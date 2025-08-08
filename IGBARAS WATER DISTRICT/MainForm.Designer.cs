@@ -1,0 +1,320 @@
+﻿// Project: IGBARAS Water District Billing System
+// Type: WinForms (.NET Framework 4.8)
+// File: MainForm.Designer.cs
+
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace IGBARAS_WATER_DISTRICT
+{
+    partial class MainForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+        private Panel sidebarPanel;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            sidebarPanel = new Panel();
+            billSettingsButton = new Button();
+            settingsButton = new Button();
+            reportsButton = new Button();
+            accountsButton = new Button();
+            billingButton = new Button();
+            panel1 = new Panel();
+            panel7 = new Panel();
+            usernameLabel = new Label();
+            pictureBox1 = new PictureBox();
+            panel5 = new Panel();
+            panel4 = new Panel();
+            panel3 = new Panel();
+            panel2 = new Panel();
+            logoutButton = new Button();
+            mainPanel = new Panel();
+            sidebarPanel.SuspendLayout();
+            panel1.SuspendLayout();
+            panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
+            // 
+            // sidebarPanel
+            // 
+            sidebarPanel.AutoScroll = true;
+            sidebarPanel.BackColor = Color.White;
+            sidebarPanel.BorderStyle = BorderStyle.Fixed3D;
+            sidebarPanel.Controls.Add(billSettingsButton);
+            sidebarPanel.Controls.Add(settingsButton);
+            sidebarPanel.Controls.Add(reportsButton);
+            sidebarPanel.Controls.Add(accountsButton);
+            sidebarPanel.Controls.Add(billingButton);
+            sidebarPanel.Controls.Add(panel1);
+            sidebarPanel.Controls.Add(logoutButton);
+            sidebarPanel.Dock = DockStyle.Left;
+            sidebarPanel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            sidebarPanel.Location = new Point(0, 0);
+            sidebarPanel.Name = "sidebarPanel";
+            sidebarPanel.Size = new Size(206, 961);
+            sidebarPanel.TabIndex = 1;
+            // 
+            // billSettingsButton
+            // 
+            billSettingsButton.BackColor = SystemColors.ControlLight;
+            billSettingsButton.Dock = DockStyle.Top;
+            billSettingsButton.FlatAppearance.BorderSize = 0;
+            billSettingsButton.FlatStyle = FlatStyle.Popup;
+            billSettingsButton.Font = new Font("Arial", 12F);
+            billSettingsButton.Location = new Point(0, 299);
+            billSettingsButton.Margin = new Padding(50);
+            billSettingsButton.Name = "billSettingsButton";
+            billSettingsButton.Size = new Size(202, 45);
+            billSettingsButton.TabIndex = 15;
+            billSettingsButton.Text = "\U0001f9eeBill Settings";
+            billSettingsButton.TextAlign = ContentAlignment.MiddleLeft;
+            billSettingsButton.UseVisualStyleBackColor = false;
+            billSettingsButton.Click += billSettingsButton_Click;
+            // 
+            // settingsButton
+            // 
+            settingsButton.BackColor = SystemColors.ControlDark;
+            settingsButton.Dock = DockStyle.Bottom;
+            settingsButton.FlatAppearance.BorderSize = 0;
+            settingsButton.FlatStyle = FlatStyle.Popup;
+            settingsButton.Font = new Font("Arial", 12F);
+            settingsButton.Location = new Point(0, 867);
+            settingsButton.Margin = new Padding(50);
+            settingsButton.Name = "settingsButton";
+            settingsButton.Size = new Size(202, 45);
+            settingsButton.TabIndex = 14;
+            settingsButton.Text = "⚙️ Settings";
+            settingsButton.TextAlign = ContentAlignment.MiddleLeft;
+            settingsButton.UseVisualStyleBackColor = false;
+            settingsButton.Click += settingsButton_Click;
+            // 
+            // reportsButton
+            // 
+            reportsButton.BackColor = SystemColors.ControlLight;
+            reportsButton.Dock = DockStyle.Top;
+            reportsButton.FlatAppearance.BorderSize = 0;
+            reportsButton.FlatStyle = FlatStyle.Popup;
+            reportsButton.Font = new Font("Arial", 12F);
+            reportsButton.Location = new Point(0, 254);
+            reportsButton.Margin = new Padding(50);
+            reportsButton.Name = "reportsButton";
+            reportsButton.Size = new Size(202, 45);
+            reportsButton.TabIndex = 13;
+            reportsButton.Text = "📝 Reports";
+            reportsButton.TextAlign = ContentAlignment.MiddleLeft;
+            reportsButton.UseVisualStyleBackColor = false;
+            reportsButton.Click += reportsButton_Click;
+            // 
+            // accountsButton
+            // 
+            accountsButton.BackColor = SystemColors.ControlLight;
+            accountsButton.Dock = DockStyle.Top;
+            accountsButton.FlatAppearance.BorderSize = 0;
+            accountsButton.FlatStyle = FlatStyle.Popup;
+            accountsButton.Font = new Font("Arial", 12F);
+            accountsButton.Location = new Point(0, 209);
+            accountsButton.Margin = new Padding(50);
+            accountsButton.Name = "accountsButton";
+            accountsButton.Size = new Size(202, 45);
+            accountsButton.TabIndex = 9;
+            accountsButton.Text = "👥 Concessionaire";
+            accountsButton.TextAlign = ContentAlignment.MiddleLeft;
+            accountsButton.UseVisualStyleBackColor = false;
+            accountsButton.Click += accountsButton_Click;
+            // 
+            // billingButton
+            // 
+            billingButton.BackColor = SystemColors.ControlLight;
+            billingButton.Dock = DockStyle.Top;
+            billingButton.FlatAppearance.BorderSize = 0;
+            billingButton.FlatStyle = FlatStyle.Popup;
+            billingButton.Font = new Font("Arial", 12F);
+            billingButton.Location = new Point(0, 164);
+            billingButton.Margin = new Padding(50);
+            billingButton.Name = "billingButton";
+            billingButton.Size = new Size(202, 45);
+            billingButton.TabIndex = 7;
+            billingButton.Text = "💸 Billing Invoice";
+            billingButton.TextAlign = ContentAlignment.MiddleLeft;
+            billingButton.UseVisualStyleBackColor = false;
+            billingButton.Click += billingButton_Click;
+            // 
+            // panel1
+            // 
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(panel7);
+            panel1.Controls.Add(panel5);
+            panel1.Controls.Add(panel4);
+            panel1.Controls.Add(panel3);
+            panel1.Controls.Add(panel2);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(202, 164);
+            panel1.TabIndex = 6;
+            // 
+            // panel7
+            // 
+            panel7.Controls.Add(usernameLabel);
+            panel7.Controls.Add(pictureBox1);
+            panel7.Dock = DockStyle.Fill;
+            panel7.Location = new Point(35, 15);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(130, 127);
+            panel7.TabIndex = 8;
+            // 
+            // usernameLabel
+            // 
+            usernameLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            usernameLabel.AutoSize = true;
+            usernameLabel.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            usernameLabel.Location = new Point(16, 101);
+            usernameLabel.Margin = new Padding(0);
+            usernameLabel.Name = "usernameLabel";
+            usernameLabel.Size = new Size(93, 19);
+            usernameLabel.TabIndex = 0;
+            usernameLabel.Text = "IGD Official";
+            usernameLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Dock = DockStyle.Top;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Margin = new Padding(0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(130, 94);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // panel5
+            // 
+            panel5.Dock = DockStyle.Left;
+            panel5.Location = new Point(0, 15);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(35, 127);
+            panel5.TabIndex = 5;
+            // 
+            // panel4
+            // 
+            panel4.Dock = DockStyle.Right;
+            panel4.Location = new Point(165, 15);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(35, 127);
+            panel4.TabIndex = 4;
+            // 
+            // panel3
+            // 
+            panel3.Dock = DockStyle.Bottom;
+            panel3.Location = new Point(0, 142);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(200, 20);
+            panel3.TabIndex = 3;
+            // 
+            // panel2
+            // 
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(200, 15);
+            panel2.TabIndex = 2;
+            // 
+            // logoutButton
+            // 
+            logoutButton.BackColor = Color.Firebrick;
+            logoutButton.Dock = DockStyle.Bottom;
+            logoutButton.FlatAppearance.BorderSize = 0;
+            logoutButton.FlatStyle = FlatStyle.Flat;
+            logoutButton.Font = new Font("Arial", 12F);
+            logoutButton.ForeColor = SystemColors.Control;
+            logoutButton.Location = new Point(0, 912);
+            logoutButton.Margin = new Padding(50);
+            logoutButton.Name = "logoutButton";
+            logoutButton.Size = new Size(202, 45);
+            logoutButton.TabIndex = 5;
+            logoutButton.Text = "⍈ Logout";
+            logoutButton.TextAlign = ContentAlignment.MiddleLeft;
+            logoutButton.UseVisualStyleBackColor = false;
+            logoutButton.Click += logoutButton_Click;
+            // 
+            // mainPanel
+            // 
+            mainPanel.AutoScroll = true;
+            mainPanel.AutoSize = true;
+            mainPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            mainPanel.Dock = DockStyle.Fill;
+            mainPanel.Location = new Point(206, 0);
+            mainPanel.Name = "mainPanel";
+            mainPanel.Size = new Size(1378, 961);
+            mainPanel.TabIndex = 3;
+            mainPanel.Click += accountsButton_Click;
+            // 
+            // MainForm
+            // 
+            AutoScroll = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            ClientSize = new Size(1584, 961);
+            Controls.Add(mainPanel);
+            Controls.Add(sidebarPanel);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "IGBARAS Water District Billing";
+            FormClosing += MainForm_FormClosing;
+            FormClosed += MainForm_FormClosed;
+            Load += MainForm_Load;
+            sidebarPanel.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel7.ResumeLayout(false);
+            panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private Button logoutButton;
+        private Button accountsButton;
+        private Button billingButton;
+        private Panel panel1;
+        private Panel panel5;
+        private Panel panel4;
+        private Panel panel3;
+        private Panel panel2;
+        private Panel panel7;
+        private PictureBox pictureBox1;
+        public Panel mainPanel;
+        private Button reloadButton;
+        private Button reportsButton;
+        private Button settingsButton;
+        private Label usernameLabel;
+        private Button billSettingsButton;
+    }
+}
