@@ -91,6 +91,13 @@
       <DependentUpon>AccountsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ReportHelper.cs" />
+    <Compile Include="Reports\DailyBillingReport.cs">
+      <DependentUpon>DailyBillingReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\AgingOfAccountsReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -155,12 +162,6 @@
     <Compile Include="ReportsControl.Designer.cs">
       <DependentUpon>ReportsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\DailyBillingReport.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DailyBillingReport.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="SettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -209,10 +210,11 @@
     <EmbeddedResource Include="ReportsControl.resx">
       <DependentUpon>ReportsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\DailyBillingReport.rpt">
+    <Content Include="Reports\DailyBillingReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DailyBillingReport1.cs</LastGenOutput>
-    </EmbeddedResource>
+      <LastGenOutput>DailyBillingReport.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="SettingsControl.resx">
       <DependentUpon>SettingsControl.cs</DependentUpon>
     </EmbeddedResource>
