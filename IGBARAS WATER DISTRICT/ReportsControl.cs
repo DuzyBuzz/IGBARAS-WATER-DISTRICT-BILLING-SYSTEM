@@ -32,8 +32,8 @@ namespace IGBARAS_WATER_DISTRICT
                 SetDatabaseLocation(agingReport);
 
                 // Assign to viewer on Aging tab (crystalReportViewer1)
-                crystalReportViewer1.ReportSource = agingReport;
-                crystalReportViewer1.RefreshReport();
+                agingCrystalReportViewer.ReportSource = agingReport;
+                agingCrystalReportViewer.RefreshReport();
             }
             else
             {
@@ -63,16 +63,16 @@ namespace IGBARAS_WATER_DISTRICT
                 }
 
                 // Show the Daily Billing report in crystalReportViewer2 on Daily Billing tab
-                crystalReportViewer2.ReportSource = dailyBillingReport;
-                crystalReportViewer2.RefreshReport();
+                dailyBillingCrystalReportViewer.ReportSource = dailyBillingReport;
+                dailyBillingCrystalReportViewer.RefreshReport();
             }
             else if (tabControl1.SelectedTab == agingOfAccountsTab) // Replace with your actual Aging tab name
             {
                 // Show Aging report again if user switches back to Aging tab
                 if (agingReport != null)
                 {
-                    crystalReportViewer1.ReportSource = agingReport;
-                    crystalReportViewer1.RefreshReport();
+                    agingCrystalReportViewer.ReportSource = agingReport;
+                    agingCrystalReportViewer.RefreshReport();
                 }
             }
         }
