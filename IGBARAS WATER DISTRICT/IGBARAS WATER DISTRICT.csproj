@@ -211,7 +211,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DailyBillingReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DailyBillingReport.cs</LastGenOutput>
+      <LastGenOutput>DailyBillingReport1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsControl.resx">
       <DependentUpon>SettingsControl.cs</DependentUpon>

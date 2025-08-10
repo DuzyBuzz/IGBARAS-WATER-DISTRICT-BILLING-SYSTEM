@@ -316,11 +316,11 @@ namespace IGBARAS_WATER_DISTRICT
                         INSERT INTO Tb_Billing (
                             BillNo, DateCreated, AccountNo, ServiceDescription, DateFrom, DateTo, PrevReading, PresentReading, 
                             DueDate, MinRate, [Rate11-20], [Rate21-30], [Rate31-40], [Rate41-Above], PenaltyRate, 
-                            Penalty, Tax, TaxAmount, ServiceConnectionFee, Is_Arrears, DiscountName, Discount, DiscountAmount, ArrearsAmount, AmountBilled, ArrearsPenaltyAmount, TotalAmountBilled
+                            Penalty, Tax, TaxAmount, ServiceConnectionFee, Is_Arrears, DiscountName, Discount, DiscountAmount, ArrearsAmount, AmountBilled, ArrearsPenaltyAmount, TotalAmountBilled, ConcessionaireID, UserID
                         ) VALUES (
                             @BillNo, @DateCreated, @AccountNo, @ServiceDescription, @DateFrom, @DateTo, @PrevReading, @PresentReading, 
                             @DueDate, @MinRate, @Rate11_20, @Rate21_30, @Rate31_40, @Rate41_Above, 
-                            @PenaltyRate, @Penalty, @Tax, @TaxAmount, @ServiceConnectionFee, @Is_Arrears, @DiscountName, @Discount, @DiscountAmount, @ArrearsAmount, @AmountBilled, @ArrearsPenaltyAmount, @TotalAmountBilled
+                            @PenaltyRate, @Penalty, @Tax, @TaxAmount, @ServiceConnectionFee, @Is_Arrears, @DiscountName, @Discount, @DiscountAmount, @ArrearsAmount, @AmountBilled, @ArrearsPenaltyAmount, @TotalAmountBilled, @ConcessionaireID, @UserID
                         )";
 
                                 using (var insertCmd = new OleDbCommand(insertQuery, connection))
@@ -365,6 +365,8 @@ namespace IGBARAS_WATER_DISTRICT
                                     insertCmd.Parameters.AddWithValue("@AmountBilled", decimal.Parse(subTotalAmountDueLabel.Text.Trim().Replace(",", "")));
                                     insertCmd.Parameters.AddWithValue("@ArrearsPenaltyAmount", decimal.Parse(penaltyAmountLabel.Text.Trim().Replace(",", "")));
                                     insertCmd.Parameters.AddWithValue("@TotalAmountBilled", decimal.Parse(totalAmountDueLabel.Text.Trim().Replace(",", "")));
+                                    insertCmd.Parameters.AddWithValue("@ConcessionaireID", int.Parse(concessionaireIDLabel.Text.Trim()));
+                                    insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
 
 
 
@@ -544,6 +546,7 @@ namespace IGBARAS_WATER_DISTRICT
             DataGridViewRow selectedRow = accountDataGridView.Rows[e.RowIndex];
 
             // 🟦 Extract individual values using the column names
+            string concessionaireID = selectedRow.Cells["concessionaireID"].Value?.ToString();
             string accountNo = selectedRow.Cells["accountno"].Value?.ToString();
             string fullname = selectedRow.Cells["fullname"].Value?.ToString();
             string address = selectedRow.Cells["businessAddress"].Value?.ToString();
@@ -582,6 +585,7 @@ namespace IGBARAS_WATER_DISTRICT
             double taxPercent = SettingsHelper.GetTaxPercent(taxExempt);
             taxExemptedPercentLabel.Text = $"{taxPercent:0.##}%";
             defaultTax = taxExemptedPercentLabel.Text;
+            concessionaireIDLabel.Text = concessionaireID;
 
             if (!string.IsNullOrWhiteSpace(accountNo))
             {
@@ -776,6 +780,7 @@ namespace IGBARAS_WATER_DISTRICT
                             insertCmd.Parameters.AddWithValue("@Remarks", remarksTextBox.Text.Trim());
                         }
                         insertCmd.Parameters.AddWithValue("@OthersAmount1", decimal.Parse(collectionOtherPaymentTextBox.Text.Replace(",", "")));
+                        insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
 
                         insertCmd.ExecuteNonQuery();
                     }
@@ -1117,7 +1122,6 @@ namespace IGBARAS_WATER_DISTRICT
 
                             decimal discounted = 0;
                             decimal taxAdded = 0;
-                            decimal arrears = 0;
 
                             // Clean up input texts
                             string discountText = discountedPercentLabel2.Text.Replace("%", "").Trim();
@@ -1137,6 +1141,7 @@ namespace IGBARAS_WATER_DISTRICT
                             {
                                 discountedAmountLabel2.Text = "0.00";
                             }
+
                             collectionTotalMeteredAmountLabel.Text = (totalConsumptionAmount - discounted).ToString("N2");
                             Debug.WriteLine($"Discounted Amount: {discounted}");
 
@@ -1156,33 +1161,39 @@ namespace IGBARAS_WATER_DISTRICT
                             {
                                 dueDate = DateTime.Now; // fallback, or handle differently if needed
                             }
-
+                            decimal arrearsAmount = decimal.Parse(arrearsAmountLabel2.Text.Replace(",", "").Trim());
                             // Calculate penalties
-                            decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrears);
+                            decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsAmount);
                             decimal latePenalty = SettingsHelper.CalculateLatePaymentPenalty(totalConsumptionAmount, dueDate);
 
                             penaltyAmountLabel2.Text = latePenalty.ToString("N2");
-
+                            // Create a list to hold the penalties to display
                             List<string> parts = new List<string>();
 
+                            // Add arrears penalty if greater than 0
                             if (arrearsPenalty > 0)
-                                parts.Add($"{arrearsPenalty:N2}");
+                                parts.Add(arrearsPenalty.ToString("N2"));
 
+                            // Add late penalty if greater than 0
                             if (latePenalty > 0)
-                                parts.Add($"{latePenalty:N2}");
+                                parts.Add(latePenalty.ToString("N2"));
 
+                            // Display logic
                             if (parts.Count > 0)
                             {
-                                collectionPenaltyLabel.Visible = true;
+                                // Show the penalties joined by " + " (e.g., "120.32 + 235.60")
                                 collectionPenaltyLabel.Text = string.Join(" + ", parts);
+
+                                // Show the total sum of penalties
                                 penaltySumLabel.Text = (arrearsPenalty + latePenalty).ToString("N2");
                             }
                             else
                             {
-                                collectionPenaltyLabel.Visible = true;
+                                // If both penalties are zero
                                 collectionPenaltyLabel.Text = "0.00";
                                 penaltySumLabel.Text = "0.00";
                             }
+
 
                             arrearsPenaltyAmountLabel.Text = arrearsPenalty.ToString("N2");
 
@@ -1194,12 +1205,13 @@ namespace IGBARAS_WATER_DISTRICT
                             subTotalAmountDueLabel2.Text = chargeSubTotal.ToString("N2");
 
 
-                            // add here the aditional and the service fee !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-                            decimal totalAmountCharge = chargeSubTotal + arrearsPenalty + latePenalty + arrears;
+                            decimal totalAmountCharge = chargeSubTotal + arrearsPenalty + latePenalty + arrearsAmount;
 
                             totalAmountDueLabel2.Text = totalAmountCharge.ToString("N2");
 
+                            collectionArrearsAmountLabel.Text = arrearsAmountLabel2.Text; 
+                            collectionTaxAmountLabel.Text = taxAdded.ToString("N2");
 
 
                         }
