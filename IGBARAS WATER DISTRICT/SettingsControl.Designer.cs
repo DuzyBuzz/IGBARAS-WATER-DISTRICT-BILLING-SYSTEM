@@ -40,6 +40,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.fullnameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.accountApplyButton = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -72,16 +73,18 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel2.Controls.Add(this.currentPasswordTextBox, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.userNameTextBox, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.fullnameTextBox, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.checkBox1, 0, 6);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(396, 197);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 6;
+            this.tableLayoutPanel2.RowCount = 7;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.76471F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.64706F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.64706F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.64706F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.64706F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.64706F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(387, 271);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -89,8 +92,9 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.confirmPasswordTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.confirmPasswordTextBox.Font = new System.Drawing.Font("Arial", 12F);
-            this.confirmPasswordTextBox.Location = new System.Drawing.Point(3, 222);
+            this.confirmPasswordTextBox.Location = new System.Drawing.Point(3, 208);
             this.confirmPasswordTextBox.Name = "confirmPasswordTextBox";
+            this.confirmPasswordTextBox.PasswordChar = '*';
             this.confirmPasswordTextBox.Size = new System.Drawing.Size(381, 26);
             this.confirmPasswordTextBox.TabIndex = 5;
             // 
@@ -98,8 +102,9 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.newPasswordTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.newPasswordTextBox.Font = new System.Drawing.Font("Arial", 12F);
-            this.newPasswordTextBox.Location = new System.Drawing.Point(3, 175);
+            this.newPasswordTextBox.Location = new System.Drawing.Point(3, 164);
             this.newPasswordTextBox.Name = "newPasswordTextBox";
+            this.newPasswordTextBox.PasswordChar = '*';
             this.newPasswordTextBox.Size = new System.Drawing.Size(381, 26);
             this.newPasswordTextBox.TabIndex = 4;
             // 
@@ -107,7 +112,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.currentPasswordTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.currentPasswordTextBox.Font = new System.Drawing.Font("Arial", 12F);
-            this.currentPasswordTextBox.Location = new System.Drawing.Point(3, 128);
+            this.currentPasswordTextBox.Location = new System.Drawing.Point(3, 120);
             this.currentPasswordTextBox.Name = "currentPasswordTextBox";
             this.currentPasswordTextBox.Size = new System.Drawing.Size(381, 26);
             this.currentPasswordTextBox.TabIndex = 3;
@@ -116,7 +121,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.userNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userNameTextBox.Font = new System.Drawing.Font("Arial", 12F);
-            this.userNameTextBox.Location = new System.Drawing.Point(3, 81);
+            this.userNameTextBox.Location = new System.Drawing.Point(3, 76);
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(381, 26);
             this.userNameTextBox.TabIndex = 2;
@@ -125,7 +130,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.fullnameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fullnameTextBox.Font = new System.Drawing.Font("Arial", 12F);
-            this.fullnameTextBox.Location = new System.Drawing.Point(3, 34);
+            this.fullnameTextBox.Location = new System.Drawing.Point(3, 32);
             this.fullnameTextBox.Name = "fullnameTextBox";
             this.fullnameTextBox.Size = new System.Drawing.Size(381, 26);
             this.fullnameTextBox.TabIndex = 0;
@@ -153,6 +158,18 @@ namespace IGBARAS_WATER_DISTRICT
             this.accountApplyButton.TabIndex = 18;
             this.accountApplyButton.Text = "✏️ Apply Changes";
             this.accountApplyButton.UseVisualStyleBackColor = false;
+            this.accountApplyButton.Click += new System.EventHandler(this.accountApplyButton_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(3, 252);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(99, 16);
+            this.checkBox1.TabIndex = 6;
+            this.checkBox1.Text = "show password";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // SettingsControl
             // 
@@ -162,6 +179,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SettingsControl";
             this.Size = new System.Drawing.Size(1181, 807);
+            this.Load += new System.EventHandler(this.SettingsControl_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -181,5 +199,6 @@ namespace IGBARAS_WATER_DISTRICT
         private TextBox fullnameTextBox;
         private Label label1;
         private Button accountApplyButton;
+        private CheckBox checkBox1;
     }
 }

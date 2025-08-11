@@ -113,5 +113,10 @@ namespace IGBARAS_WATER_DISTRICT
                 table.Location = dbFullPath;
             }
         }
+
+        private void crystalReportViewer3_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -81,7 +81,6 @@ public static class TableUpdaterHelper
                 }
             }
 
-            MessageBox.Show("Table updated successfully.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 

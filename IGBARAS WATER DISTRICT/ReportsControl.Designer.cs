@@ -133,6 +133,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.crystalReportViewer3.Name = "crystalReportViewer3";
             this.crystalReportViewer3.Size = new System.Drawing.Size(1173, 774);
             this.crystalReportViewer3.TabIndex = 0;
+            this.crystalReportViewer3.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.ParameterPanel;
+            this.crystalReportViewer3.Load += new System.EventHandler(this.crystalReportViewer3_Load);
             // 
             // dailyCollectionTab
             // 
@@ -155,6 +157,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.dailyCollectionCrystalReport.Name = "dailyCollectionCrystalReport";
             this.dailyCollectionCrystalReport.Size = new System.Drawing.Size(1167, 768);
             this.dailyCollectionCrystalReport.TabIndex = 0;
+            this.dailyCollectionCrystalReport.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.ParameterPanel;
             // 
             // monthlyCollectionTab
             // 
@@ -176,6 +179,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.monthlyCollectionCrystalReportViewer.Name = "monthlyCollectionCrystalReportViewer";
             this.monthlyCollectionCrystalReportViewer.Size = new System.Drawing.Size(1173, 774);
             this.monthlyCollectionCrystalReportViewer.TabIndex = 0;
+            this.monthlyCollectionCrystalReportViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.ParameterPanel;
             // 
             // ReportsControl
             // 

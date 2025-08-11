@@ -72,7 +72,31 @@ namespace IGBARAS_WATER_DISTRICT
 
         private void searchAccountNumberTextBox_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
 
+                string keyword = searchAccountNumberTextBox.Text.Trim();
+
+                if (string.IsNullOrEmpty(keyword)) return;
+
+                // Prevent special character issues
+                keyword = keyword.Replace("'", "''").Replace("[", "[[]").Replace("%", "[%]").Replace("*", "[*]");
+
+                if (accountDataGridView.DataSource is DataTable dt)
+                {
+                    // Ensure exact column names are used from your MDB table
+                    if (dt.Columns.Contains("AccountNo") && dt.Columns.Contains("ConcessionaireName"))
+                    {
+                        dt.DefaultView.RowFilter =
+                            $"Convert(AccountNo, 'System.String') LIKE '%{keyword}%' OR Convert(ConcessionaireName, 'System.String') LIKE '%{keyword}%'";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ensure your MDB columns are named exactly 'AccountNo' and 'ConcessionaireName'.", "Column Name Error");
+                    }
+                }
+            }
         }
 
         private void accountsDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
