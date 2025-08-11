@@ -33,15 +33,15 @@ namespace IGBARAS_WATER_DISTRICT
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.agingOfAccountsTab = new System.Windows.Forms.TabPage();
+            this.agingCrystalReportViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.dailyBillingTab = new System.Windows.Forms.TabPage();
-            this.crystalReportViewer2 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.dailyBillingCrystalReportViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.monthlyBillingTab = new System.Windows.Forms.TabPage();
-            this.crystalReportViewer3 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.monthlyBillingCrystalRepoerViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.dailyCollectionTab = new System.Windows.Forms.TabPage();
-            this.crystalReportViewer4 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.dailyCollectionCrystalReport = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.monthlyCollectionTab = new System.Windows.Forms.TabPage();
-            this.crystalReportViewer5 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
-            this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.monthlyCollectionCrystalReportViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.tabControl1.SuspendLayout();
             this.agingOfAccountsTab.SuspendLayout();
             this.dailyBillingTab.SuspendLayout();
@@ -67,10 +67,11 @@ namespace IGBARAS_WATER_DISTRICT
             this.tabControl1.Size = new System.Drawing.Size(1181, 807);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // agingOfAccountsTab
             // 
-            this.agingOfAccountsTab.Controls.Add(this.crystalReportViewer1);
+            this.agingOfAccountsTab.Controls.Add(this.agingCrystalReportViewer);
             this.agingOfAccountsTab.Location = new System.Drawing.Point(4, 29);
             this.agingOfAccountsTab.Name = "agingOfAccountsTab";
             this.agingOfAccountsTab.Padding = new System.Windows.Forms.Padding(3);
@@ -79,9 +80,20 @@ namespace IGBARAS_WATER_DISTRICT
             this.agingOfAccountsTab.Text = "Aging of Accounts";
             this.agingOfAccountsTab.UseVisualStyleBackColor = true;
             // 
+            // agingCrystalReportViewer
+            // 
+            this.agingCrystalReportViewer.ActiveViewIndex = -1;
+            this.agingCrystalReportViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.agingCrystalReportViewer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.agingCrystalReportViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.agingCrystalReportViewer.Location = new System.Drawing.Point(3, 3);
+            this.agingCrystalReportViewer.Name = "agingCrystalReportViewer";
+            this.agingCrystalReportViewer.Size = new System.Drawing.Size(1167, 768);
+            this.agingCrystalReportViewer.TabIndex = 0;
+            // 
             // dailyBillingTab
             // 
-            this.dailyBillingTab.Controls.Add(this.crystalReportViewer2);
+            this.dailyBillingTab.Controls.Add(this.dailyBillingCrystalReportViewer);
             this.dailyBillingTab.Location = new System.Drawing.Point(4, 29);
             this.dailyBillingTab.Name = "dailyBillingTab";
             this.dailyBillingTab.Size = new System.Drawing.Size(1173, 774);
@@ -89,20 +101,21 @@ namespace IGBARAS_WATER_DISTRICT
             this.dailyBillingTab.Text = "Daily Billing";
             this.dailyBillingTab.UseVisualStyleBackColor = true;
             // 
-            // crystalReportViewer2
+            // dailyBillingCrystalReportViewer
             // 
-            this.crystalReportViewer2.ActiveViewIndex = -1;
-            this.crystalReportViewer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.crystalReportViewer2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.crystalReportViewer2.Location = new System.Drawing.Point(0, 0);
-            this.crystalReportViewer2.Name = "crystalReportViewer2";
-            this.crystalReportViewer2.Size = new System.Drawing.Size(1173, 774);
-            this.crystalReportViewer2.TabIndex = 0;
+            this.dailyBillingCrystalReportViewer.ActiveViewIndex = -1;
+            this.dailyBillingCrystalReportViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dailyBillingCrystalReportViewer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dailyBillingCrystalReportViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dailyBillingCrystalReportViewer.Location = new System.Drawing.Point(0, 0);
+            this.dailyBillingCrystalReportViewer.Name = "dailyBillingCrystalReportViewer";
+            this.dailyBillingCrystalReportViewer.Size = new System.Drawing.Size(1173, 774);
+            this.dailyBillingCrystalReportViewer.TabIndex = 0;
+            this.dailyBillingCrystalReportViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.ParameterPanel;
             // 
             // monthlyBillingTab
             // 
-            this.monthlyBillingTab.Controls.Add(this.crystalReportViewer3);
+            this.monthlyBillingTab.Controls.Add(this.monthlyBillingCrystalRepoerViewer);
             this.monthlyBillingTab.Location = new System.Drawing.Point(4, 29);
             this.monthlyBillingTab.Name = "monthlyBillingTab";
             this.monthlyBillingTab.Size = new System.Drawing.Size(1173, 774);
@@ -110,20 +123,22 @@ namespace IGBARAS_WATER_DISTRICT
             this.monthlyBillingTab.Text = "Monthly Billing";
             this.monthlyBillingTab.UseVisualStyleBackColor = true;
             // 
-            // crystalReportViewer3
+            // monthlyBillingCrystalRepoerViewer
             // 
-            this.crystalReportViewer3.ActiveViewIndex = -1;
-            this.crystalReportViewer3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.crystalReportViewer3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.crystalReportViewer3.Location = new System.Drawing.Point(0, 0);
-            this.crystalReportViewer3.Name = "crystalReportViewer3";
-            this.crystalReportViewer3.Size = new System.Drawing.Size(1173, 774);
-            this.crystalReportViewer3.TabIndex = 0;
+            this.monthlyBillingCrystalRepoerViewer.ActiveViewIndex = -1;
+            this.monthlyBillingCrystalRepoerViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.monthlyBillingCrystalRepoerViewer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.monthlyBillingCrystalRepoerViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.monthlyBillingCrystalRepoerViewer.Location = new System.Drawing.Point(0, 0);
+            this.monthlyBillingCrystalRepoerViewer.Name = "monthlyBillingCrystalRepoerViewer";
+            this.monthlyBillingCrystalRepoerViewer.Size = new System.Drawing.Size(1173, 774);
+            this.monthlyBillingCrystalRepoerViewer.TabIndex = 0;
+            this.monthlyBillingCrystalRepoerViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.ParameterPanel;
+            this.monthlyBillingCrystalRepoerViewer.Load += new System.EventHandler(this.crystalReportViewer3_Load);
             // 
             // dailyCollectionTab
             // 
-            this.dailyCollectionTab.Controls.Add(this.crystalReportViewer4);
+            this.dailyCollectionTab.Controls.Add(this.dailyCollectionCrystalReport);
             this.dailyCollectionTab.Location = new System.Drawing.Point(4, 29);
             this.dailyCollectionTab.Name = "dailyCollectionTab";
             this.dailyCollectionTab.Padding = new System.Windows.Forms.Padding(3);
@@ -132,20 +147,21 @@ namespace IGBARAS_WATER_DISTRICT
             this.dailyCollectionTab.Text = "Daily Collection";
             this.dailyCollectionTab.UseVisualStyleBackColor = true;
             // 
-            // crystalReportViewer4
+            // dailyCollectionCrystalReport
             // 
-            this.crystalReportViewer4.ActiveViewIndex = -1;
-            this.crystalReportViewer4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.crystalReportViewer4.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.crystalReportViewer4.Location = new System.Drawing.Point(3, 3);
-            this.crystalReportViewer4.Name = "crystalReportViewer4";
-            this.crystalReportViewer4.Size = new System.Drawing.Size(1167, 768);
-            this.crystalReportViewer4.TabIndex = 0;
+            this.dailyCollectionCrystalReport.ActiveViewIndex = -1;
+            this.dailyCollectionCrystalReport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dailyCollectionCrystalReport.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dailyCollectionCrystalReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dailyCollectionCrystalReport.Location = new System.Drawing.Point(3, 3);
+            this.dailyCollectionCrystalReport.Name = "dailyCollectionCrystalReport";
+            this.dailyCollectionCrystalReport.Size = new System.Drawing.Size(1167, 768);
+            this.dailyCollectionCrystalReport.TabIndex = 0;
+            this.dailyCollectionCrystalReport.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.ParameterPanel;
             // 
             // monthlyCollectionTab
             // 
-            this.monthlyCollectionTab.Controls.Add(this.crystalReportViewer5);
+            this.monthlyCollectionTab.Controls.Add(this.monthlyCollectionCrystalReportViewer);
             this.monthlyCollectionTab.Location = new System.Drawing.Point(4, 29);
             this.monthlyCollectionTab.Name = "monthlyCollectionTab";
             this.monthlyCollectionTab.Size = new System.Drawing.Size(1173, 774);
@@ -153,28 +169,17 @@ namespace IGBARAS_WATER_DISTRICT
             this.monthlyCollectionTab.Text = "Monthly Collection";
             this.monthlyCollectionTab.UseVisualStyleBackColor = true;
             // 
-            // crystalReportViewer5
+            // monthlyCollectionCrystalReportViewer
             // 
-            this.crystalReportViewer5.ActiveViewIndex = -1;
-            this.crystalReportViewer5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.crystalReportViewer5.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.crystalReportViewer5.Location = new System.Drawing.Point(0, 0);
-            this.crystalReportViewer5.Name = "crystalReportViewer5";
-            this.crystalReportViewer5.Size = new System.Drawing.Size(1173, 774);
-            this.crystalReportViewer5.TabIndex = 0;
-            // 
-            // crystalReportViewer1
-            // 
-            this.crystalReportViewer1.ActiveViewIndex = -1;
-            this.crystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.crystalReportViewer1.Location = new System.Drawing.Point(3, 3);
-            this.crystalReportViewer1.Name = "crystalReportViewer1";
-            this.crystalReportViewer1.Size = new System.Drawing.Size(1167, 768);
-            this.crystalReportViewer1.TabIndex = 0;
-            this.crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
+            this.monthlyCollectionCrystalReportViewer.ActiveViewIndex = -1;
+            this.monthlyCollectionCrystalReportViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.monthlyCollectionCrystalReportViewer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.monthlyCollectionCrystalReportViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.monthlyCollectionCrystalReportViewer.Location = new System.Drawing.Point(0, 0);
+            this.monthlyCollectionCrystalReportViewer.Name = "monthlyCollectionCrystalReportViewer";
+            this.monthlyCollectionCrystalReportViewer.Size = new System.Drawing.Size(1173, 774);
+            this.monthlyCollectionCrystalReportViewer.TabIndex = 0;
+            this.monthlyCollectionCrystalReportViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.ParameterPanel;
             // 
             // ReportsControl
             // 
@@ -201,12 +206,12 @@ namespace IGBARAS_WATER_DISTRICT
         private TabPage agingOfAccountsTab;
         private TabPage dailyCollectionTab;
         private TabPage dailyBillingTab;
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer2;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer dailyBillingCrystalReportViewer;
         private TabPage monthlyBillingTab;
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer3;
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer4;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer monthlyBillingCrystalRepoerViewer;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer dailyCollectionCrystalReport;
         private TabPage monthlyCollectionTab;
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer5;
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer monthlyCollectionCrystalReportViewer;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer agingCrystalReportViewer;
     }
 }

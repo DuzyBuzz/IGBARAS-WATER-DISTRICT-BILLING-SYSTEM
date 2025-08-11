@@ -31,229 +31,172 @@ namespace IGBARAS_WATER_DISTRICT
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.miniToolStrip = new System.Windows.Forms.ToolStrip();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.accountApplyButton = new System.Windows.Forms.Button();
-            this.accountUndoButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.clearButton = new System.Windows.Forms.Button();
-            this.searchAccountNumberTextBox = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.zoneComboBox = new System.Windows.Forms.ComboBox();
-            this.accountsDataGridView = new System.Windows.Forms.DataGridView();
+            this.label32 = new System.Windows.Forms.Label();
+            this.searchAccountNumberTextBox = new System.Windows.Forms.TextBox();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.serviceApplyButton = new System.Windows.Forms.Button();
+            this.settingsUndoButton = new System.Windows.Forms.Button();
+            this.accountDataGridView = new System.Windows.Forms.DataGridView();
             this.ConcessionaireID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AccountNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ConcessionaireName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ZoneCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ServiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MeterNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FirstReadingDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SeniorCitizen = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.TaxExempt = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DueExempt = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel7.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.accountsDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.accountDataGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // miniToolStrip
-            // 
-            this.miniToolStrip.AccessibleName = "New item selection";
-            this.miniToolStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDown;
-            this.miniToolStrip.AutoSize = false;
-            this.miniToolStrip.CanOverflow = false;
-            this.miniToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.miniToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.miniToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.miniToolStrip.Name = "miniToolStrip";
-            this.miniToolStrip.Size = new System.Drawing.Size(518, 20);
-            this.miniToolStrip.TabIndex = 24;
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.accountDataGridView, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 758F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.708798F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95.2912F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1181, 807);
-            this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Arial", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1175, 49);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "IGBARAS WATER DISTRICT CONCESSIONAIRE";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tableLayoutPanel1.TabIndex = 25;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel7, 0, 0);
+            this.tableLayoutPanel2.ColumnCount = 9;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 94.18239F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.81761F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126F));
+            this.tableLayoutPanel2.Controls.Add(this.button1, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.zoneComboBox, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label32, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.searchAccountNumberTextBox, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.clearButton, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.serviceApplyButton, 8, 0);
+            this.tableLayoutPanel2.Controls.Add(this.settingsUndoButton, 7, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 52);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.329114F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1175, 752);
-            this.tableLayoutPanel2.TabIndex = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1175, 32);
+            this.tableLayoutPanel2.TabIndex = 25;
             // 
-            // tableLayoutPanel7
+            // button1
             // 
-            this.tableLayoutPanel7.ColumnCount = 1;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.accountsDataGridView, 0, 1);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 2;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.561993F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.438F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(1169, 746);
-            this.tableLayoutPanel7.TabIndex = 2;
+            this.button1.BackColor = System.Drawing.Color.SteelBlue;
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(696, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(49, 26);
+            this.button1.TabIndex = 36;
+            this.button1.Text = "↺";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // tableLayoutPanel8
+            // zoneComboBox
             // 
-            this.tableLayoutPanel8.ColumnCount = 3;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 148F));
-            this.tableLayoutPanel8.Controls.Add(this.accountApplyButton, 2, 0);
-            this.tableLayoutPanel8.Controls.Add(this.accountUndoButton, 1, 0);
-            this.tableLayoutPanel8.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 1;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(1163, 35);
-            this.tableLayoutPanel8.TabIndex = 2;
+            this.zoneComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.zoneComboBox.FormattingEnabled = true;
+            this.zoneComboBox.Location = new System.Drawing.Point(646, 4);
+            this.zoneComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
+            this.zoneComboBox.Name = "zoneComboBox";
+            this.zoneComboBox.Size = new System.Drawing.Size(44, 21);
+            this.zoneComboBox.TabIndex = 33;
+            this.zoneComboBox.Text = "01";
+            this.zoneComboBox.SelectedIndexChanged += new System.EventHandler(this.zoneComboBox_SelectedIndexChanged);
             // 
-            // accountApplyButton
+            // label32
             // 
-            this.accountApplyButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.accountApplyButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.accountApplyButton.ForeColor = System.Drawing.Color.White;
-            this.accountApplyButton.Location = new System.Drawing.Point(1018, 3);
-            this.accountApplyButton.Name = "accountApplyButton";
-            this.accountApplyButton.Size = new System.Drawing.Size(142, 29);
-            this.accountApplyButton.TabIndex = 17;
-            this.accountApplyButton.Text = "✏️ Apply Changes";
-            this.accountApplyButton.UseVisualStyleBackColor = false;
-            // 
-            // accountUndoButton
-            // 
-            this.accountUndoButton.BackColor = System.Drawing.Color.Brown;
-            this.accountUndoButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.accountUndoButton.ForeColor = System.Drawing.Color.White;
-            this.accountUndoButton.Location = new System.Drawing.Point(885, 3);
-            this.accountUndoButton.Name = "accountUndoButton";
-            this.accountUndoButton.Size = new System.Drawing.Size(127, 29);
-            this.accountUndoButton.TabIndex = 16;
-            this.accountUndoButton.Text = "↩ Undo Changes";
-            this.accountUndoButton.UseVisualStyleBackColor = false;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 5;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.0862F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.913794F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 106F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 323F));
-            this.tableLayoutPanel3.Controls.Add(this.clearButton, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.searchAccountNumberTextBox, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.zoneComboBox, 2, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(876, 29);
-            this.tableLayoutPanel3.TabIndex = 18;
-            // 
-            // clearButton
-            // 
-            this.clearButton.BackColor = System.Drawing.Color.White;
-            this.clearButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.clearButton.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearButton.ForeColor = System.Drawing.Color.Crimson;
-            this.clearButton.Location = new System.Drawing.Point(343, 3);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(31, 23);
-            this.clearButton.TabIndex = 25;
-            this.clearButton.Text = "❌";
-            this.clearButton.UseVisualStyleBackColor = false;
+            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(557, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(83, 32);
+            this.label32.TabIndex = 32;
+            this.label32.Text = "Filter Zone";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // searchAccountNumberTextBox
             // 
             this.searchAccountNumberTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.searchAccountNumberTextBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.searchAccountNumberTextBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchAccountNumberTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.searchAccountNumberTextBox.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchAccountNumberTextBox.Location = new System.Drawing.Point(3, 4);
             this.searchAccountNumberTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.searchAccountNumberTextBox.Name = "searchAccountNumberTextBox";
-            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(334, 26);
-            this.searchAccountNumberTextBox.TabIndex = 7;
+            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(516, 25);
+            this.searchAccountNumberTextBox.TabIndex = 30;
+            this.searchAccountNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchAccountNumberTextBox_KeyDown);
             // 
-            // zoneComboBox
+            // clearButton
             // 
-            this.zoneComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.zoneComboBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.zoneComboBox.FormattingEnabled = true;
-            this.zoneComboBox.Location = new System.Drawing.Point(380, 3);
-            this.zoneComboBox.Name = "zoneComboBox";
-            this.zoneComboBox.Size = new System.Drawing.Size(100, 26);
-            this.zoneComboBox.TabIndex = 8;
+            this.clearButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.clearButton.BackColor = System.Drawing.Color.White;
+            this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.clearButton.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearButton.ForeColor = System.Drawing.Color.Crimson;
+            this.clearButton.Location = new System.Drawing.Point(525, 3);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(26, 26);
+            this.clearButton.TabIndex = 31;
+            this.clearButton.Text = "❌";
+            this.clearButton.UseVisualStyleBackColor = false;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
-            // accountsDataGridView
+            // serviceApplyButton
             // 
-            this.accountsDataGridView.AllowUserToOrderColumns = true;
-            this.accountsDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.accountsDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.accountsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.accountsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ConcessionaireID,
-            this.AccountNo,
-            this.ConcessionaireName,
-            this.Address,
-            this.ZoneCode,
-            this.ServiceID,
-            this.MeterNo,
-            this.FirstReadingDate,
-            this.SeniorCitizen,
-            this.TaxExempt,
-            this.DueExempt,
-            this.Status});
-            this.accountsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.accountsDataGridView.Location = new System.Drawing.Point(3, 44);
-            this.accountsDataGridView.Name = "accountsDataGridView";
-            this.accountsDataGridView.RowHeadersVisible = false;
-            this.accountsDataGridView.Size = new System.Drawing.Size(1163, 699);
-            this.accountsDataGridView.TabIndex = 1;
+            this.serviceApplyButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.serviceApplyButton.ForeColor = System.Drawing.Color.White;
+            this.serviceApplyButton.Location = new System.Drawing.Point(1051, 3);
+            this.serviceApplyButton.Name = "serviceApplyButton";
+            this.serviceApplyButton.Size = new System.Drawing.Size(119, 26);
+            this.serviceApplyButton.TabIndex = 35;
+            this.serviceApplyButton.Text = "✏️ Apply Changes";
+            this.serviceApplyButton.UseVisualStyleBackColor = false;
+            this.serviceApplyButton.Click += new System.EventHandler(this.accountApplyButton_Click);
+            // 
+            // settingsUndoButton
+            // 
+            this.settingsUndoButton.BackColor = System.Drawing.Color.Brown;
+            this.settingsUndoButton.ForeColor = System.Drawing.Color.White;
+            this.settingsUndoButton.Location = new System.Drawing.Point(916, 3);
+            this.settingsUndoButton.Name = "settingsUndoButton";
+            this.settingsUndoButton.Size = new System.Drawing.Size(127, 26);
+            this.settingsUndoButton.TabIndex = 34;
+            this.settingsUndoButton.Text = "↩ Undo Changes";
+            this.settingsUndoButton.UseVisualStyleBackColor = false;
+            this.settingsUndoButton.Click += new System.EventHandler(this.accountUndoButton_Click);
+            // 
+            // accountDataGridView
+            // 
+            this.accountDataGridView.AllowUserToOrderColumns = true;
+            this.accountDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.accountDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.accountDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.accountDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.accountDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ConcessionaireID});
+            this.accountDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.accountDataGridView.Location = new System.Drawing.Point(3, 41);
+            this.accountDataGridView.Name = "accountDataGridView";
+            this.accountDataGridView.RowHeadersVisible = false;
+            this.accountDataGridView.Size = new System.Drawing.Size(1175, 763);
+            this.accountDataGridView.TabIndex = 26;
+            this.accountDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.accountsDataGridView_CellFormatting);
             // 
             // ConcessionaireID
             // 
@@ -262,92 +205,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.ConcessionaireID.Name = "ConcessionaireID";
             this.ConcessionaireID.Visible = false;
             // 
-            // AccountNo
-            // 
-            this.AccountNo.DataPropertyName = "AccountNo";
-            this.AccountNo.HeaderText = "AccountNo";
-            this.AccountNo.Name = "AccountNo";
-            this.AccountNo.Width = 123;
-            // 
-            // ConcessionaireName
-            // 
-            this.ConcessionaireName.DataPropertyName = "ConcessionaireName";
-            this.ConcessionaireName.HeaderText = "ConcessionaireName";
-            this.ConcessionaireName.Name = "ConcessionaireName";
-            this.ConcessionaireName.Width = 124;
-            // 
-            // Address
-            // 
-            this.Address.DataPropertyName = "Address";
-            this.Address.HeaderText = "Address";
-            this.Address.Name = "Address";
-            this.Address.Width = 123;
-            // 
-            // ZoneCode
-            // 
-            this.ZoneCode.DataPropertyName = "ZoneCode";
-            this.ZoneCode.HeaderText = "ZoneCode";
-            this.ZoneCode.Name = "ZoneCode";
-            this.ZoneCode.Width = 123;
-            // 
-            // ServiceID
-            // 
-            this.ServiceID.DataPropertyName = "ServiceID";
-            this.ServiceID.HeaderText = "ServiceID";
-            this.ServiceID.Name = "ServiceID";
-            this.ServiceID.Width = 124;
-            // 
-            // MeterNo
-            // 
-            this.MeterNo.DataPropertyName = "MeterNo";
-            this.MeterNo.HeaderText = "MeterNo";
-            this.MeterNo.Name = "MeterNo";
-            this.MeterNo.Width = 123;
-            // 
-            // FirstReadingDate
-            // 
-            this.FirstReadingDate.DataPropertyName = "FirstReadingDate";
-            this.FirstReadingDate.HeaderText = "FirstReadingDate";
-            this.FirstReadingDate.Name = "FirstReadingDate";
-            this.FirstReadingDate.Width = 124;
-            // 
-            // SeniorCitizen
-            // 
-            this.SeniorCitizen.DataPropertyName = "SeniorCitizen";
-            this.SeniorCitizen.HeaderText = "SeniorCitizen";
-            this.SeniorCitizen.Name = "SeniorCitizen";
-            this.SeniorCitizen.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.SeniorCitizen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.SeniorCitizen.Width = 123;
-            // 
-            // TaxExempt
-            // 
-            this.TaxExempt.DataPropertyName = "TaxExempt";
-            this.TaxExempt.HeaderText = "TaxExempt";
-            this.TaxExempt.Name = "TaxExempt";
-            this.TaxExempt.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.TaxExempt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.TaxExempt.Width = 123;
-            // 
-            // DueExempt
-            // 
-            this.DueExempt.DataPropertyName = "DueExempt";
-            this.DueExempt.HeaderText = "DueExempt";
-            this.DueExempt.Name = "DueExempt";
-            this.DueExempt.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DueExempt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.DueExempt.Width = 124;
-            // 
-            // Status
-            // 
-            this.Status.DataPropertyName = "Status";
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Transparent;
-            this.Status.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Status.HeaderText = "Status";
-            this.Status.Name = "Status";
-            this.Status.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Status.Width = 123;
-            // 
             // AccountsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -355,43 +212,26 @@ namespace IGBARAS_WATER_DISTRICT
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "AccountsControl";
             this.Size = new System.Drawing.Size(1181, 807);
+            this.Load += new System.EventHandler(this.AccountsControl_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel7.ResumeLayout(false);
-            this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.accountsDataGridView)).EndInit();
+            this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.accountDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private ToolStrip miniToolStrip;
         private TableLayoutPanel tableLayoutPanel1;
-        private Label label1;
         private TableLayoutPanel tableLayoutPanel2;
-        private TableLayoutPanel tableLayoutPanel7;
-        private TableLayoutPanel tableLayoutPanel8;
-        private Button accountApplyButton;
-        private Button accountUndoButton;
-        private DataGridView accountsDataGridView;
-        private TableLayoutPanel tableLayoutPanel3;
-        private TextBox searchAccountNumberTextBox;
-        private ComboBox zoneComboBox;
         private Button clearButton;
+        private TextBox searchAccountNumberTextBox;
+        private Label label32;
+        private ComboBox zoneComboBox;
+        private Button settingsUndoButton;
+        private Button serviceApplyButton;
+        private Button button1;
+        private DataGridView accountDataGridView;
         private DataGridViewTextBoxColumn ConcessionaireID;
-        private DataGridViewTextBoxColumn AccountNo;
-        private DataGridViewTextBoxColumn ConcessionaireName;
-        private DataGridViewTextBoxColumn Address;
-        private DataGridViewTextBoxColumn ZoneCode;
-        private DataGridViewTextBoxColumn ServiceID;
-        private DataGridViewTextBoxColumn MeterNo;
-        private DataGridViewTextBoxColumn FirstReadingDate;
-        private DataGridViewCheckBoxColumn SeniorCitizen;
-        private DataGridViewCheckBoxColumn TaxExempt;
-        private DataGridViewCheckBoxColumn DueExempt;
-        private DataGridViewTextBoxColumn Status;
     }
 }

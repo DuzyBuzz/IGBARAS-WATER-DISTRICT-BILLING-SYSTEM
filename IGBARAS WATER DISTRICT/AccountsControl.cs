@@ -22,7 +22,7 @@ namespace IGBARAS_WATER_DISTRICT
             PlaceholderHelper.AddPlaceholder(searchAccountNumberTextBox, "🔎 Fullname or Account Number.");
             using (var loadingForm = new LoadingForm())
             {
-                var task1 = DGVHelper.LoadDataToGridAsync(accountsDataGridView, "Tb_Concessionaire", loadingForm);
+                var task1 = DGVHelper.LoadDataToGridAsync(accountDataGridView, "Tb_Concessionaire", loadingForm);
 
                 await Task.WhenAll(task1);
             }
@@ -55,7 +55,7 @@ namespace IGBARAS_WATER_DISTRICT
 
             if (result == DialogResult.Yes)
             {
-                TableUpdaterHelper.UpdateTableFromGrid(accountsDataGridView, "Tb_Concessionaire", "ConcessionaireID");
+                TableUpdaterHelper.UpdateTableFromGrid(accountDataGridView, "Tb_Concessionaire", "ConcessionaireID");
             }
         }
 
@@ -64,7 +64,7 @@ namespace IGBARAS_WATER_DISTRICT
         {
             using (var loadingForm = new LoadingForm())
             {
-                var task1 = DGVHelper.LoadDataToGridAsync(accountsDataGridView, "Tb_Concessionaire", loadingForm);
+                var task1 = DGVHelper.LoadDataToGridAsync(accountDataGridView, "Tb_Concessionaire", loadingForm);
 
                 await Task.WhenAll(task1);
             }
@@ -83,7 +83,7 @@ namespace IGBARAS_WATER_DISTRICT
                 // Prevent special character issues
                 keyword = keyword.Replace("'", "''").Replace("[", "[[]").Replace("%", "[%]").Replace("*", "[*]");
 
-                if (accountsDataGridView.DataSource is DataTable dt)
+                if (accountDataGridView.DataSource is DataTable dt)
                 {
                     // Ensure exact column names are used from your MDB table
                     if (dt.Columns.Contains("AccountNo") && dt.Columns.Contains("ConcessionaireName"))
@@ -101,27 +101,37 @@ namespace IGBARAS_WATER_DISTRICT
 
         private void accountsDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            // Only format once per row (check if you're on the first column, or skip if you like)
-            if (e.RowIndex >= 0 && accountsDataGridView.Rows[e.RowIndex].Cells["Status"].Value != null)
+            // Make sure the column being formatted is the "Status" column
+            if (accountDataGridView.Columns[e.ColumnIndex].Name == "Status" && e.Value != null)
             {
-                string status = accountsDataGridView.Rows[e.RowIndex].Cells["Status"].Value.ToString().Trim().ToLower();
+                string status = e.Value.ToString().Trim().ToLower();
 
                 if (status == "disconnected")
                 {
-                    accountsDataGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 204, 204);
-                    accountsDataGridView.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black; // Optional
+                    accountDataGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 204, 204);
+                    accountDataGridView.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
                 }
                 else if (status == "active")
                 {
-                    accountsDataGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(255, 204, 255, 204);
-                    accountsDataGridView.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black; // Optional
+                    accountDataGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(255, 204, 255, 204);
+                    accountDataGridView.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
                 }
                 else
                 {
                     // Reset for other statuses
-                    accountsDataGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-                    accountsDataGridView.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
+                    accountDataGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                    accountDataGridView.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
                 }
+            }
+        }
+
+        private async void clearButton_Click(object sender, EventArgs e)
+        {
+            using (var loadingForm = new LoadingForm())
+            {
+                var task1 = DGVHelper.LoadDataToGridAsync(accountDataGridView, "Tb_Concessionaire", loadingForm);
+
+                await Task.WhenAll(task1);
             }
         }
 
@@ -133,7 +143,7 @@ namespace IGBARAS_WATER_DISTRICT
             if (string.IsNullOrEmpty(zoneCode))
                 return;
 
-            if (accountsDataGridView.DataSource is DataTable dt)
+            if (accountDataGridView.DataSource is DataTable dt)
             {
                 // Filter rows where accountno starts with the selected zoneCode (e.g., "04-")
                 dt.DefaultView.RowFilter = $"accountno LIKE '{zoneCode}-%'";
@@ -143,17 +153,14 @@ namespace IGBARAS_WATER_DISTRICT
             }
         }
 
-        private async void clearButton_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            zoneComboBox.SelectedIndex = 0; // Clear the selection
-            searchAccountNumberTextBox.Text = "";
             using (var loadingForm = new LoadingForm())
             {
-                var task1 = DGVHelper.LoadDataToGridAsync(accountsDataGridView, "Tb_Concessionaire", loadingForm);
+                var task1 = DGVHelper.LoadDataToGridAsync(accountDataGridView, "Tb_Concessionaire", loadingForm);
 
                 await Task.WhenAll(task1);
             }
-            LoadZoneComboBox();
         }
     }
 }
