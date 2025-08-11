@@ -40,7 +40,7 @@ namespace IGBARAS_WATER_DISTRICT
             }
             else if (tabControl1.SelectedTab == dailyCollectionTab) // ✅ Add your Daily Collection tab here
             {
-                LoadReportToViewer("DailyCollectionReport.rpt", dailyCollectionTab, dailyBillingCrystalReportViewer);
+                LoadReportToViewer("DailyCollectionReport.rpt", dailyCollectionTab, dailyCollectionCrystalReport);
             }
         }
 

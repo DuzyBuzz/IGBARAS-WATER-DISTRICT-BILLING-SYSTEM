@@ -90,7 +90,7 @@ namespace IGBARAS_WATER_DISTRICT.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CollectionDate {
+        public CrystalDecisions.Shared.IParameterField Parameter_paymentDate {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }

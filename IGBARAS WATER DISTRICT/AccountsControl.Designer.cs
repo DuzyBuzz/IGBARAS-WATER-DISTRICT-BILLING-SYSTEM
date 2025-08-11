@@ -31,14 +31,14 @@ namespace IGBARAS_WATER_DISTRICT
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.accountDataGridView = new System.Windows.Forms.DataGridView();
             this.accountno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.concessionaireID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,13 +54,13 @@ namespace IGBARAS_WATER_DISTRICT
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.clearButton = new System.Windows.Forms.Button();
-            this.searchAccountNumberTextBox = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.zoneComboBox = new System.Windows.Forms.ComboBox();
-            this.settingsUndoButton = new System.Windows.Forms.Button();
-            this.serviceApplyButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.zoneComboBox = new System.Windows.Forms.ComboBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.searchAccountNumberTextBox = new System.Windows.Forms.TextBox();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.serviceApplyButton = new System.Windows.Forms.Button();
+            this.settingsUndoButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.accountDataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -68,7 +68,6 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             // accountDataGridView
             // 
-            this.accountDataGridView.AllowUserToAddRows = false;
             this.accountDataGridView.AllowUserToDeleteRows = false;
             this.accountDataGridView.AllowUserToOrderColumns = true;
             this.accountDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -94,11 +93,10 @@ namespace IGBARAS_WATER_DISTRICT
             this.accountDataGridView.EnableHeadersVisualStyles = false;
             this.accountDataGridView.Location = new System.Drawing.Point(3, 41);
             this.accountDataGridView.Name = "accountDataGridView";
-            this.accountDataGridView.ReadOnly = true;
             this.accountDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle32.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.accountDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.accountDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.accountDataGridView.Size = new System.Drawing.Size(1175, 763);
             this.accountDataGridView.TabIndex = 24;
             this.accountDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.accountsDataGridView_CellFormatting);
@@ -107,20 +105,18 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.accountno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.accountno.DataPropertyName = "AccountNo";
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.accountno.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.accountno.DefaultCellStyle = dataGridViewCellStyle1;
             this.accountno.FillWeight = 400F;
             this.accountno.HeaderText = "Account #";
             this.accountno.Name = "accountno";
-            this.accountno.ReadOnly = true;
             // 
             // concessionaireID
             // 
             this.concessionaireID.DataPropertyName = "ConcessionaireID";
             this.concessionaireID.HeaderText = "ConcessionaireID";
             this.concessionaireID.Name = "concessionaireID";
-            this.concessionaireID.ReadOnly = true;
             this.concessionaireID.Visible = false;
             this.concessionaireID.Width = 114;
             // 
@@ -128,39 +124,36 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.fullname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.fullname.DataPropertyName = "ConcessionaireName";
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.fullname.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.fullname.DefaultCellStyle = dataGridViewCellStyle2;
             this.fullname.FillWeight = 200F;
             this.fullname.HeaderText = "Concessionaire Name";
             this.fullname.Name = "fullname";
-            this.fullname.ReadOnly = true;
             this.fullname.Width = 350;
             // 
             // businessAddress
             // 
             this.businessAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.businessAddress.DataPropertyName = "Address";
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.businessAddress.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.businessAddress.DefaultCellStyle = dataGridViewCellStyle3;
             this.businessAddress.FillWeight = 300F;
             this.businessAddress.HeaderText = "Business Address";
             this.businessAddress.Name = "businessAddress";
-            this.businessAddress.ReadOnly = true;
             this.businessAddress.Width = 300;
             // 
             // zoneCode
             // 
             this.zoneCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.zoneCode.DataPropertyName = "ZoneCode";
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.zoneCode.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.zoneCode.DefaultCellStyle = dataGridViewCellStyle4;
             this.zoneCode.FillWeight = 50F;
             this.zoneCode.HeaderText = "Zone Code";
             this.zoneCode.Name = "zoneCode";
-            this.zoneCode.ReadOnly = true;
             this.zoneCode.Width = 50;
             // 
             // serviceId
@@ -169,31 +162,28 @@ namespace IGBARAS_WATER_DISTRICT
             this.serviceId.DataPropertyName = "ServiceID";
             this.serviceId.HeaderText = "Service ID";
             this.serviceId.Name = "serviceId";
-            this.serviceId.ReadOnly = true;
             this.serviceId.Width = 75;
             // 
             // meterNo
             // 
             this.meterNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.meterNo.DataPropertyName = "MeterNo";
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.meterNo.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.meterNo.DefaultCellStyle = dataGridViewCellStyle5;
             this.meterNo.FillWeight = 200F;
             this.meterNo.HeaderText = "Meter #";
             this.meterNo.Name = "meterNo";
-            this.meterNo.ReadOnly = true;
             this.meterNo.Width = 150;
             // 
             // firstReadingDate
             // 
             this.firstReadingDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.firstReadingDate.DataPropertyName = "FirstReadingDate";
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.firstReadingDate.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.firstReadingDate.DefaultCellStyle = dataGridViewCellStyle6;
             this.firstReadingDate.HeaderText = "First Reading Date(FRD)";
             this.firstReadingDate.Name = "firstReadingDate";
-            this.firstReadingDate.ReadOnly = true;
             // 
             // taxExempt
             // 
@@ -202,7 +192,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.taxExempt.FillWeight = 50F;
             this.taxExempt.HeaderText = "Tax Exempt";
             this.taxExempt.Name = "taxExempt";
-            this.taxExempt.ReadOnly = true;
             this.taxExempt.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.taxExempt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.taxExempt.Width = 50;
@@ -214,7 +203,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.dueExempt.FillWeight = 50F;
             this.dueExempt.HeaderText = "Due Exempt";
             this.dueExempt.Name = "dueExempt";
-            this.dueExempt.ReadOnly = true;
             this.dueExempt.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dueExempt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dueExempt.Width = 50;
@@ -226,7 +214,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.seniorCitizen.FillWeight = 50F;
             this.seniorCitizen.HeaderText = "Senior Citizen";
             this.seniorCitizen.Name = "seniorCitizen";
-            this.seniorCitizen.ReadOnly = true;
             this.seniorCitizen.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.seniorCitizen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.seniorCitizen.Width = 50;
@@ -235,11 +222,10 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.status.DataPropertyName = "Status";
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.status.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.status.DefaultCellStyle = dataGridViewCellStyle7;
             this.status.HeaderText = "Status";
             this.status.Name = "status";
-            this.status.ReadOnly = true;
             // 
             // tableLayoutPanel1
             // 
@@ -268,7 +254,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 124F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
             this.tableLayoutPanel2.Controls.Add(this.button1, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.zoneComboBox, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.label32, 2, 0);
@@ -284,21 +270,44 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1175, 32);
             this.tableLayoutPanel2.TabIndex = 25;
             // 
-            // clearButton
+            // button1
             // 
-            this.clearButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.clearButton.BackColor = System.Drawing.Color.White;
-            this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.clearButton.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearButton.ForeColor = System.Drawing.Color.Crimson;
-            this.clearButton.Location = new System.Drawing.Point(527, 3);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(26, 26);
-            this.clearButton.TabIndex = 31;
-            this.clearButton.Text = "❌";
-            this.clearButton.UseVisualStyleBackColor = false;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            this.button1.BackColor = System.Drawing.Color.SteelBlue;
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(697, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(49, 26);
+            this.button1.TabIndex = 36;
+            this.button1.Text = "↺";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // zoneComboBox
+            // 
+            this.zoneComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.zoneComboBox.FormattingEnabled = true;
+            this.zoneComboBox.Location = new System.Drawing.Point(647, 4);
+            this.zoneComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
+            this.zoneComboBox.Name = "zoneComboBox";
+            this.zoneComboBox.Size = new System.Drawing.Size(44, 21);
+            this.zoneComboBox.TabIndex = 33;
+            this.zoneComboBox.Text = "01";
+            this.zoneComboBox.SelectedIndexChanged += new System.EventHandler(this.zoneComboBox_SelectedIndexChanged);
+            // 
+            // label32
+            // 
+            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(558, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(83, 32);
+            this.label32.TabIndex = 32;
+            this.label32.Text = "Filter Zone";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // searchAccountNumberTextBox
             // 
@@ -308,53 +317,30 @@ namespace IGBARAS_WATER_DISTRICT
             this.searchAccountNumberTextBox.Location = new System.Drawing.Point(3, 4);
             this.searchAccountNumberTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.searchAccountNumberTextBox.Name = "searchAccountNumberTextBox";
-            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(518, 25);
+            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(517, 25);
             this.searchAccountNumberTextBox.TabIndex = 30;
             // 
-            // label32
+            // clearButton
             // 
-            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(559, 0);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(83, 32);
-            this.label32.TabIndex = 32;
-            this.label32.Text = "Filter Zone";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // zoneComboBox
-            // 
-            this.zoneComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.zoneComboBox.FormattingEnabled = true;
-            this.zoneComboBox.Location = new System.Drawing.Point(648, 4);
-            this.zoneComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
-            this.zoneComboBox.Name = "zoneComboBox";
-            this.zoneComboBox.Size = new System.Drawing.Size(44, 21);
-            this.zoneComboBox.TabIndex = 33;
-            this.zoneComboBox.Text = "01";
-            this.zoneComboBox.SelectedIndexChanged += new System.EventHandler(this.zoneComboBox_SelectedIndexChanged);
-            // 
-            // settingsUndoButton
-            // 
-            this.settingsUndoButton.BackColor = System.Drawing.Color.Brown;
-            this.settingsUndoButton.ForeColor = System.Drawing.Color.White;
-            this.settingsUndoButton.Location = new System.Drawing.Point(918, 3);
-            this.settingsUndoButton.Name = "settingsUndoButton";
-            this.settingsUndoButton.Size = new System.Drawing.Size(127, 26);
-            this.settingsUndoButton.TabIndex = 34;
-            this.settingsUndoButton.Text = "↩ Undo Changes";
-            this.settingsUndoButton.UseVisualStyleBackColor = false;
-            this.settingsUndoButton.Click += new System.EventHandler(this.accountUndoButton_Click);
+            this.clearButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.clearButton.BackColor = System.Drawing.Color.White;
+            this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.clearButton.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearButton.ForeColor = System.Drawing.Color.Crimson;
+            this.clearButton.Location = new System.Drawing.Point(526, 3);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(26, 26);
+            this.clearButton.TabIndex = 31;
+            this.clearButton.Text = "❌";
+            this.clearButton.UseVisualStyleBackColor = false;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // serviceApplyButton
             // 
             this.serviceApplyButton.BackColor = System.Drawing.Color.SteelBlue;
             this.serviceApplyButton.ForeColor = System.Drawing.Color.White;
-            this.serviceApplyButton.Location = new System.Drawing.Point(1053, 3);
+            this.serviceApplyButton.Location = new System.Drawing.Point(1052, 3);
             this.serviceApplyButton.Name = "serviceApplyButton";
             this.serviceApplyButton.Size = new System.Drawing.Size(119, 26);
             this.serviceApplyButton.TabIndex = 35;
@@ -362,17 +348,17 @@ namespace IGBARAS_WATER_DISTRICT
             this.serviceApplyButton.UseVisualStyleBackColor = false;
             this.serviceApplyButton.Click += new System.EventHandler(this.accountApplyButton_Click);
             // 
-            // button1
+            // settingsUndoButton
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(698, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(49, 26);
-            this.button1.TabIndex = 36;
-            this.button1.Text = "↺";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.settingsUndoButton.BackColor = System.Drawing.Color.Brown;
+            this.settingsUndoButton.ForeColor = System.Drawing.Color.White;
+            this.settingsUndoButton.Location = new System.Drawing.Point(917, 3);
+            this.settingsUndoButton.Name = "settingsUndoButton";
+            this.settingsUndoButton.Size = new System.Drawing.Size(127, 26);
+            this.settingsUndoButton.TabIndex = 34;
+            this.settingsUndoButton.Text = "↩ Undo Changes";
+            this.settingsUndoButton.UseVisualStyleBackColor = false;
+            this.settingsUndoButton.Click += new System.EventHandler(this.accountUndoButton_Click);
             // 
             // AccountsControl
             // 
