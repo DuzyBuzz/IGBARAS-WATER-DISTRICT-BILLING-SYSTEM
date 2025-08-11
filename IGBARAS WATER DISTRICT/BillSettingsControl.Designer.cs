@@ -32,59 +32,56 @@ namespace IGBARAS_WATER_DISTRICT
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.zoneDataGridView = new System.Windows.Forms.DataGridView();
-            this.ZoneID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.undoAllButton = new System.Windows.Forms.Button();
-            this.settingsDataGidView = new System.Windows.Forms.DataGridView();
-            this.SettingID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.applyAllChangesButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.settingsDataGidView = new System.Windows.Forms.DataGridView();
+            this.SettingID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel8 = new System.Windows.Forms.Panel();
             this.discountDataGridView = new System.Windows.Forms.DataGridView();
             this.DiscountID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.serviceDataGridView = new System.Windows.Forms.DataGridView();
             this.ServiceiD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.panel16 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.zoneDataGridView = new System.Windows.Forms.DataGridView();
+            this.ZoneID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel14 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zoneDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsDataGidView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.discountDataGridView)).BeginInit();
-            this.panel4.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsDataGidView)).BeginInit();
+            this.panel15.SuspendLayout();
+            this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.discountDataGridView)).BeginInit();
+            this.panel16.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.serviceDataGridView)).BeginInit();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
             this.panel13.SuspendLayout();
+            this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.zoneDataGridView)).BeginInit();
             this.panel14.SuspendLayout();
-            this.panel15.SuspendLayout();
-            this.panel16.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -98,30 +95,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.panel1.Size = new System.Drawing.Size(1181, 807);
             this.panel1.TabIndex = 1;
             // 
-            // zoneDataGridView
-            // 
-            this.zoneDataGridView.AllowUserToOrderColumns = true;
-            this.zoneDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.zoneDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.zoneDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.zoneDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.zoneDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ZoneID});
-            this.zoneDataGridView.Location = new System.Drawing.Point(3, 26);
-            this.zoneDataGridView.Name = "zoneDataGridView";
-            this.zoneDataGridView.RowHeadersVisible = false;
-            this.zoneDataGridView.Size = new System.Drawing.Size(299, 318);
-            this.zoneDataGridView.TabIndex = 1;
-            // 
-            // ZoneID
-            // 
-            this.ZoneID.DataPropertyName = "ZoneID";
-            this.ZoneID.HeaderText = "ZoneID";
-            this.ZoneID.Name = "ZoneID";
-            this.ZoneID.Visible = false;
-            // 
             // undoAllButton
             // 
             this.undoAllButton.BackColor = System.Drawing.Color.Brown;
@@ -133,30 +106,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.undoAllButton.TabIndex = 16;
             this.undoAllButton.Text = "↩ Undo Changes";
             this.undoAllButton.UseVisualStyleBackColor = false;
-            // 
-            // settingsDataGidView
-            // 
-            this.settingsDataGidView.AllowUserToAddRows = false;
-            this.settingsDataGidView.AllowUserToDeleteRows = false;
-            this.settingsDataGidView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.settingsDataGidView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.settingsDataGidView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.settingsDataGidView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.settingsDataGidView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.SettingID});
-            this.settingsDataGidView.Location = new System.Drawing.Point(3, 26);
-            this.settingsDataGidView.Name = "settingsDataGidView";
-            this.settingsDataGidView.Size = new System.Drawing.Size(322, 140);
-            this.settingsDataGidView.TabIndex = 2;
-            // 
-            // SettingID
-            // 
-            this.SettingID.DataPropertyName = "SettingID";
-            this.SettingID.HeaderText = "SettingID";
-            this.SettingID.Name = "SettingID";
-            this.SettingID.Visible = false;
             // 
             // applyAllChangesButton
             // 
@@ -207,55 +156,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.panel3.Size = new System.Drawing.Size(1171, 42);
             this.panel3.TabIndex = 18;
             // 
-            // discountDataGridView
-            // 
-            this.discountDataGridView.AllowUserToOrderColumns = true;
-            this.discountDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.discountDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.discountDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.discountDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.discountDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.DiscountID});
-            this.discountDataGridView.Location = new System.Drawing.Point(3, 26);
-            this.discountDataGridView.Name = "discountDataGridView";
-            this.discountDataGridView.RowHeadersVisible = false;
-            this.discountDataGridView.Size = new System.Drawing.Size(322, 146);
-            this.discountDataGridView.TabIndex = 1;
-            // 
-            // DiscountID
-            // 
-            this.DiscountID.DataPropertyName = "DiscountID";
-            this.DiscountID.HeaderText = "DiscountID";
-            this.DiscountID.Name = "DiscountID";
-            this.DiscountID.Visible = false;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.tableLayoutPanel5);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(3, 410);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1171, 390);
-            this.panel4.TabIndex = 1;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.AutoScroll = true;
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.96499F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.03501F));
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 1, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 42);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1171, 359);
-            this.tableLayoutPanel2.TabIndex = 19;
-            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
@@ -270,6 +170,129 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.2463F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(334, 353);
             this.tableLayoutPanel4.TabIndex = 1;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.panel15);
+            this.panel7.Controls.Add(this.settingsDataGidView);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel7.Location = new System.Drawing.Point(3, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(328, 169);
+            this.panel7.TabIndex = 0;
+            // 
+            // settingsDataGidView
+            // 
+            this.settingsDataGidView.AllowUserToAddRows = false;
+            this.settingsDataGidView.AllowUserToDeleteRows = false;
+            this.settingsDataGidView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.settingsDataGidView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.settingsDataGidView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.settingsDataGidView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.settingsDataGidView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SettingID});
+            this.settingsDataGidView.Location = new System.Drawing.Point(3, 29);
+            this.settingsDataGidView.Name = "settingsDataGidView";
+            this.settingsDataGidView.Size = new System.Drawing.Size(322, 137);
+            this.settingsDataGidView.TabIndex = 2;
+            // 
+            // SettingID
+            // 
+            this.SettingID.DataPropertyName = "SettingID";
+            this.SettingID.HeaderText = "SettingID";
+            this.SettingID.Name = "SettingID";
+            this.SettingID.Visible = false;
+            // 
+            // panel15
+            // 
+            this.panel15.Controls.Add(this.label5);
+            this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel15.Location = new System.Drawing.Point(0, 0);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(328, 23);
+            this.panel15.TabIndex = 3;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label5.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(131, 23);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Penalty and Tax";
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.panel16);
+            this.panel8.Controls.Add(this.discountDataGridView);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel8.Location = new System.Drawing.Point(3, 178);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(328, 172);
+            this.panel8.TabIndex = 1;
+            // 
+            // discountDataGridView
+            // 
+            this.discountDataGridView.AllowUserToOrderColumns = true;
+            this.discountDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.discountDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.discountDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.discountDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.discountDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DiscountID});
+            this.discountDataGridView.Location = new System.Drawing.Point(3, 29);
+            this.discountDataGridView.Name = "discountDataGridView";
+            this.discountDataGridView.RowHeadersVisible = false;
+            this.discountDataGridView.Size = new System.Drawing.Size(322, 143);
+            this.discountDataGridView.TabIndex = 1;
+            // 
+            // DiscountID
+            // 
+            this.DiscountID.DataPropertyName = "DiscountID";
+            this.DiscountID.HeaderText = "DiscountID";
+            this.DiscountID.Name = "DiscountID";
+            this.DiscountID.Visible = false;
+            // 
+            // panel16
+            // 
+            this.panel16.Controls.Add(this.label6);
+            this.panel16.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel16.Location = new System.Drawing.Point(0, 0);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(328, 23);
+            this.panel16.TabIndex = 2;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label6.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(87, 23);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Discounts";
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.40105F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.59895F));
+            this.tableLayoutPanel3.Controls.Add(this.panel6, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.panel5, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(825, 353);
+            this.tableLayoutPanel3.TabIndex = 0;
             // 
             // panel5
             // 
@@ -292,10 +315,10 @@ namespace IGBARAS_WATER_DISTRICT
             this.serviceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.serviceDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ServiceiD});
-            this.serviceDataGridView.Location = new System.Drawing.Point(0, 26);
+            this.serviceDataGridView.Location = new System.Drawing.Point(0, 29);
             this.serviceDataGridView.Name = "serviceDataGridView";
             this.serviceDataGridView.RowHeadersVisible = false;
-            this.serviceDataGridView.Size = new System.Drawing.Size(505, 318);
+            this.serviceDataGridView.Size = new System.Drawing.Size(505, 315);
             this.serviceDataGridView.TabIndex = 0;
             // 
             // ServiceiD
@@ -305,83 +328,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.ServiceiD.Name = "ServiceiD";
             this.ServiceiD.Visible = false;
             // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.40105F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.59895F));
-            this.tableLayoutPanel3.Controls.Add(this.panel6, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.panel5, 0, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(825, 353);
-            this.tableLayoutPanel3.TabIndex = 0;
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.panel14);
-            this.panel6.Controls.Add(this.zoneDataGridView);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(517, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(305, 347);
-            this.panel6.TabIndex = 1;
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.panel15);
-            this.panel7.Controls.Add(this.settingsDataGidView);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(3, 3);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(328, 169);
-            this.panel7.TabIndex = 0;
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.panel16);
-            this.panel8.Controls.Add(this.discountDataGridView);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(3, 178);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(328, 172);
-            this.panel8.TabIndex = 1;
-            // 
-            // tableLayoutPanel5
-            // 
-            this.tableLayoutPanel5.AutoScroll = true;
-            this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Controls.Add(this.panel10, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.panel9, 0, 0);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 1;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(1171, 390);
-            this.tableLayoutPanel5.TabIndex = 0;
-            // 
-            // panel9
-            // 
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel9.Location = new System.Drawing.Point(3, 3);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(579, 384);
-            this.panel9.TabIndex = 0;
-            // 
-            // panel10
-            // 
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(588, 3);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(580, 384);
-            this.panel10.TabIndex = 1;
-            // 
             // panel13
             // 
             this.panel13.Controls.Add(this.label3);
@@ -390,33 +336,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(508, 23);
             this.panel13.TabIndex = 1;
-            // 
-            // panel14
-            // 
-            this.panel14.Controls.Add(this.label4);
-            this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel14.Location = new System.Drawing.Point(0, 0);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(305, 23);
-            this.panel14.TabIndex = 2;
-            // 
-            // panel15
-            // 
-            this.panel15.Controls.Add(this.label5);
-            this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel15.Location = new System.Drawing.Point(0, 0);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(328, 23);
-            this.panel15.TabIndex = 3;
-            // 
-            // panel16
-            // 
-            this.panel16.Controls.Add(this.label6);
-            this.panel16.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel16.Location = new System.Drawing.Point(0, 0);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(328, 28);
-            this.panel16.TabIndex = 2;
             // 
             // label3
             // 
@@ -429,6 +348,49 @@ namespace IGBARAS_WATER_DISTRICT
             this.label3.TabIndex = 21;
             this.label3.Text = "Service";
             // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.panel14);
+            this.panel6.Controls.Add(this.zoneDataGridView);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(517, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(305, 347);
+            this.panel6.TabIndex = 1;
+            // 
+            // zoneDataGridView
+            // 
+            this.zoneDataGridView.AllowUserToOrderColumns = true;
+            this.zoneDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.zoneDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.zoneDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.zoneDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.zoneDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ZoneID});
+            this.zoneDataGridView.Location = new System.Drawing.Point(3, 29);
+            this.zoneDataGridView.Name = "zoneDataGridView";
+            this.zoneDataGridView.RowHeadersVisible = false;
+            this.zoneDataGridView.Size = new System.Drawing.Size(299, 315);
+            this.zoneDataGridView.TabIndex = 1;
+            // 
+            // ZoneID
+            // 
+            this.ZoneID.DataPropertyName = "ZoneID";
+            this.ZoneID.HeaderText = "ZoneID";
+            this.ZoneID.Name = "ZoneID";
+            this.ZoneID.Visible = false;
+            // 
+            // panel14
+            // 
+            this.panel14.Controls.Add(this.label4);
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel14.Location = new System.Drawing.Point(0, 0);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(305, 23);
+            this.panel14.TabIndex = 2;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -440,27 +402,44 @@ namespace IGBARAS_WATER_DISTRICT
             this.label4.TabIndex = 21;
             this.label4.Text = "Zone";
             // 
-            // label5
+            // tableLayoutPanel2
             // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label5.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(131, 23);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "Penalty and Tax";
+            this.tableLayoutPanel2.AutoScroll = true;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.96499F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.03501F));
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 42);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1171, 359);
+            this.tableLayoutPanel2.TabIndex = 19;
             // 
-            // label6
+            // panel4
             // 
-            this.label6.AutoSize = true;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label6.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(87, 23);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Discounts";
+            this.panel4.Controls.Add(this.tableLayoutPanel5);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(3, 410);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1171, 390);
+            this.panel4.TabIndex = 1;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.AutoScroll = true;
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(1171, 390);
+            this.tableLayoutPanel5.TabIndex = 0;
             // 
             // BillSettingsControl
             // 
@@ -471,30 +450,29 @@ namespace IGBARAS_WATER_DISTRICT
             this.Size = new System.Drawing.Size(1181, 807);
             this.Load += new System.EventHandler(this.BillSettingsControl_Load);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.zoneDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.settingsDataGidView)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.discountDataGridView)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.serviceDataGridView)).EndInit();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
-            this.panel13.PerformLayout();
-            this.panel14.ResumeLayout(false);
-            this.panel14.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsDataGidView)).EndInit();
             this.panel15.ResumeLayout(false);
             this.panel15.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.discountDataGridView)).EndInit();
             this.panel16.ResumeLayout(false);
             this.panel16.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.serviceDataGridView)).EndInit();
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.zoneDataGridView)).EndInit();
+            this.panel14.ResumeLayout(false);
+            this.panel14.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -502,36 +480,34 @@ namespace IGBARAS_WATER_DISTRICT
         #endregion
         private Panel panel1;
         private Button applyAllChangesButton;
-        private DataGridView settingsDataGidView;
-        private DataGridViewTextBoxColumn SettingID;
         private Button undoAllButton;
-        private DataGridView zoneDataGridView;
-        private DataGridViewTextBoxColumn ZoneID;
         private TableLayoutPanel tableLayoutPanel1;
         private Panel panel2;
         private Panel panel3;
-        private DataGridView discountDataGridView;
-        private DataGridViewTextBoxColumn DiscountID;
         private TableLayoutPanel tableLayoutPanel2;
-        private TableLayoutPanel tableLayoutPanel4;
-        private Panel panel4;
         private TableLayoutPanel tableLayoutPanel3;
         private Panel panel6;
-        private Panel panel5;
-        private DataGridView serviceDataGridView;
-        private DataGridViewTextBoxColumn ServiceiD;
-        private Panel panel8;
-        private Panel panel7;
-        private TableLayoutPanel tableLayoutPanel5;
-        private Panel panel10;
-        private Panel panel9;
         private Panel panel14;
         private Label label4;
+        private DataGridView zoneDataGridView;
+        private DataGridViewTextBoxColumn ZoneID;
+        private Panel panel5;
         private Panel panel13;
         private Label label3;
+        private DataGridView serviceDataGridView;
+        private DataGridViewTextBoxColumn ServiceiD;
+        private TableLayoutPanel tableLayoutPanel4;
+        private Panel panel8;
         private Panel panel16;
         private Label label6;
+        private DataGridView discountDataGridView;
+        private DataGridViewTextBoxColumn DiscountID;
+        private Panel panel7;
         private Panel panel15;
         private Label label5;
+        private DataGridView settingsDataGidView;
+        private DataGridViewTextBoxColumn SettingID;
+        private Panel panel4;
+        private TableLayoutPanel tableLayoutPanel5;
     }
 }

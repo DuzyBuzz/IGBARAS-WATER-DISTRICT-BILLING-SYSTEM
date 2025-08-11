@@ -1,6 +1,7 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using IGBARAS_WATER_DISTRICT.Helpers;
+using IGBARAS_WATER_DISTRICT.Reports;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -45,6 +46,10 @@ namespace IGBARAS_WATER_DISTRICT
             else if (tabControl1.SelectedTab == monthlyCollectionTab) // ✅ Add your Daily Collection tab here
             {
                 LoadReportToViewer("MonthlyCollectionReports.rpt", monthlyCollectionTab, monthlyCollectionCrystalReportViewer);
+            }
+            else if (tabControl1.SelectedTab == monthlyBillingTab) // ✅ Add your Daily Collection tab here
+            {
+                LoadReportToViewer("MonthlyBillingReports.rpt", monthlyBillingTab, monthlyBillingCrystalRepoerViewer);
             }
         }
 

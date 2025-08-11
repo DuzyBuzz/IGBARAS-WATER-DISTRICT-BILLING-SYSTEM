@@ -147,6 +147,16 @@ namespace IGBARAS_WATER_DISTRICT
             );
             return result == DialogResult.Yes;
         }
+
+        private void paymentsApplyButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void billingApplyButton_Click(object sender, EventArgs e)
+        {
+
+        }
         //private void billingApplyButton_Click(object sender, EventArgs e)
         //{
         //    DialogResult result = MessageBox.Show(

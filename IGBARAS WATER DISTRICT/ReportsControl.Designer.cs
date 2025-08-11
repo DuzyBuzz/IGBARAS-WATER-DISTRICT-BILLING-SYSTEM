@@ -37,7 +37,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.dailyBillingTab = new System.Windows.Forms.TabPage();
             this.dailyBillingCrystalReportViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.monthlyBillingTab = new System.Windows.Forms.TabPage();
-            this.crystalReportViewer3 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.monthlyBillingCrystalRepoerViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.dailyCollectionTab = new System.Windows.Forms.TabPage();
             this.dailyCollectionCrystalReport = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.monthlyCollectionTab = new System.Windows.Forms.TabPage();
@@ -115,7 +115,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             // monthlyBillingTab
             // 
-            this.monthlyBillingTab.Controls.Add(this.crystalReportViewer3);
+            this.monthlyBillingTab.Controls.Add(this.monthlyBillingCrystalRepoerViewer);
             this.monthlyBillingTab.Location = new System.Drawing.Point(4, 29);
             this.monthlyBillingTab.Name = "monthlyBillingTab";
             this.monthlyBillingTab.Size = new System.Drawing.Size(1173, 774);
@@ -123,18 +123,18 @@ namespace IGBARAS_WATER_DISTRICT
             this.monthlyBillingTab.Text = "Monthly Billing";
             this.monthlyBillingTab.UseVisualStyleBackColor = true;
             // 
-            // crystalReportViewer3
+            // monthlyBillingCrystalRepoerViewer
             // 
-            this.crystalReportViewer3.ActiveViewIndex = -1;
-            this.crystalReportViewer3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.crystalReportViewer3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.crystalReportViewer3.Location = new System.Drawing.Point(0, 0);
-            this.crystalReportViewer3.Name = "crystalReportViewer3";
-            this.crystalReportViewer3.Size = new System.Drawing.Size(1173, 774);
-            this.crystalReportViewer3.TabIndex = 0;
-            this.crystalReportViewer3.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.ParameterPanel;
-            this.crystalReportViewer3.Load += new System.EventHandler(this.crystalReportViewer3_Load);
+            this.monthlyBillingCrystalRepoerViewer.ActiveViewIndex = -1;
+            this.monthlyBillingCrystalRepoerViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.monthlyBillingCrystalRepoerViewer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.monthlyBillingCrystalRepoerViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.monthlyBillingCrystalRepoerViewer.Location = new System.Drawing.Point(0, 0);
+            this.monthlyBillingCrystalRepoerViewer.Name = "monthlyBillingCrystalRepoerViewer";
+            this.monthlyBillingCrystalRepoerViewer.Size = new System.Drawing.Size(1173, 774);
+            this.monthlyBillingCrystalRepoerViewer.TabIndex = 0;
+            this.monthlyBillingCrystalRepoerViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.ParameterPanel;
+            this.monthlyBillingCrystalRepoerViewer.Load += new System.EventHandler(this.crystalReportViewer3_Load);
             // 
             // dailyCollectionTab
             // 
@@ -208,7 +208,7 @@ namespace IGBARAS_WATER_DISTRICT
         private TabPage dailyBillingTab;
         private CrystalDecisions.Windows.Forms.CrystalReportViewer dailyBillingCrystalReportViewer;
         private TabPage monthlyBillingTab;
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer3;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer monthlyBillingCrystalRepoerViewer;
         private CrystalDecisions.Windows.Forms.CrystalReportViewer dailyCollectionCrystalReport;
         private TabPage monthlyCollectionTab;
         private CrystalDecisions.Windows.Forms.CrystalReportViewer monthlyCollectionCrystalReportViewer;
