@@ -373,8 +373,7 @@ namespace IGBARAS_WATER_DISTRICT
                                     insertCmd.ExecuteNonQuery();
                                     MessageBox.Show("Billing record inserted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     printSaveButton.Enabled = false;
-                                    ClearWaterChargeLabels();
-                                    ClearBillinInfo();
+
                                     SetNextBillNo();
                                 }
                             }
@@ -807,7 +806,7 @@ namespace IGBARAS_WATER_DISTRICT
                     MessageBox.Show("Payment record inserted and billing status updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadPaymentsToday();
                     SetNextORNo();
-                    ClearCollection();
+
                 }
             }
             catch (Exception ex)
