@@ -16,14 +16,14 @@ namespace IGBARAS_WATER_DISTRICT.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class DailyBillingReport : ReportClass {
+    public class DailyCollectionReport : ReportClass {
         
-        public DailyBillingReport() {
+        public DailyCollectionReport() {
         }
         
         public override string ResourceName {
             get {
-                return "DailyBillingReport.rpt";
+                return "DailyCollectionReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace IGBARAS_WATER_DISTRICT.Reports {
         
         public override string FullResourceName {
             get {
-                return "IGBARAS_WATER_DISTRICT.Reports.DailyBillingReport.rpt";
+                return "IGBARAS_WATER_DISTRICT.Reports.DailyCollectionReport.rpt";
             }
             set {
                 // Do nothing
@@ -82,7 +82,7 @@ namespace IGBARAS_WATER_DISTRICT.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection2 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,15 +90,7 @@ namespace IGBARAS_WATER_DISTRICT.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BillingDate {
+        public CrystalDecisions.Shared.IParameterField Parameter_CollectionDate {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -106,9 +98,9 @@ namespace IGBARAS_WATER_DISTRICT.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedDailyBillingReport : Component, ICachedReport {
+    public class CachedDailyCollectionReport : Component, ICachedReport {
         
-        public CachedDailyBillingReport() {
+        public CachedDailyCollectionReport() {
         }
         
         [Browsable(false)]
@@ -145,7 +137,7 @@ namespace IGBARAS_WATER_DISTRICT.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            DailyBillingReport rpt = new DailyBillingReport();
+            DailyCollectionReport rpt = new DailyCollectionReport();
             rpt.Site = this.Site;
             return rpt;
         }
