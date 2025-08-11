@@ -165,9 +165,9 @@
     <Compile Include="Reports\MonthlyCollectionReports.cs">
       <DependentUpon>MonthlyCollectionReports.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\DailyCollectionReport.cs">
       <AutoGen>True</AutoGen>
