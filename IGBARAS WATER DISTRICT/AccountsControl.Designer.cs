@@ -42,7 +42,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.settingsUndoButton = new System.Windows.Forms.Button();
             this.accountDataGridView = new System.Windows.Forms.DataGridView();
             this.ConcessionaireID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.accountDataGridView)).BeginInit();
@@ -185,13 +184,12 @@ namespace IGBARAS_WATER_DISTRICT
             // accountDataGridView
             // 
             this.accountDataGridView.AllowUserToOrderColumns = true;
-            this.accountDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.accountDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.accountDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.accountDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.accountDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.accountDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ConcessionaireID,
-            this.Status});
+            this.ConcessionaireID});
             this.accountDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.accountDataGridView.Location = new System.Drawing.Point(3, 41);
             this.accountDataGridView.Name = "accountDataGridView";
@@ -206,14 +204,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.ConcessionaireID.HeaderText = "ConcessionaireID";
             this.ConcessionaireID.Name = "ConcessionaireID";
             this.ConcessionaireID.Visible = false;
-            this.ConcessionaireID.Width = 96;
-            // 
-            // Status
-            // 
-            this.Status.DataPropertyName = "Status";
-            this.Status.HeaderText = "Status";
-            this.Status.Name = "Status";
-            this.Status.Width = 62;
             // 
             // AccountsControl
             // 
@@ -243,6 +233,5 @@ namespace IGBARAS_WATER_DISTRICT
         private Button button1;
         private DataGridView accountDataGridView;
         private DataGridViewTextBoxColumn ConcessionaireID;
-        private DataGridViewTextBoxColumn Status;
     }
 }

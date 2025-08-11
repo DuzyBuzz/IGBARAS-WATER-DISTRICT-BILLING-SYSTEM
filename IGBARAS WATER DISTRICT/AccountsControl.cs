@@ -101,20 +101,20 @@ namespace IGBARAS_WATER_DISTRICT
 
         private void accountsDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            // Only format once per row (check if you're on the first column, or skip if you like)
-            if (e.RowIndex >= 0 && accountDataGridView.Rows[e.RowIndex].Cells["Status"].Value != null)
+            // Make sure the column being formatted is the "Status" column
+            if (accountDataGridView.Columns[e.ColumnIndex].Name == "Status" && e.Value != null)
             {
-                string status = accountDataGridView.Rows[e.RowIndex].Cells["Status"].Value.ToString().Trim().ToLower();
+                string status = e.Value.ToString().Trim().ToLower();
 
                 if (status == "disconnected")
                 {
                     accountDataGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 204, 204);
-                    accountDataGridView.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black; // Optional
+                    accountDataGridView.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
                 }
                 else if (status == "active")
                 {
                     accountDataGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(255, 204, 255, 204);
-                    accountDataGridView.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black; // Optional
+                    accountDataGridView.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
                 }
                 else
                 {
