@@ -14,77 +14,17 @@ namespace IGBARAS_WATER_DISTRICT
         public BillSettingsControl()
         {
             InitializeComponent();
+            AddDeleteContextMenu(serviceDataGridView, "Tb_Service", "ServiceID");
+            AddDeleteContextMenu(settingsDataGidView, "Tb_Settings", "SettingID");
+            AddDeleteContextMenu(zoneDataGridView, "Tb_Zone", "ZoneID");
+            AddDeleteContextMenu(discountDataGridView, "Tb_Discount", "DiscountID");
         }
 
         private void BillSettingsControl_Load(object sender, EventArgs e)
         {
-            TableLoaderHelper.LoadTableToGrid(serviceDataGridView, "Tb_Service");
-            TableLoaderHelper.LoadTableToGrid(settingsDataGidView, "Tb_Settings");
-            TableLoaderHelper.LoadTableToGrid(zoneDataGridView, "Tb_Zone");
-            TableLoaderHelper.LoadTableToGrid(discountDataGridView, "Tb_Discount");
-
-            //TableLoaderHelper.LoadTableToGrid(billingDataGridView, "Tb_Billing");
-            //TableLoaderHelper.LoadTableToGrid(paymentsDataGridView, "Tb_Payments");
-
-
+            ReloadAllTables();
             settingsDataGidView.AllowUserToAddRows = false;
             settingsDataGidView.RowHeadersVisible = false;
-        }
-
-        // ✅ Service Section
-        private void undoServiceButton_Click(object sender, EventArgs e)
-        {
-            TableLoaderHelper.LoadTableToGrid(serviceDataGridView, "Tb_Service");
-        }
-
-        private void applyServiceButton_Click(object sender, EventArgs e)
-        {
-            if (ConfirmUpdate("service settings"))
-            {
-                TableUpdaterHelper.UpdateTableFromGrid(serviceDataGridView, "Tb_Service", "ServiceID");
-            }
-        }
-
-        // ✅ Settings Section
-        private void settingsApplyButton_Click(object sender, EventArgs e)
-        {
-            if (ConfirmUpdate("system settings"))
-            {
-                TableUpdaterHelper.UpdateTableFromGrid(settingsDataGidView, "Tb_Settings", "SettingID");
-            }
-        }
-
-        private void settingsUndoButton_Click(object sender, EventArgs e)
-        {
-            TableLoaderHelper.LoadTableToGrid(settingsDataGidView, "Tb_Settings");
-        }
-
-        // ✅ Discount Section
-        private void discountApplyButton_Click(object sender, EventArgs e)
-        {
-            if (ConfirmUpdate("discount settings"))
-            {
-                TableUpdaterHelper.UpdateTableFromGrid(discountDataGridView, "Tb_Discount", "DiscountID");
-            }
-        }
-
-        private void discountUndoButton_Click(object sender, EventArgs e)
-        {
-            TableLoaderHelper.LoadTableToGrid(discountDataGridView, "Tb_Discount");
-        }
-
-        // ✅ Zone Section
-        private void zoneUndoButton_Click(object sender, EventArgs e)
-        {
-            TableLoaderHelper.LoadTableToGrid(zoneDataGridView, "Tb_Zone");
-        }
-
-        private void zoneApplyButton_Click(object sender, EventArgs e)
-        {
-            if (ConfirmUpdate("zone settings"))
-            {
-                TableUpdaterHelper.UpdateTableFromGrid(zoneDataGridView, "Tb_Zone", "ZoneID");
-            }
         }
 
         // 📌 Reusable Confirmation Method
@@ -102,15 +42,6 @@ namespace IGBARAS_WATER_DISTRICT
             return result == DialogResult.Yes;
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel8_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
         // Centralized Apply All Changes
         private void applyAllChangesButton_Click(object sender, EventArgs e)
         {
@@ -125,9 +56,11 @@ namespace IGBARAS_WATER_DISTRICT
                 TableUpdaterHelper.UpdateTableFromGrid(discountDataGridView, "Tb_Discount", "DiscountID");
                 TableUpdaterHelper.UpdateTableFromGrid(zoneDataGridView, "Tb_Zone", "ZoneID");
 
-
                 MessageBox.Show("All changes have been successfully applied.", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Always reload to mirror the database
+                ReloadAllTables();
             }
             catch (Exception ex)
             {
@@ -148,46 +81,81 @@ namespace IGBARAS_WATER_DISTRICT
             return result == DialogResult.Yes;
         }
 
-        private void paymentsApplyButton_Click(object sender, EventArgs e)
+        private void undoAllButton_Click(object sender, EventArgs e)
         {
-
+            ReloadAllTables();
         }
 
-        private void billingApplyButton_Click(object sender, EventArgs e)
+        // Helper to reload all tables
+        private void ReloadAllTables()
         {
-
+            TableLoaderHelper.LoadTableToGrid(serviceDataGridView, "Tb_Service");
+            TableLoaderHelper.LoadTableToGrid(settingsDataGidView, "Tb_Settings");
+            TableLoaderHelper.LoadTableToGrid(zoneDataGridView, "Tb_Zone");
+            TableLoaderHelper.LoadTableToGrid(discountDataGridView, "Tb_Discount");
         }
-        //private void billingApplyButton_Click(object sender, EventArgs e)
-        //{
-        //    DialogResult result = MessageBox.Show(
-        //        "Are you sure you want to apply all changes to the Billing records?",
-        //        "Confirm Update",
-        //        MessageBoxButtons.YesNo,
-        //        MessageBoxIcon.Question
-        //    );
 
-        //    if (result == DialogResult.Yes)
-        //    {
-        //        TableUpdaterHelper.UpdateTableFromGrid(billingDataGridView, "Tb_Billing", "BillingID");
-        //        MessageBox.Show("Billing records have been successfully updated.", "Update Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //    }
-        //}
+        // Add right-click delete support to a DataGridView
+        private void AddDeleteContextMenu(DataGridView dgv, string tableName, string idColumn)
+        {
+            var menu = new ContextMenuStrip();
+            var deleteItem = new ToolStripMenuItem("Delete Row");
+            deleteItem.Click += (s, e) =>
+            {
+                if (dgv.SelectedRows.Count > 0)
+                {
+                    var row = dgv.SelectedRows[0];
 
-        //private void paymentsApplyButton_Click(object sender, EventArgs e)
-        //{
-        //    DialogResult result = MessageBox.Show(
-        //        "Are you sure you want to apply all changes to the Payments records?",
-        //        "Confirm Update",
-        //        MessageBoxButtons.YesNo,
-        //        MessageBoxIcon.Question
-        //    );
+                    // Handle uncommitted new row deletion gracefully
+                    if (row.IsNewRow)
+                    {
+                        MessageBox.Show("Cannot delete an uncommitted new row. Please enter data or cancel the row first.", "Delete Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
 
-        //    if (result == DialogResult.Yes)
-        //    {
-        //        TableUpdaterHelper.UpdateTableFromGrid(paymentsDataGridView, "Tb_Payments", "PaymentID");
-        //        MessageBox.Show("Payments records have been successfully updated.", "Update Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //    }
-        //}
+                    var idValue = row.Cells[idColumn].Value;
+                    if (idValue == null || idValue == DBNull.Value)
+                    {
+                        try
+                        {
+                            dgv.Rows.Remove(row); // Remove unsaved row
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            MessageBox.Show("Cannot delete an uncommitted new row. Please enter data or cancel the row first.", "Delete Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        return;
+                    }
+                    if (MessageBox.Show("Are you sure you want to delete this row from the database?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        if (TableUpdaterHelper.DeleteRow(tableName, idColumn, idValue))
+                        {
+                            MessageBox.Show("Row deleted.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ReloadAllTables();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Delete failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            };
+            menu.Items.Add(deleteItem);
+            dgv.ContextMenuStrip = menu;
 
+            // Ensure right-click selects the row
+            dgv.MouseDown += (s, e) =>
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    var hit = dgv.HitTest(e.X, e.Y);
+                    if (hit.RowIndex >= 0)
+                    {
+                        dgv.ClearSelection();
+                        dgv.Rows[hit.RowIndex].Selected = true;
+                    }
+                }
+            };
+        }
     }
 }

@@ -32,6 +32,7 @@ namespace IGBARAS_WATER_DISTRICT
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.accountDataGridView = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.zoneComboBox = new System.Windows.Forms.ComboBox();
@@ -40,11 +41,11 @@ namespace IGBARAS_WATER_DISTRICT
             this.clearButton = new System.Windows.Forms.Button();
             this.serviceApplyButton = new System.Windows.Forms.Button();
             this.settingsUndoButton = new System.Windows.Forms.Button();
-            this.accountDataGridView = new System.Windows.Forms.DataGridView();
             this.ConcessionaireID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.accountDataGridView)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -63,6 +64,24 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1181, 807);
             this.tableLayoutPanel1.TabIndex = 25;
             // 
+            // accountDataGridView
+            // 
+            this.accountDataGridView.AllowUserToOrderColumns = true;
+            this.accountDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.accountDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.accountDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.accountDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.accountDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ConcessionaireID,
+            this.Status});
+            this.accountDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.accountDataGridView.Location = new System.Drawing.Point(3, 41);
+            this.accountDataGridView.Name = "accountDataGridView";
+            this.accountDataGridView.RowHeadersVisible = false;
+            this.accountDataGridView.Size = new System.Drawing.Size(1175, 763);
+            this.accountDataGridView.TabIndex = 26;
+            this.accountDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.accountsDataGridView_CellFormatting);
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 9;
@@ -74,7 +93,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 127F));
             this.tableLayoutPanel2.Controls.Add(this.button1, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.zoneComboBox, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.label32, 2, 0);
@@ -94,7 +113,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.button1.BackColor = System.Drawing.Color.SteelBlue;
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(696, 3);
+            this.button1.Location = new System.Drawing.Point(695, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(49, 26);
             this.button1.TabIndex = 36;
@@ -108,7 +127,7 @@ namespace IGBARAS_WATER_DISTRICT
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.zoneComboBox.FormattingEnabled = true;
-            this.zoneComboBox.Location = new System.Drawing.Point(646, 4);
+            this.zoneComboBox.Location = new System.Drawing.Point(645, 4);
             this.zoneComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.zoneComboBox.Name = "zoneComboBox";
             this.zoneComboBox.Size = new System.Drawing.Size(44, 21);
@@ -122,7 +141,7 @@ namespace IGBARAS_WATER_DISTRICT
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(557, 0);
+            this.label32.Location = new System.Drawing.Point(556, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(83, 32);
             this.label32.TabIndex = 32;
@@ -137,7 +156,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.searchAccountNumberTextBox.Location = new System.Drawing.Point(3, 4);
             this.searchAccountNumberTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.searchAccountNumberTextBox.Name = "searchAccountNumberTextBox";
-            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(516, 25);
+            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(515, 25);
             this.searchAccountNumberTextBox.TabIndex = 30;
             this.searchAccountNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchAccountNumberTextBox_KeyDown);
             // 
@@ -149,7 +168,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.clearButton.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearButton.ForeColor = System.Drawing.Color.Crimson;
-            this.clearButton.Location = new System.Drawing.Point(525, 3);
+            this.clearButton.Location = new System.Drawing.Point(524, 3);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(26, 26);
             this.clearButton.TabIndex = 31;
@@ -161,7 +180,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.serviceApplyButton.BackColor = System.Drawing.Color.SteelBlue;
             this.serviceApplyButton.ForeColor = System.Drawing.Color.White;
-            this.serviceApplyButton.Location = new System.Drawing.Point(1051, 3);
+            this.serviceApplyButton.Location = new System.Drawing.Point(1050, 3);
             this.serviceApplyButton.Name = "serviceApplyButton";
             this.serviceApplyButton.Size = new System.Drawing.Size(119, 26);
             this.serviceApplyButton.TabIndex = 35;
@@ -173,7 +192,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.settingsUndoButton.BackColor = System.Drawing.Color.Brown;
             this.settingsUndoButton.ForeColor = System.Drawing.Color.White;
-            this.settingsUndoButton.Location = new System.Drawing.Point(916, 3);
+            this.settingsUndoButton.Location = new System.Drawing.Point(915, 3);
             this.settingsUndoButton.Name = "settingsUndoButton";
             this.settingsUndoButton.Size = new System.Drawing.Size(127, 26);
             this.settingsUndoButton.TabIndex = 34;
@@ -181,29 +200,21 @@ namespace IGBARAS_WATER_DISTRICT
             this.settingsUndoButton.UseVisualStyleBackColor = false;
             this.settingsUndoButton.Click += new System.EventHandler(this.accountUndoButton_Click);
             // 
-            // accountDataGridView
-            // 
-            this.accountDataGridView.AllowUserToOrderColumns = true;
-            this.accountDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.accountDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.accountDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.accountDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.accountDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ConcessionaireID});
-            this.accountDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.accountDataGridView.Location = new System.Drawing.Point(3, 41);
-            this.accountDataGridView.Name = "accountDataGridView";
-            this.accountDataGridView.RowHeadersVisible = false;
-            this.accountDataGridView.Size = new System.Drawing.Size(1175, 763);
-            this.accountDataGridView.TabIndex = 26;
-            this.accountDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.accountsDataGridView_CellFormatting);
-            // 
             // ConcessionaireID
             // 
             this.ConcessionaireID.DataPropertyName = "ConcessionaireID";
             this.ConcessionaireID.HeaderText = "ConcessionaireID";
             this.ConcessionaireID.Name = "ConcessionaireID";
             this.ConcessionaireID.Visible = false;
+            // 
+            // Status
+            // 
+            this.Status.DataPropertyName = "Status";
+            this.Status.HeaderText = "Status";
+            this.Status.Items.AddRange(new object[] {
+            "Active",
+            "Disconnected"});
+            this.Status.Name = "Status";
             // 
             // AccountsControl
             // 
@@ -214,9 +225,9 @@ namespace IGBARAS_WATER_DISTRICT
             this.Size = new System.Drawing.Size(1181, 807);
             this.Load += new System.EventHandler(this.AccountsControl_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.accountDataGridView)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.accountDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -233,5 +244,6 @@ namespace IGBARAS_WATER_DISTRICT
         private Button button1;
         private DataGridView accountDataGridView;
         private DataGridViewTextBoxColumn ConcessionaireID;
+        private DataGridViewComboBoxColumn Status;
     }
 }

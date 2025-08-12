@@ -90,6 +90,18 @@
     <Compile Include="AccountsControl.Designer.cs">
       <DependentUpon>AccountsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="BillingAndPaymentsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BillingAndPaymentsControl.Designer.cs">
+      <DependentUpon>BillingAndPaymentsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BillingControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BillingControl.Designer.cs">
+      <DependentUpon>BillingControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\ReportHelper.cs" />
     <Compile Include="Reports\MonthlyBillingReports.cs">
       <DependentUpon>MonthlyBillingReports.rpt</DependentUpon>
@@ -204,6 +216,9 @@
       <LastGenOutput>AgingOfAccountsReport.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="BillingAndPaymentsControl.resx">
+      <DependentUpon>BillingAndPaymentsControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BillSettingsControl.resx">
       <DependentUpon>BillSettingsControl.cs</DependentUpon>
     </EmbeddedResource>

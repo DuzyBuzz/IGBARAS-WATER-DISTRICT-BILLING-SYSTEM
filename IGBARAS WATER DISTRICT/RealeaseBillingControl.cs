@@ -517,7 +517,7 @@ namespace IGBARAS_WATER_DISTRICT
             minimumChargeLabel.Text = "0.00";
             penaltyAmountLabel.Text = "0.00";
             penaltyPercentLabel.Text = "0%";
-            checkBox1.Checked = false;
+            freeWaterCheckBox.Checked = false;
 
 
             isWithHoldingTaxLabel.Text = "0";
@@ -2262,7 +2262,7 @@ ORDER BY
             // Parse serviceId safely
             if (int.TryParse(serviceIDLabel.Text?.Trim(), out int serviceId))
             {
-                if (checkBox1.Checked)
+                if (freeWaterCheckBox.Checked)
                 {
                     discountedPercentLabel.Text = "100%";
                     discountNameLabel.Text = "FREE WATER";
@@ -2298,6 +2298,15 @@ ORDER BY
         private void refreshPaymentsTodayButton_Click(object sender, EventArgs e)
         {
             LoadPaymentsToday();
+        }
+
+        private void freeWaterCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            freeWaterTextBox.Enabled = freeWaterCheckBox.Checked;
+            if (!freeWaterCheckBox.Checked)
+            {
+                freeWaterTextBox.Text = "";
+            }
         }
     }
 }

@@ -38,264 +38,280 @@ namespace IGBARAS_WATER_DISTRICT
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            sidebarPanel = new Panel();
-            billSettingsButton = new Button();
-            settingsButton = new Button();
-            reportsButton = new Button();
-            accountsButton = new Button();
-            billingButton = new Button();
-            panel1 = new Panel();
-            panel7 = new Panel();
-            usernameLabel = new Label();
-            pictureBox1 = new PictureBox();
-            panel5 = new Panel();
-            panel4 = new Panel();
-            panel3 = new Panel();
-            panel2 = new Panel();
-            logoutButton = new Button();
-            mainPanel = new Panel();
-            sidebarPanel.SuspendLayout();
-            panel1.SuspendLayout();
-            panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            SuspendLayout();
+            this.sidebarPanel = new System.Windows.Forms.Panel();
+            this.billSettingsButton = new System.Windows.Forms.Button();
+            this.settingsButton = new System.Windows.Forms.Button();
+            this.reportsButton = new System.Windows.Forms.Button();
+            this.accountsButton = new System.Windows.Forms.Button();
+            this.billingButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.usernameLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.logoutButton = new System.Windows.Forms.Button();
+            this.mainPanel = new System.Windows.Forms.Panel();
+            this.billingAndPaymentsButton = new System.Windows.Forms.Button();
+            this.sidebarPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SuspendLayout();
             // 
             // sidebarPanel
             // 
-            sidebarPanel.AutoScroll = true;
-            sidebarPanel.BackColor = Color.White;
-            sidebarPanel.BorderStyle = BorderStyle.Fixed3D;
-            sidebarPanel.Controls.Add(billSettingsButton);
-            sidebarPanel.Controls.Add(settingsButton);
-            sidebarPanel.Controls.Add(reportsButton);
-            sidebarPanel.Controls.Add(accountsButton);
-            sidebarPanel.Controls.Add(billingButton);
-            sidebarPanel.Controls.Add(panel1);
-            sidebarPanel.Controls.Add(logoutButton);
-            sidebarPanel.Dock = DockStyle.Left;
-            sidebarPanel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            sidebarPanel.Location = new Point(0, 0);
-            sidebarPanel.Name = "sidebarPanel";
-            sidebarPanel.Size = new Size(206, 961);
-            sidebarPanel.TabIndex = 1;
+            this.sidebarPanel.AutoScroll = true;
+            this.sidebarPanel.BackColor = System.Drawing.Color.White;
+            this.sidebarPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.sidebarPanel.Controls.Add(this.billingAndPaymentsButton);
+            this.sidebarPanel.Controls.Add(this.billSettingsButton);
+            this.sidebarPanel.Controls.Add(this.settingsButton);
+            this.sidebarPanel.Controls.Add(this.reportsButton);
+            this.sidebarPanel.Controls.Add(this.accountsButton);
+            this.sidebarPanel.Controls.Add(this.billingButton);
+            this.sidebarPanel.Controls.Add(this.panel1);
+            this.sidebarPanel.Controls.Add(this.logoutButton);
+            this.sidebarPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sidebarPanel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sidebarPanel.Location = new System.Drawing.Point(0, 0);
+            this.sidebarPanel.Name = "sidebarPanel";
+            this.sidebarPanel.Size = new System.Drawing.Size(206, 961);
+            this.sidebarPanel.TabIndex = 1;
             // 
             // billSettingsButton
             // 
-            billSettingsButton.BackColor = SystemColors.ControlLight;
-            billSettingsButton.Dock = DockStyle.Top;
-            billSettingsButton.FlatAppearance.BorderSize = 0;
-            billSettingsButton.FlatStyle = FlatStyle.Popup;
-            billSettingsButton.Font = new Font("Arial", 12F);
-            billSettingsButton.Location = new Point(0, 299);
-            billSettingsButton.Margin = new Padding(50);
-            billSettingsButton.Name = "billSettingsButton";
-            billSettingsButton.Size = new Size(202, 45);
-            billSettingsButton.TabIndex = 15;
-            billSettingsButton.Text = "\U0001f9eeBill Settings";
-            billSettingsButton.TextAlign = ContentAlignment.MiddleLeft;
-            billSettingsButton.UseVisualStyleBackColor = false;
-            billSettingsButton.Click += billSettingsButton_Click;
+            this.billSettingsButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.billSettingsButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.billSettingsButton.FlatAppearance.BorderSize = 0;
+            this.billSettingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.billSettingsButton.Font = new System.Drawing.Font("Arial", 12F);
+            this.billSettingsButton.Location = new System.Drawing.Point(0, 299);
+            this.billSettingsButton.Margin = new System.Windows.Forms.Padding(50);
+            this.billSettingsButton.Name = "billSettingsButton";
+            this.billSettingsButton.Size = new System.Drawing.Size(202, 45);
+            this.billSettingsButton.TabIndex = 15;
+            this.billSettingsButton.Text = "🧮Bill Settings";
+            this.billSettingsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.billSettingsButton.UseVisualStyleBackColor = false;
+            this.billSettingsButton.Click += new System.EventHandler(this.billSettingsButton_Click);
             // 
             // settingsButton
             // 
-            settingsButton.BackColor = SystemColors.ControlDark;
-            settingsButton.Dock = DockStyle.Bottom;
-            settingsButton.FlatAppearance.BorderSize = 0;
-            settingsButton.FlatStyle = FlatStyle.Popup;
-            settingsButton.Font = new Font("Arial", 12F);
-            settingsButton.Location = new Point(0, 867);
-            settingsButton.Margin = new Padding(50);
-            settingsButton.Name = "settingsButton";
-            settingsButton.Size = new Size(202, 45);
-            settingsButton.TabIndex = 14;
-            settingsButton.Text = "⚙️ Settings";
-            settingsButton.TextAlign = ContentAlignment.MiddleLeft;
-            settingsButton.UseVisualStyleBackColor = false;
-            settingsButton.Click += settingsButton_Click;
+            this.settingsButton.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.settingsButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.settingsButton.FlatAppearance.BorderSize = 0;
+            this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.settingsButton.Font = new System.Drawing.Font("Arial", 12F);
+            this.settingsButton.Location = new System.Drawing.Point(0, 867);
+            this.settingsButton.Margin = new System.Windows.Forms.Padding(50);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(202, 45);
+            this.settingsButton.TabIndex = 14;
+            this.settingsButton.Text = "⚙️ Settings";
+            this.settingsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.settingsButton.UseVisualStyleBackColor = false;
             // 
             // reportsButton
             // 
-            reportsButton.BackColor = SystemColors.ControlLight;
-            reportsButton.Dock = DockStyle.Top;
-            reportsButton.FlatAppearance.BorderSize = 0;
-            reportsButton.FlatStyle = FlatStyle.Popup;
-            reportsButton.Font = new Font("Arial", 12F);
-            reportsButton.Location = new Point(0, 254);
-            reportsButton.Margin = new Padding(50);
-            reportsButton.Name = "reportsButton";
-            reportsButton.Size = new Size(202, 45);
-            reportsButton.TabIndex = 13;
-            reportsButton.Text = "📝 Reports";
-            reportsButton.TextAlign = ContentAlignment.MiddleLeft;
-            reportsButton.UseVisualStyleBackColor = false;
-            reportsButton.Click += reportsButton_Click;
+            this.reportsButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.reportsButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.reportsButton.FlatAppearance.BorderSize = 0;
+            this.reportsButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.reportsButton.Font = new System.Drawing.Font("Arial", 12F);
+            this.reportsButton.Location = new System.Drawing.Point(0, 254);
+            this.reportsButton.Margin = new System.Windows.Forms.Padding(50);
+            this.reportsButton.Name = "reportsButton";
+            this.reportsButton.Size = new System.Drawing.Size(202, 45);
+            this.reportsButton.TabIndex = 13;
+            this.reportsButton.Text = "📝 Reports";
+            this.reportsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.reportsButton.UseVisualStyleBackColor = false;
+            this.reportsButton.Click += new System.EventHandler(this.reportsButton_Click);
             // 
             // accountsButton
             // 
-            accountsButton.BackColor = SystemColors.ControlLight;
-            accountsButton.Dock = DockStyle.Top;
-            accountsButton.FlatAppearance.BorderSize = 0;
-            accountsButton.FlatStyle = FlatStyle.Popup;
-            accountsButton.Font = new Font("Arial", 12F);
-            accountsButton.Location = new Point(0, 209);
-            accountsButton.Margin = new Padding(50);
-            accountsButton.Name = "accountsButton";
-            accountsButton.Size = new Size(202, 45);
-            accountsButton.TabIndex = 9;
-            accountsButton.Text = "👥 Concessionaire";
-            accountsButton.TextAlign = ContentAlignment.MiddleLeft;
-            accountsButton.UseVisualStyleBackColor = false;
-            accountsButton.Click += accountsButton_Click;
+            this.accountsButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.accountsButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.accountsButton.FlatAppearance.BorderSize = 0;
+            this.accountsButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.accountsButton.Font = new System.Drawing.Font("Arial", 12F);
+            this.accountsButton.Location = new System.Drawing.Point(0, 209);
+            this.accountsButton.Margin = new System.Windows.Forms.Padding(50);
+            this.accountsButton.Name = "accountsButton";
+            this.accountsButton.Size = new System.Drawing.Size(202, 45);
+            this.accountsButton.TabIndex = 9;
+            this.accountsButton.Text = "👥 Concessionaire";
+            this.accountsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.accountsButton.UseVisualStyleBackColor = false;
+            this.accountsButton.Click += new System.EventHandler(this.accountsButton_Click);
             // 
             // billingButton
             // 
-            billingButton.BackColor = SystemColors.ControlLight;
-            billingButton.Dock = DockStyle.Top;
-            billingButton.FlatAppearance.BorderSize = 0;
-            billingButton.FlatStyle = FlatStyle.Popup;
-            billingButton.Font = new Font("Arial", 12F);
-            billingButton.Location = new Point(0, 164);
-            billingButton.Margin = new Padding(50);
-            billingButton.Name = "billingButton";
-            billingButton.Size = new Size(202, 45);
-            billingButton.TabIndex = 7;
-            billingButton.Text = "💸 Billing Invoice";
-            billingButton.TextAlign = ContentAlignment.MiddleLeft;
-            billingButton.UseVisualStyleBackColor = false;
-            billingButton.Click += billingButton_Click;
+            this.billingButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.billingButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.billingButton.FlatAppearance.BorderSize = 0;
+            this.billingButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.billingButton.Font = new System.Drawing.Font("Arial", 12F);
+            this.billingButton.Location = new System.Drawing.Point(0, 164);
+            this.billingButton.Margin = new System.Windows.Forms.Padding(50);
+            this.billingButton.Name = "billingButton";
+            this.billingButton.Size = new System.Drawing.Size(202, 45);
+            this.billingButton.TabIndex = 7;
+            this.billingButton.Text = "💸 Billing Invoice";
+            this.billingButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.billingButton.UseVisualStyleBackColor = false;
+            this.billingButton.Click += new System.EventHandler(this.billingButton_Click);
             // 
             // panel1
             // 
-            panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(panel7);
-            panel1.Controls.Add(panel5);
-            panel1.Controls.Add(panel4);
-            panel1.Controls.Add(panel3);
-            panel1.Controls.Add(panel2);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(202, 164);
-            panel1.TabIndex = 6;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.panel7);
+            this.panel1.Controls.Add(this.panel5);
+            this.panel1.Controls.Add(this.panel4);
+            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(202, 164);
+            this.panel1.TabIndex = 6;
             // 
             // panel7
             // 
-            panel7.Controls.Add(usernameLabel);
-            panel7.Controls.Add(pictureBox1);
-            panel7.Dock = DockStyle.Fill;
-            panel7.Location = new Point(35, 15);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(130, 127);
-            panel7.TabIndex = 8;
+            this.panel7.Controls.Add(this.usernameLabel);
+            this.panel7.Controls.Add(this.pictureBox1);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel7.Location = new System.Drawing.Point(35, 15);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(130, 127);
+            this.panel7.TabIndex = 8;
             // 
             // usernameLabel
             // 
-            usernameLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            usernameLabel.AutoSize = true;
-            usernameLabel.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            usernameLabel.Location = new Point(16, 101);
-            usernameLabel.Margin = new Padding(0);
-            usernameLabel.Name = "usernameLabel";
-            usernameLabel.Size = new Size(93, 19);
-            usernameLabel.TabIndex = 0;
-            usernameLabel.Text = "IGD Official";
-            usernameLabel.TextAlign = ContentAlignment.MiddleCenter;
+            this.usernameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.usernameLabel.AutoSize = true;
+            this.usernameLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameLabel.Location = new System.Drawing.Point(16, 101);
+            this.usernameLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.usernameLabel.Name = "usernameLabel";
+            this.usernameLabel.Size = new System.Drawing.Size(93, 19);
+            this.usernameLabel.TabIndex = 0;
+            this.usernameLabel.Text = "IGD Official";
+            this.usernameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
             // 
-            pictureBox1.Dock = DockStyle.Top;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Margin = new Padding(0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(130, 94);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(130, 94);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // panel5
             // 
-            panel5.Dock = DockStyle.Left;
-            panel5.Location = new Point(0, 15);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(35, 127);
-            panel5.TabIndex = 5;
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel5.Location = new System.Drawing.Point(0, 15);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(35, 127);
+            this.panel5.TabIndex = 5;
             // 
             // panel4
             // 
-            panel4.Dock = DockStyle.Right;
-            panel4.Location = new Point(165, 15);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(35, 127);
-            panel4.TabIndex = 4;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(165, 15);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(35, 127);
+            this.panel4.TabIndex = 4;
             // 
             // panel3
             // 
-            panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(0, 142);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(200, 20);
-            panel3.TabIndex = 3;
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 142);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(200, 20);
+            this.panel3.TabIndex = 3;
             // 
             // panel2
             // 
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(200, 15);
-            panel2.TabIndex = 2;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(200, 15);
+            this.panel2.TabIndex = 2;
             // 
             // logoutButton
             // 
-            logoutButton.BackColor = Color.Firebrick;
-            logoutButton.Dock = DockStyle.Bottom;
-            logoutButton.FlatAppearance.BorderSize = 0;
-            logoutButton.FlatStyle = FlatStyle.Flat;
-            logoutButton.Font = new Font("Arial", 12F);
-            logoutButton.ForeColor = SystemColors.Control;
-            logoutButton.Location = new Point(0, 912);
-            logoutButton.Margin = new Padding(50);
-            logoutButton.Name = "logoutButton";
-            logoutButton.Size = new Size(202, 45);
-            logoutButton.TabIndex = 5;
-            logoutButton.Text = "⍈ Logout";
-            logoutButton.TextAlign = ContentAlignment.MiddleLeft;
-            logoutButton.UseVisualStyleBackColor = false;
-            logoutButton.Click += logoutButton_Click;
+            this.logoutButton.BackColor = System.Drawing.Color.Firebrick;
+            this.logoutButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.logoutButton.FlatAppearance.BorderSize = 0;
+            this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logoutButton.Font = new System.Drawing.Font("Arial", 12F);
+            this.logoutButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.logoutButton.Location = new System.Drawing.Point(0, 912);
+            this.logoutButton.Margin = new System.Windows.Forms.Padding(50);
+            this.logoutButton.Name = "logoutButton";
+            this.logoutButton.Size = new System.Drawing.Size(202, 45);
+            this.logoutButton.TabIndex = 5;
+            this.logoutButton.Text = "⍈ Logout";
+            this.logoutButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.logoutButton.UseVisualStyleBackColor = false;
             // 
             // mainPanel
             // 
-            mainPanel.AutoScroll = true;
-            mainPanel.AutoSize = true;
-            mainPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            mainPanel.Dock = DockStyle.Fill;
-            mainPanel.Location = new Point(206, 0);
-            mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(1378, 961);
-            mainPanel.TabIndex = 3;
-            mainPanel.Click += accountsButton_Click;
+            this.mainPanel.AutoScroll = true;
+            this.mainPanel.AutoSize = true;
+            this.mainPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(206, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(1378, 961);
+            this.mainPanel.TabIndex = 3;
+            // 
+            // billingAndPaymentsButton
+            // 
+            this.billingAndPaymentsButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.billingAndPaymentsButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.billingAndPaymentsButton.FlatAppearance.BorderSize = 0;
+            this.billingAndPaymentsButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.billingAndPaymentsButton.Font = new System.Drawing.Font("Arial", 12F);
+            this.billingAndPaymentsButton.Location = new System.Drawing.Point(0, 344);
+            this.billingAndPaymentsButton.Margin = new System.Windows.Forms.Padding(50);
+            this.billingAndPaymentsButton.Name = "billingAndPaymentsButton";
+            this.billingAndPaymentsButton.Size = new System.Drawing.Size(202, 45);
+            this.billingAndPaymentsButton.TabIndex = 16;
+            this.billingAndPaymentsButton.Text = "📝 Billing and Payments";
+            this.billingAndPaymentsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.billingAndPaymentsButton.UseVisualStyleBackColor = false;
+            this.billingAndPaymentsButton.Click += new System.EventHandler(this.billingAndPaymentsButton_Click);
             // 
             // MainForm
             // 
-            AutoScroll = true;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(1584, 961);
-            Controls.Add(mainPanel);
-            Controls.Add(sidebarPanel);
-            Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "MainForm";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "IGBARAS Water District Billing";
-            FormClosing += MainForm_FormClosing;
-            FormClosed += MainForm_FormClosed;
-            Load += MainForm_Load;
-            sidebarPanel.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panel7.ResumeLayout(false);
-            panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScroll = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(1584, 961);
+            this.Controls.Add(this.mainPanel);
+            this.Controls.Add(this.sidebarPanel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "IGBARAS Water District Billing";
+            this.sidebarPanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
@@ -316,5 +332,6 @@ namespace IGBARAS_WATER_DISTRICT
         private Button settingsButton;
         private Label usernameLabel;
         private Button billSettingsButton;
+        private Button billingAndPaymentsButton;
     }
 }

@@ -38,9 +38,9 @@ namespace IGBARAS_WATER_DISTRICT
             this.currentPasswordTextBox = new System.Windows.Forms.TextBox();
             this.userNameTextBox = new System.Windows.Forms.TextBox();
             this.fullnameTextBox = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.accountApplyButton = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -135,6 +135,17 @@ namespace IGBARAS_WATER_DISTRICT
             this.fullnameTextBox.Size = new System.Drawing.Size(381, 26);
             this.fullnameTextBox.TabIndex = 0;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(3, 252);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(99, 16);
+            this.checkBox1.TabIndex = 6;
+            this.checkBox1.Text = "show password";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -159,17 +170,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.accountApplyButton.Text = "✏️ Apply Changes";
             this.accountApplyButton.UseVisualStyleBackColor = false;
             this.accountApplyButton.Click += new System.EventHandler(this.accountApplyButton_Click);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(3, 252);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(99, 16);
-            this.checkBox1.TabIndex = 6;
-            this.checkBox1.Text = "show password";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // SettingsControl
             // 

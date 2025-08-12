@@ -1,12 +1,14 @@
 ﻿using IGBARAS_WATER_DISTRICT.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.OleDb;
 using System.Text;
 using System.Windows.Forms;
 
 public static class TableUpdaterHelper
 {
+    // CREATE/UPDATE: Already handled by this method
     public static void UpdateTableFromGrid(DataGridView dgv, string tableName, string idColumn)
     {
         if (dgv.DataSource == null || dgv.Rows.Count == 0)
@@ -35,8 +37,6 @@ public static class TableUpdaterHelper
                     for (int i = 0; i < row.Cells.Count; i++)
                     {
                         var colName = dgv.Columns[i].Name;
-
-                        // Skip auto-increment ID column
                         if (string.Equals(colName, idColumn, StringComparison.OrdinalIgnoreCase))
                             continue;
 
@@ -80,8 +80,37 @@ public static class TableUpdaterHelper
                     MessageBox.Show($"Error on row: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
         }
     }
 
+    // READ: Load all rows from a table into a DataTable
+    public static DataTable ReadTable(string tableName)
+    {
+        var dt = new DataTable();
+        using (var connection = new OleDbConnection(DbConfig.ConnectionString))
+        {
+            string query = $"SELECT * FROM [{tableName}]";
+            using (var adapter = new OleDbDataAdapter(query, connection))
+            {
+                adapter.Fill(dt);
+            }
+        }
+        return dt;
+    }
+
+    // DELETE: Delete a row by ID
+    public static bool DeleteRow(string tableName, string idColumn, object idValue)
+    {
+        using (var connection = new OleDbConnection(DbConfig.ConnectionString))
+        {
+            string query = $"DELETE FROM [{tableName}] WHERE [{idColumn}] = ?";
+            using (var cmd = new OleDbCommand(query, connection))
+            {
+                cmd.Parameters.AddWithValue("@id", idValue);
+                connection.Open();
+                int affected = cmd.ExecuteNonQuery();
+                return affected > 0;
+            }
+        }
+    }
 }
