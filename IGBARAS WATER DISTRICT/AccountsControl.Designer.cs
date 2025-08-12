@@ -213,7 +213,9 @@ namespace IGBARAS_WATER_DISTRICT
             this.Status.HeaderText = "Status";
             this.Status.Items.AddRange(new object[] {
             "Active",
-            "Disconnected"});
+            "Disconnected",
+            "Status",
+            " "});
             this.Status.Name = "Status";
             // 
             // AccountsControl

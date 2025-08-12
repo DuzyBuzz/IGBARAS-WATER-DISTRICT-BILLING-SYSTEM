@@ -113,6 +113,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.settingsButton.Text = "⚙️ Settings";
             this.settingsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.settingsButton.UseVisualStyleBackColor = false;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
             // reportsButton
             // 
@@ -264,6 +265,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.logoutButton.Text = "⍈ Logout";
             this.logoutButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.logoutButton.UseVisualStyleBackColor = false;
+            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
             // mainPanel
             // 
@@ -304,6 +306,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IGBARAS Water District Billing";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.sidebarPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel7.ResumeLayout(false);

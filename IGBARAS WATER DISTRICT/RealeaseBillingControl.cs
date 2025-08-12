@@ -935,20 +935,20 @@ namespace IGBARAS_WATER_DISTRICT
         private void LoadAccountBillHistory(string accountNo)
         {
             string query = @"
-        SELECT
-            BillNo AS [Bill No],
-            DateFrom AS [From],
-            DateTo AS [To],
-            PrevReading AS [Prev Reading],
-            PresentReading AS [Present Reading],
-            (PresentReading - PrevReading) AS [Meter Consumed(m³)],
-            DueDate AS [Due Date],
-            IIF(Is_PartiallyPaid = True, 'Partially Paid',
-                IIF(Is_FullyPaid = True, 'Fully Paid', 'Unpaid')) AS [Status]
-        FROM Tb_Billing
-        WHERE AccountNo = ?
-        ORDER BY BillNo DESC;
-    ";
+                SELECT
+                    BillNo AS [Bill No],
+                    DateFrom AS [From],
+                    DateTo AS [To],
+                    PrevReading AS [Prev Reading],
+                    PresentReading AS [Present Reading],
+                    (PresentReading - PrevReading) AS [Meter Consumed(m³)],
+                    DueDate AS [Due Date],
+                    IIF(Is_FullyPaid = True, 'Fully Paid',
+                        IIF(Is_PartiallyPaid = True, 'Partially Paid', 'Unpaid')) AS [Status]
+                FROM Tb_Billing
+                WHERE AccountNo = ?
+                ORDER BY BillNo DESC;
+            ";
 
             try
             {

@@ -102,6 +102,8 @@
     <Compile Include="BillingControl.Designer.cs">
       <DependentUpon>BillingControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ColumnUpdaterHelper.cs" />
+    <Compile Include="Helpers\CustomTableLoaderHelper.cs" />
     <Compile Include="Helpers\ReportHelper.cs" />
     <Compile Include="Reports\MonthlyBillingReports.cs">
       <DependentUpon>MonthlyBillingReports.rpt</DependentUpon>
