@@ -56,15 +56,12 @@ namespace IGBARAS_WATER_DISTRICT
             if (result == DialogResult.Yes)
             {
                 accountDataGridView.EndEdit();
-                if (accountDataGridView.DataSource is DataView dv)
-                {
-                    dv.Table.AcceptChanges();
-                }
-                else if (accountDataGridView.DataSource is DataTable dt)
-                {
-                    dt.AcceptChanges();
-                }
+
+                // Apply changes to the database
                 TableUpdaterHelper.UpdateTableFromGrid(accountDataGridView, "Tb_Concessionaire", "ConcessionaireID");
+
+                // Show success message
+                MessageBox.Show("Concessionaire details updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

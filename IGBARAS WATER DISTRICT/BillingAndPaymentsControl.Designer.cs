@@ -70,7 +70,6 @@
             this.AmountBilled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ArrearsPenaltyAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalAmountBilled = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaymentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ORNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CurrentBillNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -90,6 +89,7 @@
             this.ServiceConnectionFee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FreeWaters = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PaymentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.billingTab.SuspendLayout();
             this.paymentsTab.SuspendLayout();
@@ -325,12 +325,11 @@
             this.paymentsDataGridView.AllowUserToAddRows = false;
             this.paymentsDataGridView.AllowUserToDeleteRows = false;
             this.paymentsDataGridView.AllowUserToOrderColumns = true;
-            this.paymentsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.paymentsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.paymentsDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.paymentsDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.paymentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.paymentsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.PaymentID,
             this.ORNumber,
             this.CurrentBillNo,
             this.AccountNum,
@@ -349,7 +348,8 @@
             this.Balance,
             this.ServiceConnectionFee,
             this.Remarks,
-            this.FreeWaters});
+            this.FreeWaters,
+            this.PaymentID});
             this.paymentsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.paymentsDataGridView.Location = new System.Drawing.Point(3, 39);
             this.paymentsDataGridView.Name = "paymentsDataGridView";
@@ -629,26 +629,20 @@
             this.TotalAmountBilled.ReadOnly = true;
             this.TotalAmountBilled.Width = 113;
             // 
-            // PaymentID
-            // 
-            this.PaymentID.DataPropertyName = "PaymentID";
-            this.PaymentID.HeaderText = "Payment ID";
-            this.PaymentID.Name = "PaymentID";
-            this.PaymentID.ReadOnly = true;
-            this.PaymentID.Visible = false;
-            // 
             // ORNumber
             // 
             this.ORNumber.DataPropertyName = "ORNumber";
             this.ORNumber.HeaderText = "OR Number";
             this.ORNumber.Name = "ORNumber";
             this.ORNumber.ReadOnly = true;
+            this.ORNumber.Width = 88;
             // 
             // CurrentBillNo
             // 
             this.CurrentBillNo.DataPropertyName = "CurrentBillNo";
             this.CurrentBillNo.HeaderText = "Bill No.";
             this.CurrentBillNo.Name = "CurrentBillNo";
+            this.CurrentBillNo.Width = 65;
             // 
             // AccountNum
             // 
@@ -656,6 +650,7 @@
             this.AccountNum.HeaderText = "Account No.";
             this.AccountNum.Name = "AccountNum";
             this.AccountNum.ReadOnly = true;
+            this.AccountNum.Width = 92;
             // 
             // PaymentDate
             // 
@@ -663,6 +658,7 @@
             this.PaymentDate.HeaderText = "PaymentDate";
             this.PaymentDate.Name = "PaymentDate";
             this.PaymentDate.ReadOnly = true;
+            this.PaymentDate.Width = 96;
             // 
             // PaymentType
             // 
@@ -673,10 +669,11 @@
             // 
             // ArrearsAmounts
             // 
-            this.ArrearsAmounts.DataPropertyName = "ArrearsAmounts";
+            this.ArrearsAmounts.DataPropertyName = "ArrearsAmount";
             this.ArrearsAmounts.HeaderText = "Arrears Amount";
             this.ArrearsAmounts.Name = "ArrearsAmounts";
             this.ArrearsAmounts.ReadOnly = true;
+            this.ArrearsAmounts.Width = 96;
             // 
             // ArrearsPenalty
             // 
@@ -684,6 +681,7 @@
             this.ArrearsPenalty.HeaderText = "Arrears Penalty";
             this.ArrearsPenalty.Name = "ArrearsPenalty";
             this.ArrearsPenalty.ReadOnly = true;
+            this.ArrearsPenalty.Width = 95;
             // 
             // TotalArrears
             // 
@@ -691,6 +689,7 @@
             this.TotalArrears.HeaderText = "Total Arrears";
             this.TotalArrears.Name = "TotalArrears";
             this.TotalArrears.ReadOnly = true;
+            this.TotalArrears.Width = 85;
             // 
             // BillCharge
             // 
@@ -698,6 +697,7 @@
             this.BillCharge.HeaderText = "Bill Charge";
             this.BillCharge.Name = "BillCharge";
             this.BillCharge.ReadOnly = true;
+            this.BillCharge.Width = 76;
             // 
             // TaxAmounts
             // 
@@ -705,6 +705,7 @@
             this.TaxAmounts.HeaderText = "Tax";
             this.TaxAmounts.Name = "TaxAmounts";
             this.TaxAmounts.ReadOnly = true;
+            this.TaxAmounts.Width = 50;
             // 
             // DiscountAmounts
             // 
@@ -712,6 +713,7 @@
             this.DiscountAmounts.HeaderText = "Discount";
             this.DiscountAmounts.Name = "DiscountAmounts";
             this.DiscountAmounts.ReadOnly = true;
+            this.DiscountAmounts.Width = 74;
             // 
             // TotalCurrent
             // 
@@ -726,6 +728,7 @@
             this.AmountPaid.HeaderText = "Amount Paid";
             this.AmountPaid.Name = "AmountPaid";
             this.AmountPaid.ReadOnly = true;
+            this.AmountPaid.Width = 85;
             // 
             // Penalty
             // 
@@ -733,6 +736,7 @@
             this.Penalty.HeaderText = "Penalty";
             this.Penalty.Name = "Penalty";
             this.Penalty.ReadOnly = true;
+            this.Penalty.Width = 67;
             // 
             // NetBillChage
             // 
@@ -740,13 +744,14 @@
             this.NetBillChage.HeaderText = "Net Bill Charge";
             this.NetBillChage.Name = "NetBillChage";
             this.NetBillChage.ReadOnly = true;
+            this.NetBillChage.Width = 94;
             // 
             // Balance
             // 
             this.Balance.DataPropertyName = "Balance";
             this.Balance.HeaderText = "Balance";
             this.Balance.Name = "Balance";
-            this.Balance.ReadOnly = true;
+            this.Balance.Width = 71;
             // 
             // ServiceConnectionFee
             // 
@@ -754,6 +759,7 @@
             this.ServiceConnectionFee.HeaderText = "SCF";
             this.ServiceConnectionFee.Name = "ServiceConnectionFee";
             this.ServiceConnectionFee.ReadOnly = true;
+            this.ServiceConnectionFee.Width = 52;
             // 
             // Remarks
             // 
@@ -761,6 +767,7 @@
             this.Remarks.HeaderText = "Remarks";
             this.Remarks.Name = "Remarks";
             this.Remarks.ReadOnly = true;
+            this.Remarks.Width = 74;
             // 
             // FreeWaters
             // 
@@ -768,6 +775,15 @@
             this.FreeWaters.HeaderText = "Free Water";
             this.FreeWaters.Name = "FreeWaters";
             this.FreeWaters.ReadOnly = true;
+            this.FreeWaters.Width = 79;
+            // 
+            // PaymentID
+            // 
+            this.PaymentID.DataPropertyName = "PaymentID";
+            this.PaymentID.HeaderText = "PaymentID";
+            this.PaymentID.Name = "PaymentID";
+            this.PaymentID.Visible = false;
+            this.PaymentID.Width = 84;
             // 
             // BillingAndPaymentsControl
             // 
@@ -836,7 +852,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AmountBilled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ArrearsPenaltyAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalAmountBilled;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ORNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn CurrentBillNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountNum;
@@ -856,5 +871,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ServiceConnectionFee;
         private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
         private System.Windows.Forms.DataGridViewTextBoxColumn FreeWaters;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentID;
     }
 }
