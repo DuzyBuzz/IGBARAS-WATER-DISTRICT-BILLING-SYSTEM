@@ -112,9 +112,87 @@ namespace IGBARAS_WATER_DISTRICT
                 MessageBox.Show($"❌ An error occurred while saving or printing: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void FormatAmountPaidTextBox()
+        {
+            TextBox textBox = collectionTotalAmountPaidTextBox;
+
+            // Disable the button if the textbox is empty or zero
+            if (string.IsNullOrWhiteSpace(textBox.Text) || textBox.Text == "0")
+            {
+                billPaidButton.Enabled = false;
+                collectionTotalPaidAmointLabel.Text = "0.00";
+                changeLabel.Text = "0.00";
+                return;
+            }
+            else
+            {
+                billPaidButton.Enabled = true;
+            }
+
+            // Save cursor position before formatting
+            int cursorPosition = textBox.SelectionStart;
+
+            // Remove commas to parse clean number
+            string rawText = textBox.Text.Replace(",", "");
+
+            // Try parsing the value from the textbox
+            if (decimal.TryParse(rawText, out decimal paidAmount))
+            {
+                // Format with commas and 2 decimal places (e.g., 1,000.00)
+                string formattedText = NumberFormatterHelper.FormatWithCommas2(paidAmount);
+
+                // Update text only if it's different (to avoid flicker)
+                if (textBox.Text != formattedText)
+                {
+                    textBox.Text = formattedText;
+                    textBox.SelectionStart = textBox.Text.Length;
+                }
+
+                // Try to parse the total amount due from the label
+                if (decimal.TryParse(totalAmountDueLabel2.Text.Replace(",", ""), out decimal totalAmountDue))
+                {
+                    // Compare entered amount with total due
+                    if (paidAmount > totalAmountDue)
+                    {
+                        // Show total amount due only if paid amount exceeds it
+                        collectionTotalPaidAmointLabel.Text = totalAmountDue.ToString("N2");
+                    }
+                    else
+                    {
+                        // Show the entered amount if within limit
+                        collectionTotalPaidAmointLabel.Text = formattedText;
+                    }
+                }
+                else
+                {
+                    // Handle if the total due label contains invalid number
+                    collectionTotalPaidAmointLabel.Text = "0.00";
+                }
+            }
+            else
+            {
+                // If input is not valid number, clear textbox and label
+                textBox.Text = "";
+                collectionTotalPaidAmointLabel.Text = "0.00";
+            }
+
+            // Remove commas and trim spaces, then parse to decimal
+            decimal totalDue = decimal.TryParse(totalAmountDueLabel2.Text.Replace(",", "").Trim(), out decimal dueValue) ? dueValue : 0;
+            decimal totalPaid = decimal.TryParse(textBox.Text.Replace(",", "").Trim(), out decimal paidValue) ? paidValue : 0;
+
+            // Subtract to get the change
+            decimal change = totalPaid - totalDue;
+
+            // Ensure negative values are shown as 0.00
+            change = Math.Max(change, 0);
+
+            // Format and display
+            changeLabel.Text = change.ToString("N2");
+        }
 
         private void billPaidButton_Click(object sender, EventArgs e)
         {
+            FormatAmountPaidTextBox();
             string accountNo = collectionNameLabel.Text;
             string billNo = collectionBillingInvoiceTextBox.Text;
 
@@ -943,6 +1021,7 @@ namespace IGBARAS_WATER_DISTRICT
                 PresentReading AS [Present Reading],
                 (PresentReading - PrevReading) AS [Meter Consumed(m³)],
                 DueDate AS [Due Date],
+                AmountBilled AS [Amount Billed],
                 IIF(Is_FullyPaid = True, 'Fully Paid',
                     IIF(Is_PartiallyPaid = True, 'Partially Paid', 'Unpaid')) AS [Status]
             FROM Tb_Billing
@@ -1580,86 +1659,6 @@ namespace IGBARAS_WATER_DISTRICT
 
         private void totalAmountPaidTextBox_TextChanged(object sender, EventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-
-            // Disable the button if the textbox is empty or zero
-            if (string.IsNullOrWhiteSpace(collectionTotalAmountPaidTextBox.Text) || collectionTotalAmountPaidTextBox.Text == "0")
-            {
-                billPaidButton.Enabled = false;
-            }
-            else
-            {
-                billPaidButton.Enabled = true;
-            }
-
-            // Return early if empty to avoid parsing issues
-            if (string.IsNullOrWhiteSpace(textBox.Text))
-            {
-                collectionTotalPaidAmointLabel.Text = "0.00";
-                return;
-            }
-
-            // Save cursor position before formatting
-            int cursorPosition = textBox.SelectionStart;
-
-            // Remove commas to parse clean number
-            string rawText = textBox.Text.Replace(",", "");
-
-            // Try parsing the value from the textbox
-            if (decimal.TryParse(rawText, out decimal paidAmount))
-            {
-                // Format with commas (e.g., 1,000.00)
-                string formattedText = NumberFormatterHelper.FormatWithCommas(paidAmount);
-
-                // Update text only if it's different (to avoid flicker)
-                if (textBox.Text != formattedText)
-                {
-                    textBox.Text = formattedText;
-
-                    // Move cursor to the end
-                    textBox.SelectionStart = textBox.Text.Length;
-                }
-
-                // Try to parse the total amount due from the label
-                if (decimal.TryParse(totalAmountDueLabel2.Text.Replace(",", ""), out decimal totalAmountDue))
-                {
-                    // Compare entered amount with total due
-                    if (paidAmount > totalAmountDue)
-                    {
-                        // Show total amount due only if paid amount exceeds it
-                        collectionTotalPaidAmointLabel.Text = totalAmountDue.ToString("N2");
-                    }
-                    else
-                    {
-                        // Show the entered amount if within limit
-                        collectionTotalPaidAmointLabel.Text = formattedText;
-                    }
-                }
-                else
-                {
-                    // Handle if the total due label contains invalid number
-                    collectionTotalPaidAmointLabel.Text = "0.00";
-                }
-            }
-            else
-            {
-                // If input is not valid number, clear textbox and label
-                textBox.Text = "";
-                collectionTotalPaidAmointLabel.Text = "0.00";
-            }
-            // Remove commas and trim spaces, then parse to decimal
-            decimal totalDue = decimal.TryParse(totalAmountDueLabel2.Text.Replace(",", "").Trim(), out decimal dueValue) ? dueValue : 0;
-            decimal totalPaid = decimal.TryParse(collectionTotalAmountPaidTextBox.Text.Replace(",", "").Trim(), out decimal paidValue) ? paidValue : 0;
-
-            // Subtract to get the change
-            decimal change = totalPaid - totalDue;
-
-            // Ensure negative values are shown as 0.00
-            change = Math.Max(change, 0);
-
-            // Format and display
-            changeLabel.Text = change.ToString("N2");
-
 
         }
 
@@ -2281,6 +2280,11 @@ ORDER BY
             {
                 freeWaterTextBox.Text = "";
             }
+        }
+
+        private void collectionTotalAmountPaidTextBox_MouseLeave(object sender, EventArgs e)
+        {
+            FormatAmountPaidTextBox();
         }
     }
 }

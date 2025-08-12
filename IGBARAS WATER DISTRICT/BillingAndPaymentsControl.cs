@@ -264,13 +264,15 @@ namespace IGBARAS_WATER_DISTRICT
                         DataRowView drv = row.DataBoundItem as DataRowView;
                         if (drv == null) continue;
                         var originalCurrentBillNo = drv.Row["CurrentBillNo", DataRowVersion.Original];
+                        var originalBalance = drv.Row["Balance", DataRowVersion.Original];
 
+                        // Only check if CurrentBillNo has changed
                         if (!object.Equals(currentBillNo, originalCurrentBillNo))
                         {
                             var columnValues = new Dictionary<string, object>
-                    {
-                        { "CurrentBillNo", currentBillNo }
-                    };
+                            {
+                                { "CurrentBillNo", currentBillNo }
+                            };
 
                             try
                             {
