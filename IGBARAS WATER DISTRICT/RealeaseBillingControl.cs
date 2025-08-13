@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Security.AccessControl;
 using System.Threading.Tasks;
@@ -606,7 +607,7 @@ namespace IGBARAS_WATER_DISTRICT
             sfcInstallmentTextBox.Text = "0.00";
             minimumChargeLabel.Text = "0.00";
             penaltyAmountLabel.Text = "0.00";
-            penaltyPercentLabel.Text = "0%";
+            penaltyPercentLabel.Text = "10%";
             freeWaterCheckBox.Checked = false;
 
             isWithHoldingTaxLabel.Text = "0";
@@ -621,7 +622,7 @@ namespace IGBARAS_WATER_DISTRICT
             taxExemptedPercentLabel2.Text = "0%";
             arrearsAmountLabel2.Text = "0.00";
             totalAmountDueLabel2.Text = "0.00";
-            penaltyPercentLabel2.Text = "0%";
+            penaltyPercentLabel2.Text = "10%";
             totalQuantityLabel2.Text = "0";
             bankNameTextBox.Text = "";
             checkNumberTextBox.Text = "";
@@ -675,7 +676,11 @@ namespace IGBARAS_WATER_DISTRICT
             taxExemptedPercentLabel.Text = $"{taxPercent:0.##}%";
             defaultTax = taxExemptedPercentLabel.Text;
             concessionaireIDLabel.Text = concessionaireID;
-            decimal SCFBalance = decimal.Parse(scf);
+            decimal SCFBalance = 0;
+            if (!string.IsNullOrWhiteSpace(scf))
+            {
+                SCFBalance = decimal.Parse(scf);
+            }
 
             if (SCFBalance > 0)
             {
@@ -779,7 +784,7 @@ namespace IGBARAS_WATER_DISTRICT
                         meterConsumedReadingTextBox.Text = meterConsumed.ToString();
                         taxExemptedPercentLabel2.Text = $"{bill.Tax}%";
                         discountedPercentLabel2.Text = $"{bill.Discount}%";
-                        sfcInstallmentTextBox2.Text = $"{bill.ServiceConnectionFee:N2}";
+                        scfinstallmentLabel.Text = $"{bill.ServiceConnectionFee:N2}";
                         dueDateLabel2.Text = bill.DueDate.ToString("MMMM dd, yyyy");
 
                         if (int.TryParse(serviceIDLabel.Text.Trim(), out int serviceId))
@@ -1246,11 +1251,11 @@ namespace IGBARAS_WATER_DISTRICT
 
                             // Display Final Total
                             subTotalAmountDueLabel2.Text = chargeSubTotal.ToString("N2");
-
-
-
+                            decimal scf = scfinstallmentLabel.Text.Trim().Replace(",", "").Trim() == "" ? 0 : decimal.Parse(scfinstallmentLabel.Text.Trim().Replace(",", ""));
+                            decimal othersAmount = collectionOtherPaymentTextBox.Text.Trim().Replace(",", "").Trim() == "" ? 0 : decimal.Parse(collectionOtherPaymentTextBox.Text.Trim().Replace(",", ""));
                             decimal totalAmountCharge = chargeSubTotal + arrearsPenalty + latePenalty + arrearsAmount;
-
+                            decimal totalAmountDuePlusSCF = totalAmountCharge + scf + othersAmount;
+                            totalPlusSFCOthersLabel.Text = totalAmountDuePlusSCF.ToString("N2");
                             totalAmountDueLabel2.Text = totalAmountCharge.ToString("N2");
 
                             collectionArrearsAmountLabel.Text = arrearsAmountLabel2.Text;
@@ -1389,7 +1394,6 @@ namespace IGBARAS_WATER_DISTRICT
 
 
                         // Display as whole number with %
-                        penaltyPercentLabel.Text = $"{penaltyAmount}%";
                         totalAmountDueLabel.Text = totalAmountDue.ToString("N2");
                         totalAmountDueSCFLabel.Text = totalAmountDuePlusSCF.ToString("N2");
                         // You can now add this penalty to your total calculation
@@ -2343,6 +2347,25 @@ namespace IGBARAS_WATER_DISTRICT
         private void collectionTotalAmountPaidTextBox_MouseLeave(object sender, EventArgs e)
         {
             FormatAmountPaidTextBox();
+        }
+
+        private void collectionOtherPaymentTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Allow only numbers and dot
+            string filtered = new string(collectionOtherPaymentTextBox.Text
+                .Where(c => char.IsDigit(c) || c == '.')
+                .ToArray());
+
+            // If input changed after filtering, update the textbox
+            if (collectionOtherPaymentTextBox.Text != filtered)
+            {
+                int cursorPos = collectionOtherPaymentTextBox.SelectionStart - 1;
+                collectionOtherPaymentTextBox.Text = filtered;
+                collectionOtherPaymentTextBox.SelectionStart = Math.Max(cursorPos, 0);
+            }
+
+            // Mirror to paymentFroOthersTextBox
+            paymentFroOthersTextBox.Text = filtered;
         }
 
     }
