@@ -86,7 +86,6 @@
             this.Penalty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NetBillChage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ServiceConnectionFee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FreeWaters = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaymentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -500,7 +499,6 @@
             this.Penalty,
             this.NetBillChage,
             this.Balance,
-            this.ServiceConnectionFee,
             this.Remarks,
             this.FreeWaters,
             this.PaymentID});
@@ -510,6 +508,7 @@
             this.paymentsDataGridView.RowHeadersVisible = false;
             this.paymentsDataGridView.Size = new System.Drawing.Size(1161, 730);
             this.paymentsDataGridView.TabIndex = 26;
+            this.paymentsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.paymentsDataGridView_CellContentClick);
             // 
             // tableLayoutPanel4
             // 
@@ -752,14 +751,6 @@
             this.Balance.Name = "Balance";
             this.Balance.Width = 71;
             // 
-            // ServiceConnectionFee
-            // 
-            this.ServiceConnectionFee.DataPropertyName = "ServiceConnectionFee";
-            this.ServiceConnectionFee.HeaderText = "SCF";
-            this.ServiceConnectionFee.Name = "ServiceConnectionFee";
-            this.ServiceConnectionFee.ReadOnly = true;
-            this.ServiceConnectionFee.Width = 52;
-            // 
             // Remarks
             // 
             this.Remarks.DataPropertyName = "Remarks";
@@ -867,7 +858,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Penalty;
         private System.Windows.Forms.DataGridViewTextBoxColumn NetBillChage;
         private System.Windows.Forms.DataGridViewTextBoxColumn Balance;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceConnectionFee;
         private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
         private System.Windows.Forms.DataGridViewTextBoxColumn FreeWaters;
         private System.Windows.Forms.DataGridViewTextBoxColumn PaymentID;

@@ -105,6 +105,13 @@
     <Compile Include="Helpers\ColumnUpdaterHelper.cs" />
     <Compile Include="Helpers\CustomTableLoaderHelper.cs" />
     <Compile Include="Helpers\ReportHelper.cs" />
+    <Compile Include="Reports\AgingOfSCFReport.cs">
+      <DependentUpon>AgingOfSCFReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\MonthlyBillingReports.cs">
       <DependentUpon>MonthlyBillingReports.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -124,7 +131,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AgingOfAccountsReport.rpt</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="BillSettingsControl.cs">
       <SubType>UserControl</SubType>
@@ -197,6 +203,7 @@
       <SubType>Component</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Reports\RepoerHelper.cs" />
     <Compile Include="SettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -266,6 +273,11 @@
     <Content Include="Reports\MonthlyBillingReports.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>MonthlyBillingReports.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\AgingOfSCFReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AgingOfSCFReport.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="SettingsControl.resx">

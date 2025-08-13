@@ -34,17 +34,17 @@ namespace IGBARAS_WATER_DISTRICT
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RealeaseBillingControl));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.loadingLabel = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -54,7 +54,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.panel3 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.billingInvoiceTab = new System.Windows.Forms.TabPage();
-            this.panel10 = new System.Windows.Forms.Panel();
+            this.ok = new System.Windows.Forms.Panel();
             this.freeWaterCheckBox = new System.Windows.Forms.CheckBox();
             this.freeWaterTextBox = new System.Windows.Forms.TextBox();
             this.printSaveButton = new System.Windows.Forms.Button();
@@ -360,18 +360,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.label31 = new System.Windows.Forms.Label();
             this.searchAccountNumberTextBox = new System.Windows.Forms.TextBox();
             this.accountDataGridView = new System.Windows.Forms.DataGridView();
-            this.accountno = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.concessionaireID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fullname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.businessAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.zoneCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.serviceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.meterNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firstReadingDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.taxExempt = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dueExempt = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.seniorCitizen = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.userIDLabel = new System.Windows.Forms.Label();
             this.concessionaireIDLabel = new System.Windows.Forms.Label();
@@ -392,13 +380,28 @@ namespace IGBARAS_WATER_DISTRICT
             this.label71 = new System.Windows.Forms.Label();
             this.billDataGridView = new System.Windows.Forms.DataGridView();
             this.billdataTextBox = new System.Windows.Forms.TextBox();
+            this.accountno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.concessionaireID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fullname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.businessAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.zoneCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serviceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.meterNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstReadingDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taxExempt = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dueExempt = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.seniorCitizen = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SCF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.scfBalanceLabel = new System.Windows.Forms.Label();
+            this.totalAmountDueSCFLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel14.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel24.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.billingInvoiceTab.SuspendLayout();
-            this.panel10.SuspendLayout();
+            this.ok.SuspendLayout();
             this.panel9.SuspendLayout();
             this.billingPanel.SuspendLayout();
             this.tableLayoutPanel20.SuspendLayout();
@@ -591,7 +594,7 @@ namespace IGBARAS_WATER_DISTRICT
             // billingInvoiceTab
             // 
             this.billingInvoiceTab.AutoScroll = true;
-            this.billingInvoiceTab.Controls.Add(this.panel10);
+            this.billingInvoiceTab.Controls.Add(this.ok);
             this.billingInvoiceTab.Controls.Add(this.panel9);
             this.billingInvoiceTab.Controls.Add(this.discountNameLabel);
             this.billingInvoiceTab.Controls.Add(this.concessionaireCodeLabel);
@@ -606,17 +609,18 @@ namespace IGBARAS_WATER_DISTRICT
             this.billingInvoiceTab.Text = "Billing Invoice";
             this.billingInvoiceTab.UseVisualStyleBackColor = true;
             // 
-            // panel10
+            // ok
             // 
-            this.panel10.AutoScroll = true;
-            this.panel10.Controls.Add(this.freeWaterCheckBox);
-            this.panel10.Controls.Add(this.freeWaterTextBox);
-            this.panel10.Controls.Add(this.printSaveButton);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel10.Location = new System.Drawing.Point(3, 481);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(830, 46);
-            this.panel10.TabIndex = 36;
+            this.ok.AutoScroll = true;
+            this.ok.Controls.Add(this.scfBalanceLabel);
+            this.ok.Controls.Add(this.freeWaterCheckBox);
+            this.ok.Controls.Add(this.freeWaterTextBox);
+            this.ok.Controls.Add(this.printSaveButton);
+            this.ok.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ok.Location = new System.Drawing.Point(3, 481);
+            this.ok.Name = "ok";
+            this.ok.Size = new System.Drawing.Size(830, 46);
+            this.ok.TabIndex = 36;
             // 
             // freeWaterCheckBox
             // 
@@ -1642,8 +1646,9 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel34.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel34.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel34.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel34.Controls.Add(this.totalAmountDueLabel, 3, 0);
             this.tableLayoutPanel34.Controls.Add(this.label77, 0, 0);
+            this.tableLayoutPanel34.Controls.Add(this.totalAmountDueLabel, 2, 0);
+            this.tableLayoutPanel34.Controls.Add(this.totalAmountDueSCFLabel, 3, 0);
             this.tableLayoutPanel34.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel34.Location = new System.Drawing.Point(1, 327);
             this.tableLayoutPanel34.Margin = new System.Windows.Forms.Padding(0);
@@ -1658,12 +1663,13 @@ namespace IGBARAS_WATER_DISTRICT
             this.totalAmountDueLabel.AutoSize = true;
             this.totalAmountDueLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.totalAmountDueLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalAmountDueLabel.Location = new System.Drawing.Point(287, 1);
+            this.totalAmountDueLabel.Location = new System.Drawing.Point(216, 1);
             this.totalAmountDueLabel.Name = "totalAmountDueLabel";
-            this.totalAmountDueLabel.Size = new System.Drawing.Size(65, 18);
+            this.totalAmountDueLabel.Size = new System.Drawing.Size(64, 18);
             this.totalAmountDueLabel.TabIndex = 34;
             this.totalAmountDueLabel.Text = "0.00";
             this.totalAmountDueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.totalAmountDueLabel.Visible = false;
             // 
             // label77
             // 
@@ -4812,157 +4818,20 @@ namespace IGBARAS_WATER_DISTRICT
             this.taxExempt,
             this.dueExempt,
             this.seniorCitizen,
-            this.status});
+            this.status,
+            this.SCF});
             this.accountDataGridView.EnableHeadersVisualStyles = false;
             this.accountDataGridView.Location = new System.Drawing.Point(3, 70);
             this.accountDataGridView.Name = "accountDataGridView";
             this.accountDataGridView.ReadOnly = true;
             this.accountDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle52.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.accountDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.accountDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.accountDataGridView.Size = new System.Drawing.Size(422, 485);
             this.accountDataGridView.TabIndex = 23;
             this.accountDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.accountDataGridView_CellClick);
             this.accountDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.accountDataGridView_CellFormatting);
-            // 
-            // accountno
-            // 
-            this.accountno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.accountno.DataPropertyName = "AccountNo";
-            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle45.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.accountno.DefaultCellStyle = dataGridViewCellStyle45;
-            this.accountno.FillWeight = 400F;
-            this.accountno.HeaderText = "Account #";
-            this.accountno.Name = "accountno";
-            this.accountno.ReadOnly = true;
-            // 
-            // concessionaireID
-            // 
-            this.concessionaireID.DataPropertyName = "ConcessionaireID";
-            this.concessionaireID.HeaderText = "ConcessionaireID";
-            this.concessionaireID.Name = "concessionaireID";
-            this.concessionaireID.ReadOnly = true;
-            this.concessionaireID.Visible = false;
-            this.concessionaireID.Width = 114;
-            // 
-            // fullname
-            // 
-            this.fullname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.fullname.DataPropertyName = "ConcessionaireName";
-            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.fullname.DefaultCellStyle = dataGridViewCellStyle46;
-            this.fullname.FillWeight = 200F;
-            this.fullname.HeaderText = "Concessionaire Name";
-            this.fullname.Name = "fullname";
-            this.fullname.ReadOnly = true;
-            this.fullname.Width = 350;
-            // 
-            // businessAddress
-            // 
-            this.businessAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.businessAddress.DataPropertyName = "Address";
-            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.businessAddress.DefaultCellStyle = dataGridViewCellStyle47;
-            this.businessAddress.FillWeight = 300F;
-            this.businessAddress.HeaderText = "Business Address";
-            this.businessAddress.Name = "businessAddress";
-            this.businessAddress.ReadOnly = true;
-            this.businessAddress.Width = 300;
-            // 
-            // zoneCode
-            // 
-            this.zoneCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.zoneCode.DataPropertyName = "ZoneCode";
-            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle48.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.zoneCode.DefaultCellStyle = dataGridViewCellStyle48;
-            this.zoneCode.FillWeight = 50F;
-            this.zoneCode.HeaderText = "Zone Code";
-            this.zoneCode.Name = "zoneCode";
-            this.zoneCode.ReadOnly = true;
-            this.zoneCode.Width = 50;
-            // 
-            // serviceId
-            // 
-            this.serviceId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.serviceId.DataPropertyName = "ServiceID";
-            this.serviceId.HeaderText = "Service ID";
-            this.serviceId.Name = "serviceId";
-            this.serviceId.ReadOnly = true;
-            this.serviceId.Width = 75;
-            // 
-            // meterNo
-            // 
-            this.meterNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.meterNo.DataPropertyName = "MeterNo";
-            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.meterNo.DefaultCellStyle = dataGridViewCellStyle49;
-            this.meterNo.FillWeight = 200F;
-            this.meterNo.HeaderText = "Meter #";
-            this.meterNo.Name = "meterNo";
-            this.meterNo.ReadOnly = true;
-            this.meterNo.Width = 150;
-            // 
-            // firstReadingDate
-            // 
-            this.firstReadingDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.firstReadingDate.DataPropertyName = "FirstReadingDate";
-            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.firstReadingDate.DefaultCellStyle = dataGridViewCellStyle50;
-            this.firstReadingDate.HeaderText = "First Reading Date(FRD)";
-            this.firstReadingDate.Name = "firstReadingDate";
-            this.firstReadingDate.ReadOnly = true;
-            // 
-            // taxExempt
-            // 
-            this.taxExempt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.taxExempt.DataPropertyName = "TaxExempt";
-            this.taxExempt.FillWeight = 50F;
-            this.taxExempt.HeaderText = "Tax Exempt";
-            this.taxExempt.Name = "taxExempt";
-            this.taxExempt.ReadOnly = true;
-            this.taxExempt.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.taxExempt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.taxExempt.Width = 50;
-            // 
-            // dueExempt
-            // 
-            this.dueExempt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dueExempt.DataPropertyName = "DueExempt";
-            this.dueExempt.FillWeight = 50F;
-            this.dueExempt.HeaderText = "Due Exempt";
-            this.dueExempt.Name = "dueExempt";
-            this.dueExempt.ReadOnly = true;
-            this.dueExempt.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dueExempt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dueExempt.Width = 50;
-            // 
-            // seniorCitizen
-            // 
-            this.seniorCitizen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.seniorCitizen.DataPropertyName = "SeniorCitizen";
-            this.seniorCitizen.FillWeight = 50F;
-            this.seniorCitizen.HeaderText = "Senior Citizen";
-            this.seniorCitizen.Name = "seniorCitizen";
-            this.seniorCitizen.ReadOnly = true;
-            this.seniorCitizen.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.seniorCitizen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.seniorCitizen.Width = 50;
-            // 
-            // status
-            // 
-            this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.status.DataPropertyName = "Status";
-            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.status.DefaultCellStyle = dataGridViewCellStyle51;
-            this.status.HeaderText = "Status";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
             // 
             // panel2
             // 
@@ -5128,8 +4997,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.paymentsOnThisDayDataGridView.Name = "paymentsOnThisDayDataGridView";
             this.paymentsOnThisDayDataGridView.ReadOnly = true;
             this.paymentsOnThisDayDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.paymentsOnThisDayDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle53;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.paymentsOnThisDayDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.paymentsOnThisDayDataGridView.Size = new System.Drawing.Size(581, 229);
             this.paymentsOnThisDayDataGridView.TabIndex = 45;
             // 
@@ -5168,8 +5037,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.paymentsDataGridView.Name = "paymentsDataGridView";
             this.paymentsDataGridView.ReadOnly = true;
             this.paymentsDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.paymentsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle54;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.paymentsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.paymentsDataGridView.Size = new System.Drawing.Size(439, 263);
             this.paymentsDataGridView.TabIndex = 36;
             // 
@@ -5206,8 +5075,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.billDataGridView.Name = "billDataGridView";
             this.billDataGridView.ReadOnly = true;
             this.billDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle55.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.billDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle55;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.billDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle11;
             this.billDataGridView.Size = new System.Drawing.Size(661, 229);
             this.billDataGridView.TabIndex = 24;
             // 
@@ -5219,6 +5088,173 @@ namespace IGBARAS_WATER_DISTRICT
             this.billdataTextBox.Size = new System.Drawing.Size(193, 150);
             this.billdataTextBox.TabIndex = 27;
             this.billdataTextBox.Visible = false;
+            // 
+            // accountno
+            // 
+            this.accountno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.accountno.DataPropertyName = "AccountNo";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.accountno.DefaultCellStyle = dataGridViewCellStyle1;
+            this.accountno.FillWeight = 400F;
+            this.accountno.HeaderText = "Account #";
+            this.accountno.Name = "accountno";
+            this.accountno.ReadOnly = true;
+            // 
+            // concessionaireID
+            // 
+            this.concessionaireID.DataPropertyName = "ConcessionaireID";
+            this.concessionaireID.HeaderText = "ConcessionaireID";
+            this.concessionaireID.Name = "concessionaireID";
+            this.concessionaireID.ReadOnly = true;
+            this.concessionaireID.Visible = false;
+            this.concessionaireID.Width = 114;
+            // 
+            // fullname
+            // 
+            this.fullname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.fullname.DataPropertyName = "ConcessionaireName";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.fullname.DefaultCellStyle = dataGridViewCellStyle2;
+            this.fullname.FillWeight = 200F;
+            this.fullname.HeaderText = "Concessionaire Name";
+            this.fullname.Name = "fullname";
+            this.fullname.ReadOnly = true;
+            this.fullname.Width = 350;
+            // 
+            // businessAddress
+            // 
+            this.businessAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.businessAddress.DataPropertyName = "Address";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.businessAddress.DefaultCellStyle = dataGridViewCellStyle3;
+            this.businessAddress.FillWeight = 300F;
+            this.businessAddress.HeaderText = "Business Address";
+            this.businessAddress.Name = "businessAddress";
+            this.businessAddress.ReadOnly = true;
+            this.businessAddress.Width = 300;
+            // 
+            // zoneCode
+            // 
+            this.zoneCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.zoneCode.DataPropertyName = "ZoneCode";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.zoneCode.DefaultCellStyle = dataGridViewCellStyle4;
+            this.zoneCode.FillWeight = 50F;
+            this.zoneCode.HeaderText = "Zone Code";
+            this.zoneCode.Name = "zoneCode";
+            this.zoneCode.ReadOnly = true;
+            this.zoneCode.Width = 50;
+            // 
+            // serviceId
+            // 
+            this.serviceId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.serviceId.DataPropertyName = "ServiceID";
+            this.serviceId.HeaderText = "Service ID";
+            this.serviceId.Name = "serviceId";
+            this.serviceId.ReadOnly = true;
+            this.serviceId.Width = 75;
+            // 
+            // meterNo
+            // 
+            this.meterNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.meterNo.DataPropertyName = "MeterNo";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.meterNo.DefaultCellStyle = dataGridViewCellStyle5;
+            this.meterNo.FillWeight = 200F;
+            this.meterNo.HeaderText = "Meter #";
+            this.meterNo.Name = "meterNo";
+            this.meterNo.ReadOnly = true;
+            this.meterNo.Width = 150;
+            // 
+            // firstReadingDate
+            // 
+            this.firstReadingDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.firstReadingDate.DataPropertyName = "FirstReadingDate";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.firstReadingDate.DefaultCellStyle = dataGridViewCellStyle6;
+            this.firstReadingDate.HeaderText = "First Reading Date(FRD)";
+            this.firstReadingDate.Name = "firstReadingDate";
+            this.firstReadingDate.ReadOnly = true;
+            // 
+            // taxExempt
+            // 
+            this.taxExempt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.taxExempt.DataPropertyName = "TaxExempt";
+            this.taxExempt.FillWeight = 50F;
+            this.taxExempt.HeaderText = "Tax Exempt";
+            this.taxExempt.Name = "taxExempt";
+            this.taxExempt.ReadOnly = true;
+            this.taxExempt.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.taxExempt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.taxExempt.Width = 50;
+            // 
+            // dueExempt
+            // 
+            this.dueExempt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dueExempt.DataPropertyName = "DueExempt";
+            this.dueExempt.FillWeight = 50F;
+            this.dueExempt.HeaderText = "Due Exempt";
+            this.dueExempt.Name = "dueExempt";
+            this.dueExempt.ReadOnly = true;
+            this.dueExempt.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dueExempt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dueExempt.Width = 50;
+            // 
+            // seniorCitizen
+            // 
+            this.seniorCitizen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.seniorCitizen.DataPropertyName = "SeniorCitizen";
+            this.seniorCitizen.FillWeight = 50F;
+            this.seniorCitizen.HeaderText = "Senior Citizen";
+            this.seniorCitizen.Name = "seniorCitizen";
+            this.seniorCitizen.ReadOnly = true;
+            this.seniorCitizen.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.seniorCitizen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.seniorCitizen.Width = 50;
+            // 
+            // status
+            // 
+            this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.status.DataPropertyName = "Status";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.status.DefaultCellStyle = dataGridViewCellStyle7;
+            this.status.HeaderText = "Status";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            // 
+            // SCF
+            // 
+            this.SCF.DataPropertyName = "SCF";
+            this.SCF.HeaderText = "SCF";
+            this.SCF.Name = "SCF";
+            this.SCF.ReadOnly = true;
+            this.SCF.Width = 51;
+            // 
+            // scfBalanceLabel
+            // 
+            this.scfBalanceLabel.AutoSize = true;
+            this.scfBalanceLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scfBalanceLabel.Location = new System.Drawing.Point(362, 19);
+            this.scfBalanceLabel.Name = "scfBalanceLabel";
+            this.scfBalanceLabel.Size = new System.Drawing.Size(106, 18);
+            this.scfBalanceLabel.TabIndex = 51;
+            this.scfBalanceLabel.Text = "SCF Balance:";
+            // 
+            // totalAmountDueSCFLabel
+            // 
+            this.totalAmountDueSCFLabel.AutoSize = true;
+            this.totalAmountDueSCFLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.totalAmountDueSCFLabel.Location = new System.Drawing.Point(287, 1);
+            this.totalAmountDueSCFLabel.Name = "totalAmountDueSCFLabel";
+            this.totalAmountDueSCFLabel.Size = new System.Drawing.Size(65, 18);
+            this.totalAmountDueSCFLabel.TabIndex = 35;
+            this.totalAmountDueSCFLabel.Text = "0.00";
+            this.totalAmountDueSCFLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // RealeaseBillingControl
             // 
@@ -5239,8 +5275,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.tabControl1.ResumeLayout(false);
             this.billingInvoiceTab.ResumeLayout(false);
             this.billingInvoiceTab.PerformLayout();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
+            this.ok.ResumeLayout(false);
+            this.ok.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.billingPanel.ResumeLayout(false);
             this.tableLayoutPanel20.ResumeLayout(false);
@@ -5702,12 +5738,14 @@ namespace IGBARAS_WATER_DISTRICT
         private Label label55;
         private Button refreshPaymentsTodayButton;
         private Panel panel6;
-        private Panel panel10;
+        private Panel ok;
         private Panel panel9;
         private Panel panel8;
         private Label dateBilledLabel2;
         private Label concessionaireIDLabel;
         private Label userIDLabel;
+        private TextBox freeWaterTextBox;
+        private CheckBox freeWaterCheckBox;
         private DataGridViewTextBoxColumn accountno;
         private DataGridViewTextBoxColumn concessionaireID;
         private DataGridViewTextBoxColumn fullname;
@@ -5720,7 +5758,8 @@ namespace IGBARAS_WATER_DISTRICT
         private DataGridViewCheckBoxColumn dueExempt;
         private DataGridViewCheckBoxColumn seniorCitizen;
         private DataGridViewTextBoxColumn status;
-        private TextBox freeWaterTextBox;
-        private CheckBox freeWaterCheckBox;
+        private DataGridViewTextBoxColumn SCF;
+        private Label scfBalanceLabel;
+        private Label totalAmountDueSCFLabel;
     }
 }

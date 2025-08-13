@@ -124,7 +124,7 @@ namespace IGBARAS_WATER_DISTRICT
                 "Tb_Billing",
                 new string[] {"BillingID", "BillNo", "DateCreated", "AccountNo", "DateFrom", "DateTo", "PrevReading",
                     "PresentReading", "DueDate",  "Is_PartiallyPaid", "Is_FullyPaid", "Is_Arrears", "DiscountAmount", "TaxAmount", "FreeWater",
-                    "ArrearsAmount", "AmountBilled", "ArrearsPenaltyAmount", "TotalAmountBilled"}
+                    "ArrearsAmount", "AmountBilled", "ArrearsPenaltyAmount", "TotalAmountBilled", "ServiceConnectionFee",}
             );
         }
         private void LoadPaymentsSelectedColumns()
@@ -135,7 +135,7 @@ namespace IGBARAS_WATER_DISTRICT
                 "Tb_Payments",
                 new string[] {"PaymentID", "ORNumber", "CurrentBillNo", "PaymentDate", "AccountNo", "PaymentType", "ArrearsAmount", "ArrearsPenalty",
                     "TotalArrears", "BillCharge",  "TaxAmount", "DiscountAmount", "TotalCurrent", "AmountPaid", "Penalty", "[Net Bill Charge]", 
-                    "Balance", "ServiceConnectionFee", "Remarks", "FreeWater"}
+                    "Balance", "Remarks", "FreeWater"}
             );
         }
 
@@ -376,6 +376,11 @@ namespace IGBARAS_WATER_DISTRICT
                     }
                 }
             }
+        }
+
+        private void paymentsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

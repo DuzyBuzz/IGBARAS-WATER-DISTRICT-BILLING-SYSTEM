@@ -8,8 +8,10 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Globalization;
+using System.Reflection;
 using System.Security.AccessControl;
 using System.Threading.Tasks;
+using System.Web.Services.Description;
 using System.Windows.Forms;
 using Color = System.Drawing.Color;
 using Font = System.Drawing.Font;
@@ -22,6 +24,7 @@ namespace IGBARAS_WATER_DISTRICT
         private string[] billData;
         private string[] selectedBillingData;
         private int _previousMeterConsumed = -1; // Default to -1 for first time check
+        private bool _isUpdatingMeterConsumed = false;
 
         public RealeaseBillingControl()
         {
@@ -434,7 +437,7 @@ namespace IGBARAS_WATER_DISTRICT
                                     insertCmd.Parameters.AddWithValue("@ArrearsPenaltyAmount", decimal.Parse(penaltyAmountLabel.Text.Trim().Replace(",", "")));
                                     insertCmd.Parameters.AddWithValue("@Tax", int.Parse(taxExemptedPercentLabel.Text.Trim().Replace("%", "")));
                                     insertCmd.Parameters.AddWithValue("@TaxAmount", decimal.Parse(taxAmountLabel.Text.Trim().Replace(",", "")));
-                                    insertCmd.Parameters.AddWithValue("@ServiceConnectionFee", decimal.Parse(sfcInstallmentTextBox.Text.Trim()));
+                                    insertCmd.Parameters.AddWithValue("@ServiceConnectionFee", decimal.Parse(sfcInstallmentTextBox.Text.Trim().Replace(",", "")));
                                     insertCmd.Parameters.AddWithValue("@Is_Arrears", int.Parse(isArrearsLabel.Text.Trim()));
                                     insertCmd.Parameters.AddWithValue("@DiscountName", discountNameLabel.Text.Trim());
                                     insertCmd.Parameters.AddWithValue("@Discount", int.Parse(discountedPercentLabel.Text.Trim().Replace("%", "")));
@@ -445,10 +448,17 @@ namespace IGBARAS_WATER_DISTRICT
                                     insertCmd.Parameters.AddWithValue("@TotalAmountBilled", decimal.Parse(totalAmountDueLabel.Text.Trim().Replace(",", "")));
                                     insertCmd.Parameters.AddWithValue("@ConcessionaireID", int.Parse(concessionaireIDLabel.Text.Trim()));
                                     insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
-                                    insertCmd.Parameters.AddWithValue("@FreeWater", int.Parse(freeWaterTextBox.Text.Trim()));
-                                    insertCmd.Parameters.AddWithValue("@ServiceConnectionFee", decimal.Parse(sfcInstallmentTextBox.Text.Trim()));
+                                    // Safely parse FreeWater, default to 0 if empty or invalid
+                                    int freeWater = 0;
+                                    if (!int.TryParse(freeWaterTextBox.Text.Trim(), out freeWater))
+                                    {
+                                        freeWater = 0;
+                                    }
 
-                                    
+                                    insertCmd.Parameters.AddWithValue("@FreeWater", freeWater);
+
+
+
 
                                     insertCmd.ExecuteNonQuery();
                                     MessageBox.Show("Billing record inserted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -636,6 +646,7 @@ namespace IGBARAS_WATER_DISTRICT
             int IsSeniorCitizen = Convert.ToInt32(selectedRow.Cells["seniorCitizen"].Value);
             string dueExempted = selectedRow.Cells["dueExempt"].Value?.ToString();
             string status = selectedRow.Cells["status"].Value?.ToString();
+            string scf = selectedRow.Cells["SCF"].Value?.ToString();
 
             if (DateTime.TryParse(frdObj?.ToString(), out DateTime frd))
             {
@@ -654,6 +665,7 @@ namespace IGBARAS_WATER_DISTRICT
             {
                 discountNameLabel.Text = "";
             }
+            scfBalanceLabel.Text = $"SCF Balance: ₱{scf:N2}";
             defaultDiscount = discountedPercentLabel.Text;
             defaultDiscountName = discountNameLabel.Text;
             firstReadingDateLabel.Text = frdObj;
@@ -663,6 +675,21 @@ namespace IGBARAS_WATER_DISTRICT
             taxExemptedPercentLabel.Text = $"{taxPercent:0.##}%";
             defaultTax = taxExemptedPercentLabel.Text;
             concessionaireIDLabel.Text = concessionaireID;
+            decimal SCFBalance = decimal.Parse(scf);
+
+            if (SCFBalance > 0)
+            {
+                // Determine amount to display in the textbox
+                decimal displayAmount = Math.Min(SCFBalance, 500m); // max 500
+
+                // Format and set the textbox
+                sfcInstallmentTextBox.Text = displayAmount.ToString("N2");
+            }
+            else
+            {
+                // If scf is 0, clear or reset the textbox
+                sfcInstallmentTextBox.Text = "0.00";
+            }
 
             if (!string.IsNullOrWhiteSpace(accountNo))
             {
@@ -683,18 +710,22 @@ namespace IGBARAS_WATER_DISTRICT
 
                 if (bill != null)
                 {
-                    if (bill.IsPatrtiallyPaid)
+                    if (bill.IsFullyPaid)
                     {
-                        arrearsAmountLabel.Text = bill.Balance.ToString("N2");
-                    }
-                    else if (!bill.IsFullyPaid && !bill.IsPatrtiallyPaid)
-                    {
-                        arrearsAmountLabel.Text = bill.Balance.ToString("N2");
-                    }
-                    else if (bill.IsFullyPaid)
-                    {
+                        // Bill is fully paid, always show 0.00
                         arrearsAmountLabel.Text = "0.00";
                     }
+                    else if (bill.IsPatrtiallyPaid)
+                    {
+                        // Bill is partially paid, show the remaining balance
+                        arrearsAmountLabel.Text = bill.Balance.ToString("N2");
+                    }
+                    else
+                    {
+                        // Bill is unpaid (neither fully nor partially paid), show full billed amount
+                        arrearsAmountLabel.Text = bill.TotalAmountBilled.ToString("N2");
+                    }
+
 
 
                     // You can also update arrearsAmountLabel2 if needed:
@@ -725,7 +756,7 @@ namespace IGBARAS_WATER_DISTRICT
                     }
 
                     double penaltyPercent = SettingsHelper.GetPenaltyPercent(isArrears);
-                    penaltyPercentLabel.Text = $"{penaltyPercent:0.##}%";
+
                     decimal arrearsAmount = decimal.Parse(arrearsAmountLabel.Text.Replace(",", ""));
 
                     decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsAmount);
@@ -911,101 +942,6 @@ namespace IGBARAS_WATER_DISTRICT
 
 
 
-        //private string GenerateNextBillCode_Advanced(string zoneCode, DateTime billingDate)
-        //{
-        //    string formattedBillCode = "";
-        //    int nextBillNumber = 0;
-
-        //    // 🟦 Step 1: Load dynamic zone order
-        //    List<string> zoneOrder = LoadZoneCodesFromDatabase();
-        //    int rangeSize = 100;
-
-        //    int zoneIndex = zoneOrder.IndexOf(zoneCode);
-        //    if (zoneIndex == -1)
-        //        zoneIndex = 0;
-
-        //    int zoneStart = (zoneIndex * rangeSize) + 1;
-        //    int zoneEnd = zoneStart + rangeSize - 1;
-
-        //    using (MySqlConnection conn = new MySqlConnection(DbConfig.ConnectionString))
-        //    {
-        //        conn.Open();
-
-        //        // 🟦 Step 2: Get the max billcode used for this zone in current month range
-        //        string query = @"
-        //    SELECT MAX(CAST(SUBSTRING_INDEX(billcode, '-', -1) AS UNSIGNED)) AS maxnum
-        //    FROM tb_bill
-        //    WHERE CAST(SUBSTRING_INDEX(billcode, '-', -1) AS UNSIGNED) BETWEEN @start AND @end
-        //    AND DATE_FORMAT(datebilled, '%Y%m') = @currentMonth";
-
-        //        using (MySqlCommand cmd = new MySqlCommand(query, conn))
-        //        {
-        //            cmd.Parameters.AddWithValue("@start", zoneStart);
-        //            cmd.Parameters.AddWithValue("@end", zoneEnd);
-        //            cmd.Parameters.AddWithValue("@currentMonth", billingDate.ToString("yyyyMM"));
-
-        //            object result = cmd.ExecuteScalar();
-        //            if (result != DBNull.Value && int.TryParse(result.ToString(), out int lastNum))
-        //            {
-        //                nextBillNumber = lastNum + 1;
-        //            }
-        //            else
-        //            {
-        //                nextBillNumber = zoneStart;
-        //            }
-        //        }
-        //    }
-
-        //    formattedBillCode = $"{zoneCode}-{nextBillNumber.ToString("D7")}";
-        //    invoiceTextBox.Text = nextBillNumber.ToString("D7");
-        //    billCodeLabel.Text = formattedBillCode;
-
-        //    return formattedBillCode;
-        //}
-
-
-
-        private string GetZonePrefixFromAccountNo(string accountNo)
-        {
-            if (string.IsNullOrWhiteSpace(accountNo))
-                return "001"; // Default fallback
-
-            // Split account number by dash (e.g., "01-1-12-214C")
-            string[] parts = accountNo.Split('-');
-
-            if (parts.Length > 0 && int.TryParse(parts[0], out int zoneNumber))
-            {
-                // Format as 3-digit string with leading zeroes (e.g., 1 → "001")
-                return zoneNumber.ToString("D3");
-            }
-
-            return "001"; // Fallback if parsing fails
-        }
-        //private List<string> LoadZoneCodesFromDatabase()
-        //{
-        //    List<string> zoneCodes = new List<string>();
-
-        //    using (MySqlConnection conn = new MySqlConnection(DbConfig.ConnectionString))
-        //    {
-        //        conn.Open();
-
-        //        string query = "SELECT zonecode FROM tb_zone ORDER BY CAST(zonecode AS UNSIGNED) ASC";
-
-        //        using (MySqlCommand cmd = new MySqlCommand(query, conn))
-        //        using (MySqlDataReader reader = cmd.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                // Add zonecode to the list (e.g., "001", "002", etc.)
-        //                zoneCodes.Add(reader["zonecode"].ToString());
-        //            }
-        //        }
-        //    }
-
-        //    return zoneCodes;
-        //}
-
-
 
         private void LoadAccountBillHistory(string accountNo)
         {
@@ -1127,128 +1063,132 @@ namespace IGBARAS_WATER_DISTRICT
 
 
 
-
         public void PopulateServiceRateLabels2(int serviceId, int totalConsumption)
         {
-            using (var conn = new OleDbConnection(DbConfig.ConnectionString))
+            try
             {
-                string query = @"
-        SELECT MinRate, [Rate11-20], [Rate21-30], [Rate31-40], [Rate41-Above]
-        FROM Tb_Service
-        WHERE ServiceID = ?";
-
-                using (var cmd = new OleDbCommand(query, conn))
+                using (var conn = new OleDbConnection(DbConfig.ConnectionString))
+                using (var cmd = new OleDbCommand(@"
+            SELECT MinRate, [Rate11-20], [Rate21-30], [Rate31-40], [Rate41-Above]
+            FROM Tb_Service
+            WHERE ServiceID = ?", conn))
                 {
                     cmd.Parameters.AddWithValue("?", serviceId);
                     conn.Open();
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read())
+                        if (!reader.Read())
                         {
-                            decimal minRate = Convert.ToDecimal(reader["MinRate"]);
-                            decimal rate11_20 = Convert.ToDecimal(reader["Rate11-20"]);
-                            decimal rate21_30 = Convert.ToDecimal(reader["Rate21-30"]);
-                            decimal rate31_40 = Convert.ToDecimal(reader["Rate31-40"]);
-                            decimal rate41_above = Convert.ToDecimal(reader["Rate41-Above"]);
-
-                            // Consumption quantities
-                            int q10 = Math.Min(totalConsumption, 10);
-                            int q20 = Math.Min(Math.Max(totalConsumption - 10, 0), 10);
-                            int q30 = Math.Min(Math.Max(totalConsumption - 20, 0), 10);
-                            int q40 = Math.Min(Math.Max(totalConsumption - 30, 0), 10);
-                            int q41 = Math.Max(totalConsumption - 40, 0);
-
-                            // Amounts per tier
-                            decimal a10 = q10 > 0 ? minRate : 0;
-                            decimal a20 = q20 * rate11_20;
-                            decimal a30 = q30 * rate21_30;
-                            decimal a40 = q40 * rate31_40;
-                            decimal a41 = q41 * rate41_above;
-
-                            // Total billing before discounts/tax
-                            decimal waterCharge = a10 + a20 + a30 + a40 + a41;
-
-                            totalQuantityLabel2.Text = totalConsumption.ToString();
-                            // Show tier breakdown
-                            tenQuantityLabel2.Text = q10.ToString();
-                            tenUnitPriceLabel2.Text = (minRate / 10).ToString("N2");
-                            tenAmountLabel2.Text = a10.ToString("N2");
-
-                            twentyQuantityLabel2.Text = q20.ToString();
-                            twentyUnitPriceLabel2.Text = rate11_20.ToString("N2");
-                            twentyAmountLabel2.Text = a20.ToString("N2");
-
-                            thirtyQuantityLabel2.Text = q30.ToString();
-                            thirtyUnitPriceLabel2.Text = rate21_30.ToString("N2");
-                            thirtyAmountLabel2.Text = a30.ToString("N2");
-
-                            fortyQuantityLabel2.Text = q40.ToString();
-                            fortyUnitPriceLabel2.Text = rate31_40.ToString("N2");
-                            fortyAmountLabel2.Text = a40.ToString("N2");
-
-                            fortyUpQuantityLabel2.Text = q41.ToString();
-                            fortyUpUnitPriceLabel2.Text = rate41_above.ToString("N2");
-                            fortyUpAmountLabel2.Text = a41.ToString("N2");
-
-                            // Hide rows with zero quantity
-                            tenQuantityLabel2.Visible = tenUnitPriceLabel2.Visible = tenAmountLabel2.Visible = q10 > 0;
-                            twentyQuantityLabel2.Visible = twentyUnitPriceLabel2.Visible = twentyAmountLabel2.Visible = q20 > 0;
-                            thirtyQuantityLabel2.Visible = thirtyUnitPriceLabel2.Visible = thirtyAmountLabel2.Visible = q30 > 0;
-                            fortyQuantityLabel2.Visible = fortyUnitPriceLabel2.Visible = fortyAmountLabel2.Visible = q40 > 0;
-                            fortyUpQuantityLabel2.Visible = fortyUpUnitPriceLabel2.Visible = fortyUpAmountLabel2.Visible = q41 > 0;
-
-                            // Get discount & tax %
-                            decimal discountPercent = ParsePercent(discountedPercentLabel2.Text);
-                            decimal taxPercent = ParsePercent(taxExemptedPercentLabel2.Text);
-
-                            // Billing discount
-                            decimal billingDiscount = waterCharge * (discountPercent / 100);
-                            discountedAmountLabel2.Text = billingDiscount.ToString("N2");
-
-                            // Billing after discount
-                            decimal billingAfterDiscount = waterCharge - billingDiscount;
-
-                            // Franchise tax (on original billing)
-                            decimal franchiseTax = waterCharge * (taxPercent / 100);
-
-                            // Tax discount
-                            decimal taxDiscount = franchiseTax * (discountPercent / 100);
-                            decimal taxAfterDiscount = franchiseTax - taxDiscount;
-                            taxAmountLabel2.Text = taxAfterDiscount.ToString("N2");
-                            collectionTaxAmountLabel.Text = taxAfterDiscount.ToString("N2");
-
-                            // Subtotal before penalties
-                            decimal subtotal = billingAfterDiscount + taxAfterDiscount;
-                            subTotalAmountDueLabel2.Text = subtotal.ToString("N2");
-                            collectionTotalMeteredAmountLabel.Text = subtotal.ToString("N2");
-
-                            // Penalty & arrears
-                            DateTime dueDate = ParseDateOrNow(dateBilledLabel2.Text);
-                            decimal arrearsAmount = ParseMoney(arrearsAmountLabel2.Text);
-                            decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsAmount);
-                            decimal latePenalty = SettingsHelper.CalculateLatePaymentPenalty(waterCharge, dueDate);
-
-                            penaltyAmountLabel2.Text = latePenalty.ToString("N2");
-                            arrearsPenaltyAmountLabel.Text = arrearsPenalty.ToString("N2");
-
-                            // Penalty display
-                            List<string> penalties = new List<string>();
-                            if (arrearsPenalty > 0) penalties.Add(arrearsPenalty.ToString("N2"));
-                            if (latePenalty > 0) penalties.Add(latePenalty.ToString("N2"));
-                            collectionPenaltyLabel.Text = penalties.Count > 0 ? string.Join(" + ", penalties) : "0.00";
-                            penaltySumLabel.Text = (arrearsPenalty + latePenalty).ToString("N2");
-
-                            // Final total
-                            decimal totalAmountCharge = subtotal + arrearsPenalty + latePenalty + arrearsAmount;
-                            totalAmountDueLabel2.Text = totalAmountCharge.ToString("N2");
-                            collectionArrearsAmountLabel.Text = arrearsAmountLabel2.Text;
+                            MessageBox.Show("Service rates not found for the given ServiceID.", "Data Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
                         }
+
+                        decimal minRate = SafeGetDecimal(reader, "MinRate");
+                        decimal rate11_20 = SafeGetDecimal(reader, "Rate11-20");
+                        decimal rate21_30 = SafeGetDecimal(reader, "Rate21-30");
+                        decimal rate31_40 = SafeGetDecimal(reader, "Rate31-40");
+                        decimal rate41_above = SafeGetDecimal(reader, "Rate41-Above");
+
+                        int q10 = Math.Min(totalConsumption, 10);
+                        int q20 = Math.Min(Math.Max(totalConsumption - 10, 0), 10);
+                        int q30 = Math.Min(Math.Max(totalConsumption - 20, 0), 10);
+                        int q40 = Math.Min(Math.Max(totalConsumption - 30, 0), 10);
+                        int q41 = Math.Max(totalConsumption - 40, 0);
+
+                        decimal a10 = q10 > 0 ? minRate : 0;
+                        decimal a20 = q20 * rate11_20;
+                        decimal a30 = q30 * rate21_30;
+                        decimal a40 = q40 * rate31_40;
+                        decimal a41 = q41 * rate41_above;
+
+                        decimal waterCharge = a10 + a20 + a30 + a40 + a41;
+
+                        // UI updates
+                        totalQuantityLabel2.Text = totalConsumption.ToString();
+                        tenQuantityLabel2.Text = q10.ToString();
+                        tenUnitPriceLabel2.Text = (minRate / 10).ToString("N2");
+                        tenAmountLabel2.Text = a10.ToString("N2");
+
+                        twentyQuantityLabel2.Text = q20.ToString();
+                        twentyUnitPriceLabel2.Text = rate11_20.ToString("N2");
+                        twentyAmountLabel2.Text = a20.ToString("N2");
+
+                        thirtyQuantityLabel2.Text = q30.ToString();
+                        thirtyUnitPriceLabel2.Text = rate21_30.ToString("N2");
+                        thirtyAmountLabel2.Text = a30.ToString("N2");
+
+                        fortyQuantityLabel2.Text = q40.ToString();
+                        fortyUnitPriceLabel2.Text = rate31_40.ToString("N2");
+                        fortyAmountLabel2.Text = a40.ToString("N2");
+
+                        fortyUpQuantityLabel2.Text = q41.ToString();
+                        fortyUpUnitPriceLabel2.Text = rate41_above.ToString("N2");
+                        fortyUpAmountLabel2.Text = a41.ToString("N2");
+
+                        tenQuantityLabel2.Visible = tenUnitPriceLabel2.Visible = tenAmountLabel2.Visible = q10 > 0;
+                        twentyQuantityLabel2.Visible = twentyUnitPriceLabel2.Visible = twentyAmountLabel2.Visible = q20 > 0;
+                        thirtyQuantityLabel2.Visible = thirtyUnitPriceLabel2.Visible = thirtyAmountLabel2.Visible = q30 > 0;
+                        fortyQuantityLabel2.Visible = fortyUnitPriceLabel2.Visible = fortyAmountLabel2.Visible = q40 > 0;
+                        fortyUpQuantityLabel2.Visible = fortyUpUnitPriceLabel2.Visible = fortyUpAmountLabel2.Visible = q41 > 0;
+
+                        decimal discountPercent = ParsePercent(discountedPercentLabel2.Text);
+                        decimal taxPercent = ParsePercent(taxExemptedPercentLabel2.Text);
+
+                        decimal billingDiscount = waterCharge * (discountPercent / 100);
+                        discountedAmountLabel2.Text = billingDiscount.ToString("N2");
+
+                        decimal billingAfterDiscount = waterCharge - billingDiscount;
+                        decimal franchiseTax = waterCharge * (taxPercent / 100);
+                        decimal taxDiscount = franchiseTax * (discountPercent / 100);
+                        decimal taxAfterDiscount = franchiseTax - taxDiscount;
+                        taxAmountLabel2.Text = taxAfterDiscount.ToString("N2");
+                        collectionTaxAmountLabel.Text = taxAfterDiscount.ToString("N2");
+
+                        decimal subtotal = billingAfterDiscount + taxAfterDiscount;
+                        subTotalAmountDueLabel2.Text = subtotal.ToString("N2");
+                        collectionTotalMeteredAmountLabel.Text = subtotal.ToString("N2");
+
+                        DateTime dueDate = ParseDateOrNow(dateBilledLabel2.Text);
+                        decimal arrearsAmount = ParseMoney(arrearsAmountLabel2.Text);
+                        decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsAmount);
+                        decimal latePenalty = SettingsHelper.CalculateLatePaymentPenalty(waterCharge, dueDate);
+
+                        penaltyAmountLabel2.Text = latePenalty.ToString("N2");
+                        arrearsPenaltyAmountLabel.Text = arrearsPenalty.ToString("N2");
+
+                        var penalties = new List<string>();
+                        if (arrearsPenalty > 0) penalties.Add(arrearsPenalty.ToString("N2"));
+                        if (latePenalty > 0) penalties.Add(latePenalty.ToString("N2"));
+                        collectionPenaltyLabel.Text = penalties.Count > 0 ? string.Join(" + ", penalties) : "0.00";
+                        penaltySumLabel.Text = (arrearsPenalty + latePenalty).ToString("N2");
+
+                        decimal totalAmountCharge = subtotal + arrearsPenalty + latePenalty + arrearsAmount;
+                        totalAmountDueLabel2.Text = totalAmountCharge.ToString("N2");
+                        collectionArrearsAmountLabel.Text = arrearsAmountLabel2.Text;
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error calculating service rates:\n{ex.Message}", "Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
+        // Helper for safe decimal conversion from OleDbDataReader
+        private decimal SafeGetDecimal(OleDbDataReader reader, string column)
+        {
+            try
+            {
+                object value = reader[column];
+                if (value == DBNull.Value) return 0m;
+                return Convert.ToDecimal(value);
+            }
+            catch
+            {
+                return 0m;
+            }
+        }
         private decimal ParsePercent(string text) =>
             decimal.TryParse(text.Replace("%", "").Trim(), out var val) ? val : 0m;
 
@@ -1259,17 +1199,6 @@ namespace IGBARAS_WATER_DISTRICT
             DateTime.TryParseExact(text, "MMMM dd, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var date)
                 ? date
                 : DateTime.Now;
-
-
-
-
-
-
-
-
-
-
-
 
 
         public void PopulateServiceRateLabels(int serviceId, int totalConsumption)
@@ -1347,7 +1276,7 @@ namespace IGBARAS_WATER_DISTRICT
                         double discounted = 0;
                         double taxAdded = 0;
                         double arrears = 0;
-
+                        int penaltyPercent = 0;
                         // Clean up input texts
                         string discountText = discountedPercentLabel.Text.Replace("%", "").Trim();
                         string taxAddedText = taxExemptedPercentLabel.Text.Replace("%", "").Trim();
@@ -1387,13 +1316,18 @@ namespace IGBARAS_WATER_DISTRICT
 
                         // Display Final Total
                         subTotalAmountDueLabel.Text = chargeSubTotal.ToString("N2");
-
+                        arrears = double.Parse(arrearsAmountLabel.Text.Replace(",", "").Trim());
                         double penaltyAmount = double.Parse(penaltyAmountLabel.Text.Replace(",", "").Trim());
-
+                        double scf = double.Parse(sfcInstallmentTextBox.Text.Replace(",", "").Trim());
                         // Display total amount due
                         double totalAmountDue = chargeSubTotal + penaltyAmount + arrears;
+                        double totalAmountDuePlusSCF = chargeSubTotal + penaltyAmount + arrears + scf;
 
+
+                        // Display as whole number with %
+                        penaltyPercentLabel.Text = $"{penaltyAmount}%";
                         totalAmountDueLabel.Text = totalAmountDue.ToString("N2");
+                        totalAmountDueSCFLabel.Text = totalAmountDuePlusSCF.ToString("N2");
                         // You can now add this penalty to your total calculation
 
 
@@ -1401,7 +1335,6 @@ namespace IGBARAS_WATER_DISTRICT
                 }
             }
         }
-
 
         private void meterConsumedReadingTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -1424,102 +1357,6 @@ namespace IGBARAS_WATER_DISTRICT
             // Call your method to populate service rate labels with valid parsed values
             PopulateServiceRateLabels(serviceID, totalWaterConsumed);
         }
-
-
-        private void ClearWaterChargeLabels2()
-        {
-            // Clear all tier 1 (0–10) labels
-            tenQuantityLabel2.Text = tenUnitPriceLabel2.Text = tenAmountLabel2.Text = "";
-            twentyQuantityLabel2.Text = twentyUnitPriceLabel2.Text = twentyAmountLabel2.Text = "";
-            thirtyQuantityLabel2.Text = thirtyUnitPriceLabel2.Text = thirtyAmountLabel2.Text = "";
-            fortyQuantityLabel2.Text = fortyUnitPriceLabel2.Text = fortyAmountLabel2.Text = "";
-            fortyUpQuantityLabel2.Text = fortyUpUnitPriceLabel2.Text = fortyUpAmountLabel2.Text = "";
-
-            // Clear subtotal and tax/discounts
-            discountedAmountLabel2.Text = "0";
-            taxAmountLabel2.Text = "0.00";
-            subTotalAmountDueLabel2.Text = "";
-            penaltyAmountLabel2.Text = "0.00";
-        }
-
-        private void ClearAmounts()
-        {
-
-            // Clear discount and tax labels
-            discountedPercentLabel.Text = "0";
-            discountedAmountLabel.Text = "0";
-            taxExemptedPercentLabel.Text = "0";
-            taxAmountLabel.Text = "0.00";
-            subTotalAmountDueLabel.Text = "0.00";
-            arrearsAmountLabel.Text = "0.00";
-            totalAmountDueLabel.Text = "0.00";
-            // Also clear totals
-            totalQuantityLabel.Text = "0";
-            totalWaterConsumptionAmountLabel.Text = "0.00";
-        }
-        private void ClearAmounts2()
-        {
-            // Clear discount and tax labels
-            discountedPercentLabel2.Text = "0%";
-            discountedAmountLabel2.Text = "0.00";
-            taxExemptedPercentLabel2.Text = "0%";
-            taxAmountLabel2.Text = "0.00";
-            arrearsAmountLabel2.Text = "0.00";
-            subTotalAmountDueLabel2.Text = "0.00";
-            totalAmountDueLabel2.Text = "0.00";
-
-            totalWaterConsumptionAmountLabel2.Text = "0.00";
-            // Also clear totals
-            totalQuantityLabel.Text = "0";
-            totalWaterConsumptionAmountLabel.Text = "0.00";
-
-
-            collectionArrearsAmountLabel.Text = "0.00";
-            collectionBillingInvoiceTextBox.Text = "000-0000000";
-            collectionTotalAmountPaidTextBox.Text = "0.00";
-        }
-        private void ClearWaterChargeLabels()
-        {
-            // Clear all tier labels if input is invalid
-            tenQuantityLabel.Text = tenUnitPriceLabel.Text = tenAmountLabel.Text = "";
-            twentyQuantityLabel.Text = twentyUnitPriceLabel.Text = twentyAmountLabel.Text = "";
-            thirtyQuantityLabel.Text = thirtyUnitPriceLabel.Text = thirtyAmountLabel.Text = "";
-            fortyQuantityLabel.Text = fortyUnitPriceLabel.Text = fortyAmountLabel.Text = "";
-            fortyUpQuantityLabel.Text = fortyUpUnitPriceLabel.Text = fortyUpAmountLabel.Text = "";
-            discountedAmountLabel.Text = "0";
-            taxAmountLabel.Text = "0";
-            subTotalAmountDueLabel.Text = "";
-        }
-        private async void syncButton_Click(object sender, EventArgs e)
-        {
-            // 🟡 Load data from DB to billingDataGridView
-            using (var loadingForm = new LoadingForm()) // make sure you created LoadingForm
-            {
-                await DGVHelper.LoadDataToGridAsync(accountDataGridView, "v_concessionaire_detail", loadingForm);
-            }
-        }
-
-
-        private void arrearsLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void discountedAmountLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void exemptedAmountLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chargeLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-        private int originalMeterConsumed = 0;
 
         private void UpdateMeterConsumedAfterFreeWater()
         {
@@ -1623,6 +1460,102 @@ namespace IGBARAS_WATER_DISTRICT
 
             UpdateMeterConsumedAfterFreeWater();
         }
+        private void ClearWaterChargeLabels2()
+        {
+            // Clear all tier 1 (0–10) labels
+            tenQuantityLabel2.Text = tenUnitPriceLabel2.Text = tenAmountLabel2.Text = "";
+            twentyQuantityLabel2.Text = twentyUnitPriceLabel2.Text = twentyAmountLabel2.Text = "";
+            thirtyQuantityLabel2.Text = thirtyUnitPriceLabel2.Text = thirtyAmountLabel2.Text = "";
+            fortyQuantityLabel2.Text = fortyUnitPriceLabel2.Text = fortyAmountLabel2.Text = "";
+            fortyUpQuantityLabel2.Text = fortyUpUnitPriceLabel2.Text = fortyUpAmountLabel2.Text = "";
+
+            // Clear subtotal and tax/discounts
+            discountedAmountLabel2.Text = "0";
+            taxAmountLabel2.Text = "0.00";
+            subTotalAmountDueLabel2.Text = "";
+            penaltyAmountLabel2.Text = "0.00";
+        }
+
+        private void ClearAmounts()
+        {
+
+            // Clear discount and tax labels
+            discountedPercentLabel.Text = "0";
+            discountedAmountLabel.Text = "0";
+            taxExemptedPercentLabel.Text = "0";
+            taxAmountLabel.Text = "0.00";
+            subTotalAmountDueLabel.Text = "0.00";
+            arrearsAmountLabel.Text = "0.00";
+            totalAmountDueLabel.Text = "0.00";
+            // Also clear totals
+            totalQuantityLabel.Text = "0";
+            totalWaterConsumptionAmountLabel.Text = "0.00";
+        }
+        private void ClearAmounts2()
+        {
+            // Clear discount and tax labels
+            discountedPercentLabel2.Text = "0%";
+            discountedAmountLabel2.Text = "0.00";
+            taxExemptedPercentLabel2.Text = "0%";
+            taxAmountLabel2.Text = "0.00";
+            arrearsAmountLabel2.Text = "0.00";
+            subTotalAmountDueLabel2.Text = "0.00";
+            totalAmountDueLabel2.Text = "0.00";
+
+            totalWaterConsumptionAmountLabel2.Text = "0.00";
+            // Also clear totals
+            totalQuantityLabel.Text = "0";
+            totalWaterConsumptionAmountLabel.Text = "0.00";
+
+
+            collectionArrearsAmountLabel.Text = "0.00";
+            collectionBillingInvoiceTextBox.Text = "000-0000000";
+            collectionTotalAmountPaidTextBox.Text = "0.00";
+        }
+        private void ClearWaterChargeLabels()
+        {
+            // Clear all tier labels if input is invalid
+            tenQuantityLabel.Text = tenUnitPriceLabel.Text = tenAmountLabel.Text = "";
+            twentyQuantityLabel.Text = twentyUnitPriceLabel.Text = twentyAmountLabel.Text = "";
+            thirtyQuantityLabel.Text = thirtyUnitPriceLabel.Text = thirtyAmountLabel.Text = "";
+            fortyQuantityLabel.Text = fortyUnitPriceLabel.Text = fortyAmountLabel.Text = "";
+            fortyUpQuantityLabel.Text = fortyUpUnitPriceLabel.Text = fortyUpAmountLabel.Text = "";
+            discountedAmountLabel.Text = "0";
+            taxAmountLabel.Text = "0";
+            subTotalAmountDueLabel.Text = "";
+        }
+        private async void syncButton_Click(object sender, EventArgs e)
+        {
+            // 🟡 Load data from DB to billingDataGridView
+            using (var loadingForm = new LoadingForm()) // make sure you created LoadingForm
+            {
+                await DGVHelper.LoadDataToGridAsync(accountDataGridView, "v_concessionaire_detail", loadingForm);
+            }
+        }
+
+
+        private void arrearsLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void discountedAmountLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exemptedAmountLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chargeLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+        private int originalMeterConsumed = 0;
+
+
 
 
 
@@ -1999,56 +1932,76 @@ namespace IGBARAS_WATER_DISTRICT
         }
 
 
-
         private void DrawBillingForm(Graphics g, int offsetY, Font font, Brush brush)
         {
-            // Draw each field with offsetY applied
-            g.DrawString(dateBilledLabel.Text, font, brush, 300, 105 + offsetY);
-            g.DrawString(fullnameTextBox.Text, font, brush, 190, 153 + offsetY);
-            g.DrawString(addressTextBox.Text, font, brush, 190, 168 + offsetY);
-            g.DrawString(accountNumberTextBox.Text, font, brush, 190, 200 + offsetY);
+            // Helper method to print only if value is not 0, 0.00, or empty
+            void PrintIfNotZero(string value, int x, int y, bool allowZero = false)
+            {
+                if (!string.IsNullOrWhiteSpace(value) && (allowZero || (value != "0" && value != "0.00")))
+                {
+                    g.DrawString(value, font, brush, x, y + offsetY);
+                }
+            }
 
-            g.DrawString(fromReadingDateLabel.Text, font, brush, 288, 213 + offsetY);
-            g.DrawString(toReadingDateLabel.Text, font, brush, 368, 213 + offsetY);
+            // Always print previous reading even if 0
+            PrintIfNotZero(previousReadingTextBox.Text, 210, 265, true);
+            PrintIfNotZero(dateBilledLabel.Text, 300, 105);
+            PrintIfNotZero(fullnameTextBox.Text, 190, 153);
+            PrintIfNotZero(addressTextBox.Text, 190, 168);
+            PrintIfNotZero(accountNumberTextBox.Text, 190, 200);
 
-            g.DrawString(previousReadingTextBox.Text, font, brush, 210, 265 + offsetY);
-            g.DrawString(presentReadingTextBox.Text, font, brush, 290, 265 + offsetY);
-            g.DrawString(meterConsumedReadingTextBox.Text, font, brush, 370, 265 + offsetY);
+            PrintIfNotZero(fromReadingDateLabel.Text, 288, 213);
+            PrintIfNotZero(toReadingDateLabel.Text, 368, 213);
 
-            g.DrawString(dueDateLabel.Text, font, brush, 670, 35 + offsetY);
+            PrintIfNotZero(presentReadingTextBox.Text, 290, 265);
+            PrintIfNotZero(meterConsumedReadingTextBox.Text, 370, 265);
 
-            g.DrawString(totalQuantityLabel.Text, font, brush, 605, 90 + offsetY);
-            g.DrawString(minimumChargeLabel.Text, font, brush, 648, 105 + offsetY);
-            g.DrawString(totalWaterConsumptionAmountLabel.Text, font, brush, 700, 90 + offsetY);
+            PrintIfNotZero(dueDateLabel.Text, 670, 35);
 
-            g.DrawString(tenQuantityLabel.Text, font, brush, 605, 125 + offsetY);
-            g.DrawString(twentyQuantityLabel.Text, font, brush, 605, 140 + offsetY);
-            g.DrawString(thirtyQuantityLabel.Text, font, brush, 605, 155 + offsetY);
-            g.DrawString(fortyQuantityLabel.Text, font, brush, 605, 170 + offsetY);
-            g.DrawString(fortyUpQuantityLabel.Text, font, brush, 605, 185 + offsetY);
+            PrintIfNotZero(totalQuantityLabel.Text, 605, 90);
+            PrintIfNotZero(minimumChargeLabel.Text, 648, 105);
+            PrintIfNotZero(totalWaterConsumptionAmountLabel.Text, 700, 90);
 
-            g.DrawString(tenUnitPriceLabel.Text, font, brush, 648, 125 + offsetY);
-            g.DrawString(twentyUnitPriceLabel.Text, font, brush, 648, 140 + offsetY);
-            g.DrawString(thirtyUnitPriceLabel.Text, font, brush, 648, 155 + offsetY);
-            g.DrawString(fortyUnitPriceLabel.Text, font, brush, 648, 170 + offsetY);
-            g.DrawString(fortyUpUnitPriceLabel.Text, font, brush, 648, 185 + offsetY);
+            // Only print tier rows if their quantity > 0 (just like in PopulateServiceRateLabels)
+            if (int.TryParse(tenQuantityLabel.Text, out int q10) && q10 > 0)
+            {
+                PrintIfNotZero(tenQuantityLabel.Text, 605, 125);
+                PrintIfNotZero(tenUnitPriceLabel.Text, 648, 125);
+                PrintIfNotZero(tenAmountLabel.Text, 700, 125);
+            }
+            if (int.TryParse(twentyQuantityLabel.Text, out int q20) && q20 > 0)
+            {
+                PrintIfNotZero(twentyQuantityLabel.Text, 605, 140);
+                PrintIfNotZero(twentyUnitPriceLabel.Text, 648, 140);
+                PrintIfNotZero(twentyAmountLabel.Text, 700, 140);
+            }
+            if (int.TryParse(thirtyQuantityLabel.Text, out int q30) && q30 > 0)
+            {
+                PrintIfNotZero(thirtyQuantityLabel.Text, 605, 155);
+                PrintIfNotZero(thirtyUnitPriceLabel.Text, 648, 155);
+                PrintIfNotZero(thirtyAmountLabel.Text, 700, 155);
+            }
+            if (int.TryParse(fortyQuantityLabel.Text, out int q40) && q40 > 0)
+            {
+                PrintIfNotZero(fortyQuantityLabel.Text, 605, 170);
+                PrintIfNotZero(fortyUnitPriceLabel.Text, 648, 170);
+                PrintIfNotZero(fortyAmountLabel.Text, 700, 170);
+            }
+            if (int.TryParse(fortyUpQuantityLabel.Text, out int q41) && q41 > 0)
+            {
+                PrintIfNotZero(fortyUpQuantityLabel.Text, 605, 185);
+                PrintIfNotZero(fortyUpUnitPriceLabel.Text, 648, 185);
+                PrintIfNotZero(fortyUpAmountLabel.Text, 700, 185);
+            }
 
-            g.DrawString(tenAmountLabel.Text, font, brush, 700, 125 + offsetY);
-            g.DrawString(twentyAmountLabel.Text, font, brush, 700, 140 + offsetY);
-            g.DrawString(thirtyAmountLabel.Text, font, brush, 700, 155 + offsetY);
-            g.DrawString(fortyAmountLabel.Text, font, brush, 700, 170 + offsetY);
-            g.DrawString(fortyUpAmountLabel.Text, font, brush, 700, 185 + offsetY);
-
-            g.DrawString(discountedAmountLabel.Text, font, brush, 700, 203 + offsetY);
-            g.DrawString(taxAmountLabel.Text, font, brush, 700, 218 + offsetY);
-            g.DrawString(arrearsAmountLabel.Text, font, brush, 700, 248 + offsetY);
-            g.DrawString(sfcInstallmentTextBox.Text, font, brush, 700, 263 + offsetY);
-            g.DrawString(subTotalAmountDueLabel.Text, font, brush, 700, 283 + offsetY);
-            g.DrawString(penaltyAmountLabel.Text, font, brush, 700, 298 + offsetY);
-            g.DrawString(subTotalAmountDueLabel.Text, font, brush, 700, 313 + offsetY);
+            PrintIfNotZero(discountedAmountLabel.Text, 700, 203);
+            PrintIfNotZero(taxAmountLabel.Text, 700, 218);
+            PrintIfNotZero(arrearsAmountLabel.Text, 700, 248);
+            PrintIfNotZero(sfcInstallmentTextBox.Text, 700, 263);
+            PrintIfNotZero(subTotalAmountDueLabel.Text, 700, 283);
+            PrintIfNotZero(penaltyAmountLabel.Text, 700, 298);
+            PrintIfNotZero(subTotalAmountDueLabel.Text, 700, 313);
         }
-
-
 
 
 
@@ -2056,7 +2009,7 @@ namespace IGBARAS_WATER_DISTRICT
         {
             Graphics g = e.Graphics;
             Font font = new Font("Calibre", 9);
-            Brush brush = Brushes.Black;
+            Brush brush = Brushes.Red;
 
             for (int i = 0; i < 3; i++)
             {
