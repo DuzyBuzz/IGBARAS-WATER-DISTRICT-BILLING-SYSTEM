@@ -39,6 +39,7 @@ namespace IGBARAS_WATER_DISTRICT
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.sidebarPanel = new System.Windows.Forms.Panel();
+            this.billingAndPaymentsButton = new System.Windows.Forms.Button();
             this.billSettingsButton = new System.Windows.Forms.Button();
             this.settingsButton = new System.Windows.Forms.Button();
             this.reportsButton = new System.Windows.Forms.Button();
@@ -54,7 +55,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.panel2 = new System.Windows.Forms.Panel();
             this.logoutButton = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.billingAndPaymentsButton = new System.Windows.Forms.Button();
             this.sidebarPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -78,8 +78,25 @@ namespace IGBARAS_WATER_DISTRICT
             this.sidebarPanel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sidebarPanel.Location = new System.Drawing.Point(0, 0);
             this.sidebarPanel.Name = "sidebarPanel";
-            this.sidebarPanel.Size = new System.Drawing.Size(206, 961);
+            this.sidebarPanel.Size = new System.Drawing.Size(206, 986);
             this.sidebarPanel.TabIndex = 1;
+            // 
+            // billingAndPaymentsButton
+            // 
+            this.billingAndPaymentsButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.billingAndPaymentsButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.billingAndPaymentsButton.FlatAppearance.BorderSize = 0;
+            this.billingAndPaymentsButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.billingAndPaymentsButton.Font = new System.Drawing.Font("Arial", 12F);
+            this.billingAndPaymentsButton.Location = new System.Drawing.Point(0, 344);
+            this.billingAndPaymentsButton.Margin = new System.Windows.Forms.Padding(50);
+            this.billingAndPaymentsButton.Name = "billingAndPaymentsButton";
+            this.billingAndPaymentsButton.Size = new System.Drawing.Size(202, 45);
+            this.billingAndPaymentsButton.TabIndex = 16;
+            this.billingAndPaymentsButton.Text = "📝 Billing and Payments";
+            this.billingAndPaymentsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.billingAndPaymentsButton.UseVisualStyleBackColor = false;
+            this.billingAndPaymentsButton.Click += new System.EventHandler(this.billingAndPaymentsButton_Click);
             // 
             // billSettingsButton
             // 
@@ -105,7 +122,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.settingsButton.FlatAppearance.BorderSize = 0;
             this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.settingsButton.Font = new System.Drawing.Font("Arial", 12F);
-            this.settingsButton.Location = new System.Drawing.Point(0, 867);
+            this.settingsButton.Location = new System.Drawing.Point(0, 892);
             this.settingsButton.Margin = new System.Windows.Forms.Padding(50);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(202, 45);
@@ -257,7 +274,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.logoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutButton.Font = new System.Drawing.Font("Arial", 12F);
             this.logoutButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.logoutButton.Location = new System.Drawing.Point(0, 912);
+            this.logoutButton.Location = new System.Drawing.Point(0, 937);
             this.logoutButton.Margin = new System.Windows.Forms.Padding(50);
             this.logoutButton.Name = "logoutButton";
             this.logoutButton.Size = new System.Drawing.Size(202, 45);
@@ -275,31 +292,14 @@ namespace IGBARAS_WATER_DISTRICT
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(206, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1378, 961);
+            this.mainPanel.Size = new System.Drawing.Size(1378, 986);
             this.mainPanel.TabIndex = 3;
-            // 
-            // billingAndPaymentsButton
-            // 
-            this.billingAndPaymentsButton.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.billingAndPaymentsButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.billingAndPaymentsButton.FlatAppearance.BorderSize = 0;
-            this.billingAndPaymentsButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.billingAndPaymentsButton.Font = new System.Drawing.Font("Arial", 12F);
-            this.billingAndPaymentsButton.Location = new System.Drawing.Point(0, 344);
-            this.billingAndPaymentsButton.Margin = new System.Windows.Forms.Padding(50);
-            this.billingAndPaymentsButton.Name = "billingAndPaymentsButton";
-            this.billingAndPaymentsButton.Size = new System.Drawing.Size(202, 45);
-            this.billingAndPaymentsButton.TabIndex = 16;
-            this.billingAndPaymentsButton.Text = "📝 Billing and Payments";
-            this.billingAndPaymentsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.billingAndPaymentsButton.UseVisualStyleBackColor = false;
-            this.billingAndPaymentsButton.Click += new System.EventHandler(this.billingAndPaymentsButton_Click);
             // 
             // MainForm
             // 
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1584, 961);
+            this.ClientSize = new System.Drawing.Size(1584, 986);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.sidebarPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

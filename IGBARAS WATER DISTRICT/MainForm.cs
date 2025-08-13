@@ -156,7 +156,6 @@ namespace IGBARAS_WATER_DISTRICT
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Show confirmation only if it's a user-initiated close (not from Application.Exit)
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 DialogResult result = MessageBox.Show(
@@ -172,16 +171,12 @@ namespace IGBARAS_WATER_DISTRICT
                     return;
                 }
 
-                // Close all running forms safely
-                foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
-                {
-                    form.FormClosing -= MainForm_FormClosing; // Unsubscribe to avoid second trigger
-                    form.Close();
-                }
-
-                Application.Exit(); // Exit the application
+                // Exit the entire application immediately
+                Application.ExitThread(); // Ends all message loops
+                Environment.Exit(0); // Forces the process to close
             }
         }
+
 
 
         private void reportsButton_Click(object sender, EventArgs e)
