@@ -131,6 +131,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AgingOfAccountsReport.rpt</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="BillSettingsControl.cs">
       <SubType>UserControl</SubType>
