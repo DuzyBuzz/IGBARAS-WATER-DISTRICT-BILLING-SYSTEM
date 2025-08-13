@@ -394,11 +394,11 @@ namespace IGBARAS_WATER_DISTRICT
                         INSERT INTO Tb_Billing (
                             BillNo, DateCreated, AccountNo, ServiceDescription, DateFrom, DateTo, PrevReading, PresentReading, 
                             DueDate, MinRate, [Rate11-20], [Rate21-30], [Rate31-40], [Rate41-Above], PenaltyRate, 
-                            Penalty, Tax, TaxAmount, ServiceConnectionFee, Is_Arrears, DiscountName, Discount, DiscountAmount, ArrearsAmount, AmountBilled, ArrearsPenaltyAmount, TotalAmountBilled, ConcessionaireID, UserID
+                            Penalty, Tax, TaxAmount, ServiceConnectionFee, Is_Arrears, DiscountName, Discount, DiscountAmount, ArrearsAmount, AmountBilled, ArrearsPenaltyAmount, TotalAmountBilled, ConcessionaireID, UserID, FreeWater
                         ) VALUES (
                             @BillNo, @DateCreated, @AccountNo, @ServiceDescription, @DateFrom, @DateTo, @PrevReading, @PresentReading, 
                             @DueDate, @MinRate, @Rate11_20, @Rate21_30, @Rate31_40, @Rate41_Above, 
-                            @PenaltyRate, @Penalty, @Tax, @TaxAmount, @ServiceConnectionFee, @Is_Arrears, @DiscountName, @Discount, @DiscountAmount, @ArrearsAmount, @AmountBilled, @ArrearsPenaltyAmount, @TotalAmountBilled, @ConcessionaireID, @UserID
+                            @PenaltyRate, @Penalty, @Tax, @TaxAmount, @ServiceConnectionFee, @Is_Arrears, @DiscountName, @Discount, @DiscountAmount, @ArrearsAmount, @AmountBilled, @ArrearsPenaltyAmount, @TotalAmountBilled, @ConcessionaireID, @UserID, @FreeWater
                         )";
 
                                 using (var insertCmd = new OleDbCommand(insertQuery, connection))
@@ -445,8 +445,10 @@ namespace IGBARAS_WATER_DISTRICT
                                     insertCmd.Parameters.AddWithValue("@TotalAmountBilled", decimal.Parse(totalAmountDueLabel.Text.Trim().Replace(",", "")));
                                     insertCmd.Parameters.AddWithValue("@ConcessionaireID", int.Parse(concessionaireIDLabel.Text.Trim()));
                                     insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
+                                    insertCmd.Parameters.AddWithValue("@FreeWater", int.Parse(freeWaterTextBox.Text.Trim()));
+                                    insertCmd.Parameters.AddWithValue("@ServiceConnectionFee", decimal.Parse(sfcInstallmentTextBox.Text.Trim()));
 
-
+                                    
 
                                     insertCmd.ExecuteNonQuery();
                                     MessageBox.Show("Billing record inserted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1021,6 +1023,7 @@ namespace IGBARAS_WATER_DISTRICT
                 PresentReading AS [Present Reading],
                 (PresentReading - PrevReading) AS [Meter Consumed(m³)],
                 DueDate AS [Due Date],
+                FreeWater AS [Free Water],
                 AmountBilled AS [Amount Billed],
                 IIF(Is_FullyPaid = True, 'Fully Paid',
                     IIF(Is_PartiallyPaid = True, 'Partially Paid', 'Unpaid')) AS [Status]
@@ -1192,9 +1195,12 @@ namespace IGBARAS_WATER_DISTRICT
                             fortyUpUnitPriceLabel2.Text = rate41_above.ToString("N2");
                             fortyUpAmountLabel2.Text = a41.ToString("N2");
 
-                            minimumChargeLabel2.Text = minRate.ToString("N2");
-                            totalWaterConsumptionAmountLabel2.Text = waterCharge.ToString("N2");
-                            totalQuantityLabel2.Text = totalConsumption.ToString();
+                            // Hide rows with zero quantity
+                            tenQuantityLabel2.Visible = tenUnitPriceLabel2.Visible = tenAmountLabel2.Visible = q10 > 0;
+                            twentyQuantityLabel2.Visible = twentyUnitPriceLabel2.Visible = twentyAmountLabel2.Visible = q20 > 0;
+                            thirtyQuantityLabel2.Visible = thirtyUnitPriceLabel2.Visible = thirtyAmountLabel2.Visible = q30 > 0;
+                            fortyQuantityLabel2.Visible = fortyUnitPriceLabel2.Visible = fortyAmountLabel2.Visible = q40 > 0;
+                            fortyUpQuantityLabel2.Visible = fortyUpUnitPriceLabel2.Visible = fortyUpAmountLabel2.Visible = q41 > 0;
 
                             // Get discount & tax %
                             decimal discountPercent = ParsePercent(discountedPercentLabel2.Text);
@@ -1397,8 +1403,26 @@ namespace IGBARAS_WATER_DISTRICT
 
         private void meterConsumedReadingTextBox_TextChanged(object sender, EventArgs e)
         {
+            // Try to parse service ID from label text
+            if (!int.TryParse(serviceIDLabel.Text.Trim(), out int serviceID))
+            {
+                // Could not parse service ID; optionally handle this error
+                // For example, disable some UI elements or show a message
+                return;
+            }
 
+            // Try to parse the meter consumed value from the textbox
+            if (!int.TryParse(meterConsumedReadingTextBox.Text.Trim(), out int totalWaterConsumed))
+            {
+                // Invalid input in meter consumed textbox
+                // Optionally clear labels or reset related UI elements
+                return;
+            }
+
+            // Call your method to populate service rate labels with valid parsed values
+            PopulateServiceRateLabels(serviceID, totalWaterConsumed);
         }
+
 
         private void ClearWaterChargeLabels2()
         {
@@ -1493,10 +1517,39 @@ namespace IGBARAS_WATER_DISTRICT
         {
 
         }
+        private int originalMeterConsumed = 0;
+
+        private void UpdateMeterConsumedAfterFreeWater()
+        {
+            int freeWaterValue = 0;
+
+            string freeWaterText = freeWaterTextBox.Text.Trim();
+
+            // Only subtract free water if textbox is not empty AND valid positive number
+            if (!string.IsNullOrEmpty(freeWaterText) && int.TryParse(freeWaterText, out int parsedFreeWater) && parsedFreeWater >= 0)
+            {
+                freeWaterValue = parsedFreeWater;
+            }
+
+            // Subtract free water, but don't let result go below zero
+            int adjustedMeterConsumed = Math.Max(originalMeterConsumed - freeWaterValue, 0);
+
+            meterConsumedReadingTextBox.Text = adjustedMeterConsumed.ToString();
+        }
+
 
         private void presentReadingTextBox_TextChanged(object sender, EventArgs e)
         {
             string input = presentReadingTextBox.Text.Trim();
+
+            if (!System.Text.RegularExpressions.Regex.IsMatch(input, @"^\d*$"))
+            {
+                presentReadingTextBox.Text = "";
+                meterConsumedReadingTextBox.Clear();
+                ClearWaterChargeLabels();
+                printSaveButton.Enabled = false;
+                return;
+            }
 
             if (meterConsumedReadingTextBox.Text != "")
             {
@@ -1506,7 +1559,7 @@ namespace IGBARAS_WATER_DISTRICT
                 totalWaterConsumptionAmountLabel.Text = "0.00";
                 subTotalAmountDueLabel.Text = "0.00";
             }
-            // 🟡 Disable button if input is empty or zero
+
             if (string.IsNullOrEmpty(input) || input == "0")
             {
                 printSaveButton.Enabled = false;
@@ -1516,46 +1569,60 @@ namespace IGBARAS_WATER_DISTRICT
                 printSaveButton.Enabled = true;
             }
 
-            // ✅ Try to parse the present reading
-            if (int.TryParse(presentReadingTextBox.Text.Trim(), out int presentReading))
+            if (int.TryParse(input, out int presentReading))
             {
-                // ✅ Try to parse the previous reading
                 if (int.TryParse(previousReadingTextBox.Text.Trim(), out int previousReading))
                 {
-                    // ✅ Validate that present reading is not less than previous reading
                     if (presentReading >= previousReading)
                     {
-                        // ✅ Calculate meter consumed
-                        int meterConsumed = presentReading - previousReading;
-                        meterConsumedReadingTextBox.Text = meterConsumed.ToString();
+                        // Calculate original meter consumed
+                        originalMeterConsumed = presentReading - previousReading;
+
+                        // Show adjusted meter consumed after subtracting free water
+                        UpdateMeterConsumedAfterFreeWater();
+
                         if (int.TryParse(serviceIDLabel.Text.Trim(), out int serviceId))
                         {
-                            PopulateServiceRateLabels(serviceId, meterConsumed);
+                            PopulateServiceRateLabels(serviceId, originalMeterConsumed);
                         }
-
                     }
                     else
                     {
-                        // ❌ Present reading is less than previous reading
                         meterConsumedReadingTextBox.Clear();
+                        originalMeterConsumed = 0;
                     }
                 }
                 else
                 {
-                    // ❌ Invalid input in previous reading
                     meterConsumedReadingTextBox.Clear();
                     ClearWaterChargeLabels();
+                    originalMeterConsumed = 0;
                 }
             }
             else
             {
-                // ❌ Invalid input in present reading
                 meterConsumedReadingTextBox.Clear();
                 ClearWaterChargeLabels();
+                originalMeterConsumed = 0;
+            }
+        }
+
+
+        private void freeWaterTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Validate input — if invalid or empty, don't subtract anything
+            string input = freeWaterTextBox.Text.Trim();
+
+            if (!string.IsNullOrEmpty(input) && (!int.TryParse(input, out int freeWaterValue) || freeWaterValue < 0))
+            {
+                freeWaterTextBox.Text = "";
+                return;
             }
 
-
+            UpdateMeterConsumedAfterFreeWater();
         }
+
+
 
 
         private void zoneComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -2028,64 +2095,33 @@ ORDER BY
 
         private void sfcInstallmentTextBox_TextChanged(object sender, EventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
+            UpdateTotalAmountDue();
+        }
 
-            if (string.IsNullOrWhiteSpace(textBox.Text))
-                return;
+        // Helper method to update total amount due label consistently
+        private void UpdateTotalAmountDue()
+        {
+            decimal amountDue = 0.00m;
+            decimal penalty = 0.00m;
+            decimal scf = 0.00m;
 
-            // Save the original cursor position
-            int cursorPosition = textBox.SelectionStart;
+            // Parse subtotal amount due label
+            decimal.TryParse(subTotalAmountDueLabel.Text.Trim(), out amountDue);
 
-            // Remove commas before parsing
-            string rawText = textBox.Text.Replace(",", "");
+            // Parse penalty label
+            decimal.TryParse(penaltyAmountLabel.Text.Trim(), out penalty);
 
-            if (decimal.TryParse(rawText, out decimal value))
-            {
-                // Format to N2 (with commas)
-                string formattedText = value.ToString("N2");
+            // Parse SFC installment textbox (remove commas before parsing)
+            string scfRaw = sfcInstallmentTextBox.Text.Replace(",", "");
+            decimal.TryParse(scfRaw, out scf);
 
-                // Update only if necessary
-                if (textBox.Text != formattedText)
-                {
-                    textBox.Text = formattedText;
-
-                    // Adjust cursor to nearest valid position
-                    int newCursorPos = Math.Min(cursorPosition + (textBox.Text.Length - rawText.Length), textBox.Text.Length);
-                    textBox.SelectionStart = newCursorPos;
-                }
-            }
-            else
-            {
-                // Invalid input; default to 0.00
-                textBox.Text = "0.00";
-                textBox.SelectionStart = textBox.Text.Length;
-            }
-
-            // Parse amountDue safely
-            if (!decimal.TryParse(subTotalAmountDueLabel.Text.Trim(), out decimal amountDue))
-            {
-                amountDue = 0.00m;
-            }
-
-            // Parse penalty safely
-            if (!decimal.TryParse(penaltyAmountLabel.Text.Trim(), out decimal penalty))
-            {
-                penalty = 0.00m;
-            }
-
-            // Parse SCF (Service Connection Fee / SFC Installment)
-            if (!decimal.TryParse(sfcInstallmentTextBox.Text.Trim(), out decimal scf))
-            {
-                scf = 0.00m;
-            }
-
-            // Compute total amount due
+            // Calculate total amount due
             decimal totalAmountDue = amountDue + penalty + scf;
 
-            // Format as currency
+            // Format and set total amount due label
             totalAmountDueLabel.Text = totalAmountDue.ToString("N2");
-
         }
+
 
         private void tableLayoutPanel51_Paint(object sender, PaintEventArgs e)
         {
@@ -2276,15 +2312,19 @@ ORDER BY
         private void freeWaterCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             freeWaterTextBox.Enabled = freeWaterCheckBox.Checked;
+
             if (!freeWaterCheckBox.Checked)
             {
-                freeWaterTextBox.Text = "";
+                freeWaterTextBox.Text = ""; // This clears the free water input and triggers update
             }
         }
+
+
 
         private void collectionTotalAmountPaidTextBox_MouseLeave(object sender, EventArgs e)
         {
             FormatAmountPaidTextBox();
         }
+
     }
 }
