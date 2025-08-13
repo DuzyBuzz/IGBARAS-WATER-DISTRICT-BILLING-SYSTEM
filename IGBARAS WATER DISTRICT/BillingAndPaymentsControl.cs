@@ -260,19 +260,26 @@ namespace IGBARAS_WATER_DISTRICT
 
                         var paymentId = row.Cells["PaymentID"].Value;
                         var currentBillNo = row.Cells["CurrentBillNo"].Value;
+                        var balance = row.Cells["Balance"].Value;
+                        var amountPaid = row.Cells["AmountPaid"].Value;
 
                         DataRowView drv = row.DataBoundItem as DataRowView;
                         if (drv == null) continue;
                         var originalCurrentBillNo = drv.Row["CurrentBillNo", DataRowVersion.Original];
                         var originalBalance = drv.Row["Balance", DataRowVersion.Original];
+                        var originalAmountPaid = drv.Row["AmountPaid", DataRowVersion.Original];
 
-                        // Only check if CurrentBillNo has changed
-                        if (!object.Equals(currentBillNo, originalCurrentBillNo))
+                        // Check if any relevant column has changed
+                        if (!object.Equals(currentBillNo, originalCurrentBillNo) ||
+                            !object.Equals(balance, originalBalance) ||
+                            !object.Equals(amountPaid, originalAmountPaid))
                         {
                             var columnValues = new Dictionary<string, object>
-                            {
-                                { "CurrentBillNo", currentBillNo }
-                            };
+                    {
+                        { "CurrentBillNo", currentBillNo },
+                        { "Balance", balance },
+                        { "AmountPaid", amountPaid }
+                    };
 
                             try
                             {
@@ -298,7 +305,7 @@ namespace IGBARAS_WATER_DISTRICT
                 }
                 else
                 {
-                    MessageBox.Show("CurrentBillNo(s) updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("CurrentBillNo(s), Balance(s), and AmountPaid(s) updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 LoadPaymentsSelectedColumns();

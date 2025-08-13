@@ -1850,26 +1850,26 @@ namespace IGBARAS_WATER_DISTRICT
                     connection.Open();
 
                     string query = @"
-SELECT 
-    p.ORNumber AS [OR No],
-    b.BillNo AS [Bill No],
-    p.AccountNo AS [Account No],
-    p.PaymentDate AS [Payment Date],
-    p.AmountPaid AS [Amount Paid],
-    p.Balance AS [Balance],
-    b.DueDate AS [Due Date],
-            IIF(Is_PartiallyPaid = True, 'Partially Paid',
-                IIF(Is_FullyPaid = True, 'Fully Paid', 'Unpaid')) AS [Status]
-FROM 
-    Tb_Payments AS p
-INNER JOIN 
-    Tb_Billing AS b ON p.CurrentBillNo = b.BillNo
-WHERE 
-    FORMAT(p.PaymentDate, 'yyyy-mm-dd') = FORMAT(Date(), 'yyyy-mm-dd')
-    AND (b.Is_FullyPaid = True OR b.Is_PartiallyPaid = True)
-ORDER BY 
-    p.ORNumber DESC;
-";
+                        SELECT 
+                            p.ORNumber AS [OR No],
+                            b.BillNo AS [Bill No],
+                            p.AccountNo AS [Account No],
+                            p.PaymentDate AS [Payment Date],
+                            p.AmountPaid AS [Amount Paid],
+                            p.Balance AS [Balance],
+                            b.DueDate AS [Due Date],
+                            IIF(b.Is_FullyPaid = True, 'Fully Paid',
+                                IIF(b.Is_PartiallyPaid = True, 'Partially Paid', 'Unpaid')) AS [Status]
+                        FROM 
+                            Tb_Payments AS p
+                        INNER JOIN 
+                            Tb_Billing AS b ON p.CurrentBillNo = b.BillNo
+                        WHERE 
+                            FORMAT(p.PaymentDate, 'yyyy-mm-dd') = FORMAT(Date(), 'yyyy-mm-dd')
+                            AND (b.Is_FullyPaid = True OR b.Is_PartiallyPaid = True)
+                        ORDER BY 
+                            p.ORNumber DESC;
+                        ";
 
                     using (var adapter = new OleDbDataAdapter(query, connection))
                     {
