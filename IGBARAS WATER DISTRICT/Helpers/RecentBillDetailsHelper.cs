@@ -24,6 +24,7 @@ namespace IGBARAS_WATER_DISTRICT.Helpers
             public double DiscountAmount { get; set; }
             public double Balance { get; set; }
             public double ArrearsAmount { get; set; }
+            public double AmountBilled { get; set; }
             public double ServiceConnectionFee { get; set; }
             public string Others1 { get; set; }
             public double OthersAmount1 { get; set; }
@@ -32,6 +33,7 @@ namespace IGBARAS_WATER_DISTRICT.Helpers
             public double AmountPaid { get; set; }
             public bool IsArrears { get; set; }
             public bool IsFullyPaid { get; set; }
+            public bool IsPatrtiallyPaid { get; set; }
         }
 
         public BillingInfo GetBillByBillNo(string billNo)
@@ -81,6 +83,7 @@ namespace IGBARAS_WATER_DISTRICT.Helpers
                                 DiscountAmount = reader["DiscountAmount"] != DBNull.Value ? Convert.ToDouble(reader["DiscountAmount"]) : 0,
                                 Balance = reader["Balance"] != DBNull.Value ? Convert.ToDouble(reader["Balance"]) : 0,
                                 ArrearsAmount = reader["ArrearsAmount"] != DBNull.Value ? Convert.ToDouble(reader["ArrearsAmount"]) : 0,
+                                AmountBilled = reader["AmountBilled"] != DBNull.Value ? Convert.ToDouble(reader["AmountBilled"]) : 0,
 
                                 ServiceConnectionFee = reader["ServiceConnectionFee"] != DBNull.Value ? Convert.ToDouble(reader["ServiceConnectionFee"]) : 0,
                                 Others1 = reader["Others1"]?.ToString(),
@@ -89,6 +92,9 @@ namespace IGBARAS_WATER_DISTRICT.Helpers
                                 OthersAmount2 = reader["OthersAmount2"] != DBNull.Value ? Convert.ToDouble(reader["OthersAmount2"]) : 0,
                                 AmountPaid = reader["AmountPaid"] != DBNull.Value ? Convert.ToDouble(reader["AmountPaid"]) : 0,
                                 IsArrears = reader["Is_Arrears"] != DBNull.Value && Convert.ToBoolean(reader["Is_Arrears"]),
+                                IsFullyPaid = reader["Is_FullyPaid"] != DBNull.Value && Convert.ToBoolean(reader["Is_FullyPaid"]),
+                                IsPatrtiallyPaid = reader["Is_FullyPaid"] != DBNull.Value && Convert.ToBoolean(reader["Is_FullyPaid"]),
+
                             };
                         }
                     }

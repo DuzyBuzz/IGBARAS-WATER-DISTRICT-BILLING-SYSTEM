@@ -599,7 +599,6 @@ namespace IGBARAS_WATER_DISTRICT
             penaltyPercentLabel.Text = "0%";
             freeWaterCheckBox.Checked = false;
 
-
             isWithHoldingTaxLabel.Text = "0";
             isArrearsLabel.Text = "0";
             dueExemptLabel.Text = "0";
@@ -637,7 +636,6 @@ namespace IGBARAS_WATER_DISTRICT
             int IsSeniorCitizen = Convert.ToInt32(selectedRow.Cells["seniorCitizen"].Value);
             string dueExempted = selectedRow.Cells["dueExempt"].Value?.ToString();
             string status = selectedRow.Cells["status"].Value?.ToString();
-
 
             if (DateTime.TryParse(frdObj?.ToString(), out DateTime frd))
             {
@@ -685,6 +683,23 @@ namespace IGBARAS_WATER_DISTRICT
 
                 if (bill != null)
                 {
+                    if (bill.IsPatrtiallyPaid)
+                    {
+                        arrearsAmountLabel.Text = bill.Balance.ToString("N2");
+                    }
+                    else if (!bill.IsFullyPaid && !bill.IsPatrtiallyPaid)
+                    {
+                        arrearsAmountLabel.Text = bill.Balance.ToString("N2");
+                    }
+                    else if (bill.IsFullyPaid)
+                    {
+                        arrearsAmountLabel.Text = "0.00";
+                    }
+
+
+                    // You can also update arrearsAmountLabel2 if needed:
+                    // arrearsAmountLabel2.Text = arrearsAmountLabel.Text;
+
                     string message =
                         $"Account No: {bill.AccountNo}\n" +
                         $"Billing Period: {bill.DateFrom:MMMM dd, yyyy} to {bill.DateTo:MMMM dd, yyyy}\n" +
@@ -696,7 +711,6 @@ namespace IGBARAS_WATER_DISTRICT
                         $"Due Date: {bill.DueDate:MMMM dd, yyyy}";
                     fromReadingDateLabel.Text = $"{bill.DateTo:MMM-dd-yyyy}";
                     previousReadingTextBox.Text = $"{bill.PresentReading}";
-                    arrearsAmountLabel.Text = $"{bill.Balance.ToString("N2")}";
                     arrearsAmountLabel2.Text = $"{bill.ArrearsAmount.ToString("N2")}";
                     dateBilledLabel2.Text = $"{bill.DateCreated:MMMM dd, yyyy}";
                     int isArrears = 0;
@@ -707,9 +721,8 @@ namespace IGBARAS_WATER_DISTRICT
                     }
                     else
                     {
-                            isArrears = 1;    
+                        isArrears = 1;
                     }
-
 
                     double penaltyPercent = SettingsHelper.GetPenaltyPercent(isArrears);
                     penaltyPercentLabel.Text = $"{penaltyPercent:0.##}%";
@@ -730,12 +743,6 @@ namespace IGBARAS_WATER_DISTRICT
                     }
                     if (currentTabLabel.Text == "Collection Reciept")
                     {
-
-
-
-
-
-                        // Fix for CS0266: Explicitly cast 'double' to 'int' to resolve the type mismatch.
                         int meterConsumed = Math.Max(0, (int)(bill.PresentReading - bill.PrevReading));
                         Debug.WriteLine($"Meter consumed: {meterConsumed} cu.m");
                         meterConsumedReadingTextBox.Text = meterConsumed.ToString();
@@ -750,26 +757,14 @@ namespace IGBARAS_WATER_DISTRICT
                         collectionNameLabel.Text = fullname;
                         collectionAddressLabel.Text = address;
                         collectionBillingInvoiceTextBox.Text = bill.BillNo;
-
-                        string c = collectionNameLabel.Text.Trim();
-                        string b = collectionBillingInvoiceTextBox.Text.Trim();
-
-
-
                     }
-
-                }
-                else
-                {
                 }
             }
 
             // Tax Exempt
 
-
             // 🟦 Update UI fields
             accountNumberTextBox.Text = accountNo;
-
             fullnameTextBox.Text = fullname;
             addressTextBox.Text = address;
             accountnoBillHistory.Text = $"Account ID: {accountNo}";
@@ -1174,6 +1169,7 @@ namespace IGBARAS_WATER_DISTRICT
                             // Total billing before discounts/tax
                             decimal waterCharge = a10 + a20 + a30 + a40 + a41;
 
+                            totalQuantityLabel2.Text = totalConsumption.ToString();
                             // Show tier breakdown
                             tenQuantityLabel2.Text = q10.ToString();
                             tenUnitPriceLabel2.Text = (minRate / 10).ToString("N2");
@@ -1339,6 +1335,12 @@ namespace IGBARAS_WATER_DISTRICT
                             totalWaterConsumptionAmountLabel.Text = total.ToString("N2");
                             totalQuantityLabel.Text = totalConsumption.ToString();
 
+                            // Hide rows with zero quantity
+                            tenQuantityLabel.Visible = tenUnitPriceLabel.Visible = tenAmountLabel.Visible = q10 > 0;
+                            twentyQuantityLabel.Visible = twentyUnitPriceLabel.Visible = twentyAmountLabel.Visible = q20 > 0;
+                            thirtyQuantityLabel.Visible = thirtyUnitPriceLabel.Visible = thirtyAmountLabel.Visible = q30 > 0;
+                            fortyQuantityLabel.Visible = fortyUnitPriceLabel.Visible = fortyAmountLabel.Visible = q40 > 0;
+                            fortyUpQuantityLabel.Visible = fortyUpUnitPriceLabel.Visible = fortyUpAmountLabel.Visible = q41 > 0;
 
                         }
 
