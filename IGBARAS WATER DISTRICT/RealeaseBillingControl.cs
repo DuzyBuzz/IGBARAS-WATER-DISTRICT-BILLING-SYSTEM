@@ -2028,7 +2028,7 @@ ORDER BY b.BillNo DESC;
         {
             Graphics g = e.Graphics;
             Font font = new Font("Calibre", 9);
-            Brush brush = Brushes.Red;
+            Brush brush = Brushes.Black;
 
             for (int i = 0; i < 3; i++)
             {
@@ -2424,26 +2424,45 @@ ORDER BY b.BillNo DESC;
 
         private void paymentForBillingTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (decimal.TryParse(totalAmountDueLabel2.Text, out decimal totalAmountDue) &&
-                decimal.TryParse(paymentForBillingTextBox.Text, out decimal paymentAmount))
+            if (decimal.TryParse(totalAmountDueLabel2.Text, out decimal totalAmountDue))
             {
-                if (paymentAmount > totalAmountDue)
+                if (decimal.TryParse(paymentForBillingTextBox.Text, out decimal paymentAmount))
                 {
-                    MessageBox.Show(
-                        "Payment amount cannot exceed the total amount due.",
-                        "Invalid Amount",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning
-                    );
+                    if (paymentAmount > totalAmountDue)
+                    {
+                        MessageBox.Show(
+                            "Payment amount cannot exceed the total amount due.",
+                            "Invalid Amount",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
 
-                    // Reset the textbox to the max allowed value
-                    paymentForBillingTextBox.Text = totalAmountDue.ToString();
-                    paymentForBillingTextBox.SelectionStart = paymentForBillingTextBox.Text.Length;
+                        // Reset to max allowed value
+                        paymentForBillingTextBox.Text = totalAmountDue.ToString();
+                        paymentAmount = totalAmountDue; // Update the value for calculation
+                        paymentForBillingTextBox.SelectionStart = paymentForBillingTextBox.Text.Length;
+                    }
+
+                    // Show balance
+                    if (paymentAmount <= 0)
+                    {
+                        // Payment is 0, keep original balance
+                        totalAmountBilledBalanceLabel.Text = totalAmountDue.ToString("N2");
+                    }
+                    else
+                    {
+                        // Calculate remaining balance
+                        decimal remaining = totalAmountDue - paymentAmount;
+                        totalAmountBilledBalanceLabel.Text = remaining.ToString("N2");
+                    }
                 }
-                // Calculate remaining balance
-                decimal balance = totalAmountDue - paymentAmount;
-                totalAmountBilledBalanceLabel.Text = balance.ToString("N2");
+                else
+                {
+                    // Invalid input, show original balance
+                    totalAmountBilledBalanceLabel.Text = totalAmountDue.ToString("N2");
+                }
             }
+
             CalculateTotal();
         }
 
