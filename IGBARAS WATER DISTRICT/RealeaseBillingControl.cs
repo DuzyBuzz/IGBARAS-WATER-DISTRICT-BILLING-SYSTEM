@@ -868,8 +868,11 @@ namespace IGBARAS_WATER_DISTRICT
                         insertCmd.Parameters.AddWithValue("@FreeWater", int.Parse(freeWaterLabel.Text.Trim()));
                         insertCmd.Parameters.AddWithValue("@SCFBalance", SCFbalance);
                         insertCmd.Parameters.AddWithValue("@TotalPenalty", decimal.Parse(collectionPenaltyLabel.Text.Replace(",", "")));
-                        insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
                         insertCmd.Parameters.AddWithValue("@TotalAmountPaid", decimal.Parse(totalPaidAmountTextBox.Text.Replace(",", "")));
+                        insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
+
+
+
                         insertCmd.ExecuteNonQuery();
                     }
 
