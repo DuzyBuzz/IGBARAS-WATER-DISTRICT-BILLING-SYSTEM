@@ -588,7 +588,15 @@ namespace IGBARAS_WATER_DISTRICT
             {
                 discountNameLabel.Text = "";
             }
-            scfBalanceLabel.Text = $"SCF Balance: ₱{scf:N2}";
+            if (decimal.TryParse(scf, out decimal scfValue))
+            {
+                scfBalanceLabel.Text = $"SCF Balance: ₱{scfValue:N2}";
+            }
+            else
+            {
+                scfBalanceLabel.Text = "SCF Balance: ₱0.00";
+            }
+
             defaultDiscount = discountedPercentLabel.Text;
             defaultDiscountName = discountNameLabel.Text;
             firstReadingDateLabel.Text = frdObj;
@@ -702,7 +710,9 @@ namespace IGBARAS_WATER_DISTRICT
                     if (currentTabLabel.Text == "Collection Reciept")
                     {
                         int meterConsumed = Math.Max(0, (int)(bill.PresentReading - bill.PrevReading));
-                        Debug.WriteLine($"Meter consumed: {meterConsumed} cu.m");
+                        Debug.WriteLine(
+                            $"Meter consumed: {meterConsumed} cu.m | Tax: {bill.Tax}% | Discount: {bill.Discount}% | SCF: {bill.ServiceConnectionFee:N2} | DueDate: {bill.DueDate:MMMM dd, yyyy}"
+                        );
                         meterConsumedReadingTextBox.Text = meterConsumed.ToString();
                         taxExemptedPercentLabel2.Text = $"{bill.Tax}%";
                         discountedPercentLabel2.Text = $"{bill.Discount}%";
