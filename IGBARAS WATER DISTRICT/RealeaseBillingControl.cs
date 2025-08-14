@@ -574,6 +574,7 @@ namespace IGBARAS_WATER_DISTRICT
             string status = selectedRow.Cells["status"].Value?.ToString();
             string scf = selectedRow.Cells["SCF"].Value?.ToString();
 
+            collectionAccountNoLabel.Text = accountNo;
             if (DateTime.TryParse(frdObj?.ToString(), out DateTime frd))
             {
                 fromReadingDateLabel.Text = frd.ToString("MMM-dd-yyyy", CultureInfo.InvariantCulture);
@@ -791,12 +792,25 @@ namespace IGBARAS_WATER_DISTRICT
                 {
                     connection.Open();
 
-                    // 1. Get SCF value for the current AccountNo
+                    // Pre-calculate values used in both insert and update
+                    decimal totalCurrent = decimal.TryParse(subTotalAmountDueLabel2.Text.Replace(",", ""), out decimal tbc) ? tbc : 0m;
+                    decimal amountPaid = decimal.TryParse(totalPaidAmountTextBox.Text.Replace(",", ""), out decimal ap) ? ap : 0m;
+                    decimal penaltyAmount = decimal.TryParse(penaltyAmountLabel2.Text.Replace(",", ""), out decimal pa) ? pa : 0m;
+                    decimal scfAmountPaid = decimal.TryParse(collectionSCFTextBox.Text.Replace(",", ""), out decimal scfpaid) ? scfpaid : 0m;
+                    decimal totalCurrentSCF = decimal.TryParse(totalSCFAmountLabel2.Text.Replace(",", ""), out decimal scfcurrent) ? scfcurrent : 0m;
 
+                    decimal SCFbalance = totalCurrentSCF - scfAmountPaid;
+                    if (SCFbalance < 0) SCFbalance = 0;
 
-                    // 2. (Optional) Use scfValue for further logic, e.g., update SCF after payment
-                    // Example: decimal newScfValue = scfValue - decimal.Parse(collectionSCFTextBox.Text.Replace(",", ""));
-                    // You can add an UPDATE query here if you want to update the SCF balance.
+                    decimal arrearsAmount = decimal.TryParse(arrearsAmountLabel2.Text.Trim().Replace(",", ""), out decimal aa) ? aa : 0m;
+                    decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsAmount);
+                    decimal totalArrears = arrearsAmount + arrearsPenalty;
+
+                    decimal totalPenalty = decimal.TryParse(collectionPenaltyLabel.Text.Trim().Replace(",", ""), out decimal tp) ? tp : 0m;
+
+                    totalCurrent = totalCurrent + arrearsAmount + totalPenalty;
+                    decimal balance = totalCurrent - amountPaid;
+                    if (balance < 0) balance = 0;
 
                     string insertQuery = @"
                 INSERT INTO Tb_Payments (
@@ -808,43 +822,19 @@ namespace IGBARAS_WATER_DISTRICT
                     @ORNumber, @CurrentBillNo, @AccountNo, @PaymentDate, @PaymentType, @ArrearsAmount, @ArrearsPenalty, @TotalArrears, 
                     @BillCharge, @TaxAmount, @TotalCurrent, @CheckNumber, @BankName, @BankAccountNumber, @DateIssued, 
                     @CheckAmount, @CashAmount, @AmountPaid, @NetBillCharge, @Balance, @DiscountName, @DiscountAmount, 
-                    @Penalty, @ServiceConnectionFee, @Remarks, @OthersAmount1, UserID, @FreeWater, @SCFBalance, @TotalPenalty
+                    @Penalty, @ServiceConnectionFee, @Remarks, @OthersAmount1, @UserID, @FreeWater, @SCFBalance, @TotalPenalty
                 )";
 
-                    // Pre-calculate values used in both insert and update
-                    double totalCurrent = double.TryParse(subTotalAmountDueLabel2.Text.Replace(",", ""), out double tbc) ? tbc : 0;
-                    double amountPaid = double.TryParse(totalPaidAmountTextBox.Text.Replace(",", ""), out double ap) ? ap : 0;
-
-                    double penaltyAmount = double.TryParse(penaltyAmountLabel2.Text.Replace(",", ""), out double pa) ? pa : 0;
-
-
-                    double scfAmountPaid = double.TryParse(collectionSCFTextBox.Text.Replace(",", ""), out double scfpaid) ? pa : 0;
-                    double totalCurrentSCF = double.TryParse(totalSCFAmountLabel2.Text.Replace(",", ""), out double scfcurrent) ? ap : 0;
-                    double balance = totalCurrent - amountPaid;
-                    if (balance < 0) balance = 0;
-
-                    double SCFbalance = totalCurrentSCF - scfAmountPaid;
-                    if (SCFbalance < 0) SCFbalance = 0;
-
-                    decimal arrearsAmount = decimal.Parse(arrearsAmountLabel2.Text.Trim().Replace(",", ""));
-                    decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsAmount);
-                    decimal totalArrears = arrearsAmount + arrearsPenalty;
-                    decimal latePenalty =  decimal.Parse(penaltyAmountLabel2.Text.Trim().Replace(",", ""));
-                    decimal totalPenalty = arrearsPenalty + latePenalty;
-
-                    // INSERT payment record
                     using (var insertCmd = new OleDbCommand(insertQuery, connection))
                     {
                         insertCmd.Parameters.AddWithValue("@ORNumber", int.Parse(orNumberTextBox.Text.Trim()));
                         insertCmd.Parameters.AddWithValue("@CurrentBillNo", int.Parse(collectionBillingInvoiceTextBox.Text.Trim()));
                         insertCmd.Parameters.AddWithValue("@AccountNo", accountNumberTextBox.Text.Trim());
                         insertCmd.Parameters.AddWithValue("@PaymentDate", DateTime.Now.ToString("M/d/yyyy"));
-
                         insertCmd.Parameters.AddWithValue("@PaymentType", cashCheckBox.Checked ? "Cash" : "Check");
                         insertCmd.Parameters.AddWithValue("@ArrearsAmount", arrearsAmount);
                         insertCmd.Parameters.AddWithValue("@ArrearsPenalty", arrearsPenalty);
                         insertCmd.Parameters.AddWithValue("@TotalArrears", totalArrears);
-
                         insertCmd.Parameters.AddWithValue("@BillCharge", decimal.Parse(totalWaterConsumptionAmountLabel2.Text.Replace(",", "")));
                         insertCmd.Parameters.AddWithValue("@TaxAmount", decimal.Parse(collectionTaxAmountLabel.Text.Replace(",", "")));
                         insertCmd.Parameters.AddWithValue("@TotalCurrent", decimal.Parse(collectionTotalMeteredAmountLabel.Text.Replace(",", "")));
@@ -864,9 +854,8 @@ namespace IGBARAS_WATER_DISTRICT
                             insertCmd.Parameters.AddWithValue("@DateIssued", DBNull.Value);
                         }
 
-                        insertCmd.Parameters.AddWithValue("@CheckAmount", cashCheckBox.Checked ? 0 : decimal.Parse(totalPaidAmountTextBox.Text.Trim()));
-                        insertCmd.Parameters.AddWithValue("@CashAmount", cashCheckBox.Checked ? decimal.Parse(totalPaidAmountTextBox.Text.Trim()) : 0);
-
+                        insertCmd.Parameters.AddWithValue("@CheckAmount", cashCheckBox.Checked ? 0m : decimal.Parse(totalPaidAmountTextBox.Text.Trim()));
+                        insertCmd.Parameters.AddWithValue("@CashAmount", cashCheckBox.Checked ? decimal.Parse(totalPaidAmountTextBox.Text.Trim()) : 0m);
                         insertCmd.Parameters.AddWithValue("@AmountPaid", amountPaid);
                         insertCmd.Parameters.AddWithValue("@NetBillCharge", decimal.Parse(totalPlusSFCOthersLabel.Text.Replace(",", "")));
                         insertCmd.Parameters.AddWithValue("@Balance", balance);
@@ -874,39 +863,31 @@ namespace IGBARAS_WATER_DISTRICT
                         insertCmd.Parameters.AddWithValue("@DiscountAmount", decimal.Parse(discountedAmountLabel2.Text.Replace(",", "")));
                         insertCmd.Parameters.AddWithValue("@Penalty", penaltyAmount);
                         insertCmd.Parameters.AddWithValue("@ServiceConnectionFee", decimal.Parse(collectionSCFTextBox.Text.Replace(",", "")));
-                        if (remarksTextBox.Text.Trim() == "📝 Remarks")
-                        {
-                            insertCmd.Parameters.AddWithValue("@Remarks", "");
-                        }
-                        else
-                        {
-                            insertCmd.Parameters.AddWithValue("@Remarks", remarksTextBox.Text.Trim());
-                        }
+                        insertCmd.Parameters.AddWithValue("@Remarks", remarksTextBox.Text.Trim() == "📝 Remarks" ? "" : remarksTextBox.Text.Trim());
                         insertCmd.Parameters.AddWithValue("@OthersAmount1", decimal.Parse(paymentFroOthersLabel.Text.Replace(",", "")));
                         insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
-                        insertCmd.Parameters.AddWithValue("@FreeWater", int.Parse(freeWaterLabel.Text.Trim())); 
+                        insertCmd.Parameters.AddWithValue("@FreeWater", int.Parse(freeWaterLabel.Text.Trim()));
                         insertCmd.Parameters.AddWithValue("@SCFBalance", SCFbalance);
-                        insertCmd.Parameters.AddWithValue("@TotalPenalty", totalPenalty);
+                        insertCmd.Parameters.AddWithValue("@TotalPenalty", decimal.Parse(collectionPenaltyLabel.Text.Replace(",", "")));
+                        insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
+
                         insertCmd.ExecuteNonQuery();
                     }
 
                     // UPDATE billing status
                     string updateBillingQuery = @"
-                        UPDATE Tb_Billing
-                        SET 
-                            Is_FullyPaid = @IsFullyPaid, 
-                            Is_PartiallyPaid = @IsPartiallyPaid,
-                            Is_SCFFullyPaid = @IsSCFFullyPaid,
-                            Is_SCFPartiallyPaid = @IsSCFPartiallyPaid
-                        WHERE BillNo = @BillNo";
+                UPDATE Tb_Billing
+                SET 
+                    Is_FullyPaid = @IsFullyPaid, 
+                    Is_PartiallyPaid = @IsPartiallyPaid,
+                    Is_SCFPaid = @IsSCFFullyPaid,
+                    Is_SCFPartiallyPaid = @IsSCFPartiallyPaid
+                WHERE BillNo = @BillNo";
 
                     using (var updateCmd = new OleDbCommand(updateBillingQuery, connection))
                     {
-                        // Main billing payment status
                         bool isFullyPaid = amountPaid >= totalCurrent;
                         bool isPartiallyPaid = amountPaid > 0 && amountPaid < totalCurrent;
-
-                        // SCF payment status
                         bool isSCFFullyPaid = scfAmountPaid >= totalCurrentSCF;
                         bool isSCFPartiallyPaid = scfAmountPaid > 0 && scfAmountPaid < totalCurrentSCF;
 
@@ -918,12 +899,13 @@ namespace IGBARAS_WATER_DISTRICT
 
                         updateCmd.ExecuteNonQuery();
                     }
+
                     // Deduct SCF payment from concessionaire's SCF balance
                     string updateScfQuery = "UPDATE Tb_Concessionaire SET SCF = SCF - ? WHERE AccountNo = ?";
                     using (var updateScfCmd = new OleDbCommand(updateScfQuery, connection))
                     {
-                        updateScfCmd.Parameters.AddWithValue("?", scfAmountPaid); // amount to deduct
-                        updateScfCmd.Parameters.AddWithValue("?", accountNumberTextBox.Text.Trim());
+                        updateScfCmd.Parameters.AddWithValue("?", scfAmountPaid);
+                        updateScfCmd.Parameters.AddWithValue("?", collectionAccountNoLabel.Text.Trim());
                         updateScfCmd.ExecuteNonQuery();
                     }
 
@@ -937,6 +919,7 @@ namespace IGBARAS_WATER_DISTRICT
                 MessageBox.Show($"Insert failed:\n{ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void ClearCollection()
         {
             collectionNameLabel.Text = "";
@@ -1236,6 +1219,8 @@ ORDER BY b.BillNo DESC;
                             // Create a list to hold the penalties to display
                             List<string> parts = new List<string>();
 
+                            decimal totalPenalty = arrearsPenalty + latePenalty;
+                            collectionPenaltyLabel.Text = totalPenalty.ToString("N2");
                             // Add arrears penalty if greater than 0
                             if (arrearsPenalty > 0)
                                 parts.Add(arrearsPenalty.ToString("N2"));
@@ -1248,7 +1233,7 @@ ORDER BY b.BillNo DESC;
                             if (parts.Count > 0)
                             {
                                 // Show the penalties joined by " + " (e.g., "120.32 + 235.60")
-                                collectionPenaltyLabel.Text = string.Join(" + ", parts);
+                                allPenaltyLabel.Text = string.Join(" + ", parts);
 
                                 // Show the total sum of penalties
                                 penaltySumLabel.Text = (arrearsPenalty + latePenalty).ToString("N2");
@@ -1276,7 +1261,6 @@ ORDER BY b.BillNo DESC;
                             totalAmountDueLabel2.Text = totalAmountCharge.ToString("N2");
 
                             collectionArrearsAmountLabel.Text = arrearsAmountLabel2.Text;
-                            allPenaltyLabel.Text = collectionPenaltyLabel.Text;
 
                         }
                     }
@@ -2358,16 +2342,10 @@ ORDER BY b.BillNo DESC;
 
         private void collectionOtherPaymentTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Allow only digits, decimal point, and control keys (e.g., backspace)
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            // Allow only digits and control keys (like Backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true;
-            }
-
-            // Only allow one decimal point
-            if (e.KeyChar == '.' && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
+                e.Handled = true; // Ignore the input
             }
         }
 
