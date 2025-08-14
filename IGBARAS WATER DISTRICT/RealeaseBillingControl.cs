@@ -2440,6 +2440,9 @@ ORDER BY b.BillNo DESC;
                     paymentForBillingTextBox.Text = totalAmountDue.ToString();
                     paymentForBillingTextBox.SelectionStart = paymentForBillingTextBox.Text.Length;
                 }
+                // Calculate remaining balance
+                decimal balance = totalAmountDue - paymentAmount;
+                totalAmountBilledBalanceLabel.Text = balance.ToString("N2");
             }
             CalculateTotal();
         }
