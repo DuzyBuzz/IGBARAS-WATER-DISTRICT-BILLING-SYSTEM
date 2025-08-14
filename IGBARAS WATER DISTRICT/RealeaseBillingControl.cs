@@ -1256,6 +1256,9 @@ ORDER BY b.BillNo DESC;
                             decimal scf = totalSCFAmountLabel2.Text.Trim().Replace(",", "").Trim() == "" ? 0 : decimal.Parse(totalSCFAmountLabel2.Text.Trim().Replace(",", ""));
                             decimal othersAmount = collectionOtherPaymentTextBox.Text.Trim().Replace(",", "").Trim() == "" ? 0 : decimal.Parse(collectionOtherPaymentTextBox.Text.Trim().Replace(",", ""));
                             decimal totalAmountCharge = chargeSubTotal + arrearsPenalty + latePenalty + arrearsAmount;
+
+
+
                             decimal totalAmountDuePlusSCF = totalAmountCharge + scf + othersAmount;
                             totalPlusSFCOthersLabel.Text = totalAmountDuePlusSCF.ToString("N2");
                             totalAmountDueLabel2.Text = totalAmountCharge.ToString("N2");
@@ -1276,9 +1279,9 @@ ORDER BY b.BillNo DESC;
             using (var conn = new OleDbConnection(DbConfig.ConnectionString))
             {
                 string query = @"
-                    SELECT MinRate, [Rate11-20], [Rate21-30], [Rate31-40], [Rate41-Above]
-                    FROM Tb_Service
-                    WHERE ServiceID = ?";
+            SELECT MinRate, [Rate11-20], [Rate21-30], [Rate31-40], [Rate41-Above]
+            FROM Tb_Service
+            WHERE ServiceID = ?";
                 using (var cmd = new OleDbCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("?", serviceId);
@@ -1340,25 +1343,25 @@ ORDER BY b.BillNo DESC;
                             thirtyQuantityLabel.Visible = thirtyUnitPriceLabel.Visible = thirtyAmountLabel.Visible = q30 > 0;
                             fortyQuantityLabel.Visible = fortyUnitPriceLabel.Visible = fortyAmountLabel.Visible = q40 > 0;
                             fortyUpQuantityLabel.Visible = fortyUpUnitPriceLabel.Visible = fortyUpAmountLabel.Visible = q41 > 0;
-
                         }
 
-                        double discounted = 0;
-                        double taxAdded = 0;
-                        double arrears = 0;
-                        int penaltyPercent = 0;
-                        // Clean up input texts
+                        // ----------------------
+                        // Calculation section
+                        // ----------------------
+
+                        decimal discounted = 0;
+                        decimal taxAdded = 0;
+                        decimal arrears = 0;
+
                         string discountText = discountedPercentLabel.Text.Replace("%", "").Trim();
                         string taxAddedText = taxExemptedPercentLabel.Text.Replace("%", "").Trim();
 
-                        if (!double.TryParse(totalWaterConsumptionAmountLabel.Text.Trim(), out double totalConsumptionAmount))
-                        {
+                        // Parse Total Consumption Amount
+                        if (!decimal.TryParse(totalWaterConsumptionAmountLabel.Text.Trim(), out decimal totalConsumptionAmount))
                             totalConsumptionAmount = 0;
-                        }
-
 
                         // Parse Tax
-                        if (double.TryParse(taxAddedText, out double percent2))
+                        if (decimal.TryParse(taxAddedText, out decimal percent2))
                         {
                             taxAdded = totalConsumptionAmount * (percent2 / 100);
                             taxAmountLabel.Text = taxAdded.ToString("N2");
@@ -1367,12 +1370,12 @@ ORDER BY b.BillNo DESC;
                         {
                             taxAmountLabel.Text = "0.00";
                         }
-                        double addedTaxWaterConsumption = 0;
+
+                        decimal addedTaxWaterConsumption = totalConsumptionAmount + taxAdded;
 
                         // Parse Discount
-                        if (double.TryParse(discountText, out double percent1))
+                        if (decimal.TryParse(discountText, out decimal percent1))
                         {
-                            addedTaxWaterConsumption = totalConsumptionAmount + taxAdded;
                             discounted = addedTaxWaterConsumption * (percent1 / 100);
                             discountedAmountLabel.Text = discounted.ToString("N2");
                         }
@@ -1380,30 +1383,26 @@ ORDER BY b.BillNo DESC;
                         {
                             discountedAmountLabel.Text = "0.00";
                         }
-                        Debug.Write("addedwaterconsumption: " + addedTaxWaterConsumption);
+
                         // Step 2: Final Charge Calculation
-                        double chargeSubTotal = addedTaxWaterConsumption - discounted;
-
-                        // Display Final Total
+                        decimal chargeSubTotal = addedTaxWaterConsumption - discounted;
                         subTotalAmountDueLabel.Text = chargeSubTotal.ToString("N2");
-                        arrears = double.Parse(arrearsAmountLabel.Text.Replace(",", "").Trim());
-                        double penaltyAmount = double.Parse(penaltyAmountLabel.Text.Replace(",", "").Trim());
-                        double scf = double.Parse(totalSCFAmountLabel.Text.Replace(",", "").Trim());
-                        // Display total amount due
-                        double totalAmountDue = chargeSubTotal + penaltyAmount + arrears;
-                        double totalAmountDuePlusSCF = chargeSubTotal + penaltyAmount + arrears + scf;
 
+                        arrears = decimal.Parse(arrearsAmountLabel.Text.Replace(",", "").Trim());
+                        decimal penaltyAmount = decimal.Parse(penaltyAmountLabel.Text.Replace(",", "").Trim());
+                        decimal scf = decimal.Parse(totalSCFAmountLabel.Text.Replace(",", "").Trim());
 
-                        // Display as whole number with %
+                        // Total amount due calculations
+                        decimal totalAmountDue = chargeSubTotal + penaltyAmount + arrears;
+                        decimal totalAmountDuePlusSCF = totalAmountDue + scf;
+
                         totalAmountDueLabel.Text = totalAmountDue.ToString("N2");
                         totalAmountDueSCFLabel.Text = totalAmountDuePlusSCF.ToString("N2");
-                        // You can now add this penalty to your total calculation
-
-
                     }
                 }
             }
         }
+
 
         private void meterConsumedReadingTextBox_TextChanged(object sender, EventArgs e)
         {
