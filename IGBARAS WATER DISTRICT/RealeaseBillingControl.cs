@@ -761,7 +761,6 @@ namespace IGBARAS_WATER_DISTRICT
                         taxExemptedPercentLabel2.Text = $"{bill.Tax}%";
                         discountedPercentLabel2.Text = $"{bill.Discount}%";
                         totalSCFAmountLabel2.Text = $"{bill.TotalSCFAmount:N2}";
-                        collectionSCFTextBox.Text = $"{bill.TotalSCFAmount:N2}";
                         dueDateLabel2.Text = bill.DueDate.ToString("MMMM dd, yyyy");
 
                         if (int.TryParse(serviceIDLabel.Text.Trim(), out int serviceId))
@@ -794,7 +793,7 @@ namespace IGBARAS_WATER_DISTRICT
 
                     // Pre-calculate values used in both insert and update
                     decimal totalCurrent = decimal.TryParse(subTotalAmountDueLabel2.Text.Replace(",", ""), out decimal tbc) ? tbc : 0m;
-                    decimal amountPaid = decimal.TryParse(totalPaidAmountTextBox.Text.Replace(",", ""), out decimal ap) ? ap : 0m;
+                    decimal amountPaid = decimal.TryParse(paymentForBillingTextBox.Text.Replace(",", ""), out decimal ap) ? ap : 0m;
                     decimal penaltyAmount = decimal.TryParse(penaltyAmountLabel2.Text.Replace(",", ""), out decimal pa) ? pa : 0m;
                     decimal scfAmountPaid = decimal.TryParse(collectionSCFTextBox.Text.Replace(",", ""), out decimal scfpaid) ? scfpaid : 0m;
                     decimal totalCurrentSCF = decimal.TryParse(totalSCFAmountLabel2.Text.Replace(",", ""), out decimal scfcurrent) ? scfcurrent : 0m;
@@ -817,12 +816,12 @@ namespace IGBARAS_WATER_DISTRICT
                     ORNumber, CurrentBillNo, AccountNo, PaymentDate, PaymentType, ArrearsAmount, ArrearsPenalty, TotalArrears, 
                     BillCharge, TaxAmount, TotalCurrent, CheckNumber, BankName, BankAccountNumber, DateIssued, 
                     CheckAmount, CashAmount, AmountPaid, [Net Bill Charge], Balance, DiscountName, DiscountAmount, 
-                    Penalty, ServiceConnectionFee, Remarks, OthersAmount1, UserID, FreeWater, SCFBalance, TotalPenalty
+                    Penalty, ServiceConnectionFee, Remarks, OthersAmount1, UserID, FreeWater, SCFBalance, TotalPenalty, TotalAmountPaid
                 ) VALUES (
                     @ORNumber, @CurrentBillNo, @AccountNo, @PaymentDate, @PaymentType, @ArrearsAmount, @ArrearsPenalty, @TotalArrears, 
                     @BillCharge, @TaxAmount, @TotalCurrent, @CheckNumber, @BankName, @BankAccountNumber, @DateIssued, 
                     @CheckAmount, @CashAmount, @AmountPaid, @NetBillCharge, @Balance, @DiscountName, @DiscountAmount, 
-                    @Penalty, @ServiceConnectionFee, @Remarks, @OthersAmount1, @UserID, @FreeWater, @SCFBalance, @TotalPenalty
+                    @Penalty, @ServiceConnectionFee, @Remarks, @OthersAmount1, @UserID, @FreeWater, @SCFBalance, @TotalPenalty, @TotalAmountPaid
                 )";
 
                     using (var insertCmd = new OleDbCommand(insertQuery, connection))
@@ -870,7 +869,7 @@ namespace IGBARAS_WATER_DISTRICT
                         insertCmd.Parameters.AddWithValue("@SCFBalance", SCFbalance);
                         insertCmd.Parameters.AddWithValue("@TotalPenalty", decimal.Parse(collectionPenaltyLabel.Text.Replace(",", "")));
                         insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
-
+                        insertCmd.Parameters.AddWithValue("@TotalAmountPaid", decimal.Parse(totalPaidAmountTextBox.Text.Replace(",", "")));
                         insertCmd.ExecuteNonQuery();
                     }
 
@@ -2403,6 +2402,54 @@ ORDER BY b.BillNo DESC;
                 billPaidButton.Enabled = false;
             }
         }
+
+        private void paymentForSCFTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(paymentForSCFTextBox.Text, out decimal value))
+            {
+                collectionSCFTextBox.Text = value.ToString("N2"); 
+            }
+            else
+            {
+                collectionSCFTextBox.Text = "0.00";
+            }
+        }
+
+        private void paymentForSCFTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Allow: number keys, decimal point, comma, backspace, delete, arrow keys, tab
+            bool isNumberKey = (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) ||
+                               (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9);
+            bool isAllowedSymbol = e.KeyCode == Keys.Decimal || e.KeyCode == Keys.OemPeriod || e.KeyCode == Keys.Oemcomma;
+            bool isControlKey = e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete ||
+                                e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Tab;
+
+            if (!isNumberKey && !isAllowedSymbol && !isControlKey)
+            {
+                e.SuppressKeyPress = true; // Block the key
+            }
+        }
+
+        private void paymentForBillingTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void paymentForBillingTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Allow: number keys, decimal point, comma, backspace, delete, arrow keys, tab
+            bool isNumberKey = (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) ||
+                               (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9);
+            bool isAllowedSymbol = e.KeyCode == Keys.Decimal || e.KeyCode == Keys.OemPeriod || e.KeyCode == Keys.Oemcomma;
+            bool isControlKey = e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete ||
+                                e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Tab;
+
+            if (!isNumberKey && !isAllowedSymbol && !isControlKey)
+            {
+                e.SuppressKeyPress = true; // Block the key
+            }
+        }
+
 
     }
 }
