@@ -2303,6 +2303,7 @@ ORDER BY b.BillNo DESC;
         private void collectionOtherPaymentTextBox_TextChanged(object sender, EventArgs e)
         {
 
+
             if (decimal.TryParse(collectionOtherPaymentTextBox.Text, out decimal otherPayment))
                 paymentFroOthersLabel.Text = otherPayment.ToString("N2");
             else
@@ -2315,27 +2316,18 @@ ORDER BY b.BillNo DESC;
                 return;
 
             PopulateServiceRateLabels2(serviceID, totalWaterConsumed);
+            CalculateTotal();
         }
 
 
-        private void collectionSCFTextBox_TextChanged(object sender, EventArgs e)
+        private void collectionSCFTextBox_TextChanged(object sender, EventArgs e) 
         {
-
+            CalculateTotal();
         }
 
         private void collectionSCFTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Allow only digits, decimal point, and control keys (e.g., backspace)
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
-            {
-                e.Handled = true;
-            }
 
-            // Only allow one decimal point
-            if (e.KeyChar == '.' && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }
         }
 
         private void collectionOtherPaymentTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -2432,8 +2424,27 @@ ORDER BY b.BillNo DESC;
 
         private void paymentForBillingTextBox_TextChanged(object sender, EventArgs e)
         {
+            if (decimal.TryParse(totalAmountDueLabel2.Text, out decimal totalAmountDue) &&
+                decimal.TryParse(paymentForBillingTextBox.Text, out decimal paymentAmount))
+            {
+                if (paymentAmount > totalAmountDue)
+                {
+                    MessageBox.Show(
+                        "Payment amount cannot exceed the total amount due.",
+                        "Invalid Amount",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
 
+                    // Reset the textbox to the max allowed value
+                    paymentForBillingTextBox.Text = totalAmountDue.ToString();
+                    paymentForBillingTextBox.SelectionStart = paymentForBillingTextBox.Text.Length;
+                }
+            }
+            CalculateTotal();
         }
+
+
 
         private void paymentForBillingTextBox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -2450,6 +2461,52 @@ ORDER BY b.BillNo DESC;
             }
         }
 
+        private void collectionOtherPaymentTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Allow: number keys, decimal point, comma, backspace, delete, arrow keys, tab
+            bool isNumberKey = (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) ||
+                               (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9);
+            bool isAllowedSymbol = e.KeyCode == Keys.Decimal || e.KeyCode == Keys.OemPeriod || e.KeyCode == Keys.Oemcomma;
+            bool isControlKey = e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete ||
+                                e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Tab;
 
+            if (!isNumberKey && !isAllowedSymbol && !isControlKey)
+            {
+                e.SuppressKeyPress = true; // Block the key
+            }
+        }
+
+        private void paymentForBillingTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow digits, backspace, delete, decimal point, and comma
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true; // Block invalid input
+            }
+        }
+
+        private decimal ParseDecimal(string value)
+        {
+            if (decimal.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal result))
+                return result;
+
+            // Try with local culture (handles commas for thousands separator)
+            if (decimal.TryParse(value, NumberStyles.Any, CultureInfo.CurrentCulture, out result))
+                return result;
+
+            return 0;
+        }
+
+        private void CalculateTotal()
+        {
+            decimal collectionSCF = ParseDecimal(collectionSCFTextBox.Text);
+            decimal paymentForBilling = ParseDecimal(paymentForBillingTextBox.Text);
+            decimal paymentForOthers = ParseDecimal(paymentFroOthersLabel.Text);
+
+            decimal total = collectionSCF + paymentForBilling + paymentForOthers;
+
+            // Example: Show in a label
+            totalPaidAmountTextBox.Text = total.ToString("N2");
+        }
     }
 }
