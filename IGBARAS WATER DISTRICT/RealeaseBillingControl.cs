@@ -1353,24 +1353,7 @@ namespace IGBARAS_WATER_DISTRICT
 
         private void meterConsumedReadingTextBox_TextChanged(object sender, EventArgs e)
         {
-            // Try to parse service ID from label text
-            if (!int.TryParse(serviceIDLabel.Text.Trim(), out int serviceID))
-            {
-                // Could not parse service ID; optionally handle this error
-                // For example, disable some UI elements or show a message
-                return;
-            }
 
-            // Try to parse the meter consumed value from the textbox
-            if (!int.TryParse(meterConsumedReadingTextBox.Text.Trim(), out int totalWaterConsumed))
-            {
-                // Invalid input in meter consumed textbox
-                // Optionally clear labels or reset related UI elements
-                return;
-            }
-
-            // Call your method to populate service rate labels with valid parsed values
-            PopulateServiceRateLabels(serviceID, totalWaterConsumed);
         }
 
         private void UpdateMeterConsumedAfterFreeWater()
@@ -1388,15 +1371,12 @@ namespace IGBARAS_WATER_DISTRICT
             // Subtract free water, but don't let result go below zero
             int adjustedMeterConsumed = Math.Max(originalMeterConsumed - freeWaterValue, 0);
 
-            meterConsumedReadingTextBox.Text = adjustedMeterConsumed.ToString();
+            totalQuantityLabel.Text = adjustedMeterConsumed.ToString();
         }
-
 
         private void presentReadingTextBox_TextChanged(object sender, EventArgs e)
         {
-
             string input = presentReadingTextBox.Text.Trim();
-
             if (!System.Text.RegularExpressions.Regex.IsMatch(input, @"^\d*$"))
             {
                 presentReadingTextBox.Text = "";
@@ -1415,42 +1395,33 @@ namespace IGBARAS_WATER_DISTRICT
                 subTotalAmountDueLabel.Text = "0.00";
             }
 
-            if (string.IsNullOrEmpty(input) || input == "0")
-            {
-                printSaveButton.Enabled = false;
-            }
-            else
-            {
-                printSaveButton.Enabled = true;
-            }
+            printSaveButton.Enabled = !(string.IsNullOrEmpty(input) || input == "0");
 
-            if (int.TryParse(input, out int presentReading))
+            if (int.TryParse(input, out int presentReading) &&
+                int.TryParse(previousReadingTextBox.Text.Trim(), out int previousReading))
             {
-                if (int.TryParse(previousReadingTextBox.Text.Trim(), out int previousReading))
+                if (presentReading >= previousReading)
                 {
-                    if (presentReading >= previousReading)
-                    {
-                        // Calculate original meter consumed
-                        originalMeterConsumed = presentReading - previousReading;
+                    // Actual meter consumed
+                    originalMeterConsumed = presentReading - previousReading;
+                    meterConsumedReadingTextBox.Text = originalMeterConsumed.ToString();
 
-                        // Show adjusted meter consumed after subtracting free water
-                        UpdateMeterConsumedAfterFreeWater();
+                    // Adjusted for free water
+                    int freeWaterValue = 0;
+                    string freeWaterText = freeWaterTextBox.Text.Trim();
+                    if (!string.IsNullOrEmpty(freeWaterText) && int.TryParse(freeWaterText, out int parsedFreeWater) && parsedFreeWater >= 0)
+                        freeWaterValue = parsedFreeWater;
 
-                        if (int.TryParse(serviceIDLabel.Text.Trim(), out int serviceId))
-                        {
-                            PopulateServiceRateLabels(serviceId, originalMeterConsumed);
-                        }
-                    }
-                    else
-                    {
-                        meterConsumedReadingTextBox.Clear();
-                        originalMeterConsumed = 0;
-                    }
+                    int adjustedMeterConsumed = Math.Max(originalMeterConsumed - freeWaterValue, 0);
+                    totalQuantityLabel.Text = adjustedMeterConsumed.ToString();
+
+                    // Populate service rates using adjusted value
+                    if (int.TryParse(serviceIDLabel.Text.Trim(), out int serviceId))
+                        PopulateServiceRateLabels(serviceId, adjustedMeterConsumed);
                 }
                 else
                 {
                     meterConsumedReadingTextBox.Clear();
-                    ClearWaterChargeLabels();
                     originalMeterConsumed = 0;
                 }
             }
@@ -1462,20 +1433,27 @@ namespace IGBARAS_WATER_DISTRICT
             }
         }
 
-
         private void freeWaterTextBox_TextChanged(object sender, EventArgs e)
         {
-            // Validate input — if invalid or empty, don't subtract anything
             string input = freeWaterTextBox.Text.Trim();
-
             if (!string.IsNullOrEmpty(input) && (!int.TryParse(input, out int freeWaterValue) || freeWaterValue < 0))
             {
                 freeWaterTextBox.Text = "";
                 return;
             }
 
-            UpdateMeterConsumedAfterFreeWater();
+            // Recalculate adjusted meter consumed and update population
+            int adjustedMeterConsumed = Math.Max(originalMeterConsumed - (string.IsNullOrEmpty(input) ? 0 : int.Parse(input)), 0);
+            totalQuantityLabel.Text = adjustedMeterConsumed.ToString();
+
+            if (int.TryParse(serviceIDLabel.Text.Trim(), out int serviceId))
+                PopulateServiceRateLabels(serviceId, adjustedMeterConsumed);
         }
+
+
+
+
+
         private void ClearWaterChargeLabels2()
         {
             // Clear all tier 1 (0–10) labels
