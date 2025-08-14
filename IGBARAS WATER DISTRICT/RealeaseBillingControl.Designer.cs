@@ -163,7 +163,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.minimumChargeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel21 = new System.Windows.Forms.TableLayoutPanel();
-            this.sfcInstallmentTextBox = new System.Windows.Forms.TextBox();
+            this.totalSCFAmountLabel = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.discountedAmountLabel = new System.Windows.Forms.Label();
             this.discountedPercentLabel = new System.Windows.Forms.Label();
@@ -344,7 +344,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label131 = new System.Windows.Forms.Label();
             this.label132 = new System.Windows.Forms.Label();
             this.withHoldingTaxPercentLabel2 = new System.Windows.Forms.Label();
-            this.scfinstallmentLabel = new System.Windows.Forms.Label();
+            this.totalSCFAmountLabel2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel55 = new System.Windows.Forms.TableLayoutPanel();
             this.subTotalAmountDueLabel2 = new System.Windows.Forms.Label();
             this.label185 = new System.Windows.Forms.Label();
@@ -397,6 +397,9 @@ namespace IGBARAS_WATER_DISTRICT
             this.label71 = new System.Windows.Forms.Label();
             this.billDataGridView = new System.Windows.Forms.DataGridView();
             this.billdataTextBox = new System.Windows.Forms.TextBox();
+            this.scfArrearsLabel = new System.Windows.Forms.Label();
+            this.currentSCFLabel = new System.Windows.Forms.Label();
+            this.freeWaterLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel14.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel24.SuspendLayout();
@@ -2120,7 +2123,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel21.Controls.Add(this.sfcInstallmentTextBox, 3, 4);
+            this.tableLayoutPanel21.Controls.Add(this.totalSCFAmountLabel, 3, 4);
             this.tableLayoutPanel21.Controls.Add(this.label22, 0, 4);
             this.tableLayoutPanel21.Controls.Add(this.discountedAmountLabel, 3, 0);
             this.tableLayoutPanel21.Controls.Add(this.discountedPercentLabel, 1, 0);
@@ -2135,6 +2138,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel21.Controls.Add(this.label69, 0, 2);
             this.tableLayoutPanel21.Controls.Add(this.label65, 0, 1);
             this.tableLayoutPanel21.Controls.Add(this.withHoldingTaxPercentLabel, 1, 2);
+            this.tableLayoutPanel21.Controls.Add(this.scfArrearsLabel, 1, 4);
+            this.tableLayoutPanel21.Controls.Add(this.currentSCFLabel, 2, 4);
             this.tableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel21.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel21.Margin = new System.Windows.Forms.Padding(0);
@@ -2148,21 +2153,21 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel21.Size = new System.Drawing.Size(356, 109);
             this.tableLayoutPanel21.TabIndex = 0;
             // 
-            // sfcInstallmentTextBox
+            // totalSCFAmountLabel
             // 
-            this.sfcInstallmentTextBox.BackColor = System.Drawing.Color.White;
-            this.sfcInstallmentTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.sfcInstallmentTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sfcInstallmentTextBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sfcInstallmentTextBox.Location = new System.Drawing.Point(284, 92);
-            this.sfcInstallmentTextBox.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.sfcInstallmentTextBox.Name = "sfcInstallmentTextBox";
-            this.sfcInstallmentTextBox.Size = new System.Drawing.Size(71, 15);
-            this.sfcInstallmentTextBox.TabIndex = 36;
-            this.sfcInstallmentTextBox.Text = " 0.00";
-            this.sfcInstallmentTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.sfcInstallmentTextBox.TextChanged += new System.EventHandler(this.sfcInstallmentTextBox_TextChanged);
-            this.sfcInstallmentTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sfcInstallmentTextBox_KeyPress);
+            this.totalSCFAmountLabel.BackColor = System.Drawing.Color.White;
+            this.totalSCFAmountLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.totalSCFAmountLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.totalSCFAmountLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalSCFAmountLabel.Location = new System.Drawing.Point(284, 92);
+            this.totalSCFAmountLabel.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.totalSCFAmountLabel.Name = "totalSCFAmountLabel";
+            this.totalSCFAmountLabel.Size = new System.Drawing.Size(71, 15);
+            this.totalSCFAmountLabel.TabIndex = 36;
+            this.totalSCFAmountLabel.Text = " 0.00";
+            this.totalSCFAmountLabel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.totalSCFAmountLabel.TextChanged += new System.EventHandler(this.sfcInstallmentTextBox_TextChanged);
+            this.totalSCFAmountLabel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sfcInstallmentTextBox_KeyPress);
             // 
             // label22
             // 
@@ -3792,7 +3797,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.37634F));
             this.tableLayoutPanel12.Controls.Add(this.arrearsPenaltyAmountLabel, 1, 0);
             this.tableLayoutPanel12.Controls.Add(this.paymentFroOthersLabel, 3, 0);
-            this.tableLayoutPanel12.Controls.Add(this.penaltyAmountLabel2, 2, 0);
             this.tableLayoutPanel12.Controls.Add(this.label82, 0, 0);
             this.tableLayoutPanel12.Location = new System.Drawing.Point(9, 396);
             this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(0);
@@ -3827,9 +3831,9 @@ namespace IGBARAS_WATER_DISTRICT
             // penaltyAmountLabel2
             // 
             this.penaltyAmountLabel2.AutoSize = true;
-            this.penaltyAmountLabel2.Location = new System.Drawing.Point(225, 1);
+            this.penaltyAmountLabel2.Location = new System.Drawing.Point(151, 1);
             this.penaltyAmountLabel2.Name = "penaltyAmountLabel2";
-            this.penaltyAmountLabel2.Size = new System.Drawing.Size(24, 15);
+            this.penaltyAmountLabel2.Size = new System.Drawing.Size(31, 15);
             this.penaltyAmountLabel2.TabIndex = 33;
             this.penaltyAmountLabel2.Text = "0.00";
             this.penaltyAmountLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4011,6 +4015,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel50.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.37634F));
             this.tableLayoutPanel50.Controls.Add(this.label118, 0, 0);
             this.tableLayoutPanel50.Controls.Add(this.totalAmountDueLabel2, 2, 0);
+            this.tableLayoutPanel50.Controls.Add(this.penaltyAmountLabel2, 1, 0);
             this.tableLayoutPanel50.Controls.Add(this.totalPlusSFCOthersLabel, 3, 0);
             this.tableLayoutPanel50.Location = new System.Drawing.Point(9, 413);
             this.tableLayoutPanel50.Margin = new System.Windows.Forms.Padding(0);
@@ -4393,7 +4398,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel51.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel51.Controls.Add(this.label128, 0, 4);
             this.tableLayoutPanel51.Controls.Add(this.discountedAmountLabel2, 3, 0);
-            this.tableLayoutPanel51.Controls.Add(this.dueExemptLabel2, 2, 4);
             this.tableLayoutPanel51.Controls.Add(this.discountedPercentLabel2, 1, 0);
             this.tableLayoutPanel51.Controls.Add(this.label129, 0, 0);
             this.tableLayoutPanel51.Controls.Add(this.label130, 0, 3);
@@ -4406,7 +4410,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel51.Controls.Add(this.label131, 0, 2);
             this.tableLayoutPanel51.Controls.Add(this.label132, 0, 1);
             this.tableLayoutPanel51.Controls.Add(this.withHoldingTaxPercentLabel2, 1, 2);
-            this.tableLayoutPanel51.Controls.Add(this.scfinstallmentLabel, 3, 4);
+            this.tableLayoutPanel51.Controls.Add(this.totalSCFAmountLabel2, 3, 4);
+            this.tableLayoutPanel51.Controls.Add(this.dueExemptLabel2, 2, 1);
             this.tableLayoutPanel51.Location = new System.Drawing.Point(8, 272);
             this.tableLayoutPanel51.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel51.Name = "tableLayoutPanel51";
@@ -4445,7 +4450,7 @@ namespace IGBARAS_WATER_DISTRICT
             // dueExemptLabel2
             // 
             this.dueExemptLabel2.AutoSize = true;
-            this.dueExemptLabel2.Location = new System.Drawing.Point(226, 73);
+            this.dueExemptLabel2.Location = new System.Drawing.Point(226, 19);
             this.dueExemptLabel2.Name = "dueExemptLabel2";
             this.dueExemptLabel2.Size = new System.Drawing.Size(14, 15);
             this.dueExemptLabel2.TabIndex = 36;
@@ -4588,15 +4593,15 @@ namespace IGBARAS_WATER_DISTRICT
             this.withHoldingTaxPercentLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.withHoldingTaxPercentLabel2.Visible = false;
             // 
-            // scfinstallmentLabel
+            // totalSCFAmountLabel2
             // 
-            this.scfinstallmentLabel.AutoSize = true;
-            this.scfinstallmentLabel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.scfinstallmentLabel.Location = new System.Drawing.Point(338, 73);
-            this.scfinstallmentLabel.Name = "scfinstallmentLabel";
-            this.scfinstallmentLabel.Size = new System.Drawing.Size(31, 18);
-            this.scfinstallmentLabel.TabIndex = 38;
-            this.scfinstallmentLabel.Text = "0.00";
+            this.totalSCFAmountLabel2.AutoSize = true;
+            this.totalSCFAmountLabel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.totalSCFAmountLabel2.Location = new System.Drawing.Point(338, 73);
+            this.totalSCFAmountLabel2.Name = "totalSCFAmountLabel2";
+            this.totalSCFAmountLabel2.Size = new System.Drawing.Size(31, 18);
+            this.totalSCFAmountLabel2.TabIndex = 38;
+            this.totalSCFAmountLabel2.Text = "0.00";
             // 
             // tableLayoutPanel55
             // 
@@ -5035,6 +5040,7 @@ namespace IGBARAS_WATER_DISTRICT
             // panel2
             // 
             this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.freeWaterLabel);
             this.panel2.Controls.Add(this.userIDLabel);
             this.panel2.Controls.Add(this.concessionaireIDLabel);
             this.panel2.Controls.Add(this.dateBilledLabel2);
@@ -5287,6 +5293,36 @@ namespace IGBARAS_WATER_DISTRICT
             this.billdataTextBox.Size = new System.Drawing.Size(193, 150);
             this.billdataTextBox.TabIndex = 27;
             this.billdataTextBox.Visible = false;
+            // 
+            // scfArrearsLabel
+            // 
+            this.scfArrearsLabel.AutoSize = true;
+            this.scfArrearsLabel.Location = new System.Drawing.Point(145, 89);
+            this.scfArrearsLabel.Name = "scfArrearsLabel";
+            this.scfArrearsLabel.Size = new System.Drawing.Size(28, 14);
+            this.scfArrearsLabel.TabIndex = 40;
+            this.scfArrearsLabel.Text = "0.00";
+            this.scfArrearsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // currentSCFLabel
+            // 
+            this.currentSCFLabel.AutoSize = true;
+            this.currentSCFLabel.Location = new System.Drawing.Point(216, 89);
+            this.currentSCFLabel.Name = "currentSCFLabel";
+            this.currentSCFLabel.Size = new System.Drawing.Size(28, 14);
+            this.currentSCFLabel.TabIndex = 41;
+            this.currentSCFLabel.Text = "0.00";
+            this.currentSCFLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // freeWaterLabel
+            // 
+            this.freeWaterLabel.AutoSize = true;
+            this.freeWaterLabel.Location = new System.Drawing.Point(355, 10);
+            this.freeWaterLabel.Name = "freeWaterLabel";
+            this.freeWaterLabel.Size = new System.Drawing.Size(54, 13);
+            this.freeWaterLabel.TabIndex = 55;
+            this.freeWaterLabel.Text = "freeWater";
+            this.freeWaterLabel.Visible = false;
             // 
             // RealeaseBillingControl
             // 
@@ -5719,7 +5755,7 @@ namespace IGBARAS_WATER_DISTRICT
         private Label label37;
         private TableLayoutPanel tableLayoutPanel29;
         private TableLayoutPanel tableLayoutPanel21;
-        private TextBox sfcInstallmentTextBox;
+        private TextBox totalSCFAmountLabel;
         private Label label22;
         private Label discountedAmountLabel;
         private Label discountedPercentLabel;
@@ -5789,11 +5825,14 @@ namespace IGBARAS_WATER_DISTRICT
         private Label paymentFroOthersLabel;
         private Label label82;
         private Label totalPlusSFCOthersLabel;
-        private Label scfinstallmentLabel;
+        private Label totalSCFAmountLabel2;
         private Label allPenaltyLabel;
         private TextBox totalPaidAmountTextBox;
         private Label label38;
         private Label label159;
         private Label label160;
+        private Label scfArrearsLabel;
+        private Label currentSCFLabel;
+        private Label freeWaterLabel;
     }
 }
