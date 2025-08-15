@@ -407,6 +407,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label71 = new System.Windows.Forms.Label();
             this.billDataGridView = new System.Windows.Forms.DataGridView();
             this.billdataTextBox = new System.Windows.Forms.TextBox();
+            this.initialBillingCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel14.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel24.SuspendLayout();
@@ -625,10 +626,11 @@ namespace IGBARAS_WATER_DISTRICT
             // ok
             // 
             this.ok.AutoScroll = true;
+            this.ok.Controls.Add(this.initialBillingCheckBox);
             this.ok.Controls.Add(this.scfBalanceLabel);
-            this.ok.Controls.Add(this.freeWaterCheckBox);
             this.ok.Controls.Add(this.freeWaterTextBox);
             this.ok.Controls.Add(this.printSaveButton);
+            this.ok.Controls.Add(this.freeWaterCheckBox);
             this.ok.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ok.Location = new System.Drawing.Point(3, 480);
             this.ok.Name = "ok";
@@ -639,7 +641,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.scfBalanceLabel.AutoSize = true;
             this.scfBalanceLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scfBalanceLabel.Location = new System.Drawing.Point(362, 19);
+            this.scfBalanceLabel.Location = new System.Drawing.Point(405, 17);
             this.scfBalanceLabel.Name = "scfBalanceLabel";
             this.scfBalanceLabel.Size = new System.Drawing.Size(106, 18);
             this.scfBalanceLabel.TabIndex = 51;
@@ -661,7 +663,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.freeWaterTextBox.Enabled = false;
             this.freeWaterTextBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.freeWaterTextBox.Location = new System.Drawing.Point(127, 11);
+            this.freeWaterTextBox.Location = new System.Drawing.Point(120, 11);
             this.freeWaterTextBox.Name = "freeWaterTextBox";
             this.freeWaterTextBox.Size = new System.Drawing.Size(136, 26);
             this.freeWaterTextBox.TabIndex = 22;
@@ -1469,10 +1471,11 @@ namespace IGBARAS_WATER_DISTRICT
             // label19
             // 
             this.label19.AutoSize = true;
+            this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label19.Location = new System.Drawing.Point(1, 1);
             this.label19.Margin = new System.Windows.Forms.Padding(0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(59, 14);
+            this.label19.Size = new System.Drawing.Size(81, 27);
             this.label19.TabIndex = 0;
             this.label19.Text = "PREVIOUS";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5419,6 +5422,18 @@ namespace IGBARAS_WATER_DISTRICT
             this.billdataTextBox.TabIndex = 27;
             this.billdataTextBox.Visible = false;
             // 
+            // initialBillingCheckBox
+            // 
+            this.initialBillingCheckBox.AutoSize = true;
+            this.initialBillingCheckBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.initialBillingCheckBox.Location = new System.Drawing.Point(277, 13);
+            this.initialBillingCheckBox.Name = "initialBillingCheckBox";
+            this.initialBillingCheckBox.Size = new System.Drawing.Size(108, 22);
+            this.initialBillingCheckBox.TabIndex = 52;
+            this.initialBillingCheckBox.Text = "Initial Billing";
+            this.initialBillingCheckBox.UseVisualStyleBackColor = true;
+            this.initialBillingCheckBox.CheckedChanged += new System.EventHandler(this.initialBillingCheckBox_CheckedChanged);
+            // 
             // RealeaseBillingControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5936,5 +5951,6 @@ namespace IGBARAS_WATER_DISTRICT
         private Label paymentFroOthersLabel;
         private Label totalAmountBilledBalanceLabel;
         private Label label72;
+        private CheckBox initialBillingCheckBox;
     }
 }

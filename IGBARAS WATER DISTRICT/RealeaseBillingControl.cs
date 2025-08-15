@@ -551,6 +551,7 @@ namespace IGBARAS_WATER_DISTRICT
             bankNameTextBox.Text = "";
             checkNumberTextBox.Text = "";
             bankAccountNumberText.Text = "";
+            allPenaltyLabel.Text = "0.00";
             cashCheckBox.Checked = true;
             DisableButton();
             if (e.RowIndex < 0) return; // Ignore header or invalid rows
@@ -1317,8 +1318,20 @@ ORDER BY b.BillNo DESC;
                             int q30 = Math.Min(Math.Max(totalConsumption - 20, 0), 10);
                             int q40 = Math.Min(Math.Max(totalConsumption - 30, 0), 10);
                             int q41 = Math.Max(totalConsumption - 40, 0);
+                            decimal a10;
+                            decimal perUnitRateForFirst10 = minRate / 10; // This is the price per cubic meter for the first 10
 
-                            decimal a10 = q10 > 0 ? minRate : 0; // Minimum charge
+                            if (initialBillingCheckBox.Checked)
+                            {
+                                // Bill only for actual quantity in first 10 at the per-unit rate
+                                a10 = q10 * perUnitRateForFirst10;
+                            }
+                            else
+                            {
+                                // Normal case — first 10 cubic meters charged at MinRate
+                                a10 = q10 > 0 ? minRate : 0;
+                            }
+
                             decimal a20 = q20 * rate11_20;
                             decimal a30 = q30 * rate21_30;
                             decimal a40 = q40 * rate31_40;
@@ -2554,5 +2567,17 @@ ORDER BY b.BillNo DESC;
             // Example: Show in a label
             totalPaidAmountTextBox.Text = total.ToString("N2");
         }
+
+        private void initialBillingCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Recalculate the billing based on the new checkbox state
+            // Make sure you have the current serviceId and totalConsumption stored somewhere accessible
+            if (int.TryParse(serviceIDLabel.Text, out int serviceId) &&
+                int.TryParse(totalQuantityLabel.Text, out int totalConsumption))
+            {
+                PopulateServiceRateLabels(serviceId, totalConsumption);
+            }
+        }
+
     }
 }
