@@ -157,8 +157,7 @@ namespace IGBARAS_WATER_DISTRICT
 
             try
             {
-                // Save billing record to database
-                //UpdateBillingRecord();
+
                 InsertIntoPayments();
 
                 //LoadPayments();
@@ -816,12 +815,12 @@ namespace IGBARAS_WATER_DISTRICT
                     ORNumber, CurrentBillNo, AccountNo, PaymentDate, PaymentType, ArrearsAmount, ArrearsPenalty, TotalArrears, 
                     BillCharge, TaxAmount, TotalCurrent, CheckNumber, BankName, BankAccountNumber, DateIssued, 
                     CheckAmount, CashAmount, AmountPaid, [Net Bill Charge], Balance, DiscountName, DiscountAmount, 
-                    Penalty, ServiceConnectionFee, Remarks, OthersAmount1, UserID, FreeWater, SCFBalance, TotalPenalty, TotalAmountPaid
+                    Penalty, ServiceConnectionFee, Remarks, OthersAmount, UserID, FreeWater, SCFBalance, TotalPenalty, TotalAmountPaid
                 ) VALUES (
                     @ORNumber, @CurrentBillNo, @AccountNo, @PaymentDate, @PaymentType, @ArrearsAmount, @ArrearsPenalty, @TotalArrears, 
                     @BillCharge, @TaxAmount, @TotalCurrent, @CheckNumber, @BankName, @BankAccountNumber, @DateIssued, 
                     @CheckAmount, @CashAmount, @AmountPaid, @NetBillCharge, @Balance, @DiscountName, @DiscountAmount, 
-                    @Penalty, @ServiceConnectionFee, @Remarks, @OthersAmount1, @UserID, @FreeWater, @SCFBalance, @TotalPenalty, @TotalAmountPaid
+                    @Penalty, @ServiceConnectionFee, @Remarks, @OthersAmount, @UserID, @FreeWater, @SCFBalance, @TotalPenalty, @TotalAmountPaid
                 )";
 
                     using (var insertCmd = new OleDbCommand(insertQuery, connection))
@@ -863,7 +862,9 @@ namespace IGBARAS_WATER_DISTRICT
                         insertCmd.Parameters.AddWithValue("@Penalty", penaltyAmount);
                         insertCmd.Parameters.AddWithValue("@ServiceConnectionFee", decimal.Parse(collectionSCFTextBox.Text.Replace(",", "")));
                         insertCmd.Parameters.AddWithValue("@Remarks", remarksTextBox.Text.Trim() == "📝 Remarks" ? "" : remarksTextBox.Text.Trim());
-                        insertCmd.Parameters.AddWithValue("@OthersAmount1", decimal.Parse(paymentFroOthersLabel.Text.Replace(",", "")));
+                        insertCmd.Parameters.AddWithValue("@OthersAmount", decimal.Parse(paymentFroOthersLabel.Text.Replace(",", "")));
+                        Debug.Write(insertCmd);
+
                         insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
                         insertCmd.Parameters.AddWithValue("@FreeWater", int.Parse(freeWaterLabel.Text.Trim()));
                         insertCmd.Parameters.AddWithValue("@SCFBalance", SCFbalance);

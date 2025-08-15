@@ -135,7 +135,7 @@ namespace IGBARAS_WATER_DISTRICT
                 "Tb_Payments",
                 new string[] {"PaymentID", "ORNumber", "CurrentBillNo", "PaymentDate", "AccountNo", "PaymentType", "ArrearsAmount", "ArrearsPenalty",
                     "TotalArrears", "BillCharge",  "TaxAmount", "DiscountAmount", "TotalCurrent", "AmountPaid", "Penalty", "[Net Bill Charge]", 
-                    "Balance", "Remarks", "FreeWater"}
+                    "Balance", "Remarks", "FreeWater", "[OthersAmount]", "SCFBalance", "TotalPenalty","ServiceConnectionFee" }
             );
         }
 
