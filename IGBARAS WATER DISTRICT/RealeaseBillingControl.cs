@@ -957,20 +957,23 @@ SELECT
     (b.PresentReading - b.PrevReading) AS [Meter Consumed(m³)],
     b.DueDate AS [Due Date],
     b.FreeWater AS [Free Water],
-    b.TotalSCF AS [SCF],
+
     b.AmountBilled AS [Amount Billed],
     IIF(b.Is_FullyPaid = True, 'Fully Paid',
-        IIF(b.Is_PartiallyPaid = True, 'Partially Paid', 'Unpaid')) AS [Status],
-    p.Balance,
-    p.SCFBalance
+        IIF(b.Is_PartiallyPaid = True, 'Partially Paid', 'Unpaid')) AS [Billing Status],
+    p.Balance AS [Billing Balance],
+
+    b.TotalSCF AS [SCF],
+    IIF(b.Is_SCFPaid = True, 'Fully Paid',
+        IIF(b.Is_SCFPartiallyPaid = True, 'Partially Paid', 'Unpaid')) AS [SCF Status],
+    p.SCFBalance AS [SCF Balance]
+
 FROM Tb_Billing AS b
 LEFT JOIN Tb_Payments AS p
     ON b.BillNo = p.CurrentBillNo
 WHERE b.AccountNo = ?
 ORDER BY b.BillNo DESC;
-
-
-        ";
+";
 
             try
             {
@@ -990,33 +993,20 @@ ORDER BY b.BillNo DESC;
 
                             billDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-                            // Highlight the text color of Status column only
+                            // Loop through each row to apply colors
                             foreach (DataGridViewRow row in billDataGridView.Rows)
                             {
                                 if (row.IsNewRow) continue;
 
-                                var statusCell = row.Cells["Status"];
-                                string status = statusCell.Value?.ToString()?.Trim();
+                                // Billing status coloring
+                                var billingStatusCell = row.Cells["Billing Status"];
+                                string billingStatus = billingStatusCell.Value?.ToString()?.Trim();
+                                ApplyStatusColor(billingStatusCell, billingStatus);
 
-                                if (status == "Fully Paid")
-                                {
-                                    statusCell.Style.ForeColor = Color.Green;
-                                    statusCell.Style.Font = new Font("Segoe UI", 9, FontStyle.Bold);
-                                }
-                                else if (status == "Partially Paid")
-                                {
-                                    statusCell.Style.ForeColor = Color.OrangeRed;
-                                    statusCell.Style.Font = new Font("Segoe UI", 9, FontStyle.Bold);
-                                }
-                                else if (status == "Unpaid")
-                                {
-                                    statusCell.Style.ForeColor = Color.DarkRed;
-                                    statusCell.Style.Font = new Font("Segoe UI", 9, FontStyle.Bold);
-                                }
-                                else
-                                {
-                                    statusCell.Style.ForeColor = billDataGridView.DefaultCellStyle.ForeColor;
-                                }
+                                // SCF status coloring
+                                var scfStatusCell = row.Cells["SCF Status"];
+                                string scfStatus = scfStatusCell.Value?.ToString()?.Trim();
+                                ApplyStatusColor(scfStatusCell, scfStatus);
                             }
                         }
                     }
@@ -1028,7 +1018,28 @@ ORDER BY b.BillNo DESC;
             }
         }
 
-
+        private void ApplyStatusColor(DataGridViewCell cell, string status)
+        {
+            if (status == "Fully Paid")
+            {
+                cell.Style.ForeColor = Color.Green;
+                cell.Style.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            }
+            else if (status == "Partially Paid")
+            {
+                cell.Style.ForeColor = Color.OrangeRed;
+                cell.Style.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            }
+            else if (status == "Unpaid")
+            {
+                cell.Style.ForeColor = Color.DarkRed;
+                cell.Style.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            }
+            else
+            {
+                cell.Style.ForeColor = billDataGridView.DefaultCellStyle.ForeColor;
+            }
+        }
 
 
 
@@ -1832,26 +1843,35 @@ ORDER BY b.BillNo DESC;
                     connection.Open();
 
                     string query = @"
-                        SELECT 
-                            p.ORNumber AS [OR No],
-                            b.BillNo AS [Bill No],
-                            p.AccountNo AS [Account No],
-                            p.PaymentDate AS [Payment Date],
-                            p.AmountPaid AS [Amount Paid],
-                            p.Balance AS [Balance],
-                            b.DueDate AS [Due Date],
-                            IIF(b.Is_FullyPaid = True, 'Fully Paid',
-                                IIF(b.Is_PartiallyPaid = True, 'Partially Paid', 'Unpaid')) AS [Status]
-                        FROM 
-                            Tb_Payments AS p
-                        INNER JOIN 
-                            Tb_Billing AS b ON p.CurrentBillNo = b.BillNo
-                        WHERE 
-                            FORMAT(p.PaymentDate, 'yyyy-mm-dd') = FORMAT(Date(), 'yyyy-mm-dd')
-                            AND (b.Is_FullyPaid = True OR b.Is_PartiallyPaid = True)
-                        ORDER BY 
-                            p.ORNumber DESC;
-                        ";
+                SELECT 
+                    p.ORNumber AS [OR No],
+                    b.BillNo AS [Bill No],
+                    p.AccountNo AS [Account No],
+                    p.PaymentDate AS [Payment Date],
+
+                    p.TotalAmountPaid AS [Amount Paid],
+                    p.Balance AS [Billing Balance],
+                    IIF(b.Is_FullyPaid = True, 'Fully Paid',
+                        IIF(b.Is_PartiallyPaid = True, 'Partially Paid', 'Unpaid')) AS [Billing Status],
+
+                    p.SCFBalance AS [SCF Balance],
+                    IIF(b.Is_SCFPaid = True, 'Fully Paid',
+                        IIF(b.Is_SCFPartiallyPaid = True, 'Partially Paid', 'Unpaid')) AS [SCF Status],
+
+                    b.DueDate AS [Due Date]
+                FROM 
+                    Tb_Payments AS p
+                INNER JOIN 
+                    Tb_Billing AS b ON p.CurrentBillNo = b.BillNo
+                WHERE 
+                    FORMAT(p.PaymentDate, 'yyyy-mm-dd') = FORMAT(Date(), 'yyyy-mm-dd')
+                    AND (
+                        b.Is_FullyPaid = True OR b.Is_PartiallyPaid = True
+                        OR b.Is_SCFPaid = True OR b.Is_SCFPartiallyPaid = True
+                    )
+                ORDER BY 
+                    p.ORNumber DESC;
+                ";
 
                     using (var adapter = new OleDbDataAdapter(query, connection))
                     {
@@ -1860,7 +1880,7 @@ ORDER BY b.BillNo DESC;
                         paymentsOnThisDayDataGridView.DataSource = dataTable;
 
                         FormatDataGridView(paymentsOnThisDayDataGridView);
-                        HighlightPaymentStatus();
+                        HighlightPaymentStatuses();
                     }
                 }
             }
@@ -1870,38 +1890,25 @@ ORDER BY b.BillNo DESC;
             }
         }
 
-
-
-
-
-
-
-
-        private void HighlightPaymentStatus()
+        private void HighlightPaymentStatuses()
         {
             foreach (DataGridViewRow row in paymentsOnThisDayDataGridView.Rows)
             {
                 if (row.IsNewRow) continue;
 
-                var statusCell = row.Cells["Status"];
-                string status = statusCell.Value?.ToString()?.Trim();
+                // Billing status coloring
+                var billingStatusCell = row.Cells["Billing Status"];
+                string billingStatus = billingStatusCell.Value?.ToString()?.Trim();
+                ApplyStatusColor(billingStatusCell, billingStatus);
 
-                if (status == "Partially Paid")
-                {
-                    statusCell.Style.ForeColor = Color.Red;
-                }
-                else if (status == "Fully Paid")
-                {
-                    statusCell.Style.ForeColor = Color.Green;
-                }
-                else
-                {
-                    // Optional: Reset to default if needed
-                    statusCell.Style.BackColor = paymentsOnThisDayDataGridView.DefaultCellStyle.BackColor;
-                    statusCell.Style.ForeColor = paymentsOnThisDayDataGridView.DefaultCellStyle.ForeColor;
-                }
+                // SCF status coloring
+                var scfStatusCell = row.Cells["SCF Status"];
+                string scfStatus = scfStatusCell.Value?.ToString()?.Trim();
+                ApplyStatusColor(scfStatusCell, scfStatus);
             }
         }
+
+
 
 
 

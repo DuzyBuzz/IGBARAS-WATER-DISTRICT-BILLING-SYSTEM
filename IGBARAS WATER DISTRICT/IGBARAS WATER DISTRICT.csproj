@@ -128,7 +128,6 @@
     <Compile Include="Reports\AgingOfSCFReport.cs">
       <DependentUpon>AgingOfSCFReport.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DesignTime>True</DesignTime>
     </Compile>

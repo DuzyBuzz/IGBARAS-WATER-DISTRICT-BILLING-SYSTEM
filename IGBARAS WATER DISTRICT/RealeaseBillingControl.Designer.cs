@@ -178,6 +178,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.label69 = new System.Windows.Forms.Label();
             this.label65 = new System.Windows.Forms.Label();
             this.withHoldingTaxPercentLabel = new System.Windows.Forms.Label();
+            this.scfArrearsLabel = new System.Windows.Forms.Label();
+            this.currentSCFLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
             this.subTotalAmountDueLabel = new System.Windows.Forms.Label();
             this.label87 = new System.Windows.Forms.Label();
@@ -231,6 +233,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label80 = new System.Windows.Forms.Label();
             this.tableLayoutPanel46 = new System.Windows.Forms.TableLayoutPanel();
             this.label70 = new System.Windows.Forms.Label();
+            this.collectionAccountNoLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel45 = new System.Windows.Forms.TableLayoutPanel();
             this.label66 = new System.Windows.Forms.Label();
             this.collectionNameLabel = new System.Windows.Forms.Label();
@@ -281,9 +284,17 @@ namespace IGBARAS_WATER_DISTRICT
             this.bankNameTextBox = new System.Windows.Forms.TextBox();
             this.checkNumberTextBox = new System.Windows.Forms.TextBox();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.totalAmountBilledBalanceLabel = new System.Windows.Forms.Label();
+            this.label72 = new System.Windows.Forms.Label();
+            this.label68 = new System.Windows.Forms.Label();
+            this.totalAmountDueLabel2 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.paymentForBillingTextBox = new System.Windows.Forms.TextBox();
+            this.paymentForSCFTextBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.arrearsPenaltyAmountLabel = new System.Windows.Forms.Label();
-            this.penaltyAmountLabel2 = new System.Windows.Forms.Label();
+            this.paymentFroOthersLabel = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
             this.tableLayoutPanel53 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel54 = new System.Windows.Forms.TableLayoutPanel();
@@ -298,7 +309,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.billPaidButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel50 = new System.Windows.Forms.TableLayoutPanel();
             this.label118 = new System.Windows.Forms.Label();
-            this.totalAmountDueLabel2 = new System.Windows.Forms.Label();
+            this.penaltyAmountLabel2 = new System.Windows.Forms.Label();
             this.totalPlusSFCOthersLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel57 = new System.Windows.Forms.TableLayoutPanel();
             this.label120 = new System.Windows.Forms.Label();
@@ -329,7 +340,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel51 = new System.Windows.Forms.TableLayoutPanel();
             this.label128 = new System.Windows.Forms.Label();
             this.discountedAmountLabel2 = new System.Windows.Forms.Label();
-            this.dueExemptLabel2 = new System.Windows.Forms.Label();
             this.discountedPercentLabel2 = new System.Windows.Forms.Label();
             this.label129 = new System.Windows.Forms.Label();
             this.label130 = new System.Windows.Forms.Label();
@@ -343,6 +353,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label132 = new System.Windows.Forms.Label();
             this.withHoldingTaxPercentLabel2 = new System.Windows.Forms.Label();
             this.totalSCFAmountLabel2 = new System.Windows.Forms.Label();
+            this.dueExemptLabel2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel55 = new System.Windows.Forms.TableLayoutPanel();
             this.subTotalAmountDueLabel2 = new System.Windows.Forms.Label();
             this.label185 = new System.Windows.Forms.Label();
@@ -376,6 +387,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SCF = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.freeWaterLabel = new System.Windows.Forms.Label();
             this.userIDLabel = new System.Windows.Forms.Label();
             this.concessionaireIDLabel = new System.Windows.Forms.Label();
             this.dateBilledLabel2 = new System.Windows.Forms.Label();
@@ -395,18 +407,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.label71 = new System.Windows.Forms.Label();
             this.billDataGridView = new System.Windows.Forms.DataGridView();
             this.billdataTextBox = new System.Windows.Forms.TextBox();
-            this.scfArrearsLabel = new System.Windows.Forms.Label();
-            this.currentSCFLabel = new System.Windows.Forms.Label();
-            this.freeWaterLabel = new System.Windows.Forms.Label();
-            this.collectionAccountNoLabel = new System.Windows.Forms.Label();
-            this.paymentForSCFTextBox = new System.Windows.Forms.TextBox();
-            this.paymentForBillingTextBox = new System.Windows.Forms.TextBox();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label60 = new System.Windows.Forms.Label();
-            this.label68 = new System.Windows.Forms.Label();
-            this.paymentFroOthersLabel = new System.Windows.Forms.Label();
-            this.label72 = new System.Windows.Forms.Label();
-            this.totalAmountBilledBalanceLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel14.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel24.SuspendLayout();
@@ -953,8 +953,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel18.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel18.Name = "tableLayoutPanel18";
             this.tableLayoutPanel18.RowCount = 1;
-            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 71F));
+            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 71F));
             this.tableLayoutPanel18.Size = new System.Drawing.Size(356, 50);
             this.tableLayoutPanel18.TabIndex = 1;
             // 
@@ -965,7 +965,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label33.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label33.Location = new System.Drawing.Point(4, 1);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(134, 70);
+            this.label33.Size = new System.Drawing.Size(134, 71);
             this.label33.TabIndex = 0;
             this.label33.Text = "Item Description/\r\nNature of Service";
             this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -976,7 +976,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label28.Location = new System.Drawing.Point(145, 1);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(64, 70);
+            this.label28.Size = new System.Drawing.Size(64, 71);
             this.label28.TabIndex = 1;
             this.label28.Text = "Qty";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -987,7 +987,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label29.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label29.Location = new System.Drawing.Point(216, 1);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(64, 70);
+            this.label29.Size = new System.Drawing.Size(64, 71);
             this.label29.TabIndex = 2;
             this.label29.Text = "Unit\r\nPrice";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -998,7 +998,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label30.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label30.Location = new System.Drawing.Point(287, 1);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(65, 70);
+            this.label30.Size = new System.Drawing.Size(65, 71);
             this.label30.TabIndex = 3;
             this.label30.Text = "Amount";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2336,6 +2336,28 @@ namespace IGBARAS_WATER_DISTRICT
             this.withHoldingTaxPercentLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.withHoldingTaxPercentLabel.Visible = false;
             // 
+            // scfArrearsLabel
+            // 
+            this.scfArrearsLabel.AutoSize = true;
+            this.scfArrearsLabel.Location = new System.Drawing.Point(145, 89);
+            this.scfArrearsLabel.Name = "scfArrearsLabel";
+            this.scfArrearsLabel.Size = new System.Drawing.Size(28, 14);
+            this.scfArrearsLabel.TabIndex = 40;
+            this.scfArrearsLabel.Text = "0.00";
+            this.scfArrearsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.scfArrearsLabel.Visible = false;
+            // 
+            // currentSCFLabel
+            // 
+            this.currentSCFLabel.AutoSize = true;
+            this.currentSCFLabel.Location = new System.Drawing.Point(216, 89);
+            this.currentSCFLabel.Name = "currentSCFLabel";
+            this.currentSCFLabel.Size = new System.Drawing.Size(28, 14);
+            this.currentSCFLabel.TabIndex = 41;
+            this.currentSCFLabel.Text = "0.00";
+            this.currentSCFLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.currentSCFLabel.Visible = false;
+            // 
             // tableLayoutPanel22
             // 
             this.tableLayoutPanel22.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
@@ -2912,7 +2934,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel41.ColumnCount = 3;
             this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85.71429F));
             this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
             this.tableLayoutPanel41.Controls.Add(this.orNumberTextBox, 2, 0);
             this.tableLayoutPanel41.Controls.Add(this.label52, 1, 0);
             this.tableLayoutPanel41.Controls.Add(this.label51, 0, 0);
@@ -2930,10 +2952,10 @@ namespace IGBARAS_WATER_DISTRICT
             this.orNumberTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.orNumberTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.orNumberTextBox.ForeColor = System.Drawing.Color.Red;
-            this.orNumberTextBox.Location = new System.Drawing.Point(330, 0);
+            this.orNumberTextBox.Location = new System.Drawing.Point(329, 0);
             this.orNumberTextBox.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
             this.orNumberTextBox.Name = "orNumberTextBox";
-            this.orNumberTextBox.Size = new System.Drawing.Size(90, 18);
+            this.orNumberTextBox.Size = new System.Drawing.Size(91, 18);
             this.orNumberTextBox.TabIndex = 48;
             this.orNumberTextBox.Text = "00000000";
             this.orNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -2943,7 +2965,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label52.AutoSize = true;
             this.label52.Dock = System.Windows.Forms.DockStyle.Left;
             this.label52.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label52.Location = new System.Drawing.Point(286, 0);
+            this.label52.Location = new System.Drawing.Point(285, 0);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(24, 17);
             this.label52.TabIndex = 3;
@@ -2967,7 +2989,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel42.ColumnCount = 3;
             this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.76744F));
             this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.23256F));
-            this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
+            this.tableLayoutPanel42.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
             this.tableLayoutPanel42.Controls.Add(this.label56, 1, 0);
             this.tableLayoutPanel42.Controls.Add(this.paymentDateLabel, 2, 0);
             this.tableLayoutPanel42.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2996,7 +3018,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.paymentDateLabel.AutoSize = true;
             this.paymentDateLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.paymentDateLabel.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentDateLabel.Location = new System.Drawing.Point(310, 0);
+            this.paymentDateLabel.Location = new System.Drawing.Point(309, 0);
             this.paymentDateLabel.Name = "paymentDateLabel";
             this.paymentDateLabel.Size = new System.Drawing.Size(82, 14);
             this.paymentDateLabel.TabIndex = 5;
@@ -3090,6 +3112,15 @@ namespace IGBARAS_WATER_DISTRICT
             this.label70.TabIndex = 9;
             this.label70.Text = "TIN:";
             this.label70.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // collectionAccountNoLabel
+            // 
+            this.collectionAccountNoLabel.AutoSize = true;
+            this.collectionAccountNoLabel.Location = new System.Drawing.Point(150, 0);
+            this.collectionAccountNoLabel.Name = "collectionAccountNoLabel";
+            this.collectionAccountNoLabel.Size = new System.Drawing.Size(0, 17);
+            this.collectionAccountNoLabel.TabIndex = 10;
+            this.collectionAccountNoLabel.Visible = false;
             // 
             // tableLayoutPanel45
             // 
@@ -3521,7 +3552,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.410256F));
             this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 93.58974F));
             this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 149F));
-            this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146F));
+            this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
             this.tableLayoutPanel62.Controls.Add(this.label40, 0, 0);
             this.tableLayoutPanel62.Controls.Add(this.label158, 1, 0);
             this.tableLayoutPanel62.Controls.Add(this.label162, 3, 2);
@@ -3568,9 +3599,9 @@ namespace IGBARAS_WATER_DISTRICT
             this.label162.AutoSize = true;
             this.label162.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label162.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label162.Location = new System.Drawing.Point(280, 34);
+            this.label162.Location = new System.Drawing.Point(279, 34);
             this.label162.Name = "label162";
-            this.label162.Size = new System.Drawing.Size(141, 19);
+            this.label162.Size = new System.Drawing.Size(142, 19);
             this.label162.TabIndex = 28;
             this.label162.Text = "COLLECTING OFFICER";
             this.label162.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3580,9 +3611,9 @@ namespace IGBARAS_WATER_DISTRICT
             this.collectingOfficerNameLabel.AutoSize = true;
             this.collectingOfficerNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.collectingOfficerNameLabel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.collectingOfficerNameLabel.Location = new System.Drawing.Point(280, 14);
+            this.collectingOfficerNameLabel.Location = new System.Drawing.Point(279, 14);
             this.collectingOfficerNameLabel.Name = "collectingOfficerNameLabel";
-            this.collectingOfficerNameLabel.Size = new System.Drawing.Size(141, 20);
+            this.collectingOfficerNameLabel.Size = new System.Drawing.Size(142, 20);
             this.collectingOfficerNameLabel.TabIndex = 29;
             this.collectingOfficerNameLabel.Text = "Marry De La Cruz";
             this.collectingOfficerNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3592,7 +3623,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label161.AutoSize = true;
             this.label161.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label161.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label161.Location = new System.Drawing.Point(131, 14);
+            this.label161.Location = new System.Drawing.Point(130, 14);
             this.label161.Name = "label161";
             this.label161.Size = new System.Drawing.Size(143, 20);
             this.label161.TabIndex = 27;
@@ -3612,7 +3643,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel64.Name = "tableLayoutPanel64";
             this.tableLayoutPanel64.RowCount = 1;
             this.tableLayoutPanel64.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel64.Size = new System.Drawing.Size(120, 20);
+            this.tableLayoutPanel64.Size = new System.Drawing.Size(119, 20);
             this.tableLayoutPanel64.TabIndex = 31;
             // 
             // cashCheckBox
@@ -3654,7 +3685,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel65.Name = "tableLayoutPanel65";
             this.tableLayoutPanel65.RowCount = 1;
             this.tableLayoutPanel65.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel65.Size = new System.Drawing.Size(120, 19);
+            this.tableLayoutPanel65.Size = new System.Drawing.Size(119, 19);
             this.tableLayoutPanel65.TabIndex = 32;
             // 
             // checkCheckBox
@@ -3790,6 +3821,98 @@ namespace IGBARAS_WATER_DISTRICT
             this.panel6.Size = new System.Drawing.Size(390, 523);
             this.panel6.TabIndex = 50;
             // 
+            // totalAmountBilledBalanceLabel
+            // 
+            this.totalAmountBilledBalanceLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.totalAmountBilledBalanceLabel.AutoSize = true;
+            this.totalAmountBilledBalanceLabel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalAmountBilledBalanceLabel.Location = new System.Drawing.Point(318, 426);
+            this.totalAmountBilledBalanceLabel.Name = "totalAmountBilledBalanceLabel";
+            this.totalAmountBilledBalanceLabel.Size = new System.Drawing.Size(31, 15);
+            this.totalAmountBilledBalanceLabel.TabIndex = 57;
+            this.totalAmountBilledBalanceLabel.Text = "0.00";
+            this.totalAmountBilledBalanceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label72
+            // 
+            this.label72.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label72.AutoSize = true;
+            this.label72.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label72.Location = new System.Drawing.Point(236, 426);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(76, 15);
+            this.label72.TabIndex = 56;
+            this.label72.Text = "Bill Balance:";
+            // 
+            // label68
+            // 
+            this.label68.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label68.AutoSize = true;
+            this.label68.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label68.Location = new System.Drawing.Point(10, 427);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(118, 15);
+            this.label68.TabIndex = 55;
+            this.label68.Text = "Total Amount Billed:";
+            // 
+            // totalAmountDueLabel2
+            // 
+            this.totalAmountDueLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.totalAmountDueLabel2.AutoSize = true;
+            this.totalAmountDueLabel2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalAmountDueLabel2.Location = new System.Drawing.Point(130, 426);
+            this.totalAmountDueLabel2.Name = "totalAmountDueLabel2";
+            this.totalAmountDueLabel2.Size = new System.Drawing.Size(31, 15);
+            this.totalAmountDueLabel2.TabIndex = 34;
+            this.totalAmountDueLabel2.Text = "0.00";
+            this.totalAmountDueLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label60
+            // 
+            this.label60.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label60.AutoSize = true;
+            this.label60.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label60.Location = new System.Drawing.Point(10, 495);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(133, 16);
+            this.label60.TabIndex = 54;
+            this.label60.Text = "Payment for Billing:";
+            // 
+            // label38
+            // 
+            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Location = new System.Drawing.Point(10, 460);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(118, 16);
+            this.label38.TabIndex = 53;
+            this.label38.Text = "Payment for SCF:";
+            // 
+            // paymentForBillingTextBox
+            // 
+            this.paymentForBillingTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.paymentForBillingTextBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paymentForBillingTextBox.Location = new System.Drawing.Point(147, 491);
+            this.paymentForBillingTextBox.Name = "paymentForBillingTextBox";
+            this.paymentForBillingTextBox.Size = new System.Drawing.Size(135, 26);
+            this.paymentForBillingTextBox.TabIndex = 52;
+            this.paymentForBillingTextBox.TextChanged += new System.EventHandler(this.paymentForBillingTextBox_TextChanged);
+            this.paymentForBillingTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentForBillingTextBox_KeyDown);
+            // 
+            // paymentForSCFTextBox
+            // 
+            this.paymentForSCFTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.paymentForSCFTextBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paymentForSCFTextBox.Location = new System.Drawing.Point(147, 456);
+            this.paymentForSCFTextBox.Name = "paymentForSCFTextBox";
+            this.paymentForSCFTextBox.Size = new System.Drawing.Size(135, 26);
+            this.paymentForSCFTextBox.TabIndex = 51;
+            this.paymentForSCFTextBox.TextChanged += new System.EventHandler(this.paymentForSCFTextBox_TextChanged);
+            this.paymentForSCFTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentForSCFTextBox_KeyDown);
+            // 
             // tableLayoutPanel12
             // 
             this.tableLayoutPanel12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -3822,16 +3945,16 @@ namespace IGBARAS_WATER_DISTRICT
             this.arrearsPenaltyAmountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.arrearsPenaltyAmountLabel.Visible = false;
             // 
-            // penaltyAmountLabel2
+            // paymentFroOthersLabel
             // 
-            this.penaltyAmountLabel2.AutoSize = true;
-            this.penaltyAmountLabel2.Location = new System.Drawing.Point(152, 1);
-            this.penaltyAmountLabel2.Name = "penaltyAmountLabel2";
-            this.penaltyAmountLabel2.Size = new System.Drawing.Size(31, 15);
-            this.penaltyAmountLabel2.TabIndex = 33;
-            this.penaltyAmountLabel2.Text = "0.00";
-            this.penaltyAmountLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.penaltyAmountLabel2.Visible = false;
+            this.paymentFroOthersLabel.AutoSize = true;
+            this.paymentFroOthersLabel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.paymentFroOthersLabel.Location = new System.Drawing.Point(340, 1);
+            this.paymentFroOthersLabel.Name = "paymentFroOthersLabel";
+            this.paymentFroOthersLabel.Size = new System.Drawing.Size(31, 15);
+            this.paymentFroOthersLabel.TabIndex = 33;
+            this.paymentFroOthersLabel.Text = "0.00";
+            this.paymentFroOthersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label82
             // 
@@ -3921,8 +4044,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel56.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel56.Name = "tableLayoutPanel56";
             this.tableLayoutPanel56.RowCount = 1;
-            this.tableLayoutPanel56.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 78F));
-            this.tableLayoutPanel56.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 78F));
+            this.tableLayoutPanel56.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 79F));
+            this.tableLayoutPanel56.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 79F));
             this.tableLayoutPanel56.Size = new System.Drawing.Size(373, 58);
             this.tableLayoutPanel56.TabIndex = 1;
             // 
@@ -3933,7 +4056,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label86.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label86.Location = new System.Drawing.Point(4, 1);
             this.label86.Name = "label86";
-            this.label86.Size = new System.Drawing.Size(141, 78);
+            this.label86.Size = new System.Drawing.Size(141, 79);
             this.label86.TabIndex = 0;
             this.label86.Text = "Item Description/\r\nNature of Service";
             this.label86.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3944,7 +4067,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label90.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label90.Location = new System.Drawing.Point(152, 1);
             this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(67, 78);
+            this.label90.Size = new System.Drawing.Size(67, 79);
             this.label90.TabIndex = 1;
             this.label90.Text = "Qty";
             this.label90.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3955,7 +4078,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label91.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label91.Location = new System.Drawing.Point(226, 1);
             this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(67, 78);
+            this.label91.Size = new System.Drawing.Size(67, 79);
             this.label91.TabIndex = 2;
             this.label91.Text = "Unit\r\nPrice";
             this.label91.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3966,7 +4089,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label95.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label95.Location = new System.Drawing.Point(300, 1);
             this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(69, 78);
+            this.label95.Size = new System.Drawing.Size(69, 79);
             this.label95.TabIndex = 3;
             this.label95.Text = "Amount";
             this.label95.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4031,17 +4154,16 @@ namespace IGBARAS_WATER_DISTRICT
             this.label118.Text = "TOTAL AMOUNT DUE";
             this.label118.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // totalAmountDueLabel2
+            // penaltyAmountLabel2
             // 
-            this.totalAmountDueLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.totalAmountDueLabel2.AutoSize = true;
-            this.totalAmountDueLabel2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalAmountDueLabel2.Location = new System.Drawing.Point(130, 426);
-            this.totalAmountDueLabel2.Name = "totalAmountDueLabel2";
-            this.totalAmountDueLabel2.Size = new System.Drawing.Size(31, 15);
-            this.totalAmountDueLabel2.TabIndex = 34;
-            this.totalAmountDueLabel2.Text = "0.00";
-            this.totalAmountDueLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.penaltyAmountLabel2.AutoSize = true;
+            this.penaltyAmountLabel2.Location = new System.Drawing.Point(152, 1);
+            this.penaltyAmountLabel2.Name = "penaltyAmountLabel2";
+            this.penaltyAmountLabel2.Size = new System.Drawing.Size(31, 15);
+            this.penaltyAmountLabel2.TabIndex = 33;
+            this.penaltyAmountLabel2.Text = "0.00";
+            this.penaltyAmountLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.penaltyAmountLabel2.Visible = false;
             // 
             // totalPlusSFCOthersLabel
             // 
@@ -4441,16 +4563,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.discountedAmountLabel2.Text = "0.00";
             this.discountedAmountLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // dueExemptLabel2
-            // 
-            this.dueExemptLabel2.AutoSize = true;
-            this.dueExemptLabel2.Location = new System.Drawing.Point(228, 19);
-            this.dueExemptLabel2.Name = "dueExemptLabel2";
-            this.dueExemptLabel2.Size = new System.Drawing.Size(14, 15);
-            this.dueExemptLabel2.TabIndex = 36;
-            this.dueExemptLabel2.Text = "0";
-            this.dueExemptLabel2.Visible = false;
-            // 
             // discountedPercentLabel2
             // 
             this.discountedPercentLabel2.AutoSize = true;
@@ -4596,6 +4708,16 @@ namespace IGBARAS_WATER_DISTRICT
             this.totalSCFAmountLabel2.Size = new System.Drawing.Size(31, 18);
             this.totalSCFAmountLabel2.TabIndex = 38;
             this.totalSCFAmountLabel2.Text = "0.00";
+            // 
+            // dueExemptLabel2
+            // 
+            this.dueExemptLabel2.AutoSize = true;
+            this.dueExemptLabel2.Location = new System.Drawing.Point(228, 19);
+            this.dueExemptLabel2.Name = "dueExemptLabel2";
+            this.dueExemptLabel2.Size = new System.Drawing.Size(14, 15);
+            this.dueExemptLabel2.TabIndex = 36;
+            this.dueExemptLabel2.Text = "0";
+            this.dueExemptLabel2.Visible = false;
             // 
             // tableLayoutPanel55
             // 
@@ -5060,6 +5182,16 @@ namespace IGBARAS_WATER_DISTRICT
             this.panel2.Size = new System.Drawing.Size(1292, 317);
             this.panel2.TabIndex = 1;
             // 
+            // freeWaterLabel
+            // 
+            this.freeWaterLabel.AutoSize = true;
+            this.freeWaterLabel.Location = new System.Drawing.Point(355, 10);
+            this.freeWaterLabel.Name = "freeWaterLabel";
+            this.freeWaterLabel.Size = new System.Drawing.Size(54, 13);
+            this.freeWaterLabel.TabIndex = 55;
+            this.freeWaterLabel.Text = "freeWater";
+            this.freeWaterLabel.Visible = false;
+            // 
             // userIDLabel
             // 
             this.userIDLabel.AutoSize = true;
@@ -5188,7 +5320,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.paymentsOnThisDayDataGridView.AllowUserToDeleteRows = false;
             this.paymentsOnThisDayDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.paymentsOnThisDayDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.paymentsOnThisDayDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.paymentsOnThisDayDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.paymentsOnThisDayDataGridView.BackgroundColor = System.Drawing.Color.White;
             this.paymentsOnThisDayDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -5287,138 +5419,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.billdataTextBox.Size = new System.Drawing.Size(193, 150);
             this.billdataTextBox.TabIndex = 27;
             this.billdataTextBox.Visible = false;
-            // 
-            // scfArrearsLabel
-            // 
-            this.scfArrearsLabel.AutoSize = true;
-            this.scfArrearsLabel.Location = new System.Drawing.Point(145, 89);
-            this.scfArrearsLabel.Name = "scfArrearsLabel";
-            this.scfArrearsLabel.Size = new System.Drawing.Size(28, 14);
-            this.scfArrearsLabel.TabIndex = 40;
-            this.scfArrearsLabel.Text = "0.00";
-            this.scfArrearsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.scfArrearsLabel.Visible = false;
-            // 
-            // currentSCFLabel
-            // 
-            this.currentSCFLabel.AutoSize = true;
-            this.currentSCFLabel.Location = new System.Drawing.Point(216, 89);
-            this.currentSCFLabel.Name = "currentSCFLabel";
-            this.currentSCFLabel.Size = new System.Drawing.Size(28, 14);
-            this.currentSCFLabel.TabIndex = 41;
-            this.currentSCFLabel.Text = "0.00";
-            this.currentSCFLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.currentSCFLabel.Visible = false;
-            // 
-            // freeWaterLabel
-            // 
-            this.freeWaterLabel.AutoSize = true;
-            this.freeWaterLabel.Location = new System.Drawing.Point(355, 10);
-            this.freeWaterLabel.Name = "freeWaterLabel";
-            this.freeWaterLabel.Size = new System.Drawing.Size(54, 13);
-            this.freeWaterLabel.TabIndex = 55;
-            this.freeWaterLabel.Text = "freeWater";
-            this.freeWaterLabel.Visible = false;
-            // 
-            // collectionAccountNoLabel
-            // 
-            this.collectionAccountNoLabel.AutoSize = true;
-            this.collectionAccountNoLabel.Location = new System.Drawing.Point(150, 0);
-            this.collectionAccountNoLabel.Name = "collectionAccountNoLabel";
-            this.collectionAccountNoLabel.Size = new System.Drawing.Size(0, 17);
-            this.collectionAccountNoLabel.TabIndex = 10;
-            this.collectionAccountNoLabel.Visible = false;
-            // 
-            // paymentForSCFTextBox
-            // 
-            this.paymentForSCFTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.paymentForSCFTextBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentForSCFTextBox.Location = new System.Drawing.Point(147, 456);
-            this.paymentForSCFTextBox.Name = "paymentForSCFTextBox";
-            this.paymentForSCFTextBox.Size = new System.Drawing.Size(135, 26);
-            this.paymentForSCFTextBox.TabIndex = 51;
-            this.paymentForSCFTextBox.TextChanged += new System.EventHandler(this.paymentForSCFTextBox_TextChanged);
-            this.paymentForSCFTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentForSCFTextBox_KeyDown);
-            // 
-            // paymentForBillingTextBox
-            // 
-            this.paymentForBillingTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.paymentForBillingTextBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentForBillingTextBox.Location = new System.Drawing.Point(147, 491);
-            this.paymentForBillingTextBox.Name = "paymentForBillingTextBox";
-            this.paymentForBillingTextBox.Size = new System.Drawing.Size(135, 26);
-            this.paymentForBillingTextBox.TabIndex = 52;
-            this.paymentForBillingTextBox.TextChanged += new System.EventHandler(this.paymentForBillingTextBox_TextChanged);
-            this.paymentForBillingTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentForBillingTextBox_KeyDown);
-            // 
-            // label38
-            // 
-            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(10, 460);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(118, 16);
-            this.label38.TabIndex = 53;
-            this.label38.Text = "Payment for SCF:";
-            // 
-            // label60
-            // 
-            this.label60.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label60.AutoSize = true;
-            this.label60.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label60.Location = new System.Drawing.Point(10, 495);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(133, 16);
-            this.label60.TabIndex = 54;
-            this.label60.Text = "Payment for Billing:";
-            // 
-            // label68
-            // 
-            this.label68.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label68.AutoSize = true;
-            this.label68.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label68.Location = new System.Drawing.Point(10, 427);
-            this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(118, 15);
-            this.label68.TabIndex = 55;
-            this.label68.Text = "Total Amount Billed:";
-            // 
-            // paymentFroOthersLabel
-            // 
-            this.paymentFroOthersLabel.AutoSize = true;
-            this.paymentFroOthersLabel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.paymentFroOthersLabel.Location = new System.Drawing.Point(340, 1);
-            this.paymentFroOthersLabel.Name = "paymentFroOthersLabel";
-            this.paymentFroOthersLabel.Size = new System.Drawing.Size(31, 15);
-            this.paymentFroOthersLabel.TabIndex = 33;
-            this.paymentFroOthersLabel.Text = "0.00";
-            this.paymentFroOthersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label72
-            // 
-            this.label72.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label72.AutoSize = true;
-            this.label72.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label72.Location = new System.Drawing.Point(236, 426);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(76, 15);
-            this.label72.TabIndex = 56;
-            this.label72.Text = "Bill Balance:";
-            // 
-            // totalAmountBilledBalanceLabel
-            // 
-            this.totalAmountBilledBalanceLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.totalAmountBilledBalanceLabel.AutoSize = true;
-            this.totalAmountBilledBalanceLabel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalAmountBilledBalanceLabel.Location = new System.Drawing.Point(318, 426);
-            this.totalAmountBilledBalanceLabel.Name = "totalAmountBilledBalanceLabel";
-            this.totalAmountBilledBalanceLabel.Size = new System.Drawing.Size(31, 15);
-            this.totalAmountBilledBalanceLabel.TabIndex = 57;
-            this.totalAmountBilledBalanceLabel.Text = "0.00";
-            this.totalAmountBilledBalanceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // RealeaseBillingControl
             // 
