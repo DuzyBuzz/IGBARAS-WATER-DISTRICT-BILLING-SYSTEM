@@ -354,7 +354,7 @@ namespace IGBARAS_WATER_DISTRICT
                                     insertCmd.Parameters.AddWithValue("@Rate21_30", rate21_30);
                                     insertCmd.Parameters.AddWithValue("@Rate31_40", rate31_40);
                                     insertCmd.Parameters.AddWithValue("@Rate41_Above", rate41_Above);
-
+                                    
                                     insertCmd.Parameters.AddWithValue("@PenaltyRate", int.Parse(penaltyPercentLabel.Text.Trim().Replace("%", "")));
                                     insertCmd.Parameters.AddWithValue("@ArrearsPenaltyAmount", decimal.Parse(penaltyAmountLabel.Text.Trim().Replace(",", "")));
                                     insertCmd.Parameters.AddWithValue("@Tax", int.Parse(taxExemptedPercentLabel.Text.Trim().Replace("%", "")));
@@ -365,7 +365,7 @@ namespace IGBARAS_WATER_DISTRICT
                                     insertCmd.Parameters.AddWithValue("@Discount", int.Parse(discountedPercentLabel.Text.Trim().Replace("%", "")));
                                     insertCmd.Parameters.AddWithValue("@DiscountAmount", decimal.Parse(discountedAmountLabel.Text.Trim().Replace(",", "")));
                                     insertCmd.Parameters.AddWithValue("@ArrearsAmount", decimal.Parse(arrearsAmountLabel.Text.Trim().Replace(",", "")));
-                                    insertCmd.Parameters.AddWithValue("@AmountBilled", decimal.Parse(subTotalAmountDueLabel.Text.Trim().Replace(",", "")));
+                                    insertCmd.Parameters.AddWithValue("@AmountBilled", decimal.Parse(totalWaterConsumptionAmountLabel.Text.Trim().Replace(",", "")));
                                     insertCmd.Parameters.AddWithValue("@ArrearsPenaltyAmount", decimal.Parse(penaltyAmountLabel.Text.Trim().Replace(",", "")));
                                     insertCmd.Parameters.AddWithValue("@TotalAmountBilled", decimal.Parse(totalAmountDueLabel.Text.Trim().Replace(",", "")));
                                     insertCmd.Parameters.AddWithValue("@ConcessionaireID", int.Parse(concessionaireIDLabel.Text.Trim()));
@@ -1379,6 +1379,7 @@ ORDER BY b.BillNo DESC;
                         {
                             taxAdded = totalConsumptionAmount * (percent2 / 100);
                             taxAmountLabel.Text = taxAdded.ToString("N2");
+
                         }
                         else
                         {
@@ -1386,17 +1387,29 @@ ORDER BY b.BillNo DESC;
                         }
 
                         decimal addedTaxWaterConsumption = totalConsumptionAmount + taxAdded;
+                        decimal waterConsumptionDiscountAmount = 0;
+                        decimal discountedTax = 0;
 
                         // Parse Discount
                         if (decimal.TryParse(discountText, out decimal percent1))
                         {
                             discounted = addedTaxWaterConsumption * (percent1 / 100);
                             discountedAmountLabel.Text = discounted.ToString("N2");
+                            waterConsumptionDiscountAmount = totalConsumptionAmount * (percent1 / 100);
+                            discountedTax = taxAdded * (percent1 / 100);
+
                         }
                         else
                         {
                             discountedAmountLabel.Text = "0.00";
                         }
+                        decimal discountedWaterConsumption = totalConsumptionAmount - waterConsumptionDiscountAmount;
+
+                        decimal totalDiscountedTax = taxAdded - discountedTax;
+
+                        totalWaterConsumptionAmountLabel.Text = discountedWaterConsumption.ToString("N2");
+
+                        taxAmountLabel.Text = totalDiscountedTax.ToString("N2");
 
                         // Step 2: Final Charge Calculation
                         decimal chargeSubTotal = addedTaxWaterConsumption - discounted;
