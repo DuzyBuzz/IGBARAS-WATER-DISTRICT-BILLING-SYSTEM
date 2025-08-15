@@ -124,7 +124,7 @@ namespace IGBARAS_WATER_DISTRICT
                 "Tb_Billing",
                 new string[] {"BillingID", "BillNo", "DateCreated", "AccountNo", "DateFrom", "DateTo", "PrevReading",
                     "PresentReading", "DueDate",  "Is_PartiallyPaid", "Is_FullyPaid", "Is_Arrears", "DiscountAmount", "TaxAmount", "FreeWater",
-                    "ArrearsAmount", "AmountBilled", "ArrearsPenaltyAmount", "TotalAmountBilled", "ServiceConnectionFee",}
+                    "ArrearsAmount", "AmountBilled", "ArrearsPenaltyAmount", "TotalAmountBilled", "ServiceConnectionFee", "TotalSCF", "SCFArrears", "Is_SCFPartiallyPaid", "Is_SCFPaid" }
             );
         }
         private void LoadPaymentsSelectedColumns()
