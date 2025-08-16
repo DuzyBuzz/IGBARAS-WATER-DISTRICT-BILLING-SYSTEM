@@ -319,11 +319,11 @@ namespace IGBARAS_WATER_DISTRICT
                         INSERT INTO Tb_Billing (
                             BillNo, DateCreated, AccountNo, ServiceDescription, DateFrom, DateTo, PrevReading, PresentReading, 
                             DueDate, MinRate, [Rate11-20], [Rate21-30], [Rate31-40], [Rate41-Above], PenaltyRate, 
-                            Penalty, Tax, TaxAmount, ServiceConnectionFee, Is_Arrears, DiscountName, Discount, DiscountAmount, ArrearsAmount, AmountBilled, ArrearsPenaltyAmount, TotalAmountBilled, ConcessionaireID, UserID, FreeWater, SCFArrears, TotalSCF
+                            Penalty, Tax, TaxAmount, ServiceConnectionFee, Is_Arrears, DiscountName, Discount, DiscountAmount, ArrearsAmount, AmountBilled, ArrearsPenaltyAmount, TotalAmountBilled, ConcessionaireID, UserID, FreeWater, SCFArrears, TotalSCF, Is_InitialBilling
                         ) VALUES (
                             @BillNo, @DateCreated, @AccountNo, @ServiceDescription, @DateFrom, @DateTo, @PrevReading, @PresentReading, 
                             @DueDate, @MinRate, @Rate11_20, @Rate21_30, @Rate31_40, @Rate41_Above, 
-                            @PenaltyRate, @Penalty, @Tax, @TaxAmount, @ServiceConnectionFee, @Is_Arrears, @DiscountName, @Discount, @DiscountAmount, @ArrearsAmount, @AmountBilled, @ArrearsPenaltyAmount, @TotalAmountBilled, @ConcessionaireID, @UserID, @FreeWater, @SCFArrears, @TotalSCF
+                            @PenaltyRate, @Penalty, @Tax, @TaxAmount, @ServiceConnectionFee, @Is_Arrears, @DiscountName, @Discount, @DiscountAmount, @ArrearsAmount, @AmountBilled, @ArrearsPenaltyAmount, @TotalAmountBilled, @ConcessionaireID, @UserID, @FreeWater, @SCFArrears, @TotalSCF, @Is_InitialBilling
                         )";
 
                                 using (var insertCmd = new OleDbCommand(insertQuery, connection))
@@ -384,6 +384,7 @@ namespace IGBARAS_WATER_DISTRICT
 
                                     insertCmd.Parameters.AddWithValue("@SCFArrears", decimal.Parse(scfArrearsLabel.Text.Trim().Replace(",", "")));
                                     insertCmd.Parameters.AddWithValue("@TotalSCF", decimal.Parse(totalSCFAmountLabel.Text.Trim().Replace(",", "")));
+                                    insertCmd.Parameters.AddWithValue("@Is_InitialBilling", initialBillingCheckBox.Checked);
 
                                     insertCmd.ExecuteNonQuery();
                                     MessageBox.Show("Billing record inserted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -762,7 +763,7 @@ namespace IGBARAS_WATER_DISTRICT
                         discountedPercentLabel2.Text = $"{bill.Discount}%";
                         totalSCFAmountLabel2.Text = $"{bill.TotalSCFAmount:N2}";
                         dueDateLabel2.Text = bill.DueDate.ToString("MMMM dd, yyyy");
-
+                        collectionInitianBillingCheckBox.Checked = bill.IsInitialBilling;
                         if (int.TryParse(serviceIDLabel.Text.Trim(), out int serviceId))
                         {
                             PopulateServiceRateLabels2(serviceId, meterConsumed);
@@ -1114,8 +1115,21 @@ ORDER BY b.BillNo DESC;
                                 int q30 = Math.Min(Math.Max(totalConsumption - 20, 0), 10);
                                 int q40 = Math.Min(Math.Max(totalConsumption - 30, 0), 10);
                                 int q41 = Math.Max(totalConsumption - 40, 0);
+                                decimal a10;
 
-                                decimal a10 = q10 > 0 ? minRate : 0; // Minimum charge
+                                decimal perUnitRateForFirst10 = minRate / 10; // This is the price per cubic meter for the first 10
+
+                                if (collectionInitianBillingCheckBox.Checked)
+                                {
+                                    // Bill only for actual quantity in first 10 at the per-unit rate
+                                    a10 = q10 * perUnitRateForFirst10;
+                                }
+                                else
+                                {
+                                    // Normal case — first 10 cubic meters charged at MinRate
+                                    a10 = q10 > 0 ? minRate : 0;
+                                }
+
                                 decimal a20 = q20 * rate11_20;
                                 decimal a30 = q30 * rate21_30;
                                 decimal a40 = q40 * rate31_40;
@@ -1148,6 +1162,13 @@ ORDER BY b.BillNo DESC;
                                 totalWaterConsumptionAmountLabel2.Text = total.ToString("N2");
                                 totalQuantityLabel2.Text = totalConsumption.ToString();
 
+
+                                // Hide rows with zero quantity
+                                tenQuantityLabel.Visible = tenUnitPriceLabel.Visible = tenAmountLabel.Visible = q10 > 0;
+                                twentyQuantityLabel.Visible = twentyUnitPriceLabel.Visible = twentyAmountLabel.Visible = q20 > 0;
+                                thirtyQuantityLabel.Visible = thirtyUnitPriceLabel.Visible = thirtyAmountLabel.Visible = q30 > 0;
+                                fortyQuantityLabel.Visible = fortyUnitPriceLabel.Visible = fortyAmountLabel.Visible = q40 > 0;
+                                fortyUpQuantityLabel.Visible = fortyUpUnitPriceLabel.Visible = fortyUpAmountLabel.Visible = q41 > 0;
 
                             }
 
@@ -2579,5 +2600,15 @@ ORDER BY b.BillNo DESC;
             }
         }
 
+        private void collectionInitianBillingCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Recalculate the billing based on the new checkbox state
+            // Make sure you have the current serviceId and totalConsumption stored somewhere accessible
+            if (int.TryParse(serviceIDLabel.Text, out int serviceId) &&
+                int.TryParse(totalQuantityLabel2.Text, out int totalConsumption))
+            {
+                PopulateServiceRateLabels(serviceId, totalConsumption);
+            }
+        }
     }
 }

@@ -40,6 +40,7 @@ namespace IGBARAS_WATER_DISTRICT.Helpers
             public decimal TotalSCFAmount { get; set; }
             public decimal SCFBalance { get; set; }
             public int FreeWater { get; set; }
+            public bool IsInitialBilling { get; set; }
         }
 
         public BillingInfo GetBillByBillNo(string billNo)
@@ -105,7 +106,9 @@ namespace IGBARAS_WATER_DISTRICT.Helpers
                                 IsSCFPaid = reader["Is_SCFPaid"] != DBNull.Value && Convert.ToBoolean(reader["Is_SCFPaid"]),
                                 IsSCFPartiallyPaid = reader["Is_SCFPartiallyPaid"] != DBNull.Value && Convert.ToBoolean(reader["Is_SCFPartiallyPaid"]),
                                 SCFBalance = reader["SCFBalance"] != DBNull.Value ? Convert.ToDecimal(reader["SCFBalance"]) : 0m,
-                                FreeWater = reader["FreeWater"] != DBNull.Value ? Convert.ToInt32(reader["FreeWater"]) : 0
+                                FreeWater = reader["FreeWater"] != DBNull.Value ? Convert.ToInt32(reader["FreeWater"]) : 0,
+                                IsInitialBilling = reader["Is_InitialBilling"] != DBNull.Value && Convert.ToBoolean(reader["Is_InitialBilling"]),
+
                             };
                         }
                     }
