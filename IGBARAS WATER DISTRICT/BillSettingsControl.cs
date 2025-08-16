@@ -15,14 +15,13 @@ namespace IGBARAS_WATER_DISTRICT
         {
             InitializeComponent();
             AddDeleteContextMenu(serviceDataGridView, "Tb_Service", "ServiceID");
-            AddDeleteContextMenu(settingsDataGidView, "Tb_Settings", "SettingID");
             AddDeleteContextMenu(zoneDataGridView, "Tb_Zone", "ZoneID");
-            AddDeleteContextMenu(discountDataGridView, "Tb_Discount", "DiscountID");
         }
 
         private void BillSettingsControl_Load(object sender, EventArgs e)
         {
             ReloadAllTables();
+            discountDataGridView.AllowUserToAddRows = false;
             settingsDataGidView.AllowUserToAddRows = false;
             settingsDataGidView.RowHeadersVisible = false;
         }
@@ -100,6 +99,8 @@ namespace IGBARAS_WATER_DISTRICT
         {
             var menu = new ContextMenuStrip();
             var deleteItem = new ToolStripMenuItem("Delete Row");
+            deleteItem.ForeColor = Color.Red;
+            deleteItem.Image = SystemIcons.Error.ToBitmap();
             deleteItem.Click += (s, e) =>
             {
                 if (dgv.SelectedRows.Count > 0)

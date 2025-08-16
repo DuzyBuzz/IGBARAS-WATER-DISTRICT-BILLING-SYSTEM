@@ -28,6 +28,7 @@ namespace IGBARAS_WATER_DISTRICT
             }
             AutoCompleteHelper.FillTextBoxWithColumns("Tb_Concessionaire", new string[] { "AccountNo", "ConcessionaireName" }, searchAccountNumberTextBox);
             LoadZoneComboBox();
+            AddDeleteContextMenu(accountDataGridView, "Tb_Concessionaire", "ConcessionaireID");
 
         }
 
@@ -133,6 +134,7 @@ namespace IGBARAS_WATER_DISTRICT
 
         private async void clearButton_Click(object sender, EventArgs e)
         {
+            searchAccountNumberTextBox.Clear();
             using (var loadingForm = new LoadingForm())
             {
                 var task1 = DGVHelper.LoadDataToGridAsync(accountDataGridView, "Tb_Concessionaire", loadingForm);
@@ -168,5 +170,91 @@ namespace IGBARAS_WATER_DISTRICT
                 await Task.WhenAll(task1);
             }
         }
+        private async void AddDeleteContextMenu(DataGridView dgv, string tableName, string idColumn)
+        {
+            var menu = new ContextMenuStrip();
+            var deleteItem = new ToolStripMenuItem("Delete Row");
+            deleteItem.ForeColor = Color.Red;
+            deleteItem.Image = SystemIcons.Error.ToBitmap();
+            deleteItem.Click += async (s, e) =>
+            {
+                if (dgv.SelectedRows.Count > 0)
+                {
+                    var row = dgv.SelectedRows[0];
+
+                    // Handle uncommitted new row deletion gracefully
+                    if (row.IsNewRow)
+                    {
+                        MessageBox.Show("Cannot delete an uncommitted new row. Please enter data or cancel the row first.", "Delete Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+
+                    var idValue = row.Cells[idColumn].Value;
+                    if (idValue == null || idValue == DBNull.Value)
+                    {
+                        try
+                        {
+                            dgv.Rows.Remove(row); // Remove unsaved row
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            MessageBox.Show("Cannot delete an uncommitted new row. Please enter data or cancel the row first.", "Delete Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        return;
+                    }
+                    if (MessageBox.Show("Are you sure you want to delete this row from the database?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        if (TableUpdaterHelper.DeleteRow(tableName, idColumn, idValue))
+                        {
+                            MessageBox.Show("Row deleted.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            using (var loadingForm = new LoadingForm())
+                            {
+                                var task1 = DGVHelper.LoadDataToGridAsync(accountDataGridView, "Tb_Concessionaire", loadingForm);
+
+                                await Task.WhenAll(task1);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Delete failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            };
+            menu.Items.Add(deleteItem);
+            dgv.ContextMenuStrip = menu;
+
+            // Ensure right-click selects the row
+            dgv.MouseDown += (s, e) =>
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    var hit = dgv.HitTest(e.X, e.Y);
+                    if (hit.RowIndex >= 0)
+                    {
+                        dgv.ClearSelection();
+                        dgv.Rows[hit.RowIndex].Selected = true;
+                    }
+                }
+            };
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Check if CreateConcessionaireForm is already open
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is CreateConcessionaireForm)
+                {
+                    form.BringToFront();   // bring it to front
+                    form.Focus();          // set focus
+                    return;                // stop, don’t open another
+                }
+            }
+
+            // If not open, create and show new instance
+            var addConcessionaireForm = new CreateConcessionaireForm();
+            addConcessionaireForm.Show();
+        }
+
     }
 }

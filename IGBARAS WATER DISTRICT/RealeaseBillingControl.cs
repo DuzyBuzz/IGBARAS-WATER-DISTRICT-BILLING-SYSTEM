@@ -267,19 +267,7 @@ namespace IGBARAS_WATER_DISTRICT
                 billPaidButton.Enabled = false;
             }
         }
-        private void ClearButtonDisable()
-        {
-            if (!string.IsNullOrEmpty(searchAccountNumberTextBox.Text))
-            {
-                clearButton.ForeColor = Color.Crimson;
-                clearButton.Enabled = true;
-            }
-            else
-            {
-                clearButton.ForeColor = Color.Gray;
-                clearButton.Enabled = false;
-            }
-        }
+
 
 
         private void SetDateNow()
@@ -478,7 +466,6 @@ namespace IGBARAS_WATER_DISTRICT
             PlaceholderHelper.AddPlaceholder(searchAccountNumberTextBox, "🔎 Fullname or Account Number.");
             PlaceholderHelper.AddPlaceholder(remarksTextBox, "📝 Remarks");
 
-            ClearButtonDisable();
             // 🟡 Load data from DB to billingDataGridView
             using (var loadingForm = new LoadingForm())
             {

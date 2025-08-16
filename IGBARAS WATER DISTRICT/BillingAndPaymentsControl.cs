@@ -115,6 +115,8 @@ namespace IGBARAS_WATER_DISTRICT
             AutoCompleteHelper.FillTextBoxWithColumns("Tb_Billing", new string[] { "AccountNo", "BillNo" }, searchAccountNumberTextBox);
             LoadZoneComboBox();
             LoadPaymentZoneComboBox();
+            AddDeleteContextMenu(paymentsDataGridView, "Tb_Payments", "PaymentID");
+            AddDeleteContextMenu(billingDataGridView, "Tb_Billing", "BillingID");
         }
         private void LoadSelectedColumns()
         {
@@ -382,5 +384,70 @@ namespace IGBARAS_WATER_DISTRICT
         {
 
         }
+        private void AddDeleteContextMenu(DataGridView dgv, string tableName, string idColumn)
+        {
+            var menu = new ContextMenuStrip();
+            var deleteItem = new ToolStripMenuItem("Delete Row");
+            deleteItem.ForeColor = Color.Red;
+            deleteItem.Image = SystemIcons.Error.ToBitmap();
+            deleteItem.Click += (s, e) =>
+            {
+                if (dgv.SelectedRows.Count > 0)
+                {
+                    var row = dgv.SelectedRows[0];
+
+                    // Handle uncommitted new row deletion gracefully
+                    if (row.IsNewRow)
+                    {
+                        MessageBox.Show("Cannot delete an uncommitted new row. Please enter data or cancel the row first.", "Delete Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+
+                    var idValue = row.Cells[idColumn].Value;
+                    if (idValue == null || idValue == DBNull.Value)
+                    {
+                        try
+                        {
+                            dgv.Rows.Remove(row); // Remove unsaved row
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            MessageBox.Show("Cannot delete an uncommitted new row. Please enter data or cancel the row first.", "Delete Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        return;
+                    }
+                    if (MessageBox.Show("Are you sure you want to delete this row from the database?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        if (TableUpdaterHelper.DeleteRow(tableName, idColumn, idValue))
+                        {
+                            MessageBox.Show("Row deleted.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadSelectedColumns();
+                            LoadPaymentsSelectedColumns();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Delete failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            };
+            menu.Items.Add(deleteItem);
+            dgv.ContextMenuStrip = menu;
+
+            // Ensure right-click selects the row
+            dgv.MouseDown += (s, e) =>
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    var hit = dgv.HitTest(e.X, e.Y);
+                    if (hit.RowIndex >= 0)
+                    {
+                        dgv.ClearSelection();
+                        dgv.Rows[hit.RowIndex].Selected = true;
+                    }
+                }
+            };
+        }
     }
+
 }
