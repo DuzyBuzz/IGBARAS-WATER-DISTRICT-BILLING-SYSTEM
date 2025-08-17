@@ -144,8 +144,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Reports\DailyCollectionReport - Copy.cs">
-      <DependentUpon>DailyCollectionReport - Copy.rpt</DependentUpon>
+    <Compile Include="Reports\MonthlyCollectionReports.cs">
+      <DependentUpon>MonthlyCollectionReports.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -229,13 +229,6 @@
     <Compile Include="ReportsControl.Designer.cs">
       <DependentUpon>ReportsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\MonthlyCollectionReports.cs">
-      <DependentUpon>MonthlyCollectionReports.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <DesignTime>True</DesignTime>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\DailyCollectionReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -311,11 +304,6 @@
       <LastGenOutput>DailyCollectionReport.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\MonthlyCollectionReports.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>MonthlyCollectionReports.cs</LastGenOutput>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Reports\AgingOfSCFReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AgingOfSCFReport.cs</LastGenOutput>
@@ -326,9 +314,9 @@
       <LastGenOutput>MonthlyBillingReports.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\DailyCollectionReport - Copy.rpt">
+    <Content Include="Reports\MonthlyCollectionReports.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DailyCollectionReport - Copy.cs</LastGenOutput>
+      <LastGenOutput>MonthlyCollectionReports.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="SettingsControl.resx">
