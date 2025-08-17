@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,9 +30,56 @@ namespace IGBARAS_WATER_DISTRICT
             AutoCompleteHelper.FillTextBoxWithColumns("Tb_Concessionaire", new string[] { "AccountNo", "ConcessionaireName" }, searchAccountNumberTextBox);
             LoadZoneComboBox();
             AddDeleteContextMenu(accountDataGridView, "Tb_Concessionaire", "ConcessionaireID");
+            LoadComboBoxValues();
 
         }
+        private void LoadComboBoxValues()
+        {
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(DbConfig.ConnectionString))
+                {
+                    conn.Open();
 
+                    // ZoneCode values
+                    DataTable dtZone = new DataTable();
+                    using (OleDbDataAdapter daZone = new OleDbDataAdapter(
+                        "SELECT DISTINCT ZoneCode FROM Tb_Concessionaire WHERE ZoneCode IS NOT NULL", conn))
+                    {
+                        daZone.Fill(dtZone);
+                    }
+
+                    // ServiceID values
+                    DataTable dtService = new DataTable();
+                    using (OleDbDataAdapter daService = new OleDbDataAdapter(
+                        "SELECT DISTINCT ServiceID FROM Tb_Concessionaire WHERE ServiceID IS NOT NULL", conn))
+                    {
+                        daService.Fill(dtService);
+                    }
+
+                    // Bind ZoneCode ComboBox column
+                    if (accountDataGridView.Columns["ZoneCode"] is DataGridViewComboBoxColumn zoneCol)
+                    {
+                        zoneCol.DataSource = dtZone;
+                        zoneCol.DisplayMember = "ZoneCode";
+                        zoneCol.ValueMember = "ZoneCode";
+                    }
+
+                    // Bind ServiceID ComboBox column
+                    if (accountDataGridView.Columns["ServiceID"] is DataGridViewComboBoxColumn serviceCol)
+                    {
+                        serviceCol.DataSource = dtService;
+                        serviceCol.DisplayMember = "ServiceID";
+                        serviceCol.ValueMember = "ServiceID";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading combo values: {ex.Message}",
+                                "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void LoadZoneComboBox()
         {
             int districtNo = 1; // Replace with actual district if needed

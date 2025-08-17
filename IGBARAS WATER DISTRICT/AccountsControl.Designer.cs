@@ -33,8 +33,6 @@ namespace IGBARAS_WATER_DISTRICT
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.accountDataGridView = new System.Windows.Forms.DataGridView();
-            this.ConcessionaireID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -44,6 +42,10 @@ namespace IGBARAS_WATER_DISTRICT
             this.clearButton = new System.Windows.Forms.Button();
             this.serviceApplyButton = new System.Windows.Forms.Button();
             this.settingsUndoButton = new System.Windows.Forms.Button();
+            this.ConcessionaireID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.ZoneCode = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.ServiceID = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.accountDataGridView)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -75,7 +77,9 @@ namespace IGBARAS_WATER_DISTRICT
             this.accountDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.accountDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ConcessionaireID,
-            this.Status});
+            this.Status,
+            this.ZoneCode,
+            this.ServiceID});
             this.accountDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.accountDataGridView.Location = new System.Drawing.Point(3, 41);
             this.accountDataGridView.Name = "accountDataGridView";
@@ -83,24 +87,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.accountDataGridView.Size = new System.Drawing.Size(1175, 763);
             this.accountDataGridView.TabIndex = 26;
             this.accountDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.accountsDataGridView_CellFormatting);
-            // 
-            // ConcessionaireID
-            // 
-            this.ConcessionaireID.DataPropertyName = "ConcessionaireID";
-            this.ConcessionaireID.HeaderText = "ConcessionaireID";
-            this.ConcessionaireID.Name = "ConcessionaireID";
-            this.ConcessionaireID.Visible = false;
-            // 
-            // Status
-            // 
-            this.Status.DataPropertyName = "Status";
-            this.Status.HeaderText = "Status";
-            this.Status.Items.AddRange(new object[] {
-            "Active",
-            "Disconnected",
-            "Status",
-            " "});
-            this.Status.Name = "Status";
             // 
             // tableLayoutPanel2
             // 
@@ -113,7 +99,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 71F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 131F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 132F));
             this.tableLayoutPanel2.Controls.Add(this.button2, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.button1, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.zoneComboBox, 3, 0);
@@ -135,7 +121,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.button2.BackColor = System.Drawing.Color.MidnightBlue;
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(746, 3);
+            this.button2.Location = new System.Drawing.Point(745, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(65, 26);
             this.button2.TabIndex = 37;
@@ -147,7 +133,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.button1.BackColor = System.Drawing.Color.SteelBlue;
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(691, 3);
+            this.button1.Location = new System.Drawing.Point(690, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(49, 26);
             this.button1.TabIndex = 36;
@@ -161,7 +147,7 @@ namespace IGBARAS_WATER_DISTRICT
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.zoneComboBox.FormattingEnabled = true;
-            this.zoneComboBox.Location = new System.Drawing.Point(641, 4);
+            this.zoneComboBox.Location = new System.Drawing.Point(640, 4);
             this.zoneComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.zoneComboBox.Name = "zoneComboBox";
             this.zoneComboBox.Size = new System.Drawing.Size(44, 21);
@@ -175,7 +161,7 @@ namespace IGBARAS_WATER_DISTRICT
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(552, 0);
+            this.label32.Location = new System.Drawing.Point(551, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(83, 32);
             this.label32.TabIndex = 32;
@@ -190,7 +176,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.searchAccountNumberTextBox.Location = new System.Drawing.Point(3, 4);
             this.searchAccountNumberTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.searchAccountNumberTextBox.Name = "searchAccountNumberTextBox";
-            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(512, 25);
+            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(511, 25);
             this.searchAccountNumberTextBox.TabIndex = 30;
             this.searchAccountNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchAccountNumberTextBox_KeyDown);
             // 
@@ -202,7 +188,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.clearButton.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearButton.ForeColor = System.Drawing.Color.Crimson;
-            this.clearButton.Location = new System.Drawing.Point(521, 3);
+            this.clearButton.Location = new System.Drawing.Point(520, 3);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(25, 26);
             this.clearButton.TabIndex = 31;
@@ -214,7 +200,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.serviceApplyButton.BackColor = System.Drawing.Color.SteelBlue;
             this.serviceApplyButton.ForeColor = System.Drawing.Color.White;
-            this.serviceApplyButton.Location = new System.Drawing.Point(1046, 3);
+            this.serviceApplyButton.Location = new System.Drawing.Point(1045, 3);
             this.serviceApplyButton.Name = "serviceApplyButton";
             this.serviceApplyButton.Size = new System.Drawing.Size(119, 26);
             this.serviceApplyButton.TabIndex = 35;
@@ -226,13 +212,43 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.settingsUndoButton.BackColor = System.Drawing.Color.Brown;
             this.settingsUndoButton.ForeColor = System.Drawing.Color.White;
-            this.settingsUndoButton.Location = new System.Drawing.Point(911, 3);
+            this.settingsUndoButton.Location = new System.Drawing.Point(910, 3);
             this.settingsUndoButton.Name = "settingsUndoButton";
             this.settingsUndoButton.Size = new System.Drawing.Size(127, 26);
             this.settingsUndoButton.TabIndex = 34;
             this.settingsUndoButton.Text = "↩ Undo Changes";
             this.settingsUndoButton.UseVisualStyleBackColor = false;
             this.settingsUndoButton.Click += new System.EventHandler(this.accountUndoButton_Click);
+            // 
+            // ConcessionaireID
+            // 
+            this.ConcessionaireID.DataPropertyName = "ConcessionaireID";
+            this.ConcessionaireID.HeaderText = "ConcessionaireID";
+            this.ConcessionaireID.Name = "ConcessionaireID";
+            this.ConcessionaireID.Visible = false;
+            // 
+            // Status
+            // 
+            this.Status.DataPropertyName = "Status";
+            this.Status.HeaderText = "Status";
+            this.Status.Items.AddRange(new object[] {
+            "Active",
+            "Disconnected",
+            "Status",
+            " "});
+            this.Status.Name = "Status";
+            // 
+            // ZoneCode
+            // 
+            this.ZoneCode.DataPropertyName = "ZoneCode";
+            this.ZoneCode.HeaderText = "ZoneCode";
+            this.ZoneCode.Name = "ZoneCode";
+            // 
+            // ServiceID
+            // 
+            this.ServiceID.DataPropertyName = "ServiceID";
+            this.ServiceID.HeaderText = "ServiceID";
+            this.ServiceID.Name = "ServiceID";
             // 
             // AccountsControl
             // 
@@ -261,8 +277,10 @@ namespace IGBARAS_WATER_DISTRICT
         private Button serviceApplyButton;
         private Button button1;
         private DataGridView accountDataGridView;
+        private Button button2;
         private DataGridViewTextBoxColumn ConcessionaireID;
         private DataGridViewComboBoxColumn Status;
-        private Button button2;
+        private DataGridViewComboBoxColumn ZoneCode;
+        private DataGridViewComboBoxColumn ServiceID;
     }
 }
