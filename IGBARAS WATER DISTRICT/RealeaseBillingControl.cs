@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.AccessControl;
@@ -102,6 +103,7 @@ namespace IGBARAS_WATER_DISTRICT
                         pd.Print(); // Start the print job
                     }
                     SetNextBillNo();
+                    SaveBillingInvoiceSilently();
                 }
                 else
                 {
@@ -193,7 +195,7 @@ namespace IGBARAS_WATER_DISTRICT
                         MessageBoxIcon.Information
                     );
 
-
+                    SaveCollectionReceiptSilently();
 
                 }
                 else
@@ -1994,6 +1996,39 @@ ORDER BY b.BillNo DESC;
 
             e.HasMorePages = false;
         }
+        public void SaveCollectionReceiptSilently()
+        {
+            // Folder: Documents\Collection Receipt\AUG-2025
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string monthYear = DateTime.Now.ToString("MMM-yyyy").ToUpper(); // AUG-2025
+            string folderPath = Path.Combine(documentsPath, "Collection Receipt", monthYear);
+            Directory.CreateDirectory(folderPath);
+
+            string orno = orNumberTextBox.Text;
+            string name = collectionNameLabel.Text;
+
+            // File name with timestamp (avoid overwriting)
+            string fileName = $"Receipt_{orno}_{name}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+            string fullPath = Path.Combine(folderPath, fileName);
+
+            PrintDocument pd = new PrintDocument();
+            pd.PrintController = new StandardPrintController(); // hide print dialog
+            pd.PrinterSettings.PrinterName = "Microsoft Print to PDF";
+            pd.PrinterSettings.PrintToFile = true;
+            pd.PrinterSettings.PrintFileName = fullPath;
+
+            // Attach your drawing logic
+            pd.PrintPage += new PrintPageEventHandler(CollectionMapPrintPage);
+
+            try
+            {
+                pd.Print();  // Silently save as PDF
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while saving collection receipt: " + ex.Message);
+            }
+        }
 
 
         private void DrawBillingForm(Graphics g, int offsetY, Font font, Brush brush)
@@ -2082,9 +2117,42 @@ ORDER BY b.BillNo DESC;
             }
 
             e.HasMorePages = false;
+
         }
 
+        public void SaveBillingInvoiceSilently()
+        {
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string monthYear = DateTime.Now.ToString("MMM-yyyy");
+            string folderPath = Path.Combine(documentsPath, "Billing Invoice", monthYear);
 
+            // Ensure folder exists
+            Directory.CreateDirectory(folderPath);
+
+            string billno = invoiceTextBox.Text;
+            string name = fullnameTextBox.Text;
+
+            // File name with timestamp (avoid overwriting)
+            string fileName = $"Invoice_{billno}_{name}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+            string fullPath = Path.Combine(folderPath, fileName);
+
+            PrintDocument pd = new PrintDocument();
+            pd.PrintController = new StandardPrintController(); // suppress dialog
+            pd.PrinterSettings.PrinterName = "Microsoft Print to PDF"; // silent PDF printer
+            pd.PrinterSettings.PrintToFile = true;
+            pd.PrinterSettings.PrintFileName = fullPath;
+
+            pd.PrintPage += new PrintPageEventHandler(BillingMapPrintPage);
+
+            try
+            {
+                pd.Print(); // Print silently to file
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while saving invoice: " + ex.Message);
+            }
+        }
 
         void PrintPages(object sender, PrintPageEventArgs e)
         {

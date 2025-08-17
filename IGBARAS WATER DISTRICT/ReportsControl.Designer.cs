@@ -90,7 +90,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.agingCrystalReportViewer.Name = "agingCrystalReportViewer";
             this.agingCrystalReportViewer.Size = new System.Drawing.Size(1167, 768);
             this.agingCrystalReportViewer.TabIndex = 0;
-            this.agingCrystalReportViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.ParameterPanel;
             // 
             // dailyBillingTab
             // 

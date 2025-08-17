@@ -21,6 +21,7 @@
         #region Windows Form Designer generated code
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfirmationDialog));
             this.detailsRichTextBox = new System.Windows.Forms.RichTextBox();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -106,6 +107,7 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.bottomPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConfirmationDialog";

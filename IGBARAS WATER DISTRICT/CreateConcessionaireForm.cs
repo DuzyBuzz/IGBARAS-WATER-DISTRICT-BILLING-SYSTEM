@@ -55,6 +55,37 @@ namespace IGBARAS_WATER_DISTRICT
             LoadServiceIDComboBox();
             SetTabOrder();
             this.AcceptButton = submitButton;
+            GenerateNextMeterNo();
+        }
+        private void GenerateNextMeterNo()
+        {
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(DbConfig.ConnectionString))
+                {
+                    conn.Open();
+
+                    // Get the MAX MeterNo from the table
+                    string query = "SELECT MAX(MeterNo) FROM Tb_Concessionaire";
+                    using (OleDbCommand cmd = new OleDbCommand(query, conn))
+                    {
+                        object result = cmd.ExecuteScalar();
+
+                        int nextMeterNo = 1; // Default if no records exist
+
+                        if (result != DBNull.Value && result != null)
+                        {
+                            int maxMeterNo = Convert.ToInt32(result);
+                            nextMeterNo = maxMeterNo + 1;
+                        }
+                        meterNoTextBox.Text = nextMeterNo.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching next Meter No: {ex.Message}");
+            }
         }
 
         private void serviceConnectionFeeTextBox_KeyDown(object sender, KeyEventArgs e)
