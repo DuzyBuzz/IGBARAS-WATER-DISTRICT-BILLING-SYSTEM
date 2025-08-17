@@ -1,0 +1,453 @@
+﻿using IGBARAS_WATER_DISTRICT.Helpers;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.OleDb;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace IGBARAS_WATER_DISTRICT
+{
+    public partial class BillingAndPaymentsControl : UserControl
+    {
+        public BillingAndPaymentsControl()
+        {
+            InitializeComponent();
+        }
+
+        private void searchAccountNumberTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void zoneComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Get selected zone code from ComboBox
+            string zoneCode = zoneComboBox.SelectedValue?.ToString();
+
+            if (string.IsNullOrEmpty(zoneCode))
+                return;
+
+            if (billingDataGridView.DataSource is DataTable dt)
+            {
+                // Filter rows where accountno starts with the selected zoneCode (e.g., "04-")
+                dt.DefaultView.RowFilter = $"accountno LIKE '{zoneCode}-%'";
+
+                // Sort rows in ascending order by accountno
+                dt.DefaultView.Sort = "accountno ASC";
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadSelectedColumns();
+        }
+
+        private void serviceApplyButton_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void searchAccountNumberTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+
+                string keyword = searchAccountNumberTextBox.Text.Trim();
+
+                if (string.IsNullOrEmpty(keyword)) return;
+
+                // Prevent special character issues
+                keyword = keyword.Replace("'", "''").Replace("[", "[[]").Replace("%", "[%]").Replace("*", "[*]");
+
+                if (billingDataGridView.DataSource is DataTable dt)
+                {
+                    // Ensure the column names are correct
+                    if (dt.Columns.Contains("AccountNo") && dt.Columns.Contains("BillNo"))
+                    {
+                        dt.DefaultView.RowFilter =
+                            $"Convert(AccountNo, 'System.String') LIKE '%{keyword}%' OR Convert(BillNo, 'System.String') LIKE '%{keyword}%'";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ensure your MDB columns are named exactly 'AccountNo' and 'BillNo'.", "Column Name Error");
+                    }
+                }
+            }
+        }
+        private void LoadZoneComboBox()
+        {
+            int districtNo = 1; // Replace with actual district if needed
+
+            var zoneList = ZoneHelper.GetZoneCodeHelper(districtNo);
+
+            zoneComboBox.DataSource = zoneList;
+            zoneComboBox.DisplayMember = "ZoneCode"; // Shown: "01", "02", "11"
+            zoneComboBox.ValueMember = "ZoneCode";   // Internal value: same as displayed
+
+            if (zoneComboBox.Items.Count > 0)
+                zoneComboBox.SelectedIndex = 0;
+        }
+        private void LoadPaymentZoneComboBox()
+        {
+            int districtNo = 1; // Replace with actual district if needed
+
+            var zoneList = ZoneHelper.GetZoneCodeHelper(districtNo);
+
+            paymentsZoneComboBox.DataSource = zoneList;
+            paymentsZoneComboBox.DisplayMember = "ZoneCode"; // Shown: "01", "02", "11"
+            paymentsZoneComboBox.ValueMember = "ZoneCode";   // Internal value: same as displayed
+
+            if (paymentsZoneComboBox.Items.Count > 0)
+                paymentsZoneComboBox.SelectedIndex = 0;
+        }
+        private void BillingAndPaymentsControl_Load(object sender, EventArgs e)
+        {
+            LoadPaymentsSelectedColumns();
+            PlaceholderHelper.AddPlaceholder(searchAccountNumberTextBox, "🔎Account Number or Bill No.");
+            PlaceholderHelper.AddPlaceholder(paymentSearchTextBox, "🔎Account Number or Bill No. or OR Number");
+            LoadSelectedColumns();
+            AutoCompleteHelper.FillTextBoxWithColumns("Tb_Payments", new string[] { "AccountNo", "CurrentBillNo", "ORNumber" }, paymentSearchTextBox);
+            AutoCompleteHelper.FillTextBoxWithColumns("Tb_Billing", new string[] { "AccountNo", "BillNo" }, searchAccountNumberTextBox);
+            LoadZoneComboBox();
+            LoadPaymentZoneComboBox();
+            AddDeleteContextMenu(paymentsDataGridView, "Tb_Payments", "PaymentID");
+            AddDeleteContextMenu(billingDataGridView, "Tb_Billing", "BillingID");
+        }
+        private void LoadSelectedColumns()
+        {
+            LoadZoneComboBox();
+            CustomTableLoaderHelper.LoadSelectedColumnsToGrid(
+                billingDataGridView,
+                "Tb_Billing",
+                new string[] {"BillingID", "BillNo", "DateCreated", "AccountNo", "DateFrom", "DateTo", "PrevReading",
+                    "PresentReading", "DueDate",  "Is_PartiallyPaid", "Is_FullyPaid", "Is_Arrears", "DiscountAmount", "TaxAmount", "FreeWater",
+                    "ArrearsAmount", "AmountBilled", "ArrearsPenaltyAmount", "TotalAmountBilled", "ServiceConnectionFee", "TotalSCF", "SCFArrears", "Is_SCFPartiallyPaid", "Is_SCFPaid" }
+            );
+        }
+        private void LoadPaymentsSelectedColumns()
+        {
+            LoadZoneComboBox();
+            CustomTableLoaderHelper.LoadSelectedColumnsToGrid(
+                paymentsDataGridView,
+                "Tb_Payments",
+                new string[] {"PaymentID", "ORNumber", "CurrentBillNo", "PaymentDate", "AccountNo", "PaymentType", "ArrearsAmount", "ArrearsPenalty",
+                    "TotalArrears", "BillCharge",  "TaxAmount", "DiscountAmount", "TotalCurrent", "AmountPaid", "Penalty", "[Net Bill Charge]", 
+                    "Balance", "Remarks", "FreeWater", "[OthersAmount]", "SCFBalance", "TotalPenalty","ServiceConnectionFee" }
+            );
+        }
+
+        private void billingApplyButton_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Are you sure you want to apply the changes to the Billing details?\n\n" +
+                "This action will save the modifications to the database and may affect related records.",
+                "Confirm Save",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                billingDataGridView.EndEdit();
+
+                var dt = billingDataGridView.DataSource as DataTable;
+                if (dt == null)
+                {
+                    MessageBox.Show("No data source found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                bool anyError = false;
+
+                using (var connection = new OleDbConnection(DbConfig.ConnectionString))
+                {
+                    connection.Open();
+
+                    foreach (DataGridViewRow row in billingDataGridView.Rows)
+                    {
+                        if (row.IsNewRow) continue;
+
+                        var billingId = row.Cells["BillingID"].Value;
+                        var billNo = row.Cells["BillNo"].Value;
+                        var isFullyPaid = row.Cells["Is_FullyPaid"].Value;
+
+                        DataRowView drv = row.DataBoundItem as DataRowView;
+                        if (drv == null) continue;
+                        var originalBillNo = drv.Row["BillNo", DataRowVersion.Original];
+                        var originalIsFullyPaid = drv.Row["Is_FullyPaid", DataRowVersion.Original];
+
+                        if (!object.Equals(billNo, originalBillNo) || !object.Equals(isFullyPaid, originalIsFullyPaid))
+                        {
+                            var columnValues = new Dictionary<string, object>
+                    {
+                        { "BillNo", billNo },
+                        { "Is_FullyPaid", isFullyPaid }
+                    };
+
+                            try
+                            {
+                                ColumnUpdaterHelper.UpdateColumns("Tb_Billing", "BillingID", billingId, columnValues, connection);
+                            }
+                            catch
+                            {
+                                anyError = true;
+                                // Error message is already shown in ColumnUpdaterHelper
+                            }
+                        }
+                    }
+                }
+
+                if (anyError)
+                {
+                    MessageBox.Show(
+                        "Some records could not be updated due to duplicate BillNo or other database errors.\n" +
+                        "Please review the error messages and correct the data.",
+                        "Partial Update",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("BillNo(s) and Is_FullyPaid updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                LoadSelectedColumns();
+            }
+        }
+
+        private void billingUndoButton_Click(object sender, EventArgs e)
+        {
+            LoadSelectedColumns();
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            LoadSelectedColumns();
+            searchAccountNumberTextBox.Text = "";
+        }
+
+        private void paymentsApplyButton_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Are you sure you want to apply the changes to the Payments details?\n\n" +
+                "This action will save the modifications to the database and may affect related records.",
+                "Confirm Save",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                paymentsDataGridView.EndEdit();
+
+                var dt = paymentsDataGridView.DataSource as DataTable;
+                if (dt == null)
+                {
+                    MessageBox.Show("No data source found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                bool anyError = false;
+
+                using (var connection = new OleDbConnection(DbConfig.ConnectionString))
+                {
+                    connection.Open();
+
+                    foreach (DataGridViewRow row in paymentsDataGridView.Rows)
+                    {
+                        if (row.IsNewRow) continue;
+
+                        var paymentId = row.Cells["PaymentID"].Value;
+                        var currentBillNo = row.Cells["CurrentBillNo"].Value;
+                        var balance = row.Cells["Balance"].Value;
+                        var amountPaid = row.Cells["AmountPaid"].Value;
+
+                        DataRowView drv = row.DataBoundItem as DataRowView;
+                        if (drv == null) continue;
+                        var originalCurrentBillNo = drv.Row["CurrentBillNo", DataRowVersion.Original];
+                        var originalBalance = drv.Row["Balance", DataRowVersion.Original];
+                        var originalAmountPaid = drv.Row["AmountPaid", DataRowVersion.Original];
+
+                        // Check if any relevant column has changed
+                        if (!object.Equals(currentBillNo, originalCurrentBillNo) ||
+                            !object.Equals(balance, originalBalance) ||
+                            !object.Equals(amountPaid, originalAmountPaid))
+                        {
+                            var columnValues = new Dictionary<string, object>
+                    {
+                        { "CurrentBillNo", currentBillNo },
+                        { "Balance", balance },
+                        { "AmountPaid", amountPaid }
+                    };
+
+                            try
+                            {
+                                ColumnUpdaterHelper.UpdateColumns("Tb_Payments", "PaymentID", paymentId, columnValues, connection);
+                            }
+                            catch
+                            {
+                                anyError = true;
+                                // Error message is already shown in ColumnUpdaterHelper
+                            }
+                        }
+                    }
+                }
+
+                if (anyError)
+                {
+                    MessageBox.Show(
+                        "Some records could not be updated due to duplicate CurrentBillNo or other database errors.\n" +
+                        "Please review the error messages and correct the data.",
+                        "Partial Update",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("CurrentBillNo(s), Balance(s), and AmountPaid(s) updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                LoadPaymentsSelectedColumns();
+            }
+        }
+
+        private void paymentsUndoButton_Click(object sender, EventArgs e)
+        {
+
+            LoadPaymentsSelectedColumns();
+        }
+
+        private void paymentsRefreshButton_Click(object sender, EventArgs e)
+        {
+
+            LoadPaymentsSelectedColumns();
+        }
+
+        private void paymentsZoneComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Get selected zone code from ComboBox
+            string zoneCode = paymentsZoneComboBox.SelectedValue?.ToString();
+
+            if (string.IsNullOrEmpty(zoneCode))
+                return;
+
+            if (paymentsDataGridView.DataSource is DataTable dt)
+            {
+                // Filter rows where accountno starts with the selected zoneCode (e.g., "04-")
+                dt.DefaultView.RowFilter = $"accountno LIKE '{zoneCode}-%'";
+
+                // Sort rows in ascending order by accountno
+                dt.DefaultView.Sort = "accountno ASC";
+            }
+        }
+
+        private void paymentsClearButton_Click(object sender, EventArgs e)
+        {
+            LoadPaymentsSelectedColumns();
+        }
+
+        private void paymentSearchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+
+                string keyword = paymentSearchTextBox.Text.Trim();
+
+                if (string.IsNullOrEmpty(keyword)) return;
+
+                // Prevent special character issues
+                keyword = keyword.Replace("'", "''").Replace("[", "[[]").Replace("%", "[%]").Replace("*", "[*]");
+
+                if (paymentsDataGridView.DataSource is DataTable dt)
+                {
+                    // Ensure the column names are correct
+                    if (dt.Columns.Contains("AccountNo") && dt.Columns.Contains("CurrentBillNo") && dt.Columns.Contains("ORNumber"))
+                    {
+                        dt.DefaultView.RowFilter =
+                            $"Convert(AccountNo, 'System.String') LIKE '%{keyword}%' " +
+                            $"OR Convert(CurrentBillNo, 'System.String') LIKE '%{keyword}%' " +
+                            $"OR Convert(ORNumber, 'System.String') LIKE '%{keyword}%'";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ensure your MDB columns are named exactly 'AccountNo', 'CurrentBillNo', and 'ORNumber'.", "Column Name Error");
+                    }
+                }
+            }
+        }
+
+        private void paymentsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        private void AddDeleteContextMenu(DataGridView dgv, string tableName, string idColumn)
+        {
+            var menu = new ContextMenuStrip();
+            var deleteItem = new ToolStripMenuItem("Delete Row");
+            deleteItem.ForeColor = Color.Red;
+            deleteItem.Image = SystemIcons.Error.ToBitmap();
+            deleteItem.Click += (s, e) =>
+            {
+                if (dgv.SelectedRows.Count > 0)
+                {
+                    var row = dgv.SelectedRows[0];
+
+                    // Handle uncommitted new row deletion gracefully
+                    if (row.IsNewRow)
+                    {
+                        MessageBox.Show("Cannot delete an uncommitted new row. Please enter data or cancel the row first.", "Delete Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+
+                    var idValue = row.Cells[idColumn].Value;
+                    if (idValue == null || idValue == DBNull.Value)
+                    {
+                        try
+                        {
+                            dgv.Rows.Remove(row); // Remove unsaved row
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            MessageBox.Show("Cannot delete an uncommitted new row. Please enter data or cancel the row first.", "Delete Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        return;
+                    }
+                    if (MessageBox.Show("Are you sure you want to delete this row from the database?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        if (TableUpdaterHelper.DeleteRow(tableName, idColumn, idValue))
+                        {
+                            MessageBox.Show("Row deleted.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadSelectedColumns();
+                            LoadPaymentsSelectedColumns();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Delete failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            };
+            menu.Items.Add(deleteItem);
+            dgv.ContextMenuStrip = menu;
+
+            // Ensure right-click selects the row
+            dgv.MouseDown += (s, e) =>
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    var hit = dgv.HitTest(e.X, e.Y);
+                    if (hit.RowIndex >= 0)
+                    {
+                        dgv.ClearSelection();
+                        dgv.Rows[hit.RowIndex].Selected = true;
+                    }
+                }
+            };
+        }
+    }
+
+}
