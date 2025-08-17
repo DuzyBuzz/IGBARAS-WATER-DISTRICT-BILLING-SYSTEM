@@ -114,7 +114,7 @@ namespace IGBARAS_WATER_DISTRICT.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DateFrom {
+        public CrystalDecisions.Shared.IParameterField Parameter_Month {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -122,7 +122,7 @@ namespace IGBARAS_WATER_DISTRICT.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DateTo {
+        public CrystalDecisions.Shared.IParameterField Parameter_Year {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
