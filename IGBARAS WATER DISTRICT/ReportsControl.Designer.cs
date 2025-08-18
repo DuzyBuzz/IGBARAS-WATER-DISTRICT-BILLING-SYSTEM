@@ -133,6 +133,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.monthlyBillingCrystalRepoerViewer.Name = "monthlyBillingCrystalRepoerViewer";
             this.monthlyBillingCrystalRepoerViewer.Size = new System.Drawing.Size(1173, 774);
             this.monthlyBillingCrystalRepoerViewer.TabIndex = 0;
+            this.monthlyBillingCrystalRepoerViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.ParameterPanel;
             this.monthlyBillingCrystalRepoerViewer.Load += new System.EventHandler(this.crystalReportViewer3_Load);
             // 
             // dailyCollectionTab

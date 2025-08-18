@@ -346,6 +346,7 @@ namespace IGBARAS_WATER_DISTRICT
 
         private void paymentsClearButton_Click(object sender, EventArgs e)
         {
+            paymentSearchTextBox.Text = string.Empty;
             LoadPaymentsSelectedColumns();
         }
 

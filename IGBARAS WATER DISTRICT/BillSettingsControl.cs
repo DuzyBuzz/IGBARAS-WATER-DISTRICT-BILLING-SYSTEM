@@ -21,9 +21,7 @@ namespace IGBARAS_WATER_DISTRICT
         private void BillSettingsControl_Load(object sender, EventArgs e)
         {
             ReloadAllTables();
-            discountDataGridView.AllowUserToAddRows = false;
-            settingsDataGidView.AllowUserToAddRows = false;
-            settingsDataGidView.RowHeadersVisible = false;
+
         }
 
         // 📌 Reusable Confirmation Method
@@ -92,6 +90,9 @@ namespace IGBARAS_WATER_DISTRICT
             TableLoaderHelper.LoadTableToGrid(settingsDataGidView, "Tb_Settings");
             TableLoaderHelper.LoadTableToGrid(zoneDataGridView, "Tb_Zone");
             TableLoaderHelper.LoadTableToGrid(discountDataGridView, "Tb_Discount");
+            discountDataGridView.AllowUserToAddRows = false;
+            settingsDataGidView.AllowUserToAddRows = false;
+            settingsDataGidView.RowHeadersVisible = false;
         }
 
         // Add right-click delete support to a DataGridView
