@@ -1021,7 +1021,6 @@ ORDER BY b.BillNo DESC;
                             adapter.Fill(dt);
                             billDataGridView.DataSource = dt;
 
-                            billDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
                             // Loop through each row to apply colors
                             foreach (DataGridViewRow row in billDataGridView.Rows)
@@ -1953,7 +1952,6 @@ ORDER BY b.BillNo DESC;
                         var dataTable = new DataTable();
                         adapter.Fill(dataTable);
                         paymentsOnThisDayDataGridView.DataSource = dataTable;
-
                         FormatDataGridView(paymentsOnThisDayDataGridView);
                         HighlightPaymentStatuses();
                     }
