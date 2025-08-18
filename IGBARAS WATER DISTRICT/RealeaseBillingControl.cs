@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.AccessControl;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Services.Description;
 using System.Windows.Forms;
@@ -569,6 +570,7 @@ namespace IGBARAS_WATER_DISTRICT
             string status = selectedRow.Cells["status"].Value?.ToString();
             string scf = selectedRow.Cells["SCF"].Value?.ToString();
 
+
             collectionAccountNoLabel.Text = accountNo;
             if (DateTime.TryParse(frdObj?.ToString(), out DateTime frd))
             {
@@ -607,14 +609,14 @@ namespace IGBARAS_WATER_DISTRICT
                 displayAmount = Math.Min(SCFBalance, 500m); // max 500
 
                 // Format and set the textbox
-                totalSCFAmountLabel.Text = displayAmount.ToString("N2");
+                currentSCFLabel.Text = displayAmount.ToString("N2");
             }
             else
             {
                 // If scf is 0, clear or reset the textbox
-                totalSCFAmountLabel.Text = "0.00";
+                currentSCFLabel.Text = "0.00";
             }
-            Debug.WriteLine("scf //////"+ scfValue);
+            Debug.WriteLine("scf "+ scfValue);
             defaultDiscount = discountedPercentLabel.Text;
             defaultDiscountName = discountNameLabel.Text;
             firstReadingDateLabel.Text = frdObj;
@@ -663,41 +665,75 @@ namespace IGBARAS_WATER_DISTRICT
                     }
 
 
-                    ////////////////////////////////////////////////////////////////////////
-                    // Calculate monthly SCF charge (max ₱500 or remaining balance)
-                    decimal monthlySCF = Math.Min(displayAmount, 500m);
 
-                    // Default values
-                    decimal SCFArrears = 0m;
-                    decimal currentSCF = 0m;
-
-                    // Determine SCF arrears and current charge based on bill status
                     if (bill.IsSCFPaid)
                     {
-                        // Fully paid: no arrears, no current charge
-                        SCFArrears = 0m;
-                        currentSCF = 0m;
+                        // Bill is fully paid, always show 0.00 arrears
+                        scfArrearsLabel.Text = "0.00";
+
+                        // Current SCF for this month only
+                        decimal currentSCF = Math.Min(displayAmount, 500m);
+                        totalSCFAmountLabel.Text = currentSCF.ToString("N2");
                     }
                     else if (bill.IsSCFPartiallyPaid)
                     {
-                        // Partially paid: use arrears from bill, plus current month charge
-                        SCFArrears = bill.SCFArrearsAmount > 0 ? bill.SCFArrearsAmount : 0m;
-                        currentSCF = monthlySCF;
+                        // Bill is partially paid, show the remaining balance
+                        decimal scfArrears = bill.SCFBalance;
+                        scfArrearsLabel.Text = scfArrears.ToString("N2");
+
+                        // Add arrears + current SCF
+                        decimal currentSCF = Math.Min(displayAmount, 500m);
+                        decimal totalSCF = scfArrears + currentSCF;
+                        totalSCFAmountLabel.Text = totalSCF.ToString("N2");
                     }
                     else
                     {
-                        // Unpaid: use total SCF from bill as arrears, plus current month charge
-                        SCFArrears = bill.TotalSCFAmount > 0 ? bill.TotalSCFAmount : 0m;
-                        currentSCF = monthlySCF;
+                        // Bill is unpaid (neither fully nor partially paid), show full billed amount
+                        decimal scfArrears = bill.TotalSCFAmount;
+                        scfArrearsLabel.Text = scfArrears.ToString("N2");
+
+                        // Add arrears + current SCF
+                        decimal currentSCF = Math.Min(displayAmount, 500m);
+                        decimal totalSCF = scfArrears + currentSCF;
+                        totalSCFAmountLabel.Text = totalSCF.ToString("N2");
                     }
 
-                    // Compute total SCF
-                    decimal totalSCF = SCFArrears + currentSCF;
 
-                    // Update labels
-                    scfArrearsLabel.Text = SCFArrears.ToString("N2");
-                    currentSCFLabel.Text = currentSCF.ToString("N2");
-                    totalSCFAmountLabel.Text = totalSCF.ToString("N2");
+                    ////////////////////////////////////////////////////////////////////////
+                    // Calculate monthly SCF charge (max ₱500 or remaining balance)
+                    //decimal monthlySCF = Math.Min(displayAmount, 500m);
+
+                    //// Default values
+                    //decimal SCFArrears = 0m;
+                    //decimal currentSCF = 0m;
+
+                    //// Determine SCF arrears and current charge based on bill status
+                    //if (bill.IsSCFPaid)
+                    //{
+                    //    // Fully paid: no arrears, no current charge
+                    //    SCFArrears = 0m;
+                    //    currentSCF = 0m;
+                    //}
+                    //else if (bill.IsSCFPartiallyPaid)
+                    //{
+                    //    // Partially paid: use arrears from bill, plus current month charge
+                    //    SCFArrears = bill.SCFArrearsAmount > 0 ? bill.SCFArrearsAmount : 0m;
+                    //    currentSCF = monthlySCF;
+                    //}
+                    //else
+                    //{
+                    //    // Unpaid: use total SCF from bill as arrears, plus current month charge
+                    //    SCFArrears = bill.TotalSCFAmount > 0 ? bill.TotalSCFAmount : 0m;
+                    //    currentSCF = monthlySCF;
+                    //}
+
+                    //// Compute total SCF
+                    //decimal totalSCF = SCFArrears + currentSCF;
+
+                    //// Update labels
+                    //scfArrearsLabel.Text = SCFArrears.ToString("N2");
+                    //currentSCFLabel.Text = currentSCF.ToString("N2");
+                    //totalSCFAmountLabel.Text = totalSCF.ToString("N2");
 
 
 
