@@ -34,18 +34,18 @@ namespace IGBARAS_WATER_DISTRICT
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RealeaseBillingControl));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.loadingLabel = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -969,8 +969,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel18.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel18.Name = "tableLayoutPanel18";
             this.tableLayoutPanel18.RowCount = 1;
-            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 79F));
-            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 79F));
+            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel18.Size = new System.Drawing.Size(356, 50);
             this.tableLayoutPanel18.TabIndex = 1;
             // 
@@ -981,7 +981,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label33.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label33.Location = new System.Drawing.Point(4, 1);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(134, 79);
+            this.label33.Size = new System.Drawing.Size(134, 80);
             this.label33.TabIndex = 0;
             this.label33.Text = "Item Description/\r\nNature of Service";
             this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -992,7 +992,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label28.Location = new System.Drawing.Point(145, 1);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(64, 79);
+            this.label28.Size = new System.Drawing.Size(64, 80);
             this.label28.TabIndex = 1;
             this.label28.Text = "Qty";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1003,7 +1003,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label29.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label29.Location = new System.Drawing.Point(216, 1);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(64, 79);
+            this.label29.Size = new System.Drawing.Size(64, 80);
             this.label29.TabIndex = 2;
             this.label29.Text = "Unit\r\nPrice";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1014,7 +1014,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label30.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label30.Location = new System.Drawing.Point(287, 1);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(65, 79);
+            this.label30.Size = new System.Drawing.Size(65, 80);
             this.label30.TabIndex = 3;
             this.label30.Text = "Amount";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2951,7 +2951,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel41.ColumnCount = 3;
             this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85.71429F));
             this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
+            this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
             this.tableLayoutPanel41.Controls.Add(this.orNumberTextBox, 2, 0);
             this.tableLayoutPanel41.Controls.Add(this.label52, 1, 0);
             this.tableLayoutPanel41.Controls.Add(this.label51, 0, 0);
@@ -2969,10 +2969,10 @@ namespace IGBARAS_WATER_DISTRICT
             this.orNumberTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.orNumberTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.orNumberTextBox.ForeColor = System.Drawing.Color.Red;
-            this.orNumberTextBox.Location = new System.Drawing.Point(321, 0);
+            this.orNumberTextBox.Location = new System.Drawing.Point(320, 0);
             this.orNumberTextBox.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
             this.orNumberTextBox.Name = "orNumberTextBox";
-            this.orNumberTextBox.Size = new System.Drawing.Size(99, 18);
+            this.orNumberTextBox.Size = new System.Drawing.Size(100, 18);
             this.orNumberTextBox.TabIndex = 48;
             this.orNumberTextBox.Text = "00000000";
             this.orNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -2982,7 +2982,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label52.AutoSize = true;
             this.label52.Dock = System.Windows.Forms.DockStyle.Left;
             this.label52.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label52.Location = new System.Drawing.Point(279, 0);
+            this.label52.Location = new System.Drawing.Point(278, 0);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(24, 17);
             this.label52.TabIndex = 3;
@@ -3568,7 +3568,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.410256F));
             this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 93.58974F));
             this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 149F));
-            this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 155F));
+            this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156F));
             this.tableLayoutPanel62.Controls.Add(this.label40, 0, 0);
             this.tableLayoutPanel62.Controls.Add(this.label158, 1, 0);
             this.tableLayoutPanel62.Controls.Add(this.label162, 3, 2);
@@ -3615,9 +3615,9 @@ namespace IGBARAS_WATER_DISTRICT
             this.label162.AutoSize = true;
             this.label162.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label162.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label162.Location = new System.Drawing.Point(271, 34);
+            this.label162.Location = new System.Drawing.Point(270, 34);
             this.label162.Name = "label162";
-            this.label162.Size = new System.Drawing.Size(150, 19);
+            this.label162.Size = new System.Drawing.Size(151, 19);
             this.label162.TabIndex = 28;
             this.label162.Text = "COLLECTING OFFICER";
             this.label162.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3627,9 +3627,9 @@ namespace IGBARAS_WATER_DISTRICT
             this.collectingOfficerNameLabel.AutoSize = true;
             this.collectingOfficerNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.collectingOfficerNameLabel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.collectingOfficerNameLabel.Location = new System.Drawing.Point(271, 14);
+            this.collectingOfficerNameLabel.Location = new System.Drawing.Point(270, 14);
             this.collectingOfficerNameLabel.Name = "collectingOfficerNameLabel";
-            this.collectingOfficerNameLabel.Size = new System.Drawing.Size(150, 20);
+            this.collectingOfficerNameLabel.Size = new System.Drawing.Size(151, 20);
             this.collectingOfficerNameLabel.TabIndex = 29;
             this.collectingOfficerNameLabel.Text = "Marry De La Cruz";
             this.collectingOfficerNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3639,7 +3639,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label161.AutoSize = true;
             this.label161.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label161.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label161.Location = new System.Drawing.Point(122, 14);
+            this.label161.Location = new System.Drawing.Point(121, 14);
             this.label161.Name = "label161";
             this.label161.Size = new System.Drawing.Size(143, 20);
             this.label161.TabIndex = 27;
@@ -3659,7 +3659,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel64.Name = "tableLayoutPanel64";
             this.tableLayoutPanel64.RowCount = 1;
             this.tableLayoutPanel64.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel64.Size = new System.Drawing.Size(112, 20);
+            this.tableLayoutPanel64.Size = new System.Drawing.Size(111, 20);
             this.tableLayoutPanel64.TabIndex = 31;
             // 
             // cashCheckBox
@@ -3701,7 +3701,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel65.Name = "tableLayoutPanel65";
             this.tableLayoutPanel65.RowCount = 1;
             this.tableLayoutPanel65.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel65.Size = new System.Drawing.Size(112, 19);
+            this.tableLayoutPanel65.Size = new System.Drawing.Size(111, 19);
             this.tableLayoutPanel65.TabIndex = 32;
             // 
             // checkCheckBox
@@ -3929,6 +3929,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.paymentForBillingTextBox.Name = "paymentForBillingTextBox";
             this.paymentForBillingTextBox.Size = new System.Drawing.Size(135, 26);
             this.paymentForBillingTextBox.TabIndex = 52;
+            this.paymentForBillingTextBox.Text = "0.00";
             this.paymentForBillingTextBox.TextChanged += new System.EventHandler(this.paymentForBillingTextBox_TextChanged);
             this.paymentForBillingTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentForBillingTextBox_KeyDown);
             // 
@@ -3941,6 +3942,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.paymentForSCFTextBox.Name = "paymentForSCFTextBox";
             this.paymentForSCFTextBox.Size = new System.Drawing.Size(135, 26);
             this.paymentForSCFTextBox.TabIndex = 51;
+            this.paymentForSCFTextBox.Text = "0.00";
             this.paymentForSCFTextBox.TextChanged += new System.EventHandler(this.paymentForSCFTextBox_TextChanged);
             this.paymentForSCFTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentForSCFTextBox_KeyDown);
             // 
@@ -4075,8 +4077,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel56.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel56.Name = "tableLayoutPanel56";
             this.tableLayoutPanel56.RowCount = 1;
-            this.tableLayoutPanel56.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 87F));
-            this.tableLayoutPanel56.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 87F));
+            this.tableLayoutPanel56.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 88F));
+            this.tableLayoutPanel56.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this.tableLayoutPanel56.Size = new System.Drawing.Size(373, 58);
             this.tableLayoutPanel56.TabIndex = 1;
             // 
@@ -4087,7 +4089,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label86.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label86.Location = new System.Drawing.Point(4, 1);
             this.label86.Name = "label86";
-            this.label86.Size = new System.Drawing.Size(141, 87);
+            this.label86.Size = new System.Drawing.Size(141, 88);
             this.label86.TabIndex = 0;
             this.label86.Text = "Item Description/\r\nNature of Service";
             this.label86.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4098,7 +4100,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label90.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label90.Location = new System.Drawing.Point(152, 1);
             this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(67, 87);
+            this.label90.Size = new System.Drawing.Size(67, 88);
             this.label90.TabIndex = 1;
             this.label90.Text = "Qty";
             this.label90.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4109,7 +4111,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label91.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label91.Location = new System.Drawing.Point(226, 1);
             this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(67, 87);
+            this.label91.Size = new System.Drawing.Size(67, 88);
             this.label91.TabIndex = 2;
             this.label91.Text = "Unit\r\nPrice";
             this.label91.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4120,7 +4122,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label95.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label95.Location = new System.Drawing.Point(300, 1);
             this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(69, 87);
+            this.label95.Size = new System.Drawing.Size(69, 88);
             this.label95.TabIndex = 3;
             this.label95.Text = "Amount";
             this.label95.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5030,9 +5032,9 @@ namespace IGBARAS_WATER_DISTRICT
             this.accountDataGridView.Name = "accountDataGridView";
             this.accountDataGridView.ReadOnly = true;
             this.accountDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.accountDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle33.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.accountDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle33;
             this.accountDataGridView.Size = new System.Drawing.Size(422, 485);
             this.accountDataGridView.TabIndex = 23;
             this.accountDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.accountDataGridView_CellClick);
@@ -5042,9 +5044,9 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.accountno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.accountno.DataPropertyName = "AccountNo";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.accountno.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.accountno.DefaultCellStyle = dataGridViewCellStyle25;
             this.accountno.FillWeight = 400F;
             this.accountno.HeaderText = "Account #";
             this.accountno.Name = "accountno";
@@ -5063,9 +5065,9 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.fullname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.fullname.DataPropertyName = "ConcessionaireName";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.fullname.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.fullname.DefaultCellStyle = dataGridViewCellStyle26;
             this.fullname.FillWeight = 200F;
             this.fullname.HeaderText = "Concessionaire Name";
             this.fullname.Name = "fullname";
@@ -5076,9 +5078,9 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.SCF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.SCF.DataPropertyName = "SCF";
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = "0";
-            this.SCF.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle27.Format = "N2";
+            dataGridViewCellStyle27.NullValue = "0";
+            this.SCF.DefaultCellStyle = dataGridViewCellStyle27;
             this.SCF.HeaderText = "SCF";
             this.SCF.Name = "SCF";
             this.SCF.ReadOnly = true;
@@ -5088,9 +5090,9 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.businessAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.businessAddress.DataPropertyName = "Address";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.businessAddress.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.businessAddress.DefaultCellStyle = dataGridViewCellStyle28;
             this.businessAddress.FillWeight = 300F;
             this.businessAddress.HeaderText = "Business Address";
             this.businessAddress.Name = "businessAddress";
@@ -5101,9 +5103,9 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.zoneCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.zoneCode.DataPropertyName = "ZoneCode";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.zoneCode.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.zoneCode.DefaultCellStyle = dataGridViewCellStyle29;
             this.zoneCode.FillWeight = 50F;
             this.zoneCode.HeaderText = "Zone Code";
             this.zoneCode.Name = "zoneCode";
@@ -5123,9 +5125,9 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.meterNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.meterNo.DataPropertyName = "MeterNo";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.meterNo.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.meterNo.DefaultCellStyle = dataGridViewCellStyle30;
             this.meterNo.FillWeight = 200F;
             this.meterNo.HeaderText = "Meter #";
             this.meterNo.Name = "meterNo";
@@ -5136,8 +5138,8 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.firstReadingDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.firstReadingDate.DataPropertyName = "FirstReadingDate";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.firstReadingDate.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.firstReadingDate.DefaultCellStyle = dataGridViewCellStyle31;
             this.firstReadingDate.HeaderText = "First Reading Date(FRD)";
             this.firstReadingDate.Name = "firstReadingDate";
             this.firstReadingDate.ReadOnly = true;
@@ -5182,8 +5184,8 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.status.DataPropertyName = "Status";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.status.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.status.DefaultCellStyle = dataGridViewCellStyle32;
             this.status.HeaderText = "Status";
             this.status.Name = "status";
             this.status.ReadOnly = true;
@@ -5363,8 +5365,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.paymentsOnThisDayDataGridView.Name = "paymentsOnThisDayDataGridView";
             this.paymentsOnThisDayDataGridView.ReadOnly = true;
             this.paymentsOnThisDayDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.paymentsOnThisDayDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.paymentsOnThisDayDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle34;
             this.paymentsOnThisDayDataGridView.Size = new System.Drawing.Size(581, 229);
             this.paymentsOnThisDayDataGridView.TabIndex = 45;
             // 
@@ -5403,8 +5405,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.paymentsDataGridView.Name = "paymentsDataGridView";
             this.paymentsDataGridView.ReadOnly = true;
             this.paymentsDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.paymentsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.paymentsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle35;
             this.paymentsDataGridView.Size = new System.Drawing.Size(439, 263);
             this.paymentsDataGridView.TabIndex = 36;
             // 
@@ -5441,8 +5443,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.billDataGridView.Name = "billDataGridView";
             this.billDataGridView.ReadOnly = true;
             this.billDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.billDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.billDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle36;
             this.billDataGridView.Size = new System.Drawing.Size(661, 229);
             this.billDataGridView.TabIndex = 24;
             // 

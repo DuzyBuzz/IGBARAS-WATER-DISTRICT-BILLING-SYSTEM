@@ -32,25 +32,6 @@
             this.billingTab = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.billingDataGridView = new System.Windows.Forms.DataGridView();
-            this.BillingID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BillNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DateCreated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AccountNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DateFrom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DateTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrevReading = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PresentReadings = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Is_PartiallyPaid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Is_FullyPaid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Is_Arrears = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DiscountAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TaxAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FreeWater = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ArrearsAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountBilled = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ArrearsPenaltyAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalAmountBilled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.zoneComboBox = new System.Windows.Forms.ComboBox();
@@ -89,6 +70,25 @@
             this.paymentsClearButton = new System.Windows.Forms.Button();
             this.paymentsUndoButton = new System.Windows.Forms.Button();
             this.paymentsApplyButton = new System.Windows.Forms.Button();
+            this.BillingID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BillNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateCreated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AccountNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateFrom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrevReading = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PresentReadings = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Is_PartiallyPaid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Is_FullyPaid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Is_Arrears = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DiscountAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TaxAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FreeWater = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ArrearsAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountBilled = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ArrearsPenaltyAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalAmountBilled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.billingTab.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -170,166 +170,9 @@
             this.billingDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.billingDataGridView.Location = new System.Drawing.Point(3, 39);
             this.billingDataGridView.Name = "billingDataGridView";
-            this.billingDataGridView.ReadOnly = true;
             this.billingDataGridView.RowHeadersVisible = false;
             this.billingDataGridView.Size = new System.Drawing.Size(1161, 730);
             this.billingDataGridView.TabIndex = 26;
-            // 
-            // BillingID
-            // 
-            this.BillingID.DataPropertyName = "BillingID";
-            this.BillingID.HeaderText = "BillingID";
-            this.BillingID.Name = "BillingID";
-            this.BillingID.ReadOnly = true;
-            this.BillingID.Visible = false;
-            this.BillingID.Width = 51;
-            // 
-            // BillNo
-            // 
-            this.BillNo.DataPropertyName = "BillNo";
-            this.BillNo.HeaderText = "BillNo";
-            this.BillNo.Name = "BillNo";
-            this.BillNo.ReadOnly = true;
-            this.BillNo.Width = 59;
-            // 
-            // DateCreated
-            // 
-            this.DateCreated.DataPropertyName = "DateCreated";
-            this.DateCreated.HeaderText = "Date Billed";
-            this.DateCreated.Name = "DateCreated";
-            this.DateCreated.ReadOnly = true;
-            this.DateCreated.Width = 77;
-            // 
-            // AccountNo
-            // 
-            this.AccountNo.DataPropertyName = "AccountNo";
-            this.AccountNo.HeaderText = "AccountNo";
-            this.AccountNo.Name = "AccountNo";
-            this.AccountNo.ReadOnly = true;
-            this.AccountNo.Width = 86;
-            // 
-            // DateFrom
-            // 
-            this.DateFrom.DataPropertyName = "DateFrom";
-            this.DateFrom.HeaderText = "Date From";
-            this.DateFrom.Name = "DateFrom";
-            this.DateFrom.ReadOnly = true;
-            this.DateFrom.Width = 75;
-            // 
-            // DateTo
-            // 
-            this.DateTo.DataPropertyName = "DateTo";
-            this.DateTo.HeaderText = "Date To";
-            this.DateTo.Name = "DateTo";
-            this.DateTo.ReadOnly = true;
-            this.DateTo.Width = 66;
-            // 
-            // PrevReading
-            // 
-            this.PrevReading.DataPropertyName = "PrevReading";
-            this.PrevReading.HeaderText = "Prev Reading";
-            this.PrevReading.Name = "PrevReading";
-            this.PrevReading.ReadOnly = true;
-            this.PrevReading.Width = 89;
-            // 
-            // PresentReadings
-            // 
-            this.PresentReadings.DataPropertyName = "PresentReading";
-            this.PresentReadings.HeaderText = "Present Reading";
-            this.PresentReadings.Name = "PresentReadings";
-            this.PresentReadings.ReadOnly = true;
-            this.PresentReadings.Width = 102;
-            // 
-            // DueDate
-            // 
-            this.DueDate.DataPropertyName = "DueDate";
-            this.DueDate.HeaderText = "Due Date";
-            this.DueDate.Name = "DueDate";
-            this.DueDate.ReadOnly = true;
-            this.DueDate.Width = 72;
-            // 
-            // Is_PartiallyPaid
-            // 
-            this.Is_PartiallyPaid.DataPropertyName = "Is_PartiallyPaid";
-            this.Is_PartiallyPaid.HeaderText = "Is Partially Paid";
-            this.Is_PartiallyPaid.Name = "Is_PartiallyPaid";
-            this.Is_PartiallyPaid.ReadOnly = true;
-            this.Is_PartiallyPaid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Is_PartiallyPaid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Is_PartiallyPaid.Width = 95;
-            // 
-            // Is_FullyPaid
-            // 
-            this.Is_FullyPaid.DataPropertyName = "Is_FullyPaid";
-            this.Is_FullyPaid.HeaderText = "Is Fully Paid";
-            this.Is_FullyPaid.Name = "Is_FullyPaid";
-            this.Is_FullyPaid.ReadOnly = true;
-            this.Is_FullyPaid.Width = 62;
-            // 
-            // Is_Arrears
-            // 
-            this.Is_Arrears.DataPropertyName = "Is_Arrears";
-            this.Is_Arrears.HeaderText = "Is Arrears";
-            this.Is_Arrears.Name = "Is_Arrears";
-            this.Is_Arrears.ReadOnly = true;
-            this.Is_Arrears.Width = 51;
-            // 
-            // DiscountAmount
-            // 
-            this.DiscountAmount.DataPropertyName = "DiscountAmount";
-            this.DiscountAmount.HeaderText = "Discount Amount";
-            this.DiscountAmount.Name = "DiscountAmount";
-            this.DiscountAmount.ReadOnly = true;
-            this.DiscountAmount.Width = 104;
-            // 
-            // TaxAmount
-            // 
-            this.TaxAmount.DataPropertyName = "TaxAmount";
-            this.TaxAmount.HeaderText = "Tax";
-            this.TaxAmount.Name = "TaxAmount";
-            this.TaxAmount.ReadOnly = true;
-            this.TaxAmount.Width = 50;
-            // 
-            // FreeWater
-            // 
-            this.FreeWater.DataPropertyName = "FreeWater";
-            this.FreeWater.HeaderText = "Free Water";
-            this.FreeWater.Name = "FreeWater";
-            this.FreeWater.ReadOnly = true;
-            this.FreeWater.Width = 79;
-            // 
-            // ArrearsAmount
-            // 
-            this.ArrearsAmount.DataPropertyName = "ArrearsAmount";
-            this.ArrearsAmount.HeaderText = "Arrears Amount";
-            this.ArrearsAmount.Name = "ArrearsAmount";
-            this.ArrearsAmount.ReadOnly = true;
-            this.ArrearsAmount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ArrearsAmount.Width = 96;
-            // 
-            // AmountBilled
-            // 
-            this.AmountBilled.DataPropertyName = "AmountBilled";
-            this.AmountBilled.HeaderText = "Amount Billed";
-            this.AmountBilled.Name = "AmountBilled";
-            this.AmountBilled.ReadOnly = true;
-            this.AmountBilled.Width = 88;
-            // 
-            // ArrearsPenaltyAmount
-            // 
-            this.ArrearsPenaltyAmount.DataPropertyName = "ArrearsPenaltyAmount";
-            this.ArrearsPenaltyAmount.HeaderText = "Arrears Penalty";
-            this.ArrearsPenaltyAmount.Name = "ArrearsPenaltyAmount";
-            this.ArrearsPenaltyAmount.ReadOnly = true;
-            this.ArrearsPenaltyAmount.Width = 95;
-            // 
-            // TotalAmountBilled
-            // 
-            this.TotalAmountBilled.DataPropertyName = "TotalAmountBilled";
-            this.TotalAmountBilled.HeaderText = "Total Amount Billed";
-            this.TotalAmountBilled.Name = "TotalAmountBilled";
-            this.TotalAmountBilled.ReadOnly = true;
-            this.TotalAmountBilled.Width = 113;
             // 
             // tableLayoutPanel2
             // 
@@ -342,7 +185,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
             this.tableLayoutPanel2.Controls.Add(this.button1, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.zoneComboBox, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.label32, 2, 0);
@@ -362,7 +205,7 @@
             // 
             this.button1.BackColor = System.Drawing.Color.SteelBlue;
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(675, 3);
+            this.button1.Location = new System.Drawing.Point(673, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(49, 24);
             this.button1.TabIndex = 36;
@@ -376,7 +219,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.zoneComboBox.FormattingEnabled = true;
-            this.zoneComboBox.Location = new System.Drawing.Point(625, 4);
+            this.zoneComboBox.Location = new System.Drawing.Point(623, 4);
             this.zoneComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.zoneComboBox.Name = "zoneComboBox";
             this.zoneComboBox.Size = new System.Drawing.Size(44, 21);
@@ -390,7 +233,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(536, 0);
+            this.label32.Location = new System.Drawing.Point(534, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(83, 30);
             this.label32.TabIndex = 32;
@@ -405,7 +248,7 @@
             this.searchAccountNumberTextBox.Location = new System.Drawing.Point(3, 4);
             this.searchAccountNumberTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.searchAccountNumberTextBox.Name = "searchAccountNumberTextBox";
-            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(496, 25);
+            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(495, 25);
             this.searchAccountNumberTextBox.TabIndex = 30;
             this.searchAccountNumberTextBox.TextChanged += new System.EventHandler(this.searchAccountNumberTextBox_TextChanged);
             this.searchAccountNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchAccountNumberTextBox_KeyDown);
@@ -417,9 +260,9 @@
             this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.clearButton.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearButton.ForeColor = System.Drawing.Color.Crimson;
-            this.clearButton.Location = new System.Drawing.Point(505, 3);
+            this.clearButton.Location = new System.Drawing.Point(504, 3);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(25, 24);
+            this.clearButton.Size = new System.Drawing.Size(24, 24);
             this.clearButton.TabIndex = 31;
             this.clearButton.Text = "❌";
             this.clearButton.UseVisualStyleBackColor = false;
@@ -429,7 +272,7 @@
             // 
             this.billingApplyButton.BackColor = System.Drawing.Color.SteelBlue;
             this.billingApplyButton.ForeColor = System.Drawing.Color.White;
-            this.billingApplyButton.Location = new System.Drawing.Point(1030, 3);
+            this.billingApplyButton.Location = new System.Drawing.Point(1028, 3);
             this.billingApplyButton.Name = "billingApplyButton";
             this.billingApplyButton.Size = new System.Drawing.Size(119, 24);
             this.billingApplyButton.TabIndex = 35;
@@ -442,7 +285,7 @@
             // 
             this.billingUndoButton.BackColor = System.Drawing.Color.Brown;
             this.billingUndoButton.ForeColor = System.Drawing.Color.White;
-            this.billingUndoButton.Location = new System.Drawing.Point(895, 3);
+            this.billingUndoButton.Location = new System.Drawing.Point(893, 3);
             this.billingUndoButton.Name = "billingUndoButton";
             this.billingUndoButton.Size = new System.Drawing.Size(127, 24);
             this.billingUndoButton.TabIndex = 34;
@@ -509,7 +352,6 @@
             this.paymentsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.paymentsDataGridView.Location = new System.Drawing.Point(3, 39);
             this.paymentsDataGridView.Name = "paymentsDataGridView";
-            this.paymentsDataGridView.ReadOnly = true;
             this.paymentsDataGridView.RowHeadersVisible = false;
             this.paymentsDataGridView.Size = new System.Drawing.Size(1161, 730);
             this.paymentsDataGridView.TabIndex = 26;
@@ -678,7 +520,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
             this.tableLayoutPanel4.Controls.Add(this.paymentsRefreshButton, 4, 0);
             this.tableLayoutPanel4.Controls.Add(this.paymentsZoneComboBox, 3, 0);
             this.tableLayoutPanel4.Controls.Add(this.label1, 2, 0);
@@ -698,7 +540,7 @@
             // 
             this.paymentsRefreshButton.BackColor = System.Drawing.Color.SteelBlue;
             this.paymentsRefreshButton.ForeColor = System.Drawing.Color.White;
-            this.paymentsRefreshButton.Location = new System.Drawing.Point(675, 3);
+            this.paymentsRefreshButton.Location = new System.Drawing.Point(673, 3);
             this.paymentsRefreshButton.Name = "paymentsRefreshButton";
             this.paymentsRefreshButton.Size = new System.Drawing.Size(49, 24);
             this.paymentsRefreshButton.TabIndex = 36;
@@ -712,7 +554,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.paymentsZoneComboBox.FormattingEnabled = true;
-            this.paymentsZoneComboBox.Location = new System.Drawing.Point(625, 4);
+            this.paymentsZoneComboBox.Location = new System.Drawing.Point(623, 4);
             this.paymentsZoneComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.paymentsZoneComboBox.Name = "paymentsZoneComboBox";
             this.paymentsZoneComboBox.Size = new System.Drawing.Size(44, 21);
@@ -726,7 +568,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(536, 0);
+            this.label1.Location = new System.Drawing.Point(534, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 30);
             this.label1.TabIndex = 32;
@@ -741,7 +583,7 @@
             this.paymentSearchTextBox.Location = new System.Drawing.Point(3, 4);
             this.paymentSearchTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.paymentSearchTextBox.Name = "paymentSearchTextBox";
-            this.paymentSearchTextBox.Size = new System.Drawing.Size(496, 25);
+            this.paymentSearchTextBox.Size = new System.Drawing.Size(495, 25);
             this.paymentSearchTextBox.TabIndex = 30;
             this.paymentSearchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentSearchTextBox_KeyDown);
             // 
@@ -753,9 +595,9 @@
             this.paymentsClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.paymentsClearButton.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.paymentsClearButton.ForeColor = System.Drawing.Color.Crimson;
-            this.paymentsClearButton.Location = new System.Drawing.Point(505, 3);
+            this.paymentsClearButton.Location = new System.Drawing.Point(504, 3);
             this.paymentsClearButton.Name = "paymentsClearButton";
-            this.paymentsClearButton.Size = new System.Drawing.Size(25, 24);
+            this.paymentsClearButton.Size = new System.Drawing.Size(24, 24);
             this.paymentsClearButton.TabIndex = 31;
             this.paymentsClearButton.Text = "❌";
             this.paymentsClearButton.UseVisualStyleBackColor = false;
@@ -765,7 +607,7 @@
             // 
             this.paymentsUndoButton.BackColor = System.Drawing.Color.Brown;
             this.paymentsUndoButton.ForeColor = System.Drawing.Color.White;
-            this.paymentsUndoButton.Location = new System.Drawing.Point(895, 3);
+            this.paymentsUndoButton.Location = new System.Drawing.Point(893, 3);
             this.paymentsUndoButton.Name = "paymentsUndoButton";
             this.paymentsUndoButton.Size = new System.Drawing.Size(127, 24);
             this.paymentsUndoButton.TabIndex = 34;
@@ -778,13 +620,152 @@
             // 
             this.paymentsApplyButton.BackColor = System.Drawing.Color.SteelBlue;
             this.paymentsApplyButton.ForeColor = System.Drawing.Color.White;
-            this.paymentsApplyButton.Location = new System.Drawing.Point(1030, 3);
+            this.paymentsApplyButton.Location = new System.Drawing.Point(1028, 3);
             this.paymentsApplyButton.Name = "paymentsApplyButton";
             this.paymentsApplyButton.Size = new System.Drawing.Size(119, 24);
             this.paymentsApplyButton.TabIndex = 35;
             this.paymentsApplyButton.Text = "✏️ Apply Changes";
             this.paymentsApplyButton.UseVisualStyleBackColor = false;
             this.paymentsApplyButton.Click += new System.EventHandler(this.paymentsApplyButton_Click);
+            // 
+            // BillingID
+            // 
+            this.BillingID.DataPropertyName = "BillingID";
+            this.BillingID.HeaderText = "BillingID";
+            this.BillingID.Name = "BillingID";
+            this.BillingID.Visible = false;
+            this.BillingID.Width = 51;
+            // 
+            // BillNo
+            // 
+            this.BillNo.DataPropertyName = "BillNo";
+            this.BillNo.HeaderText = "BillNo";
+            this.BillNo.Name = "BillNo";
+            this.BillNo.Width = 59;
+            // 
+            // DateCreated
+            // 
+            this.DateCreated.DataPropertyName = "DateCreated";
+            this.DateCreated.HeaderText = "Date Billed";
+            this.DateCreated.Name = "DateCreated";
+            this.DateCreated.Width = 83;
+            // 
+            // AccountNo
+            // 
+            this.AccountNo.DataPropertyName = "AccountNo";
+            this.AccountNo.HeaderText = "AccountNo";
+            this.AccountNo.Name = "AccountNo";
+            this.AccountNo.Width = 86;
+            // 
+            // DateFrom
+            // 
+            this.DateFrom.DataPropertyName = "DateFrom";
+            this.DateFrom.HeaderText = "Date From";
+            this.DateFrom.Name = "DateFrom";
+            this.DateFrom.Width = 81;
+            // 
+            // DateTo
+            // 
+            this.DateTo.DataPropertyName = "DateTo";
+            this.DateTo.HeaderText = "Date To";
+            this.DateTo.Name = "DateTo";
+            this.DateTo.Width = 71;
+            // 
+            // PrevReading
+            // 
+            this.PrevReading.DataPropertyName = "PrevReading";
+            this.PrevReading.HeaderText = "Prev Reading";
+            this.PrevReading.Name = "PrevReading";
+            this.PrevReading.Width = 97;
+            // 
+            // PresentReadings
+            // 
+            this.PresentReadings.DataPropertyName = "PresentReading";
+            this.PresentReadings.HeaderText = "Present Reading";
+            this.PresentReadings.Name = "PresentReadings";
+            this.PresentReadings.Width = 102;
+            // 
+            // DueDate
+            // 
+            this.DueDate.DataPropertyName = "DueDate";
+            this.DueDate.HeaderText = "Due Date";
+            this.DueDate.Name = "DueDate";
+            this.DueDate.Width = 72;
+            // 
+            // Is_PartiallyPaid
+            // 
+            this.Is_PartiallyPaid.DataPropertyName = "Is_PartiallyPaid";
+            this.Is_PartiallyPaid.HeaderText = "Is Partially Paid";
+            this.Is_PartiallyPaid.Name = "Is_PartiallyPaid";
+            this.Is_PartiallyPaid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Is_PartiallyPaid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Is_PartiallyPaid.Width = 95;
+            // 
+            // Is_FullyPaid
+            // 
+            this.Is_FullyPaid.DataPropertyName = "Is_FullyPaid";
+            this.Is_FullyPaid.HeaderText = "Is Fully Paid";
+            this.Is_FullyPaid.Name = "Is_FullyPaid";
+            this.Is_FullyPaid.Width = 62;
+            // 
+            // Is_Arrears
+            // 
+            this.Is_Arrears.DataPropertyName = "Is_Arrears";
+            this.Is_Arrears.HeaderText = "Is Arrears";
+            this.Is_Arrears.Name = "Is_Arrears";
+            this.Is_Arrears.Width = 51;
+            // 
+            // DiscountAmount
+            // 
+            this.DiscountAmount.DataPropertyName = "DiscountAmount";
+            this.DiscountAmount.HeaderText = "Discount Amount";
+            this.DiscountAmount.Name = "DiscountAmount";
+            this.DiscountAmount.Width = 104;
+            // 
+            // TaxAmount
+            // 
+            this.TaxAmount.DataPropertyName = "TaxAmount";
+            this.TaxAmount.HeaderText = "Tax";
+            this.TaxAmount.Name = "TaxAmount";
+            this.TaxAmount.Width = 50;
+            // 
+            // FreeWater
+            // 
+            this.FreeWater.DataPropertyName = "FreeWater";
+            this.FreeWater.HeaderText = "Free Water";
+            this.FreeWater.Name = "FreeWater";
+            this.FreeWater.Width = 79;
+            // 
+            // ArrearsAmount
+            // 
+            this.ArrearsAmount.DataPropertyName = "ArrearsAmount";
+            this.ArrearsAmount.HeaderText = "Arrears Amount";
+            this.ArrearsAmount.Name = "ArrearsAmount";
+            this.ArrearsAmount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ArrearsAmount.Width = 96;
+            // 
+            // AmountBilled
+            // 
+            this.AmountBilled.DataPropertyName = "AmountBilled";
+            this.AmountBilled.HeaderText = "Amount Billed";
+            this.AmountBilled.Name = "AmountBilled";
+            this.AmountBilled.ReadOnly = true;
+            this.AmountBilled.Width = 88;
+            // 
+            // ArrearsPenaltyAmount
+            // 
+            this.ArrearsPenaltyAmount.DataPropertyName = "ArrearsPenaltyAmount";
+            this.ArrearsPenaltyAmount.HeaderText = "Arrears Penalty";
+            this.ArrearsPenaltyAmount.Name = "ArrearsPenaltyAmount";
+            this.ArrearsPenaltyAmount.Width = 95;
+            // 
+            // TotalAmountBilled
+            // 
+            this.TotalAmountBilled.DataPropertyName = "TotalAmountBilled";
+            this.TotalAmountBilled.HeaderText = "Total Amount Billed";
+            this.TotalAmountBilled.Name = "TotalAmountBilled";
+            this.TotalAmountBilled.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.TotalAmountBilled.Width = 113;
             // 
             // BillingAndPaymentsControl
             // 
@@ -834,25 +815,6 @@
         private System.Windows.Forms.Button paymentsClearButton;
         private System.Windows.Forms.Button paymentsApplyButton;
         private System.Windows.Forms.Button paymentsUndoButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BillingID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BillNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DateCreated;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AccountNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DateFrom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DateTo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrevReading;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PresentReadings;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DueDate;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Is_PartiallyPaid;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Is_FullyPaid;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Is_Arrears;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DiscountAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TaxAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FreeWater;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ArrearsAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AmountBilled;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ArrearsPenaltyAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalAmountBilled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ORNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn CurrentBillNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountNum;
@@ -872,5 +834,24 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
         private System.Windows.Forms.DataGridViewTextBoxColumn FreeWaters;
         private System.Windows.Forms.DataGridViewTextBoxColumn PaymentID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BillingID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BillNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateCreated;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AccountNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateFrom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateTo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrevReading;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PresentReadings;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DueDate;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Is_PartiallyPaid;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Is_FullyPaid;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Is_Arrears;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiscountAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TaxAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FreeWater;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ArrearsAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AmountBilled;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ArrearsPenaltyAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalAmountBilled;
     }
 }

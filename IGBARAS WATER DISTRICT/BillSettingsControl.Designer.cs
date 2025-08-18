@@ -45,10 +45,12 @@ namespace IGBARAS_WATER_DISTRICT
             this.panel13 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.serviceDataGridView = new System.Windows.Forms.DataGridView();
-            this.ServiceiD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.discountDataGridView = new System.Windows.Forms.DataGridView();
+            this.DiscountID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiscountName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel16 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -61,9 +63,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.undoAllButton = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.DiscountID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiscountName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ServiceiD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -253,13 +253,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.serviceDataGridView.Size = new System.Drawing.Size(505, 315);
             this.serviceDataGridView.TabIndex = 0;
             // 
-            // ServiceiD
-            // 
-            this.ServiceiD.DataPropertyName = "ServiceiD";
-            this.ServiceiD.HeaderText = "ServiceiD";
-            this.ServiceiD.Name = "ServiceiD";
-            this.ServiceiD.Visible = false;
-            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
@@ -302,6 +295,26 @@ namespace IGBARAS_WATER_DISTRICT
             this.discountDataGridView.Name = "discountDataGridView";
             this.discountDataGridView.Size = new System.Drawing.Size(328, 149);
             this.discountDataGridView.TabIndex = 1;
+            // 
+            // DiscountID
+            // 
+            this.DiscountID.DataPropertyName = "DiscountID";
+            this.DiscountID.HeaderText = "DiscountID";
+            this.DiscountID.Name = "DiscountID";
+            this.DiscountID.Visible = false;
+            // 
+            // DiscountName
+            // 
+            this.DiscountName.DataPropertyName = "DiscountName";
+            this.DiscountName.HeaderText = "Discount Name";
+            this.DiscountName.Name = "DiscountName";
+            this.DiscountName.ReadOnly = true;
+            // 
+            // Discount
+            // 
+            this.Discount.DataPropertyName = "Discount";
+            this.Discount.HeaderText = "Discount";
+            this.Discount.Name = "Discount";
             // 
             // panel16
             // 
@@ -436,25 +449,11 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel5.Size = new System.Drawing.Size(1171, 390);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
-            // DiscountID
+            // ServiceiD
             // 
-            this.DiscountID.DataPropertyName = "DiscountID";
-            this.DiscountID.HeaderText = "DiscountID";
-            this.DiscountID.Name = "DiscountID";
-            this.DiscountID.Visible = false;
-            // 
-            // DiscountName
-            // 
-            this.DiscountName.DataPropertyName = "DiscountName";
-            this.DiscountName.HeaderText = "Discount Name";
-            this.DiscountName.Name = "DiscountName";
-            this.DiscountName.ReadOnly = true;
-            // 
-            // Discount
-            // 
-            this.Discount.DataPropertyName = "Discount";
-            this.Discount.HeaderText = "Discount";
-            this.Discount.Name = "Discount";
+            this.ServiceiD.DataPropertyName = "ServiceiD";
+            this.ServiceiD.HeaderText = "ServiceiD";
+            this.ServiceiD.Name = "ServiceiD";
             // 
             // BillSettingsControl
             // 
@@ -510,7 +509,6 @@ namespace IGBARAS_WATER_DISTRICT
         private Panel panel13;
         private Label label3;
         private DataGridView serviceDataGridView;
-        private DataGridViewTextBoxColumn ServiceiD;
         private TableLayoutPanel tableLayoutPanel4;
         private Panel panel8;
         private Panel panel16;
@@ -526,5 +524,6 @@ namespace IGBARAS_WATER_DISTRICT
         private DataGridViewTextBoxColumn DiscountID;
         private DataGridViewTextBoxColumn DiscountName;
         private DataGridViewTextBoxColumn Discount;
+        private DataGridViewTextBoxColumn ServiceiD;
     }
 }

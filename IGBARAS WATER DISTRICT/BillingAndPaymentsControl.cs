@@ -269,7 +269,7 @@ namespace IGBARAS_WATER_DISTRICT
                         if (drv == null) continue;
                         var originalCurrentBillNo = drv.Row["CurrentBillNo", DataRowVersion.Original];
                         var originalBalance = drv.Row["Balance", DataRowVersion.Original];
-                        var originalAmountPaid = drv.Row["AmountPaid", DataRowVersion.Original];
+                        var originalAmountPaid = drv.Row["TotalAmountPaid", DataRowVersion.Original];
 
                         // Check if any relevant column has changed
                         if (!object.Equals(currentBillNo, originalCurrentBillNo) ||
@@ -280,7 +280,7 @@ namespace IGBARAS_WATER_DISTRICT
                     {
                         { "CurrentBillNo", currentBillNo },
                         { "Balance", balance },
-                        { "AmountPaid", amountPaid }
+                        { "TotalAmountPaid", amountPaid }
                     };
 
                             try
