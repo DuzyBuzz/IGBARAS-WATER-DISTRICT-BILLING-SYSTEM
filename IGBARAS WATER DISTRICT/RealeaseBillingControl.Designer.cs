@@ -2362,6 +2362,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.scfArrearsLabel.TabIndex = 40;
             this.scfArrearsLabel.Text = "0.00";
             this.scfArrearsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.scfArrearsLabel.Visible = false;
             // 
             // currentSCFLabel
             // 
@@ -2372,6 +2373,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.currentSCFLabel.TabIndex = 41;
             this.currentSCFLabel.Text = "0.00";
             this.currentSCFLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.currentSCFLabel.Visible = false;
             // 
             // tableLayoutPanel22
             // 

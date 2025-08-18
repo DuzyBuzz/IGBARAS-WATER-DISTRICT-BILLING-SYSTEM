@@ -609,12 +609,12 @@ namespace IGBARAS_WATER_DISTRICT
                 displayAmount = Math.Min(SCFBalance, 500m); // max 500
 
                 // Format and set the textbox
-                currentSCFLabel.Text = displayAmount.ToString("N2");
+                totalSCFAmountLabel.Text = displayAmount.ToString("N2");
             }
             else
             {
                 // If scf is 0, clear or reset the textbox
-                currentSCFLabel.Text = "0.00";
+                totalSCFAmountLabel.Text = "0.00";
             }
             Debug.WriteLine("scf "+ scfValue);
             defaultDiscount = discountedPercentLabel.Text;
@@ -672,8 +672,7 @@ namespace IGBARAS_WATER_DISTRICT
                         scfArrearsLabel.Text = "0.00";
 
                         // Current SCF for this month only
-                        decimal currentSCF = Math.Min(displayAmount, 500m);
-                        totalSCFAmountLabel.Text = currentSCF.ToString("N2");
+                        totalSCFAmountLabel.Text = displayAmount.ToString("N2");
                     }
                     else if (bill.IsSCFPartiallyPaid)
                     {
@@ -682,8 +681,7 @@ namespace IGBARAS_WATER_DISTRICT
                         scfArrearsLabel.Text = scfArrears.ToString("N2");
 
                         // Add arrears + current SCF
-                        decimal currentSCF = Math.Min(displayAmount, 500m);
-                        decimal totalSCF = scfArrears + currentSCF;
+                        decimal totalSCF = scfArrears + displayAmount;
                         totalSCFAmountLabel.Text = totalSCF.ToString("N2");
                     }
                     else
@@ -693,8 +691,7 @@ namespace IGBARAS_WATER_DISTRICT
                         scfArrearsLabel.Text = scfArrears.ToString("N2");
 
                         // Add arrears + current SCF
-                        decimal currentSCF = Math.Min(displayAmount, 500m);
-                        decimal totalSCF = scfArrears + currentSCF;
+                        decimal totalSCF = scfArrears + displayAmount;
                         totalSCFAmountLabel.Text = totalSCF.ToString("N2");
                     }
 
