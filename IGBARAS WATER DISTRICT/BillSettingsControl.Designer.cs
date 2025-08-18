@@ -452,8 +452,9 @@ namespace IGBARAS_WATER_DISTRICT
             // ServiceiD
             // 
             this.ServiceiD.DataPropertyName = "ServiceiD";
-            this.ServiceiD.HeaderText = "ServiceiD";
+            this.ServiceiD.HeaderText = "ServiceID";
             this.ServiceiD.Name = "ServiceiD";
+            this.ServiceiD.ReadOnly = true;
             // 
             // BillSettingsControl
             // 

@@ -150,74 +150,86 @@ namespace IGBARAS_WATER_DISTRICT
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
-            if (result == DialogResult.Yes)
+            if (result != DialogResult.Yes)
+                return;
+
+            billingDataGridView.EndEdit();
+
+            var dt = billingDataGridView.DataSource as DataTable;
+            if (dt == null)
             {
-                billingDataGridView.EndEdit();
+                MessageBox.Show("No data source found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                var dt = billingDataGridView.DataSource as DataTable;
-                if (dt == null)
+            bool anyError = false;
+
+            using (var connection = new OleDbConnection(DbConfig.ConnectionString))
+            {
+                connection.Open();
+
+                foreach (DataGridViewRow row in billingDataGridView.Rows)
                 {
-                    MessageBox.Show("No data source found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                    if (row.IsNewRow) continue;
 
-                bool anyError = false;
+                    var billingId = row.Cells["BillingID"].Value;
+                    var billNo = row.Cells["BillNo"].Value;
+                    var isFullyPaid = row.Cells["Is_FullyPaid"].Value;
+                    var isSCFPaid = row.Cells["Is_SCFPaid"].Value;
 
-                using (var connection = new OleDbConnection(DbConfig.ConnectionString))
-                {
-                    connection.Open();
+                    DataRowView drv = row.DataBoundItem as DataRowView;
+                    if (drv == null) continue;
 
-                    foreach (DataGridViewRow row in billingDataGridView.Rows)
+                    var originalBillNo = drv.Row["BillNo", DataRowVersion.Original];
+                    var originalIsFullyPaid = drv.Row["Is_FullyPaid", DataRowVersion.Original];
+                    var originalIsSCFPaid = drv.Row["Is_SCFPaid", DataRowVersion.Original];
+
+                    // ✅ FIX: check if any tracked columns have changed
+                    bool hasChanges =
+                        !object.Equals(billNo, originalBillNo) ||
+                        !object.Equals(isFullyPaid, originalIsFullyPaid) ||
+                        !object.Equals(isSCFPaid, originalIsSCFPaid);
+
+                    if (hasChanges)
                     {
-                        if (row.IsNewRow) continue;
+                        var columnValues = new Dictionary<string, object>
+                {
+                    { "BillNo", billNo },
+                    { "Is_FullyPaid", isFullyPaid },
+                    { "Is_SCFPaid", isSCFPaid }
+                };
 
-                        var billingId = row.Cells["BillingID"].Value;
-                        var billNo = row.Cells["BillNo"].Value;
-                        var isFullyPaid = row.Cells["Is_FullyPaid"].Value;
-
-                        DataRowView drv = row.DataBoundItem as DataRowView;
-                        if (drv == null) continue;
-                        var originalBillNo = drv.Row["BillNo", DataRowVersion.Original];
-                        var originalIsFullyPaid = drv.Row["Is_FullyPaid", DataRowVersion.Original];
-
-                        if (!object.Equals(billNo, originalBillNo) || !object.Equals(isFullyPaid, originalIsFullyPaid))
+                        try
                         {
-                            var columnValues = new Dictionary<string, object>
-                    {
-                        { "BillNo", billNo },
-                        { "Is_FullyPaid", isFullyPaid }
-                    };
-
-                            try
-                            {
-                                ColumnUpdaterHelper.UpdateColumns("Tb_Billing", "BillingID", billingId, columnValues, connection);
-                            }
-                            catch
-                            {
-                                anyError = true;
-                                // Error message is already shown in ColumnUpdaterHelper
-                            }
+                            ColumnUpdaterHelper.UpdateColumns("Tb_Billing", "BillingID", billingId, columnValues, connection);
+                        }
+                        catch
+                        {
+                            anyError = true;
+                            // Error message is already shown in ColumnUpdaterHelper
                         }
                     }
                 }
-
-                if (anyError)
-                {
-                    MessageBox.Show(
-                        "Some records could not be updated due to duplicate BillNo or other database errors.\n" +
-                        "Please review the error messages and correct the data.",
-                        "Partial Update",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    MessageBox.Show("BillNo(s) and Is_FullyPaid updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-                LoadSelectedColumns();
             }
+
+            if (anyError)
+            {
+                MessageBox.Show(
+                    "Some records could not be updated due to duplicate BillNo or other database errors.\n" +
+                    "Please review the error messages and correct the data.",
+                    "Partial Update",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("BillNo(s), Is_FullyPaid, and Is_SCFPaid updated successfully.",
+                    "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            LoadSelectedColumns();
         }
+
 
         private void billingUndoButton_Click(object sender, EventArgs e)
         {
