@@ -979,45 +979,49 @@ namespace IGBARAS_WATER_DISTRICT
             this.label33.AutoSize = true;
             this.label33.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label33.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(4, 1);
+            this.label33.Location = new System.Drawing.Point(4, 11);
+            this.label33.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(134, 82);
+            this.label33.Size = new System.Drawing.Size(134, 72);
             this.label33.TabIndex = 0;
             this.label33.Text = "Item Description/\r\nNature of Service";
-            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label33.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label28
             // 
             this.label28.AutoSize = true;
             this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label28.Location = new System.Drawing.Point(145, 1);
+            this.label28.Location = new System.Drawing.Point(145, 11);
+            this.label28.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(64, 82);
+            this.label28.Size = new System.Drawing.Size(64, 72);
             this.label28.TabIndex = 1;
             this.label28.Text = "Qty";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label28.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label29
             // 
             this.label29.AutoSize = true;
             this.label29.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label29.Location = new System.Drawing.Point(216, 1);
+            this.label29.Location = new System.Drawing.Point(216, 11);
+            this.label29.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(64, 82);
+            this.label29.Size = new System.Drawing.Size(64, 72);
             this.label29.TabIndex = 2;
             this.label29.Text = "Unit\r\nPrice";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label29.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label30
             // 
             this.label30.AutoSize = true;
             this.label30.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label30.Location = new System.Drawing.Point(287, 1);
+            this.label30.Location = new System.Drawing.Point(287, 11);
+            this.label30.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(65, 82);
+            this.label30.Size = new System.Drawing.Size(65, 72);
             this.label30.TabIndex = 3;
             this.label30.Text = "Amount";
-            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label30.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // copyTypeLabel
             // 
@@ -4087,45 +4091,49 @@ namespace IGBARAS_WATER_DISTRICT
             this.label86.AutoSize = true;
             this.label86.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label86.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label86.Location = new System.Drawing.Point(4, 1);
+            this.label86.Location = new System.Drawing.Point(4, 11);
+            this.label86.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label86.Name = "label86";
-            this.label86.Size = new System.Drawing.Size(141, 90);
+            this.label86.Size = new System.Drawing.Size(141, 80);
             this.label86.TabIndex = 0;
             this.label86.Text = "Item Description/\r\nNature of Service";
-            this.label86.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label86.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label90
             // 
             this.label90.AutoSize = true;
             this.label90.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label90.Location = new System.Drawing.Point(152, 1);
+            this.label90.Location = new System.Drawing.Point(152, 11);
+            this.label90.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(67, 90);
+            this.label90.Size = new System.Drawing.Size(67, 80);
             this.label90.TabIndex = 1;
             this.label90.Text = "Qty";
-            this.label90.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label90.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label91
             // 
             this.label91.AutoSize = true;
             this.label91.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label91.Location = new System.Drawing.Point(226, 1);
+            this.label91.Location = new System.Drawing.Point(226, 11);
+            this.label91.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(67, 90);
+            this.label91.Size = new System.Drawing.Size(67, 80);
             this.label91.TabIndex = 2;
             this.label91.Text = "Unit\r\nPrice";
-            this.label91.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label91.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label95
             // 
             this.label95.AutoSize = true;
             this.label95.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label95.Location = new System.Drawing.Point(300, 1);
+            this.label95.Location = new System.Drawing.Point(300, 11);
+            this.label95.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(69, 90);
+            this.label95.Size = new System.Drawing.Size(69, 80);
             this.label95.TabIndex = 3;
             this.label95.Text = "Amount";
-            this.label95.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label95.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // remarksTextBox
             // 
