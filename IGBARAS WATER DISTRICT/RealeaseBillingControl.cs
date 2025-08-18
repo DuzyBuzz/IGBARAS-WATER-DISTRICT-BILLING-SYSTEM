@@ -2016,7 +2016,7 @@ ORDER BY b.BillNo DESC;
             string penalty = collectionPenaltyLabel.Text;
             string tax = collectionTaxAmountLabel.Text;
             string scf = collectionSCFTextBox.Text;
-            string others = collectionOtherPaymentTextBox.Text;
+            string others = paymentFroOthersLabel.Text;
             string totalamount = totalPaidAmountTextBox.Text;
             string collectingOfficer = collectingOfficerNameLabel.Text;
 
