@@ -129,7 +129,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 71F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 134F));
             this.tableLayoutPanel2.Controls.Add(this.button2, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.button1, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.zoneComboBox, 3, 0);
@@ -151,7 +151,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.button2.BackColor = System.Drawing.Color.MidnightBlue;
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(744, 3);
+            this.button2.Location = new System.Drawing.Point(743, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(65, 26);
             this.button2.TabIndex = 37;
@@ -163,7 +163,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.button1.BackColor = System.Drawing.Color.SteelBlue;
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(689, 3);
+            this.button1.Location = new System.Drawing.Point(688, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(49, 26);
             this.button1.TabIndex = 36;
@@ -177,7 +177,7 @@ namespace IGBARAS_WATER_DISTRICT
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.zoneComboBox.FormattingEnabled = true;
-            this.zoneComboBox.Location = new System.Drawing.Point(639, 4);
+            this.zoneComboBox.Location = new System.Drawing.Point(638, 4);
             this.zoneComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.zoneComboBox.Name = "zoneComboBox";
             this.zoneComboBox.Size = new System.Drawing.Size(44, 21);
@@ -191,7 +191,7 @@ namespace IGBARAS_WATER_DISTRICT
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(550, 0);
+            this.label32.Location = new System.Drawing.Point(549, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(83, 32);
             this.label32.TabIndex = 32;
@@ -206,7 +206,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.searchAccountNumberTextBox.Location = new System.Drawing.Point(3, 4);
             this.searchAccountNumberTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.searchAccountNumberTextBox.Name = "searchAccountNumberTextBox";
-            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(510, 25);
+            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(509, 25);
             this.searchAccountNumberTextBox.TabIndex = 30;
             this.searchAccountNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchAccountNumberTextBox_KeyDown);
             // 
@@ -218,7 +218,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.clearButton.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearButton.ForeColor = System.Drawing.Color.Crimson;
-            this.clearButton.Location = new System.Drawing.Point(519, 3);
+            this.clearButton.Location = new System.Drawing.Point(518, 3);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(25, 26);
             this.clearButton.TabIndex = 31;
@@ -230,7 +230,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.serviceApplyButton.BackColor = System.Drawing.Color.SteelBlue;
             this.serviceApplyButton.ForeColor = System.Drawing.Color.White;
-            this.serviceApplyButton.Location = new System.Drawing.Point(1044, 3);
+            this.serviceApplyButton.Location = new System.Drawing.Point(1043, 3);
             this.serviceApplyButton.Name = "serviceApplyButton";
             this.serviceApplyButton.Size = new System.Drawing.Size(119, 26);
             this.serviceApplyButton.TabIndex = 35;
@@ -242,7 +242,7 @@ namespace IGBARAS_WATER_DISTRICT
             // 
             this.settingsUndoButton.BackColor = System.Drawing.Color.Brown;
             this.settingsUndoButton.ForeColor = System.Drawing.Color.White;
-            this.settingsUndoButton.Location = new System.Drawing.Point(909, 3);
+            this.settingsUndoButton.Location = new System.Drawing.Point(908, 3);
             this.settingsUndoButton.Name = "settingsUndoButton";
             this.settingsUndoButton.Size = new System.Drawing.Size(127, 26);
             this.settingsUndoButton.TabIndex = 34;
