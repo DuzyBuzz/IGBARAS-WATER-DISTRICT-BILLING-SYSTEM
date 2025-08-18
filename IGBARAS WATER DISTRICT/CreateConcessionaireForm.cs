@@ -183,7 +183,7 @@ namespace IGBARAS_WATER_DISTRICT
                     {
                         cmd.Parameters.AddWithValue("AccountNo", accountNumberTextBox.Text.Trim().ToUpper());
                         cmd.Parameters.AddWithValue("ConcessionaireName", concessionaireName);
-                        cmd.Parameters.AddWithValue("Address", addressTextBox.Text.Trim());
+                        cmd.Parameters.AddWithValue("Address", addressTextBox.Text.Trim().ToUpper());
                         cmd.Parameters.AddWithValue("ZoneCode", zoneCodeComboBox.Text);
                         cmd.Parameters.AddWithValue("ServiceID", int.Parse(serviceIDComboBox.SelectedValue.ToString())); // ensure numeric
                         cmd.Parameters.AddWithValue("MeterNo", meterNoTextBox.Text.Trim());

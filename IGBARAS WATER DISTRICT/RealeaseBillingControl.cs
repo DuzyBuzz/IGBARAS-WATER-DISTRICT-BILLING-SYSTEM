@@ -581,6 +581,7 @@ namespace IGBARAS_WATER_DISTRICT
                 fromReadingDateLabel.Text = ""; // or show a default/fallback message
             }
             discountedPercentLabel.Text = $"{DiscountHelper.GetSeniorCitizenDiscountPercent(IsSeniorCitizen)}%";
+            discountedPercentLabel2.Text = $"{DiscountHelper.GetSeniorCitizenDiscountPercent(IsSeniorCitizen)}%";
             if (IsSeniorCitizen == 1)
             {
                 discountNameLabel.Text = "SENIOR CITIZEN";
@@ -787,7 +788,6 @@ namespace IGBARAS_WATER_DISTRICT
                         freeWaterLabel.Text = bill.FreeWater.ToString();
                         meterConsumedReadingTextBox.Text = meterConsumed.ToString();
                         taxExemptedPercentLabel2.Text = $"{bill.Tax}%";
-                        discountedPercentLabel2.Text = $"{bill.Discount}%";
                         totalSCFAmountLabel2.Text = $"{bill.TotalSCFAmount:N2}";
                         dueDateLabel2.Text = bill.DueDate.ToString("MMMM dd, yyyy");
                         collectionInitianBillingCheckBox.Checked = bill.IsInitialBilling;
