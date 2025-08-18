@@ -541,7 +541,12 @@ namespace IGBARAS_WATER_DISTRICT
             bankNameTextBox.Text = "";
             checkNumberTextBox.Text = "";
             bankAccountNumberText.Text = "";
+
             allPenaltyLabel.Text = "0.00";
+
+            paymentForBillingTextBox.Text = "0.00";
+            paymentForSCFTextBox.Text = "0.00";
+
             cashCheckBox.Checked = true;
             DisableButton();
             if (e.RowIndex < 0) return; // Ignore header or invalid rows
