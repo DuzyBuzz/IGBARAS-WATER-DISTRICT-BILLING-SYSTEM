@@ -510,12 +510,16 @@ namespace IGBARAS_WATER_DISTRICT
         {
             ClearWaterChargeLabels();
             ClearWaterChargeLabels2();
+            totalPlusSFCOthersLabel.Text = "0.00";
+            totalSCFAmountLabel.Text = "0.00";
+            
             arrearsAmountLabel.Text = "0.00";
             totalPaidAmountTextBox.Text = "0";
             fromReadingDateLabel.Text = "";
             previousReadingTextBox.Text = "0";
             meterConsumedReadingTextBox.Text = "0";
             presentReadingTextBox.Text = "";
+            totalSCFAmountLabel2.Text = "0.00";
             totalQuantityLabel.Text = "0";
             totalWaterConsumptionAmountLabel.Text = "0.00";
             totalAmountDueLabel.Text = "0.00";
@@ -1796,9 +1800,53 @@ ORDER BY b.BillNo DESC;
             ClearWaterChargeLabels2();
             ClearAmounts();
             ClearAmounts2();
+            totalSCFAmountLabel.Text = "0.00";
+            ClearWaterChargeLabels();
+            ClearWaterChargeLabels2();
+            totalPlusSFCOthersLabel.Text = "0.00";
+            totalSCFAmountLabel.Text = "0.00";
+
+            arrearsAmountLabel.Text = "0.00";
+            totalPaidAmountTextBox.Text = "0";
+            fromReadingDateLabel.Text = "";
+            previousReadingTextBox.Text = "0";
+            meterConsumedReadingTextBox.Text = "0";
+            presentReadingTextBox.Text = "";
+            totalSCFAmountLabel2.Text = "0.00";
+            totalQuantityLabel.Text = "0";
+            totalWaterConsumptionAmountLabel.Text = "0.00";
+            totalAmountDueLabel.Text = "0.00";
+            totalSCFAmountLabel.Text = "0.00";
+            minimumChargeLabel.Text = "0.00";
+            penaltyAmountLabel.Text = "0.00";
+            penaltyPercentLabel.Text = "10%";
+            freeWaterCheckBox.Checked = false;
+
+            isWithHoldingTaxLabel.Text = "0";
+            isArrearsLabel.Text = "0";
+            dueExemptLabel.Text = "0";
+            collectionTotalMeteredAmountLabel.Text = "0.00";
+            totalWaterConsumptionAmountLabel2.Text = "0.00";
+            collectionTaxAmountLabel.Text = "0.00";
+            collectionPenaltyLabel.Text = "0.00";
+            collectionArrearsAmountLabel.Text = "0.00";
+            totalPaidAmountTextBox.Text = "0.00";
+            taxExemptedPercentLabel2.Text = "0%";
+            arrearsAmountLabel2.Text = "0.00";
+            totalAmountDueLabel2.Text = "0.00";
+            penaltyPercentLabel2.Text = "10%";
+            totalQuantityLabel2.Text = "0";
+            bankNameTextBox.Text = "";
+            checkNumberTextBox.Text = "";
+            bankAccountNumberText.Text = "";
+
+            allPenaltyLabel.Text = "0.00";
+
+            paymentForBillingTextBox.Text = "0.00";
+            paymentForSCFTextBox.Text = "0.00";
             // Example: Show tab name in a label
             currentTabLabel.Text = $"{selectedTab.Text}";
-
+            penaltyAmountLabel.Text = "0.00";
             // Or use selectedIndex for logic
             // if (selectedIndex == 0) { ... }
         }
