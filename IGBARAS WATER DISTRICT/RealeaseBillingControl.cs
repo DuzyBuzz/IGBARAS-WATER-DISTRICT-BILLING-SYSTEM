@@ -665,6 +665,7 @@ namespace IGBARAS_WATER_DISTRICT
                         arrearsAmountLabel.Text = bill.TotalAmountBilled.ToString("N2");
                     }
 
+                    
 
 
                     if (bill.IsSCFPaid)
@@ -765,10 +766,49 @@ namespace IGBARAS_WATER_DISTRICT
                     double penaltyPercent = SettingsHelper.GetPenaltyPercent(isArrears);
 
                     decimal arrearsAmount = decimal.Parse(arrearsAmountLabel.Text.Replace(",", ""));
-
                     decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsAmount);
+                    Debug.WriteLine($"Initial arrears penalty: {arrearsPenalty:N2}");
 
-                    penaltyAmountLabel.Text = arrearsPenalty.ToString("N2");
+                    decimal finalPenalty = arrearsPenalty;
+
+                    // Parse discount percentage from label (e.g., "7%" → 0.07)
+                    if (!string.IsNullOrWhiteSpace(discountedPercentLabel.Text) &&
+                        discountedPercentLabel.Text.EndsWith("%"))
+                    {
+                        string percentText = discountedPercentLabel.Text.Replace("%", "").Trim();
+                        Debug.WriteLine($"Discount text extracted: '{percentText}'");
+
+                        if (decimal.TryParse(percentText, out decimal percentValue))
+                        {
+                            Debug.WriteLine($"Parsed discount percent: {percentValue}");
+
+                            if (percentValue > 0)
+                            {
+                                decimal discountRate = percentValue / 100m;
+                                Debug.WriteLine($"Discount rate: {discountRate:P}");
+
+                                finalPenalty = arrearsPenalty - (arrearsPenalty * discountRate);
+                                Debug.WriteLine($"Final penalty after discount: {finalPenalty:N2}");
+                            }
+                            else
+                            {
+                                Debug.WriteLine("Discount percent is 0 — no discount applied.");
+                            }
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Failed to parse discount percent.");
+                        }
+                    }
+                    else
+                    {
+                        Debug.WriteLine("No discount text or not in % format — skipping discount.");
+                    }
+
+                    decimal discountedPenalty = arrearsPenalty - finalPenalty;
+
+                    penaltyAmountLabel.Text = discountedPenalty.ToString("N2");
+                    Debug.WriteLine($"penaltyAmountLabel.Text set to: {penaltyAmountLabel.Text}");
 
                     Debug.WriteLine($"{bill.Balance}");
                     if (arrearsAmountLabel.Text != "0.00")
@@ -1477,6 +1517,10 @@ ORDER BY b.BillNo DESC;
 
                         arrears = decimal.Parse(arrearsAmountLabel.Text.Replace(",", "").Trim());
                         decimal penaltyAmount = decimal.Parse(penaltyAmountLabel.Text.Replace(",", "").Trim());
+                        
+
+
+
                         decimal scf = decimal.Parse(totalSCFAmountLabel.Text.Replace(",", "").Trim());
 
                         // Total amount due calculations
