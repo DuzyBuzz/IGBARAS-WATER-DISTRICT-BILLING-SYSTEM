@@ -698,46 +698,6 @@ namespace IGBARAS_WATER_DISTRICT
                     }
 
 
-                    ////////////////////////////////////////////////////////////////////////
-                    // Calculate monthly SCF charge (max ₱500 or remaining balance)
-                    //decimal monthlySCF = Math.Min(displayAmount, 500m);
-
-                    //// Default values
-                    //decimal SCFArrears = 0m;
-                    //decimal currentSCF = 0m;
-
-                    //// Determine SCF arrears and current charge based on bill status
-                    //if (bill.IsSCFPaid)
-                    //{
-                    //    // Fully paid: no arrears, no current charge
-                    //    SCFArrears = 0m;
-                    //    currentSCF = 0m;
-                    //}
-                    //else if (bill.IsSCFPartiallyPaid)
-                    //{
-                    //    // Partially paid: use arrears from bill, plus current month charge
-                    //    SCFArrears = bill.SCFArrearsAmount > 0 ? bill.SCFArrearsAmount : 0m;
-                    //    currentSCF = monthlySCF;
-                    //}
-                    //else
-                    //{
-                    //    // Unpaid: use total SCF from bill as arrears, plus current month charge
-                    //    SCFArrears = bill.TotalSCFAmount > 0 ? bill.TotalSCFAmount : 0m;
-                    //    currentSCF = monthlySCF;
-                    //}
-
-                    //// Compute total SCF
-                    //decimal totalSCF = SCFArrears + currentSCF;
-
-                    //// Update labels
-                    //scfArrearsLabel.Text = SCFArrears.ToString("N2");
-                    //currentSCFLabel.Text = currentSCF.ToString("N2");
-                    //totalSCFAmountLabel.Text = totalSCF.ToString("N2");
-
-
-
-                    // You can also update arrearsAmountLabel2 if needed:
-                    // arrearsAmountLabel2.Text = arrearsAmountLabel.Text;
 
                     string message =
                         $"Account No: {bill.AccountNo}\n" +
@@ -833,6 +793,7 @@ namespace IGBARAS_WATER_DISTRICT
                         if (int.TryParse(serviceIDLabel.Text.Trim(), out int serviceId))
                         {
                             decimal taxAmount = bill.TaxAmount;
+                            discountedTaxAmountLabel.Text = $"{bill.TaxAmount:N2}";
                             decimal arrearsWaterOnly = bill.AmountBilled;
                             PopulateServiceRateLabels2(serviceId, meterConsumed, arrearsWaterOnly, taxAmount);
                         }
@@ -2512,7 +2473,10 @@ ORDER BY b.BillNo DESC;
 
             if (!int.TryParse(meterConsumedReadingTextBox.Text.Trim(), out int totalWaterConsumed))
                 return;
-            //PopulateServiceRateLabels2(serviceID, totalWaterConsumed, waterOnly, recentTaxAmount);
+
+            decimal arrearsWaterOnly = decimal.Parse(collectionArrearsAmountLabel.Text.Replace(",", "").Trim());
+            decimal recentTaxAmount = decimal.Parse(discountedTaxAmountLabel.Text.Replace(",", "").Trim());
+            PopulateServiceRateLabels2(serviceID, totalWaterConsumed, arrearsWaterOnly, recentTaxAmount);
             CalculateTotal();
         }
 
