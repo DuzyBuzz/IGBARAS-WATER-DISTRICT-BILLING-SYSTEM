@@ -296,8 +296,8 @@
     </EmbeddedResource>
     <Content Include="Reports\DailyBillingReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DailyBillingReport.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <LastGenOutput>DailyBillingReport1.cs</LastGenOutput>
     </Content>
     <Content Include="Reports\DailyCollectionReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
