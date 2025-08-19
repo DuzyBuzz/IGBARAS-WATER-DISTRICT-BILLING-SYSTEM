@@ -103,10 +103,8 @@ namespace IGBARAS_WATER_DISTRICT.Helpers
         public static decimal CalculateLatePaymentPenalty(decimal totalDue, DateTime dueDate)
         {
             var settings = GetSettings();
-            DateTime penaltyThresholdDate = dueDate.AddDays(settings.PenaltyDuration);
 
-            if (DateTime.Now.Date <= penaltyThresholdDate)
-                return 0;
+
 
             var penalty = totalDue * (decimal)(settings.PenaltyPercent / 100.0);
             return penalty;

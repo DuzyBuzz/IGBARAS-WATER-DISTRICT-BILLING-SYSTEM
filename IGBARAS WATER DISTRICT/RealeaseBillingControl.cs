@@ -786,9 +786,8 @@ namespace IGBARAS_WATER_DISTRICT
                             {
                                 decimal discountRate = percentValue / 100m;
                                 Debug.WriteLine($"Discount rate: {discountRate:P}");
+                                finalPenalty = SettingsHelper.CalculatePenaltyOnArrears(bill.AmountBilled);
 
-                                finalPenalty = arrearsPenalty - (arrearsPenalty * discountRate);
-                                Debug.WriteLine($"Final penalty after discount: {finalPenalty:N2}");
                             }
                             else
                             {
@@ -805,7 +804,7 @@ namespace IGBARAS_WATER_DISTRICT
                         Debug.WriteLine("No discount text or not in % format — skipping discount.");
                     }
 
-                    decimal discountedPenalty = arrearsPenalty - finalPenalty;
+                    decimal discountedPenalty = finalPenalty;
 
                     penaltyAmountLabel.Text = discountedPenalty.ToString("N2");
                     Debug.WriteLine($"penaltyAmountLabel.Text set to: {penaltyAmountLabel.Text}");
@@ -833,7 +832,9 @@ namespace IGBARAS_WATER_DISTRICT
                         collectionInitianBillingCheckBox.Checked = bill.IsInitialBilling;
                         if (int.TryParse(serviceIDLabel.Text.Trim(), out int serviceId))
                         {
-                            PopulateServiceRateLabels2(serviceId, meterConsumed);
+                            decimal taxAmount = bill.TaxAmount;
+                            decimal arrearsWaterOnly = bill.AmountBilled;
+                            PopulateServiceRateLabels2(serviceId, meterConsumed, arrearsWaterOnly, taxAmount);
                         }
                         collectionNameLabel.Text = fullname;
                         collectionAddressLabel.Text = address;
@@ -1151,7 +1152,7 @@ ORDER BY b.BillNo DESC;
 
 
 
-        public void PopulateServiceRateLabels2(int serviceId, int totalConsumption)
+        public void PopulateServiceRateLabels2(int serviceId, int totalConsumption, decimal arrearsWaterOnly, decimal recentTaxAmount)
         {
             {
                 using (var conn = new OleDbConnection(DbConfig.ConnectionString))
@@ -1241,7 +1242,7 @@ ORDER BY b.BillNo DESC;
 
                             decimal discounted = 0;
                             decimal taxAdded = 0;
-
+                            decimal discountedConsumptionAmount = 0;
                             // Clean up input texts
                             string discountText = discountedPercentLabel2.Text.Replace("%", "").Trim();
                             string taxAddedText = taxExemptedPercentLabel2.Text.Replace("%", "").Trim();
@@ -1273,6 +1274,7 @@ ORDER BY b.BillNo DESC;
                                 discounted = addedTaxWaterConsumption * (percent1 / 100);
                                 discountedAmountLabel2.Text = discounted.ToString("N2");
 
+
                             }
                             else
                             {
@@ -1289,7 +1291,7 @@ ORDER BY b.BillNo DESC;
                                 discountedTaxAmount = taxAmount * (percent3 / 100);
                                 totalTaxAmount = taxAmount - discountedTaxAmount;
 
-
+                                totalTaxAmount = totalTaxAmount + recentTaxAmount;
                                 collectionTaxAmountLabel.Text = totalTaxAmount.ToString("N2");
 
 
@@ -1312,10 +1314,13 @@ ORDER BY b.BillNo DESC;
                             {
                                 dueDate = DateTime.Now; // fallback, or handle differently if needed
                             }
+                           
                             decimal arrearsAmount = decimal.Parse(arrearsAmountLabel2.Text.Replace(",", "").Trim());
                             // Calculate penalties
-                            decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsAmount);
-                            decimal latePenalty = SettingsHelper.CalculateLatePaymentPenalty(totalConsumptionAmount, dueDate);
+                            discountedConsumptionAmount = decimal.Parse(collectionTotalMeteredAmountLabel.Text.Replace(",", "").Trim());
+                            decimal latePenalty = SettingsHelper.CalculateLatePaymentPenalty(discountedConsumptionAmount, dueDate);
+                            decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsWaterOnly);
+                            Debug.WriteLine($"Initial arrears penalty: {arrearsPenalty:N2}");
 
                             penaltyAmountLabel2.Text = latePenalty.ToString("N2");
                             // Create a list to hold the penalties to display
@@ -1365,7 +1370,7 @@ ORDER BY b.BillNo DESC;
                             totalPlusSFCOthersLabel.Text = totalAmountDuePlusSCF.ToString("N2");
                             totalAmountDueLabel2.Text = totalAmountCharge.ToString("N2");
 
-                            collectionArrearsAmountLabel.Text = arrearsAmountLabel2.Text;
+                            collectionArrearsAmountLabel.Text = arrearsWaterOnly.ToString("N2");
 
                         }
                     }
@@ -2507,8 +2512,7 @@ ORDER BY b.BillNo DESC;
 
             if (!int.TryParse(meterConsumedReadingTextBox.Text.Trim(), out int totalWaterConsumed))
                 return;
-
-            PopulateServiceRateLabels2(serviceID, totalWaterConsumed);
+            //PopulateServiceRateLabels2(serviceID, totalWaterConsumed, waterOnly, recentTaxAmount);
             CalculateTotal();
         }
 
