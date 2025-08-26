@@ -1149,18 +1149,27 @@ ORDER BY b.BillNo DESC;
                                 int q41 = Math.Max(totalConsumption - 40, 0);
                                 decimal a10;
 
-                                decimal perUnitRateForFirst10 = minRate / 10; // This is the price per cubic meter for the first 10
+                                decimal perUnitRateForFirst10 = minRate / 10; // price per cubic meter for first 10
 
                                 if (collectionInitianBillingCheckBox.Checked)
                                 {
-                                    // Bill only for actual quantity in first 10 at the per-unit rate
-                                    a10 = q10 * perUnitRateForFirst10;
+                                    if (totalConsumption == 0)
+                                    {
+                                        // Initial billing with zero consumption -> no minimum
+                                        a10 = 0;
+                                    }
+                                    else
+                                    {
+                                        // Bill only for actual quantity in first 10 at per-unit rate
+                                        a10 = q10 * perUnitRateForFirst10;
+                                    }
                                 }
                                 else
                                 {
-                                    // Normal case — first 10 cubic meters charged at MinRate
-                                    a10 = q10 > 0 ? minRate : 0;
+                                    // Not initial billing -> minimum applies even if zero consumption
+                                    a10 = q10 > 0 ? minRate : minRate;
                                 }
+
 
                                 decimal a20 = q20 * rate11_20;
                                 decimal a30 = q30 * rate21_30;
@@ -1376,18 +1385,27 @@ ORDER BY b.BillNo DESC;
                             int q40 = Math.Min(Math.Max(totalConsumption - 30, 0), 10);
                             int q41 = Math.Max(totalConsumption - 40, 0);
                             decimal a10;
-                            decimal perUnitRateForFirst10 = minRate / 10; // This is the price per cubic meter for the first 10
+                            decimal perUnitRateForFirst10 = minRate / 10; // price per cubic meter for first 10
 
                             if (initialBillingCheckBox.Checked)
                             {
-                                // Bill only for actual quantity in first 10 at the per-unit rate
-                                a10 = q10 * perUnitRateForFirst10;
+                                if (totalConsumption == 0)
+                                {
+                                    // Initial billing with zero consumption -> no minimum
+                                    a10 = 0;
+                                }
+                                else
+                                {
+                                    // Bill only for actual quantity in first 10 at per-unit rate
+                                    a10 = q10 * perUnitRateForFirst10;
+                                }
                             }
                             else
                             {
-                                // Normal case — first 10 cubic meters charged at MinRate
-                                a10 = q10 > 0 ? minRate : 0;
+                                // Not initial billing -> minimum applies even if zero consumption
+                                a10 = q10 > 0 ? minRate : minRate;
                             }
+
 
                             decimal a20 = q20 * rate11_20;
                             decimal a30 = q30 * rate21_30;
