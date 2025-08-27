@@ -62,6 +62,14 @@
             this.paymentsTab = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.paymentsDataGridView = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.paymentsRefreshButton = new System.Windows.Forms.Button();
+            this.paymentsZoneComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.paymentSearchTextBox = new System.Windows.Forms.TextBox();
+            this.paymentsClearButton = new System.Windows.Forms.Button();
+            this.paymentsUndoButton = new System.Windows.Forms.Button();
+            this.paymentsApplyButton = new System.Windows.Forms.Button();
             this.ORNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CurrentBillNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,14 +89,6 @@
             this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FreeWaters = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaymentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.paymentsRefreshButton = new System.Windows.Forms.Button();
-            this.paymentsZoneComboBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.paymentSearchTextBox = new System.Windows.Forms.TextBox();
-            this.paymentsClearButton = new System.Windows.Forms.Button();
-            this.paymentsUndoButton = new System.Windows.Forms.Button();
-            this.paymentsApplyButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.billingTab.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -324,7 +324,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141F));
             this.tableLayoutPanel2.Controls.Add(this.button1, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.zoneComboBox, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.label32, 2, 0);
@@ -344,7 +344,7 @@
             // 
             this.button1.BackColor = System.Drawing.Color.SteelBlue;
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(668, 3);
+            this.button1.Location = new System.Drawing.Point(667, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(49, 24);
             this.button1.TabIndex = 36;
@@ -358,7 +358,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.zoneComboBox.FormattingEnabled = true;
-            this.zoneComboBox.Location = new System.Drawing.Point(618, 4);
+            this.zoneComboBox.Location = new System.Drawing.Point(617, 4);
             this.zoneComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.zoneComboBox.Name = "zoneComboBox";
             this.zoneComboBox.Size = new System.Drawing.Size(44, 21);
@@ -372,7 +372,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(529, 0);
+            this.label32.Location = new System.Drawing.Point(528, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(83, 30);
             this.label32.TabIndex = 32;
@@ -387,7 +387,7 @@
             this.searchAccountNumberTextBox.Location = new System.Drawing.Point(3, 4);
             this.searchAccountNumberTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
             this.searchAccountNumberTextBox.Name = "searchAccountNumberTextBox";
-            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(490, 25);
+            this.searchAccountNumberTextBox.Size = new System.Drawing.Size(489, 25);
             this.searchAccountNumberTextBox.TabIndex = 30;
             this.searchAccountNumberTextBox.TextChanged += new System.EventHandler(this.searchAccountNumberTextBox_TextChanged);
             this.searchAccountNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchAccountNumberTextBox_KeyDown);
@@ -399,7 +399,7 @@
             this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.clearButton.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearButton.ForeColor = System.Drawing.Color.Crimson;
-            this.clearButton.Location = new System.Drawing.Point(499, 3);
+            this.clearButton.Location = new System.Drawing.Point(498, 3);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(24, 24);
             this.clearButton.TabIndex = 31;
@@ -411,7 +411,7 @@
             // 
             this.billingApplyButton.BackColor = System.Drawing.Color.SteelBlue;
             this.billingApplyButton.ForeColor = System.Drawing.Color.White;
-            this.billingApplyButton.Location = new System.Drawing.Point(1023, 3);
+            this.billingApplyButton.Location = new System.Drawing.Point(1022, 3);
             this.billingApplyButton.Name = "billingApplyButton";
             this.billingApplyButton.Size = new System.Drawing.Size(119, 24);
             this.billingApplyButton.TabIndex = 35;
@@ -423,7 +423,7 @@
             // 
             this.billingUndoButton.BackColor = System.Drawing.Color.Brown;
             this.billingUndoButton.ForeColor = System.Drawing.Color.White;
-            this.billingUndoButton.Location = new System.Drawing.Point(888, 3);
+            this.billingUndoButton.Location = new System.Drawing.Point(887, 3);
             this.billingUndoButton.Name = "billingUndoButton";
             this.billingUndoButton.Size = new System.Drawing.Size(127, 24);
             this.billingUndoButton.TabIndex = 34;
@@ -495,21 +495,139 @@
             this.paymentsDataGridView.TabIndex = 26;
             this.paymentsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.paymentsDataGridView_CellContentClick);
             // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 9;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 94.18239F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.81761F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141F));
+            this.tableLayoutPanel4.Controls.Add(this.paymentsRefreshButton, 4, 0);
+            this.tableLayoutPanel4.Controls.Add(this.paymentsZoneComboBox, 3, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label1, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.paymentSearchTextBox, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.paymentsClearButton, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.paymentsUndoButton, 7, 0);
+            this.tableLayoutPanel4.Controls.Add(this.paymentsApplyButton, 8, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1161, 30);
+            this.tableLayoutPanel4.TabIndex = 25;
+            // 
+            // paymentsRefreshButton
+            // 
+            this.paymentsRefreshButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.paymentsRefreshButton.ForeColor = System.Drawing.Color.White;
+            this.paymentsRefreshButton.Location = new System.Drawing.Point(667, 3);
+            this.paymentsRefreshButton.Name = "paymentsRefreshButton";
+            this.paymentsRefreshButton.Size = new System.Drawing.Size(49, 24);
+            this.paymentsRefreshButton.TabIndex = 36;
+            this.paymentsRefreshButton.Text = "↺";
+            this.paymentsRefreshButton.UseVisualStyleBackColor = false;
+            this.paymentsRefreshButton.Click += new System.EventHandler(this.paymentsRefreshButton_Click);
+            // 
+            // paymentsZoneComboBox
+            // 
+            this.paymentsZoneComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.paymentsZoneComboBox.FormattingEnabled = true;
+            this.paymentsZoneComboBox.Location = new System.Drawing.Point(617, 4);
+            this.paymentsZoneComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
+            this.paymentsZoneComboBox.Name = "paymentsZoneComboBox";
+            this.paymentsZoneComboBox.Size = new System.Drawing.Size(44, 21);
+            this.paymentsZoneComboBox.TabIndex = 33;
+            this.paymentsZoneComboBox.Text = "01";
+            this.paymentsZoneComboBox.SelectedIndexChanged += new System.EventHandler(this.paymentsZoneComboBox_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(528, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 30);
+            this.label1.TabIndex = 32;
+            this.label1.Text = "Filter Zone";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // paymentSearchTextBox
+            // 
+            this.paymentSearchTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.paymentSearchTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.paymentSearchTextBox.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paymentSearchTextBox.Location = new System.Drawing.Point(3, 4);
+            this.paymentSearchTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
+            this.paymentSearchTextBox.Name = "paymentSearchTextBox";
+            this.paymentSearchTextBox.Size = new System.Drawing.Size(489, 25);
+            this.paymentSearchTextBox.TabIndex = 30;
+            this.paymentSearchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentSearchTextBox_KeyDown);
+            // 
+            // paymentsClearButton
+            // 
+            this.paymentsClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.paymentsClearButton.BackColor = System.Drawing.Color.White;
+            this.paymentsClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.paymentsClearButton.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paymentsClearButton.ForeColor = System.Drawing.Color.Crimson;
+            this.paymentsClearButton.Location = new System.Drawing.Point(498, 3);
+            this.paymentsClearButton.Name = "paymentsClearButton";
+            this.paymentsClearButton.Size = new System.Drawing.Size(24, 24);
+            this.paymentsClearButton.TabIndex = 31;
+            this.paymentsClearButton.Text = "❌";
+            this.paymentsClearButton.UseVisualStyleBackColor = false;
+            this.paymentsClearButton.Click += new System.EventHandler(this.paymentsClearButton_Click);
+            // 
+            // paymentsUndoButton
+            // 
+            this.paymentsUndoButton.BackColor = System.Drawing.Color.Brown;
+            this.paymentsUndoButton.ForeColor = System.Drawing.Color.White;
+            this.paymentsUndoButton.Location = new System.Drawing.Point(887, 3);
+            this.paymentsUndoButton.Name = "paymentsUndoButton";
+            this.paymentsUndoButton.Size = new System.Drawing.Size(127, 24);
+            this.paymentsUndoButton.TabIndex = 34;
+            this.paymentsUndoButton.Text = "↩ Undo Changes";
+            this.paymentsUndoButton.UseVisualStyleBackColor = false;
+            this.paymentsUndoButton.Visible = false;
+            this.paymentsUndoButton.Click += new System.EventHandler(this.paymentsUndoButton_Click);
+            // 
+            // paymentsApplyButton
+            // 
+            this.paymentsApplyButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.paymentsApplyButton.ForeColor = System.Drawing.Color.White;
+            this.paymentsApplyButton.Location = new System.Drawing.Point(1022, 3);
+            this.paymentsApplyButton.Name = "paymentsApplyButton";
+            this.paymentsApplyButton.Size = new System.Drawing.Size(119, 24);
+            this.paymentsApplyButton.TabIndex = 35;
+            this.paymentsApplyButton.Text = "✏️ Apply Changes";
+            this.paymentsApplyButton.UseVisualStyleBackColor = false;
+            this.paymentsApplyButton.Click += new System.EventHandler(this.paymentsApplyButton_Click);
+            // 
             // ORNumber
             // 
             this.ORNumber.DataPropertyName = "ORNumber";
             this.ORNumber.HeaderText = "OR Number";
             this.ORNumber.Name = "ORNumber";
             this.ORNumber.ReadOnly = true;
-            this.ORNumber.Width = 81;
+            this.ORNumber.Width = 88;
             // 
             // CurrentBillNo
             // 
             this.CurrentBillNo.DataPropertyName = "CurrentBillNo";
             this.CurrentBillNo.HeaderText = "Bill No.";
             this.CurrentBillNo.Name = "CurrentBillNo";
-            this.CurrentBillNo.ReadOnly = true;
-            this.CurrentBillNo.Width = 61;
+            this.CurrentBillNo.Width = 65;
             // 
             // AccountNum
             // 
@@ -517,7 +635,7 @@
             this.AccountNum.HeaderText = "Account No.";
             this.AccountNum.Name = "AccountNum";
             this.AccountNum.ReadOnly = true;
-            this.AccountNum.Width = 85;
+            this.AccountNum.Width = 92;
             // 
             // PaymentDate
             // 
@@ -533,7 +651,6 @@
             this.PaymentType.HeaderText = "Payment Type";
             this.PaymentType.Name = "PaymentType";
             this.PaymentType.ReadOnly = true;
-            this.PaymentType.Width = 92;
             // 
             // ArrearsAmounts
             // 
@@ -595,7 +712,6 @@
             this.AmountPaid.DataPropertyName = "AmountPaid";
             this.AmountPaid.HeaderText = "Amount Paid";
             this.AmountPaid.Name = "AmountPaid";
-            this.AmountPaid.ReadOnly = true;
             this.AmountPaid.Width = 85;
             // 
             // Penalty
@@ -619,7 +735,6 @@
             this.Balance.DataPropertyName = "Balance";
             this.Balance.HeaderText = "Balance";
             this.Balance.Name = "Balance";
-            this.Balance.ReadOnly = true;
             this.Balance.Width = 71;
             // 
             // Remarks
@@ -646,125 +761,6 @@
             this.PaymentID.ReadOnly = true;
             this.PaymentID.Visible = false;
             this.PaymentID.Width = 84;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 9;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 94.18239F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.81761F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
-            this.tableLayoutPanel4.Controls.Add(this.paymentsRefreshButton, 4, 0);
-            this.tableLayoutPanel4.Controls.Add(this.paymentsZoneComboBox, 3, 0);
-            this.tableLayoutPanel4.Controls.Add(this.label1, 2, 0);
-            this.tableLayoutPanel4.Controls.Add(this.paymentSearchTextBox, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.paymentsClearButton, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.paymentsUndoButton, 7, 0);
-            this.tableLayoutPanel4.Controls.Add(this.paymentsApplyButton, 8, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(1161, 30);
-            this.tableLayoutPanel4.TabIndex = 25;
-            // 
-            // paymentsRefreshButton
-            // 
-            this.paymentsRefreshButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.paymentsRefreshButton.ForeColor = System.Drawing.Color.White;
-            this.paymentsRefreshButton.Location = new System.Drawing.Point(668, 3);
-            this.paymentsRefreshButton.Name = "paymentsRefreshButton";
-            this.paymentsRefreshButton.Size = new System.Drawing.Size(49, 24);
-            this.paymentsRefreshButton.TabIndex = 36;
-            this.paymentsRefreshButton.Text = "↺";
-            this.paymentsRefreshButton.UseVisualStyleBackColor = false;
-            this.paymentsRefreshButton.Click += new System.EventHandler(this.paymentsRefreshButton_Click);
-            // 
-            // paymentsZoneComboBox
-            // 
-            this.paymentsZoneComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.paymentsZoneComboBox.FormattingEnabled = true;
-            this.paymentsZoneComboBox.Location = new System.Drawing.Point(618, 4);
-            this.paymentsZoneComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
-            this.paymentsZoneComboBox.Name = "paymentsZoneComboBox";
-            this.paymentsZoneComboBox.Size = new System.Drawing.Size(44, 21);
-            this.paymentsZoneComboBox.TabIndex = 33;
-            this.paymentsZoneComboBox.Text = "01";
-            this.paymentsZoneComboBox.SelectedIndexChanged += new System.EventHandler(this.paymentsZoneComboBox_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(529, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 30);
-            this.label1.TabIndex = 32;
-            this.label1.Text = "Filter Zone";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // paymentSearchTextBox
-            // 
-            this.paymentSearchTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.paymentSearchTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.paymentSearchTextBox.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentSearchTextBox.Location = new System.Drawing.Point(3, 4);
-            this.paymentSearchTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 3);
-            this.paymentSearchTextBox.Name = "paymentSearchTextBox";
-            this.paymentSearchTextBox.Size = new System.Drawing.Size(490, 25);
-            this.paymentSearchTextBox.TabIndex = 30;
-            this.paymentSearchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentSearchTextBox_KeyDown);
-            // 
-            // paymentsClearButton
-            // 
-            this.paymentsClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.paymentsClearButton.BackColor = System.Drawing.Color.White;
-            this.paymentsClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.paymentsClearButton.Font = new System.Drawing.Font("Segoe UI", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentsClearButton.ForeColor = System.Drawing.Color.Crimson;
-            this.paymentsClearButton.Location = new System.Drawing.Point(499, 3);
-            this.paymentsClearButton.Name = "paymentsClearButton";
-            this.paymentsClearButton.Size = new System.Drawing.Size(24, 24);
-            this.paymentsClearButton.TabIndex = 31;
-            this.paymentsClearButton.Text = "❌";
-            this.paymentsClearButton.UseVisualStyleBackColor = false;
-            this.paymentsClearButton.Click += new System.EventHandler(this.paymentsClearButton_Click);
-            // 
-            // paymentsUndoButton
-            // 
-            this.paymentsUndoButton.BackColor = System.Drawing.Color.Brown;
-            this.paymentsUndoButton.ForeColor = System.Drawing.Color.White;
-            this.paymentsUndoButton.Location = new System.Drawing.Point(888, 3);
-            this.paymentsUndoButton.Name = "paymentsUndoButton";
-            this.paymentsUndoButton.Size = new System.Drawing.Size(127, 24);
-            this.paymentsUndoButton.TabIndex = 34;
-            this.paymentsUndoButton.Text = "↩ Undo Changes";
-            this.paymentsUndoButton.UseVisualStyleBackColor = false;
-            this.paymentsUndoButton.Visible = false;
-            this.paymentsUndoButton.Click += new System.EventHandler(this.paymentsUndoButton_Click);
-            // 
-            // paymentsApplyButton
-            // 
-            this.paymentsApplyButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.paymentsApplyButton.ForeColor = System.Drawing.Color.White;
-            this.paymentsApplyButton.Location = new System.Drawing.Point(1023, 3);
-            this.paymentsApplyButton.Name = "paymentsApplyButton";
-            this.paymentsApplyButton.Size = new System.Drawing.Size(119, 24);
-            this.paymentsApplyButton.TabIndex = 35;
-            this.paymentsApplyButton.Text = "✏️ Apply Changes";
-            this.paymentsApplyButton.UseVisualStyleBackColor = false;
-            this.paymentsApplyButton.Click += new System.EventHandler(this.paymentsApplyButton_Click);
             // 
             // BillingAndPaymentsControl
             // 
@@ -814,25 +810,6 @@
         private System.Windows.Forms.Button paymentsClearButton;
         private System.Windows.Forms.Button paymentsApplyButton;
         private System.Windows.Forms.Button paymentsUndoButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ORNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CurrentBillNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AccountNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ArrearsAmounts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ArrearsPenalty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalArrears;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BillCharge;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TaxAmounts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DiscountAmounts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalCurrent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AmountPaid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Penalty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NetBillChage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Balance;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FreeWaters;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentID;
         private System.Windows.Forms.DataGridViewTextBoxColumn BillingID;
         private System.Windows.Forms.DataGridViewTextBoxColumn BillNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateCreated;
@@ -852,5 +829,24 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AmountBilled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ArrearsPenaltyAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalAmountBilled;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ORNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CurrentBillNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AccountNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ArrearsAmounts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ArrearsPenalty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalArrears;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BillCharge;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TaxAmounts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiscountAmounts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalCurrent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AmountPaid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Penalty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NetBillChage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Balance;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FreeWaters;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentID;
     }
 }

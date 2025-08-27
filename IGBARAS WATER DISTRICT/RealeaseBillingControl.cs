@@ -190,7 +190,7 @@ namespace IGBARAS_WATER_DISTRICT
                         pd.Print(); // Start the print job
                     }
                     MessageBox.Show(
-                        $"Concessionaire Change: ₱{changeLabel.Text}.",
+                        $"Bill is Paid",
                         "Transaction Complete",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information
@@ -1028,6 +1028,7 @@ ORDER BY b.BillNo DESC;
                             billDataGridView.DataSource = dt;
 
 
+
                             // Loop through each row to apply colors
                             foreach (DataGridViewRow row in billDataGridView.Rows)
                             {
@@ -1293,6 +1294,7 @@ ORDER BY b.BillNo DESC;
                             // Calculate penalties
                             discountedConsumptionAmount = decimal.Parse(collectionTotalMeteredAmountLabel.Text.Replace(",", "").Trim());
                             decimal latePenalty = SettingsHelper.CalculateLatePaymentPenalty(discountedConsumptionAmount, dueDate);
+                            Debug.WriteLine("Late" + latePenalty);
                             decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsWaterOnly);
                             Debug.WriteLine($"Initial arrears penalty: {arrearsPenalty:N2}");
 
@@ -1339,12 +1341,35 @@ ORDER BY b.BillNo DESC;
                             decimal totalAmountCharge = chargeSubTotal + arrearsPenalty + latePenalty + arrearsAmount;
 
 
+                            
+
 
                             decimal totalAmountDuePlusSCF = totalAmountCharge + scf + othersAmount;
                             totalPlusSFCOthersLabel.Text = totalAmountDuePlusSCF.ToString("N2");
                             totalAmountDueLabel2.Text = totalAmountCharge.ToString("N2");
 
                             collectionArrearsAmountLabel.Text = arrearsWaterOnly.ToString("N2");
+
+                            Debug.WriteLine(taxAdded);
+                            Debug.WriteLine(totalConsumptionAmount);
+
+
+                            latePenalty = SettingsHelper.CalculateLatePaymentPenalty(totalConsumptionAmount, dueDate);
+                            totalConsumptionAmount = (totalConsumptionAmount + taxAdded) * (percent1 / 100);
+                            decimal allPenalty = arrearsPenalty + latePenalty;
+                            Debug.WriteLine(allPenalty);
+
+
+                            allPenalty = allPenalty * (percent1 / 100);
+
+                            Debug.WriteLine(allPenalty);
+
+                            decimal totalDiscount = totalConsumptionAmount + allPenalty;
+                            Debug.WriteLine(totalDiscount);
+
+                            // 3. Show final result
+                            discountedAmountLabel2.Text = totalDiscount.ToString("N2");
+
 
                         }
                     }
@@ -1482,6 +1507,7 @@ ORDER BY b.BillNo DESC;
                         if (decimal.TryParse(discountText, out decimal percent1))
                         {
                             discounted = addedTaxWaterConsumption * (percent1 / 100);
+
                             discountedAmountLabel.Text = discounted.ToString("N2");
                             waterConsumptionDiscountAmount = totalConsumptionAmount * (percent1 / 100);
                             discountedTax = taxAdded * (percent1 / 100);

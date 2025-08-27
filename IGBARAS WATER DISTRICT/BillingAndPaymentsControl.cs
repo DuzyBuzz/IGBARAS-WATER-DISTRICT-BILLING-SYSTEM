@@ -136,7 +136,7 @@ namespace IGBARAS_WATER_DISTRICT
                 paymentsDataGridView,
                 "Tb_Payments",
                 new string[] {"PaymentID", "ORNumber", "CurrentBillNo", "PaymentDate", "AccountNo", "PaymentType", "ArrearsAmount", "ArrearsPenalty",
-                    "TotalArrears", "BillCharge",  "TaxAmount", "DiscountAmount", "TotalCurrent", "AmountPaid", "Penalty", "[Net Bill Charge]", 
+                    "TotalArrears", "BillCharge",  "TaxAmount", "DiscountAmount", "TotalCurrent", "AmountPaid", "Penalty", "[Net Bill Charge]",  "TotalAmountPaid",
                     "Balance", "Remarks", "FreeWater", "[OthersAmount]", "SCFBalance", "TotalPenalty","ServiceConnectionFee" }
             );
         }
@@ -281,7 +281,7 @@ namespace IGBARAS_WATER_DISTRICT
                         if (drv == null) continue;
                         var originalCurrentBillNo = drv.Row["CurrentBillNo", DataRowVersion.Original];
                         var originalBalance = drv.Row["Balance", DataRowVersion.Original];
-                        var originalAmountPaid = drv.Row["TotalAmountPaid", DataRowVersion.Original];
+                        var originalAmountPaid = drv.Row["AmountPaid", DataRowVersion.Original];
 
                         // Check if any relevant column has changed
                         if (!object.Equals(currentBillNo, originalCurrentBillNo) ||
@@ -292,7 +292,7 @@ namespace IGBARAS_WATER_DISTRICT
                     {
                         { "CurrentBillNo", currentBillNo },
                         { "Balance", balance },
-                        { "TotalAmountPaid", amountPaid }
+                        { "AmountPaid", amountPaid }
                     };
 
                             try
