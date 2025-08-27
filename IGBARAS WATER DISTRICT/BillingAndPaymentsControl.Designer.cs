@@ -697,7 +697,6 @@
             this.DiscountAmounts.DataPropertyName = "DiscountAmount";
             this.DiscountAmounts.HeaderText = "Discount";
             this.DiscountAmounts.Name = "DiscountAmounts";
-            this.DiscountAmounts.ReadOnly = true;
             this.DiscountAmounts.Width = 74;
             // 
             // TotalCurrent

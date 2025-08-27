@@ -276,23 +276,27 @@ namespace IGBARAS_WATER_DISTRICT
                         var currentBillNo = row.Cells["CurrentBillNo"].Value;
                         var balance = row.Cells["Balance"].Value;
                         var amountPaid = row.Cells["AmountPaid"].Value;
+                        var discountAmount = row.Cells["DiscountAmount"].Value;
 
                         DataRowView drv = row.DataBoundItem as DataRowView;
                         if (drv == null) continue;
                         var originalCurrentBillNo = drv.Row["CurrentBillNo", DataRowVersion.Original];
                         var originalBalance = drv.Row["Balance", DataRowVersion.Original];
                         var originalAmountPaid = drv.Row["AmountPaid", DataRowVersion.Original];
+                        var originamDiscountAmount = drv.Row["DiscountAmount", DataRowVersion.Original];
 
                         // Check if any relevant column has changed
                         if (!object.Equals(currentBillNo, originalCurrentBillNo) ||
                             !object.Equals(balance, originalBalance) ||
-                            !object.Equals(amountPaid, originalAmountPaid))
+                            !object.Equals(amountPaid, originalAmountPaid)||
+                            !object.Equals(discountAmount, originamDiscountAmount))
                         {
                             var columnValues = new Dictionary<string, object>
                     {
                         { "CurrentBillNo", currentBillNo },
                         { "Balance", balance },
-                        { "AmountPaid", amountPaid }
+                        { "AmountPaid", amountPaid },
+                        { "DiscountAmount", discountAmount }
                     };
 
                             try
