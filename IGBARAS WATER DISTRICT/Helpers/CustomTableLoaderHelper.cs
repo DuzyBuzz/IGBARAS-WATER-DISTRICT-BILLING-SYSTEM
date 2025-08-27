@@ -7,7 +7,7 @@ namespace IGBARAS_WATER_DISTRICT.Helpers
 {
     public static class CustomTableLoaderHelper
     {
-        public static void LoadSelectedColumnsToGrid(DataGridView dgv, string tableName, string[] columns)
+        public static DataTable LoadSelectedColumnsToDataTable(string tableName, string[] columns)
         {
             if (columns == null || columns.Length == 0)
                 throw new ArgumentException("No columns specified.");
@@ -20,8 +20,9 @@ namespace IGBARAS_WATER_DISTRICT.Helpers
             {
                 var dt = new DataTable();
                 adapter.Fill(dt);
-                dgv.DataSource = dt;
+                return dt; // return the full table
             }
         }
+
     }
 }

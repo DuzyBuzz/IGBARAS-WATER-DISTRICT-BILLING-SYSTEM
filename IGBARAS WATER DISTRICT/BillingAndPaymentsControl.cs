@@ -14,6 +14,14 @@ namespace IGBARAS_WATER_DISTRICT
 {
     public partial class BillingAndPaymentsControl : UserControl
     {
+        // ---------------- PAGINATION VARIABLES ----------------
+        private int billingPageSize = 100;
+        private int billingPageIndex = 0;
+        private DataTable billingTable;
+
+        private int paymentsPageSize = 100;
+        private int paymentsPageIndex = 0;
+        private DataTable paymentsTable;
         public BillingAndPaymentsControl()
         {
             InitializeComponent();
@@ -23,24 +31,35 @@ namespace IGBARAS_WATER_DISTRICT
         {
 
         }
-
-        private void zoneComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        // ------------------- PAGINATION HELPER -------------------
+        private DataTable GetPagedTable(DataTable dt, int pageIndex, int pageSize)
         {
-            // Get selected zone code from ComboBox
-            string zoneCode = zoneComboBox.SelectedValue?.ToString();
+            DataTable pagedTable = dt.Clone();
+            int start = pageIndex * pageSize;
+            int end = Math.Min(start + pageSize, dt.Rows.Count);
 
-            if (string.IsNullOrEmpty(zoneCode))
-                return;
+            for (int i = start; i < end; i++)
+                pagedTable.ImportRow(dt.Rows[i]);
 
-            if (billingDataGridView.DataSource is DataTable dt)
-            {
-                // Filter rows where accountno starts with the selected zoneCode (e.g., "04-")
-                dt.DefaultView.RowFilter = $"accountno LIKE '{zoneCode}-%'";
-
-                // Sort rows in ascending order by accountno
-                dt.DefaultView.Sort = "accountno ASC";
-            }
+            return pagedTable;
         }
+
+        private void UpdateBillingPageLabel()
+        {
+            if (billingTable != null && billingTable.Rows.Count > 0)
+                billingPageLabel.Text = $"Page {billingPageIndex + 1} of {Math.Ceiling((double)billingTable.Rows.Count / billingPageSize)}";
+            else
+                billingPageLabel.Text = "Page 0 of 0";
+        }
+
+        
+        //private void UpdatePaymentsPageLabel()
+        //{
+        //    if (paymentsTable != null && paymentsTable.Rows.Count > 0)
+        //        paymentsPageLabel.Text = $"Page {paymentsPageIndex + 1} of {Math.Ceiling((double)paymentsTable.Rows.Count / paymentsPageSize)}";
+        //    else
+        //        paymentsPageLabel.Text = "Page 0 of 0";
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -56,55 +75,16 @@ namespace IGBARAS_WATER_DISTRICT
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true;
-
                 string keyword = searchAccountNumberTextBox.Text.Trim();
-
-                if (string.IsNullOrEmpty(keyword)) return;
-
-                // Prevent special character issues
-                keyword = keyword.Replace("'", "''").Replace("[", "[[]").Replace("%", "[%]").Replace("*", "[*]");
-
-                if (billingDataGridView.DataSource is DataTable dt)
+                if (string.IsNullOrEmpty(keyword))
                 {
-                    // Ensure the column names are correct
-                    if (dt.Columns.Contains("AccountNo") && dt.Columns.Contains("BillNo"))
-                    {
-                        dt.DefaultView.RowFilter =
-                            $"Convert(AccountNo, 'System.String') LIKE '%{keyword}%' OR Convert(BillNo, 'System.String') LIKE '%{keyword}%'";
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ensure your MDB columns are named exactly 'AccountNo' and 'BillNo'.", "Column Name Error");
-                    }
+                    LoadSelectedColumns(); // if empty, reload full table
+                    return;
                 }
+                SearchBilling(keyword);
             }
         }
-        private void LoadZoneComboBox()
-        {
-            int districtNo = 1; // Replace with actual district if needed
 
-            var zoneList = ZoneHelper.GetZoneCodeHelper(districtNo);
-
-            zoneComboBox.DataSource = zoneList;
-            zoneComboBox.DisplayMember = "ZoneCode"; // Shown: "01", "02", "11"
-            zoneComboBox.ValueMember = "ZoneCode";   // Internal value: same as displayed
-
-            if (zoneComboBox.Items.Count > 0)
-                zoneComboBox.SelectedIndex = 0;
-        }
-        private void LoadPaymentZoneComboBox()
-        {
-            int districtNo = 1; // Replace with actual district if needed
-
-            var zoneList = ZoneHelper.GetZoneCodeHelper(districtNo);
-
-            paymentsZoneComboBox.DataSource = zoneList;
-            paymentsZoneComboBox.DisplayMember = "ZoneCode"; // Shown: "01", "02", "11"
-            paymentsZoneComboBox.ValueMember = "ZoneCode";   // Internal value: same as displayed
-
-            if (paymentsZoneComboBox.Items.Count > 0)
-                paymentsZoneComboBox.SelectedIndex = 0;
-        }
         private void BillingAndPaymentsControl_Load(object sender, EventArgs e)
         {
             LoadPaymentsSelectedColumns();
@@ -113,32 +93,80 @@ namespace IGBARAS_WATER_DISTRICT
             LoadSelectedColumns();
             AutoCompleteHelper.FillTextBoxWithColumns("Tb_Payments", new string[] { "AccountNo", "CurrentBillNo", "ORNumber" }, paymentSearchTextBox);
             AutoCompleteHelper.FillTextBoxWithColumns("Tb_Billing", new string[] { "AccountNo", "BillNo" }, searchAccountNumberTextBox);
-            LoadZoneComboBox();
-            LoadPaymentZoneComboBox();
+
             AddDeleteContextMenu(paymentsDataGridView, "Tb_Payments", "PaymentID");
             AddDeleteContextMenu(billingDataGridView, "Tb_Billing", "BillingID");
         }
         private void LoadSelectedColumns()
         {
-            LoadZoneComboBox();
-            CustomTableLoaderHelper.LoadSelectedColumnsToGrid(
-                billingDataGridView,
+            billingTable = CustomTableLoaderHelper.LoadSelectedColumnsToDataTable(
                 "Tb_Billing",
                 new string[] {"BillingID", "BillNo", "DateCreated", "AccountNo", "DateFrom", "DateTo", "PrevReading",
-                    "PresentReading", "DueDate",  "Is_PartiallyPaid", "Is_FullyPaid", "Is_Arrears", "DiscountAmount", "TaxAmount", "FreeWater",
-                    "ArrearsAmount", "AmountBilled", "ArrearsPenaltyAmount", "TotalAmountBilled", "ServiceConnectionFee", "TotalSCF", "SCFArrears", "Is_SCFPartiallyPaid", "Is_SCFPaid" }
+            "PresentReading", "DueDate", "Is_PartiallyPaid", "Is_FullyPaid", "Is_Arrears", "DiscountAmount",
+            "TaxAmount", "FreeWater", "ArrearsAmount", "AmountBilled", "ArrearsPenaltyAmount", "TotalAmountBilled",
+            "ServiceConnectionFee", "TotalSCF", "SCFArrears", "Is_SCFPartiallyPaid", "Is_SCFPaid"}
             );
+
+            billingPageIndex = 0;
+            ShowBillingPage();
         }
+
+        private void ShowBillingPage()
+        {
+            if (billingTable == null || billingTable.Rows.Count == 0)
+            {
+                billingDataGridView.DataSource = null;
+                billingPageLabel.Text = "Page 0 of 0";
+                return;
+            }
+
+            int start = billingPageIndex * billingPageSize;
+            int end = Math.Min(start + billingPageSize, billingTable.Rows.Count);
+
+            DataTable pagedTable = billingTable.Clone();
+            for (int i = start; i < end; i++)
+                pagedTable.ImportRow(billingTable.Rows[i]);
+
+            billingDataGridView.DataSource = pagedTable;
+
+            int totalPages = (int)Math.Ceiling((double)billingTable.Rows.Count / billingPageSize);
+            billingPageLabel.Text = $"Page {billingPageIndex + 1} of {totalPages}";
+        }
+
+
         private void LoadPaymentsSelectedColumns()
         {
-            LoadZoneComboBox();
-            CustomTableLoaderHelper.LoadSelectedColumnsToGrid(
-                paymentsDataGridView,
+            paymentsTable = CustomTableLoaderHelper.LoadSelectedColumnsToDataTable(
                 "Tb_Payments",
-                new string[] {"PaymentID", "ORNumber", "CurrentBillNo", "PaymentDate", "AccountNo", "PaymentType", "ArrearsAmount", "ArrearsPenalty",
-                    "TotalArrears", "BillCharge",  "TaxAmount", "DiscountAmount", "TotalCurrent", "AmountPaid", "Penalty", "[Net Bill Charge]",  "TotalAmountPaid",
-                    "Balance", "Remarks", "FreeWater", "[OthersAmount]", "SCFBalance", "TotalPenalty","ServiceConnectionFee" }
+                new string[] {"PaymentID", "ORNumber", "CurrentBillNo", "PaymentDate", "AccountNo", "PaymentType", "ArrearsAmount",
+            "ArrearsPenalty", "TotalArrears", "BillCharge", "TaxAmount", "DiscountAmount", "TotalCurrent",
+            "AmountPaid", "Penalty", "[Net Bill Charge]", "TotalAmountPaid", "Balance", "Remarks", "FreeWater",
+            "[OthersAmount]", "SCFBalance", "TotalPenalty", "ServiceConnectionFee"}
             );
+
+            paymentsPageIndex = 0;
+            ShowPaymentsPage();
+        }
+        private void ShowPaymentsPage()
+        {
+            if (paymentsTable == null || paymentsTable.Rows.Count == 0)
+            {
+                paymentsDataGridView.DataSource = null;
+                paymentsPageLabel.Text = "Page 0 of 0";
+                return;
+            }
+
+            int start = paymentsPageIndex * paymentsPageSize;
+            int end = Math.Min(start + paymentsPageSize, paymentsTable.Rows.Count);
+
+            DataTable pagedTable = paymentsTable.Clone();
+            for (int i = start; i < end; i++)
+                pagedTable.ImportRow(paymentsTable.Rows[i]);
+
+            paymentsDataGridView.DataSource = pagedTable;
+
+            int totalPages = (int)Math.Ceiling((double)paymentsTable.Rows.Count / paymentsPageSize);
+            paymentsPageLabel.Text = $"Page {paymentsPageIndex + 1} of {totalPages}";
         }
 
         private void billingApplyButton_Click(object sender, EventArgs e)
@@ -283,13 +311,13 @@ namespace IGBARAS_WATER_DISTRICT
                         var originalCurrentBillNo = drv.Row["CurrentBillNo", DataRowVersion.Original];
                         var originalBalance = drv.Row["Balance", DataRowVersion.Original];
                         var originalAmountPaid = drv.Row["AmountPaid", DataRowVersion.Original];
-                        var originamDiscountAmount = drv.Row["DiscountAmount", DataRowVersion.Original];
+                        var originalDiscountAmount = drv.Row["DiscountAmount", DataRowVersion.Original];
 
                         // Check if any relevant column has changed
                         if (!object.Equals(currentBillNo, originalCurrentBillNo) ||
                             !object.Equals(balance, originalBalance) ||
                             !object.Equals(amountPaid, originalAmountPaid)||
-                            !object.Equals(discountAmount, originamDiscountAmount))
+                            !object.Equals(discountAmount, originalDiscountAmount))
                         {
                             var columnValues = new Dictionary<string, object>
                     {
@@ -342,58 +370,20 @@ namespace IGBARAS_WATER_DISTRICT
             LoadPaymentsSelectedColumns();
         }
 
-        private void paymentsZoneComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Get selected zone code from ComboBox
-            string zoneCode = paymentsZoneComboBox.SelectedValue?.ToString();
 
-            if (string.IsNullOrEmpty(zoneCode))
-                return;
-
-            if (paymentsDataGridView.DataSource is DataTable dt)
-            {
-                // Filter rows where accountno starts with the selected zoneCode (e.g., "04-")
-                dt.DefaultView.RowFilter = $"accountno LIKE '{zoneCode}-%'";
-
-                // Sort rows in ascending order by accountno
-                dt.DefaultView.Sort = "accountno ASC";
-            }
-        }
-
-        private void paymentsClearButton_Click(object sender, EventArgs e)
-        {
-            paymentSearchTextBox.Text = string.Empty;
-            LoadPaymentsSelectedColumns();
-        }
 
         private void paymentSearchTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true;
-
                 string keyword = paymentSearchTextBox.Text.Trim();
-
-                if (string.IsNullOrEmpty(keyword)) return;
-
-                // Prevent special character issues
-                keyword = keyword.Replace("'", "''").Replace("[", "[[]").Replace("%", "[%]").Replace("*", "[*]");
-
-                if (paymentsDataGridView.DataSource is DataTable dt)
+                if (string.IsNullOrEmpty(keyword))
                 {
-                    // Ensure the column names are correct
-                    if (dt.Columns.Contains("AccountNo") && dt.Columns.Contains("CurrentBillNo") && dt.Columns.Contains("ORNumber"))
-                    {
-                        dt.DefaultView.RowFilter =
-                            $"Convert(AccountNo, 'System.String') LIKE '%{keyword}%' " +
-                            $"OR Convert(CurrentBillNo, 'System.String') LIKE '%{keyword}%' " +
-                            $"OR Convert(ORNumber, 'System.String') LIKE '%{keyword}%'";
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ensure your MDB columns are named exactly 'AccountNo', 'CurrentBillNo', and 'ORNumber'.", "Column Name Error");
-                    }
+                    LoadPaymentsSelectedColumns(); // if empty, reload full table
+                    return;
                 }
+                SearchPayments(keyword);
             }
         }
 
@@ -464,6 +454,87 @@ namespace IGBARAS_WATER_DISTRICT
                     }
                 }
             };
+        }
+
+        private void billingNextButton_Click(object sender, EventArgs e)
+        {
+            if ((billingPageIndex + 1) * billingPageSize < billingTable.Rows.Count)
+            {
+                billingPageIndex++;
+                ShowBillingPage();
+            }
+        }
+
+        private void paymentsNextButton_Click(object sender, EventArgs e)
+        {
+            if ((paymentsPageIndex + 1) * paymentsPageSize < paymentsTable.Rows.Count)
+            {
+                paymentsPageIndex++;
+                ShowPaymentsPage();
+            }
+        }
+
+        private void paymentsPrevButton_Click(object sender, EventArgs e)
+        {
+            if (paymentsPageIndex > 0)
+            {
+                paymentsPageIndex--;
+                ShowPaymentsPage();
+            }
+        }
+        private void SearchBilling(string keyword)
+        {
+            if (billingTable == null) return;
+
+            // Reset filter
+            DataTable filtered = billingTable.Clone();
+
+            foreach (DataRow row in billingTable.Rows)
+            {
+                if (row["AccountNo"].ToString().IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    row["BillNo"].ToString().IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    filtered.ImportRow(row);
+                }
+            }
+
+            billingPageIndex = 0;
+            billingTable = filtered; // now table contains only filtered rows
+            ShowBillingPage();
+        }
+
+        private void SearchPayments(string keyword)
+        {
+            if (paymentsTable == null) return;
+
+            // Reset filter
+            DataTable filtered = paymentsTable.Clone();
+
+            foreach (DataRow row in paymentsTable.Rows)
+            {
+                if (row["AccountNo"].ToString().IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    row["CurrentBillNo"].ToString().IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    row["ORNumber"].ToString().IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    filtered.ImportRow(row);
+                }
+            }
+
+            paymentsPageIndex = 0;
+            paymentsTable = filtered; // now table contains only filtered rows
+            ShowPaymentsPage();
+        }
+
+        private void paymentsClearButton_Click(object sender, EventArgs e)
+        {
+            LoadPaymentsSelectedColumns();
+            paymentSearchTextBox.Text = "";
+        }
+
+        private void paymentsRefreshButton_Click_1(object sender, EventArgs e)
+        {
+            LoadPaymentsSelectedColumns();
+
         }
     }
 
