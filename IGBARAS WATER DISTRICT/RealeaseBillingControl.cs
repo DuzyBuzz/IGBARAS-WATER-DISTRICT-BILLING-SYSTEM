@@ -125,9 +125,6 @@ namespace IGBARAS_WATER_DISTRICT
             string accountNo = collectionNameLabel.Text;
             string billNo = collectionBillingInvoiceTextBox.Text;
 
-
-
-
             // ✅ Check if required fields are empty
             if (string.IsNullOrWhiteSpace(accountNo) || string.IsNullOrWhiteSpace(billNo))
             {
@@ -141,8 +138,8 @@ namespace IGBARAS_WATER_DISTRICT
             }
 
             // First confirmation message
-            string verifyDataMessage = "Please verify the input data carefully to ensure accuracy.\n\nDo you want to proceed with saving the billing record?";
-            DialogResult verifyResult = MessageBox.Show(verifyDataMessage, "Verify Data", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string verifyDataMessage = "Please verify the billing information carefully to ensure accuracy.\n\nDo you want to proceed with saving this billing record?";
+            DialogResult verifyResult = MessageBox.Show(verifyDataMessage, "Verify Billing Data", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (verifyResult == DialogResult.No)
             {
@@ -150,8 +147,8 @@ namespace IGBARAS_WATER_DISTRICT
             }
 
             // Second confirmation message
-            string preparePrinterMessage = "Please prepare the preprint paper and ensure the printer is properly set up and ready to print.\n\nAre you ready to proceed?";
-            DialogResult prepareResult = MessageBox.Show(preparePrinterMessage, "Prepare Printer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string preparePrinterMessage = "Please prepare the preprint paper and ensure the printer is properly set up and ready for printing the billing statement.\n\nAre you ready to proceed?";
+            DialogResult prepareResult = MessageBox.Show(preparePrinterMessage, "Prepare Billing Printer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (prepareResult == DialogResult.No)
             {
@@ -160,58 +157,41 @@ namespace IGBARAS_WATER_DISTRICT
 
             try
             {
+                // Create a new PrintDocument
+                PrintDocument pd = new PrintDocument();
 
+                // Optional: set the paper size to custom 8.25" x 11.75"
+                pd.DefaultPageSettings.PaperSize = new PaperSize("CustomA4", 825, 1175); // 100 DPI units (1 inch = 100)
+
+                // Assign the PrintPage handler
+                pd.PrintPage += new PrintPageEventHandler(CollectionMapPrintPage);
+
+                // Show a print dialog for user confirmation
+                PrintDialog dialog = new PrintDialog();
+                dialog.Document = pd;
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    pd.Print(); // Start the print job
+                }
+
+                MessageBox.Show(
+                    $"Billing record has been saved and printed successfully.",
+                    "Billing Complete",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                SaveCollectionReceiptSilently();
                 InsertIntoPayments();
-
-                //LoadPayments();
-
-                // Third confirmation message
-                string printConfirmationMessage = "The billing record has been saved successfully.\n\nDo you want to print the billing invoice now?";
-                DialogResult printResult = MessageBox.Show(printConfirmationMessage, "Print Invoice", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (printResult == DialogResult.Yes)
-                {
-                    // Create a new PrintDocument
-                    PrintDocument pd = new PrintDocument();
-
-                    // Optional: set the paper size to custom 8.25" x 11.75"
-                    pd.DefaultPageSettings.PaperSize = new PaperSize("CustomA4", 825, 1175); // 100 DPI units (1 inch = 100)
-
-
-                    // Assign the PrintPage handler
-                    pd.PrintPage += new PrintPageEventHandler(CollectionMapPrintPage);
-
-                    // Show a print dialog for user confirmation
-                    PrintDialog dialog = new PrintDialog();
-                    dialog.Document = pd;
-
-                    if (dialog.ShowDialog() == DialogResult.OK)
-                    {
-                        pd.Print(); // Start the print job
-                    }
-                    MessageBox.Show(
-                        $"Bill is Paid",
-                        "Transaction Complete",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
-
-                    SaveCollectionReceiptSilently();
-
-                }
-                else
-                {
-                    MessageBox.Show("The printing process was cancelled due to an interruption. Please try again if needed.",
-                                    "Printing Cancelled",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Error);
-                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"❌ An error occurred while saving or printing: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"❌ An error occurred while saving or printing the billing record: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         // user get bill settings helper to get the due date days ine tb_billsettings table
 
@@ -257,18 +237,7 @@ namespace IGBARAS_WATER_DISTRICT
 
         private void DisableButton()
         {
-            if (string.IsNullOrEmpty(subTotalAmountDueLabel.Text))
-            {
-                printSaveButton.Enabled = false;
-            }
-            else
-            {
-                printSaveButton.Enabled = true;
-            }
-            if (totalPaidAmountTextBox.Text == "0")
-            {
-                billPaidButton.Enabled = false;
-            }
+
         }
 
 
@@ -379,7 +348,7 @@ namespace IGBARAS_WATER_DISTRICT
 
                                     insertCmd.ExecuteNonQuery();
                                     MessageBox.Show("Billing record inserted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    printSaveButton.Enabled = false;
+
 
                                     SetNextBillNo();
                                 }
@@ -819,6 +788,7 @@ namespace IGBARAS_WATER_DISTRICT
             accountnoBillHistory.Text = $"Account ID: {accountNo}";
         }
 
+
         private void InsertIntoPayments()
         {
             try
@@ -827,52 +797,115 @@ namespace IGBARAS_WATER_DISTRICT
                 {
                     connection.Open();
 
-                    // Pre-calculate values used in both insert and update
+                    // -------------------------------
+                    // Step 0: Required Fields Check
+                    // -------------------------------
+                    if (!int.TryParse(orNumberTextBox.Text.Trim(), out int orNum) || orNum <= 0)
+                    {
+                        MessageBox.Show("OR Number is required and must be a valid number.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(accountNumberTextBox.Text))
+                    {
+                        MessageBox.Show("Account Number is required.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (!int.TryParse(collectionBillingInvoiceTextBox.Text.Trim(), out int billNo) || billNo <= 0)
+                    {
+                        MessageBox.Show("Billing Invoice Number is required and must be valid.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (!cashCheckBox.Checked && !checkCheckBox.Checked)
+                    {
+                        MessageBox.Show("Please select a Payment Type: Cash or Check.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // -------------------------------
+                    // Step 1: Parse all numeric inputs
+                    // -------------------------------
                     decimal totalCurrent = decimal.TryParse(subTotalAmountDueLabel2.Text.Replace(",", ""), out decimal tbc) ? tbc : 0m;
                     decimal amountPaid = decimal.TryParse(paymentForBillingTextBox.Text.Replace(",", ""), out decimal ap) ? ap : 0m;
                     decimal penaltyAmount = decimal.TryParse(penaltyAmountLabel2.Text.Replace(",", ""), out decimal pa) ? pa : 0m;
                     decimal scfAmountPaid = decimal.TryParse(collectionSCFTextBox.Text.Replace(",", ""), out decimal scfpaid) ? scfpaid : 0m;
                     decimal totalCurrentSCF = decimal.TryParse(totalSCFAmountLabel2.Text.Replace(",", ""), out decimal scfcurrent) ? scfcurrent : 0m;
+                    decimal arrearsAmount = decimal.TryParse(arrearsAmountLabel2.Text.Replace(",", ""), out decimal aa) ? aa : 0m;
+                    decimal totalPenalty = decimal.TryParse(collectionPenaltyLabel.Text.Replace(",", ""), out decimal tp) ? tp : 0m;
 
-                    decimal SCFbalance = totalCurrentSCF - scfAmountPaid;
-                    if (SCFbalance < 0) SCFbalance = 0;
+                    // Round all decimal values to 2 decimals
+                    totalCurrent = Math.Round(totalCurrent, 2);
+                    amountPaid = Math.Round(amountPaid, 2);
+                    penaltyAmount = Math.Round(penaltyAmount, 2);
+                    scfAmountPaid = Math.Round(scfAmountPaid, 2);
+                    totalCurrentSCF = Math.Round(totalCurrentSCF, 2);
+                    arrearsAmount = Math.Round(arrearsAmount, 2);
+                    totalPenalty = Math.Round(totalPenalty, 2);
 
-                    decimal arrearsAmount = decimal.TryParse(arrearsAmountLabel2.Text.Trim().Replace(",", ""), out decimal aa) ? aa : 0m;
+                    // -------------------------------
+                    // Step 2: Business Rules Enforcement
+                    // -------------------------------
+
+                    // Rule: SCF-only payment not allowed if totalCurrent == 0
+                    if (totalCurrent == 0 && scfAmountPaid > 0)
+                    {
+                        MessageBox.Show("Cannot pay SCF only when the current bill is zero.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Rule: SCF balance in DB must be greater than 0
+                    decimal scfBalanceInDb = totalCurrentSCF; // assuming totalCurrentSCF reflects DB value
+                    if (scfBalanceInDb <= 0 && scfAmountPaid > 0)
+                    {
+                        MessageBox.Show("SCF balance in the database is zero. Cannot make SCF payment.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Rule: Prevent overpayment
+                    decimal totalDue = totalCurrent + scfAmountPaid + arrearsAmount + totalPenalty;
+                    if (amountPaid > totalDue)
+                    {
+                        MessageBox.Show("Amount paid cannot exceed the total due + SCF.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Calculate balances
+                    decimal SCFbalance = Math.Max(0, scfBalanceInDb - scfAmountPaid);
                     decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsAmount);
                     decimal totalArrears = arrearsAmount + arrearsPenalty;
+                    decimal balance = Math.Max(0, totalCurrent + totalPenalty + arrearsAmount - amountPaid);
 
-                    decimal totalPenalty = decimal.TryParse(collectionPenaltyLabel.Text.Trim().Replace(",", ""), out decimal tp) ? tp : 0m;
-
-                    totalCurrent = totalCurrent + arrearsAmount + totalPenalty;
-                    decimal balance = totalCurrent - amountPaid;
-                    if (balance < 0) balance = 0;
-
+                    // -------------------------------
+                    // Step 3: Insert Payment
+                    // -------------------------------
                     string insertQuery = @"
-                INSERT INTO Tb_Payments (
-                    ORNumber, CurrentBillNo, AccountNo, PaymentDate, PaymentType, ArrearsAmount, ArrearsPenalty, TotalArrears, 
-                    BillCharge, TaxAmount, TotalCurrent, CheckNumber, BankName, BankAccountNumber, DateIssued, 
-                    CheckAmount, CashAmount, AmountPaid, [Net Bill Charge], Balance, DiscountName, DiscountAmount, 
-                    Penalty, ServiceConnectionFee, Remarks, OthersAmount, UserID, FreeWater, SCFBalance, TotalPenalty, TotalAmountPaid
-                ) VALUES (
-                    @ORNumber, @CurrentBillNo, @AccountNo, @PaymentDate, @PaymentType, @ArrearsAmount, @ArrearsPenalty, @TotalArrears, 
-                    @BillCharge, @TaxAmount, @TotalCurrent, @CheckNumber, @BankName, @BankAccountNumber, @DateIssued, 
-                    @CheckAmount, @CashAmount, @AmountPaid, @NetBillCharge, @Balance, @DiscountName, @DiscountAmount, 
-                    @Penalty, @ServiceConnectionFee, @Remarks, @OthersAmount, @UserID, @FreeWater, @SCFBalance, @TotalPenalty, @TotalAmountPaid
-                )";
+INSERT INTO Tb_Payments (
+    ORNumber, CurrentBillNo, AccountNo, PaymentDate, PaymentType, ArrearsAmount, ArrearsPenalty, TotalArrears, 
+    BillCharge, TaxAmount, TotalCurrent, CheckNumber, BankName, BankAccountNumber, DateIssued, 
+    CheckAmount, CashAmount, AmountPaid, [Net Bill Charge], Balance, DiscountName, DiscountAmount, 
+    Penalty, ServiceConnectionFee, Remarks, OthersAmount, UserID, FreeWater, SCFBalance, TotalPenalty, TotalAmountPaid
+) VALUES (
+    @ORNumber, @CurrentBillNo, @AccountNo, @PaymentDate, @PaymentType, @ArrearsAmount, @ArrearsPenalty, @TotalArrears, 
+    @BillCharge, @TaxAmount, @TotalCurrent, @CheckNumber, @BankName, @BankAccountNumber, @DateIssued, 
+    @CheckAmount, @CashAmount, @AmountPaid, @NetBillCharge, @Balance, @DiscountName, @DiscountAmount, 
+    @Penalty, @ServiceConnectionFee, @Remarks, @OthersAmount, @UserID, @FreeWater, @SCFBalance, @TotalPenalty, @TotalAmountPaid
+)";
 
                     using (var insertCmd = new OleDbCommand(insertQuery, connection))
                     {
-                        insertCmd.Parameters.AddWithValue("@ORNumber", int.Parse(orNumberTextBox.Text.Trim()));
-                        insertCmd.Parameters.AddWithValue("@CurrentBillNo", int.Parse(collectionBillingInvoiceTextBox.Text.Trim()));
+                        insertCmd.Parameters.AddWithValue("@ORNumber", orNum);
+                        insertCmd.Parameters.AddWithValue("@CurrentBillNo", billNo);
                         insertCmd.Parameters.AddWithValue("@AccountNo", accountNumberTextBox.Text.Trim());
                         insertCmd.Parameters.AddWithValue("@PaymentDate", DateTime.Now.ToString("M/d/yyyy"));
                         insertCmd.Parameters.AddWithValue("@PaymentType", cashCheckBox.Checked ? "Cash" : "Check");
                         insertCmd.Parameters.AddWithValue("@ArrearsAmount", arrearsAmount);
                         insertCmd.Parameters.AddWithValue("@ArrearsPenalty", arrearsPenalty);
                         insertCmd.Parameters.AddWithValue("@TotalArrears", totalArrears);
-                        insertCmd.Parameters.AddWithValue("@BillCharge", decimal.Parse(totalWaterConsumptionAmountLabel2.Text.Replace(",", "")));
-                        insertCmd.Parameters.AddWithValue("@TaxAmount", decimal.Parse(collectionTaxAmountLabel.Text.Replace(",", "")));
-                        insertCmd.Parameters.AddWithValue("@TotalCurrent", decimal.Parse(collectionTotalMeteredAmountLabel.Text.Replace(",", "")));
+                        insertCmd.Parameters.AddWithValue("@BillCharge", decimal.TryParse(totalWaterConsumptionAmountLabel2.Text.Replace(",", ""), out decimal billCharge) ? Math.Round(billCharge, 2) : 0m);
+                        insertCmd.Parameters.AddWithValue("@TaxAmount", decimal.TryParse(collectionTaxAmountLabel.Text.Replace(",", ""), out decimal taxAmt) ? Math.Round(taxAmt, 2) : 0m);
+                        insertCmd.Parameters.AddWithValue("@TotalCurrent", totalCurrent);
 
                         if (checkCheckBox.Checked)
                         {
@@ -889,31 +922,25 @@ namespace IGBARAS_WATER_DISTRICT
                             insertCmd.Parameters.AddWithValue("@DateIssued", DBNull.Value);
                         }
 
-                        insertCmd.Parameters.AddWithValue("@CheckAmount", cashCheckBox.Checked ? 0m : decimal.Parse(totalPaidAmountTextBox.Text.Trim()));
-                        insertCmd.Parameters.AddWithValue("@CashAmount", cashCheckBox.Checked ? decimal.Parse(totalPaidAmountTextBox.Text.Trim()) : 0m);
+                        insertCmd.Parameters.AddWithValue("@CheckAmount", cashCheckBox.Checked ? 0m : Math.Round(amountPaid, 2));
+                        insertCmd.Parameters.AddWithValue("@CashAmount", cashCheckBox.Checked ? Math.Round(amountPaid, 2) : 0m);
                         insertCmd.Parameters.AddWithValue("@AmountPaid", amountPaid);
-                        insertCmd.Parameters.AddWithValue("@NetBillCharge", decimal.Parse(totalPlusSFCOthersLabel.Text.Replace(",", "")));
+                        insertCmd.Parameters.AddWithValue("@NetBillCharge", decimal.TryParse(totalPlusSFCOthersLabel.Text.Replace(",", ""), out decimal netBill) ? Math.Round(netBill, 2) : 0m);
                         insertCmd.Parameters.AddWithValue("@Balance", balance);
                         insertCmd.Parameters.AddWithValue("@DiscountName", discountNameLabel.Text.Trim());
-                        insertCmd.Parameters.AddWithValue("@DiscountAmount", decimal.Parse(discountedAmountLabel2.Text.Replace(",", "")));
+                        insertCmd.Parameters.AddWithValue("@DiscountAmount", decimal.TryParse(discountedAmountLabel2.Text.Replace(",", ""), out decimal discountAmt) ? Math.Round(discountAmt, 2) : 0m);
                         insertCmd.Parameters.AddWithValue("@Penalty", penaltyAmount);
-                        insertCmd.Parameters.AddWithValue("@ServiceConnectionFee", decimal.Parse(collectionSCFTextBox.Text.Replace(",", "")));
+                        insertCmd.Parameters.AddWithValue("@ServiceConnectionFee", decimal.TryParse(collectionSCFTextBox.Text.Replace(",", ""), out decimal scfFee) ? Math.Round(scfFee, 2) : 0m);
                         insertCmd.Parameters.AddWithValue("@Remarks", remarksTextBox.Text.Trim() == "📝 Remarks" ? "" : remarksTextBox.Text.Trim());
-                        insertCmd.Parameters.AddWithValue("@OthersAmount", decimal.Parse(paymentFroOthersLabel.Text.Replace(",", "")));
-                        Debug.Write(insertCmd);
-
+                        insertCmd.Parameters.AddWithValue("@OthersAmount", decimal.TryParse(paymentFroOthersLabel.Text.Replace(",", ""), out decimal othersAmt) ? Math.Round(othersAmt, 2) : 0m);
                         insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
-                        insertCmd.Parameters.AddWithValue("@FreeWater", int.Parse(freeWaterLabel.Text.Trim()));
+                        insertCmd.Parameters.AddWithValue("@FreeWater", int.TryParse(freeWaterLabel.Text.Trim(), out int fw) ? fw : 0);
                         insertCmd.Parameters.AddWithValue("@SCFBalance", SCFbalance);
-                        insertCmd.Parameters.AddWithValue("@TotalPenalty", decimal.Parse(collectionPenaltyLabel.Text.Replace(",", "")));
-                        insertCmd.Parameters.AddWithValue("@TotalAmountPaid", decimal.Parse(totalPaidAmountTextBox.Text.Replace(",", "")));
-                        insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
-
-
+                        insertCmd.Parameters.AddWithValue("@TotalPenalty", totalPenalty);
+                        insertCmd.Parameters.AddWithValue("@TotalAmountPaid", amountPaid);
 
                         insertCmd.ExecuteNonQuery();
                     }
-
                     // UPDATE billing status
                     string updateBillingQuery = @"
                 UPDATE Tb_Billing
@@ -949,17 +976,169 @@ namespace IGBARAS_WATER_DISTRICT
                         updateScfCmd.ExecuteNonQuery();
                     }
 
-                    MessageBox.Show("Payment record inserted and billing status updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Payment recorded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadPaymentsToday();
                     SetNextORNo();
                 }
             }
+            catch (OleDbException ex)
+            {
+                Debug.WriteLine($"System Error: {ex}");
+                MessageBox.Show("A system error occurred while saving the payment. Please contact IT support.", "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (FormatException ex)
+            {
+                Debug.WriteLine($"User Error: {ex}");
+                MessageBox.Show("Invalid numeric input detected. Please check your values.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Insert failed:\n{ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine($"Unexpected Error: {ex}");
+                MessageBox.Show("An unexpected error occurred. Please try again or contact support.", "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        //private void InsertIntoPayments()
+        //{
+        //    try
+        //    {
+        //        using (var connection = new OleDbConnection(DbConfig.ConnectionString))
+        //        {
+        //            connection.Open();
+
+        //            // Pre-calculate values used in both insert and update
+        //            decimal totalCurrent = decimal.TryParse(subTotalAmountDueLabel2.Text.Replace(",", ""), out decimal tbc) ? tbc : 0m;
+        //            decimal amountPaid = decimal.TryParse(paymentForBillingTextBox.Text.Replace(",", ""), out decimal ap) ? ap : 0m;
+        //            decimal penaltyAmount = decimal.TryParse(penaltyAmountLabel2.Text.Replace(",", ""), out decimal pa) ? pa : 0m;
+        //            decimal scfAmountPaid = decimal.TryParse(collectionSCFTextBox.Text.Replace(",", ""), out decimal scfpaid) ? scfpaid : 0m;
+        //            decimal totalCurrentSCF = decimal.TryParse(totalSCFAmountLabel2.Text.Replace(",", ""), out decimal scfcurrent) ? scfcurrent : 0m;
+
+        //            decimal SCFbalance = totalCurrentSCF - scfAmountPaid;
+        //            if (SCFbalance < 0) SCFbalance = 0;
+
+        //            decimal arrearsAmount = decimal.TryParse(arrearsAmountLabel2.Text.Trim().Replace(",", ""), out decimal aa) ? aa : 0m;
+        //            decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsAmount);
+        //            decimal totalArrears = arrearsAmount + arrearsPenalty;
+
+        //            decimal totalPenalty = decimal.TryParse(collectionPenaltyLabel.Text.Trim().Replace(",", ""), out decimal tp) ? tp : 0m;
+
+        //            totalCurrent = totalCurrent + arrearsAmount + totalPenalty;
+        //            decimal balance = totalCurrent - amountPaid;
+        //            if (balance < 0) balance = 0;
+
+        //            string insertQuery = @"
+        //        INSERT INTO Tb_Payments (
+        //            ORNumber, CurrentBillNo, AccountNo, PaymentDate, PaymentType, ArrearsAmount, ArrearsPenalty, TotalArrears, 
+        //            BillCharge, TaxAmount, TotalCurrent, CheckNumber, BankName, BankAccountNumber, DateIssued, 
+        //            CheckAmount, CashAmount, AmountPaid, [Net Bill Charge], Balance, DiscountName, DiscountAmount, 
+        //            Penalty, ServiceConnectionFee, Remarks, OthersAmount, UserID, FreeWater, SCFBalance, TotalPenalty, TotalAmountPaid
+        //        ) VALUES (
+        //            @ORNumber, @CurrentBillNo, @AccountNo, @PaymentDate, @PaymentType, @ArrearsAmount, @ArrearsPenalty, @TotalArrears, 
+        //            @BillCharge, @TaxAmount, @TotalCurrent, @CheckNumber, @BankName, @BankAccountNumber, @DateIssued, 
+        //            @CheckAmount, @CashAmount, @AmountPaid, @NetBillCharge, @Balance, @DiscountName, @DiscountAmount, 
+        //            @Penalty, @ServiceConnectionFee, @Remarks, @OthersAmount, @UserID, @FreeWater, @SCFBalance, @TotalPenalty, @TotalAmountPaid
+        //        )";
+
+        //            using (var insertCmd = new OleDbCommand(insertQuery, connection))
+        //            {
+        //                insertCmd.Parameters.AddWithValue("@ORNumber", int.Parse(orNumberTextBox.Text.Trim()));
+        //                insertCmd.Parameters.AddWithValue("@CurrentBillNo", int.Parse(collectionBillingInvoiceTextBox.Text.Trim()));
+        //                insertCmd.Parameters.AddWithValue("@AccountNo", accountNumberTextBox.Text.Trim());
+        //                insertCmd.Parameters.AddWithValue("@PaymentDate", DateTime.Now.ToString("M/d/yyyy"));
+        //                insertCmd.Parameters.AddWithValue("@PaymentType", cashCheckBox.Checked ? "Cash" : "Check");
+        //                insertCmd.Parameters.AddWithValue("@ArrearsAmount", arrearsAmount);
+        //                insertCmd.Parameters.AddWithValue("@ArrearsPenalty", arrearsPenalty);
+        //                insertCmd.Parameters.AddWithValue("@TotalArrears", totalArrears);
+        //                insertCmd.Parameters.AddWithValue("@BillCharge", decimal.Parse(totalWaterConsumptionAmountLabel2.Text.Replace(",", "")));
+        //                insertCmd.Parameters.AddWithValue("@TaxAmount", decimal.Parse(collectionTaxAmountLabel.Text.Replace(",", "")));
+        //                insertCmd.Parameters.AddWithValue("@TotalCurrent", decimal.Parse(collectionTotalMeteredAmountLabel.Text.Replace(",", "")));
+
+        //                if (checkCheckBox.Checked)
+        //                {
+        //                    insertCmd.Parameters.AddWithValue("@CheckNumber", checkNumberTextBox.Text.Trim());
+        //                    insertCmd.Parameters.AddWithValue("@BankName", bankNameTextBox.Text.Trim());
+        //                    insertCmd.Parameters.AddWithValue("@BankAccountNumber", bankAccountNumberText.Text.Trim());
+        //                    insertCmd.Parameters.AddWithValue("@DateIssued", checkDateIssuedDateTimePicker.Value.ToString("M/d/yyyy"));
+        //                }
+        //                else
+        //                {
+        //                    insertCmd.Parameters.AddWithValue("@CheckNumber", DBNull.Value);
+        //                    insertCmd.Parameters.AddWithValue("@BankName", DBNull.Value);
+        //                    insertCmd.Parameters.AddWithValue("@BankAccountNumber", DBNull.Value);
+        //                    insertCmd.Parameters.AddWithValue("@DateIssued", DBNull.Value);
+        //                }
+
+        //                insertCmd.Parameters.AddWithValue("@CheckAmount", cashCheckBox.Checked ? 0m : decimal.Parse(totalPaidAmountTextBox.Text.Trim()));
+        //                insertCmd.Parameters.AddWithValue("@CashAmount", cashCheckBox.Checked ? decimal.Parse(totalPaidAmountTextBox.Text.Trim()) : 0m);
+        //                insertCmd.Parameters.AddWithValue("@AmountPaid", amountPaid);
+        //                insertCmd.Parameters.AddWithValue("@NetBillCharge", decimal.Parse(totalPlusSFCOthersLabel.Text.Replace(",", "")));
+        //                insertCmd.Parameters.AddWithValue("@Balance", balance);
+        //                insertCmd.Parameters.AddWithValue("@DiscountName", discountNameLabel.Text.Trim());
+        //                insertCmd.Parameters.AddWithValue("@DiscountAmount", decimal.Parse(discountedAmountLabel2.Text.Replace(",", "")));
+        //                insertCmd.Parameters.AddWithValue("@Penalty", penaltyAmount);
+        //                insertCmd.Parameters.AddWithValue("@ServiceConnectionFee", decimal.Parse(collectionSCFTextBox.Text.Replace(",", "")));
+        //                insertCmd.Parameters.AddWithValue("@Remarks", remarksTextBox.Text.Trim() == "📝 Remarks" ? "" : remarksTextBox.Text.Trim());
+        //                insertCmd.Parameters.AddWithValue("@OthersAmount", decimal.Parse(paymentFroOthersLabel.Text.Replace(",", "")));
+        //                Debug.Write(insertCmd);
+
+        //                insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
+        //                insertCmd.Parameters.AddWithValue("@FreeWater", int.Parse(freeWaterLabel.Text.Trim()));
+        //                insertCmd.Parameters.AddWithValue("@SCFBalance", SCFbalance);
+        //                insertCmd.Parameters.AddWithValue("@TotalPenalty", decimal.Parse(collectionPenaltyLabel.Text.Replace(",", "")));
+        //                insertCmd.Parameters.AddWithValue("@TotalAmountPaid", decimal.Parse(totalPaidAmountTextBox.Text.Replace(",", "")));
+        //                insertCmd.Parameters.AddWithValue("@UserID", UserCredentials.UserId);
+
+        //                // UPDATE billing status
+        //                string updateBillingQuery = @"
+        //        UPDATE Tb_Billing
+        //        SET 
+        //            Is_FullyPaid = @IsFullyPaid, 
+        //            Is_PartiallyPaid = @IsPartiallyPaid,
+        //            Is_SCFPaid = @IsSCFFullyPaid,
+        //            Is_SCFPartiallyPaid = @IsSCFPartiallyPaid
+        //        WHERE BillNo = @BillNo";
+
+        //                using (var updateCmd = new OleDbCommand(updateBillingQuery, connection))
+        //                {
+        //                    bool isFullyPaid = amountPaid >= totalCurrent;
+        //                    bool isPartiallyPaid = amountPaid > 0 && amountPaid < totalCurrent;
+        //                    bool isSCFFullyPaid = scfAmountPaid >= totalCurrentSCF;
+        //                    bool isSCFPartiallyPaid = scfAmountPaid > 0 && scfAmountPaid < totalCurrentSCF;
+
+        //                    updateCmd.Parameters.AddWithValue("@IsFullyPaid", isFullyPaid);
+        //                    updateCmd.Parameters.AddWithValue("@IsPartiallyPaid", isPartiallyPaid);
+        //                    updateCmd.Parameters.AddWithValue("@IsSCFFullyPaid", isSCFFullyPaid);
+        //                    updateCmd.Parameters.AddWithValue("@IsSCFPartiallyPaid", isSCFPartiallyPaid);
+        //                    updateCmd.Parameters.AddWithValue("@BillNo", int.Parse(collectionBillingInvoiceTextBox.Text.Trim()));
+
+        //                    updateCmd.ExecuteNonQuery();
+        //                }
+
+        //                // Deduct SCF payment from concessionaire's SCF balance
+        //                string updateScfQuery = "UPDATE Tb_Concessionaire SET SCF = SCF - ? WHERE AccountNo = ?";
+        //                using (var updateScfCmd = new OleDbCommand(updateScfQuery, connection))
+        //                {
+        //                    updateScfCmd.Parameters.AddWithValue("?", scfAmountPaid);
+        //                    updateScfCmd.Parameters.AddWithValue("?", collectionAccountNoLabel.Text.Trim());
+        //                    updateScfCmd.ExecuteNonQuery();
+        //                }
+
+        //                insertCmd.ExecuteNonQuery();
+        //            }
+
+
+
+        //            MessageBox.Show("Payment record inserted and billing status updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //            LoadPaymentsToday();
+        //            SetNextORNo();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Insert failed:\n{ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+         
         private void ClearCollection()
         {
             collectionNameLabel.Text = "";
