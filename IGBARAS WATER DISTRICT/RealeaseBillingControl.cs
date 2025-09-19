@@ -784,6 +784,7 @@ namespace IGBARAS_WATER_DISTRICT
                     }
                     if (currentTabLabel.Text == "Collection Reciept")
                     {
+
                         int meterConsumed = Math.Max(0, (int)((bill.PresentReading - bill.PrevReading) - bill.FreeWater));
                         Debug.WriteLine(
                             $"Meter consumed: {meterConsumed} cu.m | Tax: {bill.Tax}% | Discount: {bill.Discount}% | SCF: {bill.CurrentSCFAmount:N2} | DueDate: {bill.DueDate:MMMM dd, yyyy}"
@@ -798,7 +799,8 @@ namespace IGBARAS_WATER_DISTRICT
                         {
                             decimal taxAmount = bill.TaxAmount;
                             discountedTaxAmountLabel.Text = $"{bill.TaxAmount:N2}";
-                            decimal arrearsWaterOnly = bill.AmountBilled;
+
+                            decimal arrearsWaterOnly = bill.ArrearsAmount;
                             PopulateServiceRateLabels2(serviceId, meterConsumed, arrearsWaterOnly, taxAmount);
                         }
                         collectionNameLabel.Text = fullname;
@@ -1247,7 +1249,8 @@ ORDER BY b.BillNo DESC;
 
                                 addedTaxWaterConsumption = totalConsumptionAmount + taxAdded;
                                 discounted = addedTaxWaterConsumption * (percent1 / 100);
-                                discountedAmountLabel2.Text = discounted.ToString("N2");
+                                discountedAmountLabel2.Text = Math.Round(discounted, 2).ToString("N2");
+
 
 
                             }
@@ -1285,16 +1288,17 @@ ORDER BY b.BillNo DESC;
 
                             // Step 3: Get Due Date (required for late penalty)
                             DateTime dueDate;
-                            if (!DateTime.TryParseExact(dateBilledLabel2.Text, "MMMM dd, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dueDate))
+                            if (!DateTime.TryParseExact(dueDateLabel2.Text, "MMMM dd, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dueDate))
                             {
                                 dueDate = DateTime.Now; // fallback, or handle differently if needed
                             }
-                           
+
                             decimal arrearsAmount = decimal.Parse(arrearsAmountLabel2.Text.Replace(",", "").Trim());
                             // Calculate penalties
                             discountedConsumptionAmount = decimal.Parse(collectionTotalMeteredAmountLabel.Text.Replace(",", "").Trim());
                             decimal latePenalty = SettingsHelper.CalculateLatePaymentPenalty(discountedConsumptionAmount, dueDate);
                             Debug.WriteLine("Late" + latePenalty);
+                            Debug.WriteLine("duedate" + dueDate);
                             decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsWaterOnly);
                             Debug.WriteLine($"Initial arrears penalty: {arrearsPenalty:N2}");
 
@@ -1341,7 +1345,7 @@ ORDER BY b.BillNo DESC;
                             decimal totalAmountCharge = chargeSubTotal + arrearsPenalty + latePenalty + arrearsAmount;
 
 
-                            
+
 
 
                             decimal totalAmountDuePlusSCF = totalAmountCharge + scf + othersAmount;
@@ -1378,6 +1382,10 @@ ORDER BY b.BillNo DESC;
                 }
             }
         }
+
+
+
+
 
 
         public void PopulateServiceRateLabels(int serviceId, int totalConsumption)
