@@ -2423,7 +2423,7 @@ ORDER BY b.BillNo DESC;
             {
                 if (!string.IsNullOrWhiteSpace(value) && (allowZero || (value != "0" && value != "0.00")))
                 {
-                    g.DrawString(value, font, brush, x, y + offsetY);
+                    g.DrawString(value, font, brush, x-5, y + offsetY);
                 }
             }
 
@@ -2431,7 +2431,7 @@ ORDER BY b.BillNo DESC;
             PrintIfNotZero(previousReadingTextBox.Text, 210, 265, true);
             PrintIfNotZero(dateBilledLabel.Text, 300, 105);
             PrintIfNotZero(fullnameTextBox.Text, 190, 153);
-            PrintIfNotZero(addressTextBox.Text, 190, 168);
+            PrintIfNotZero(addressTextBox.Text, 190, 183);
             PrintIfNotZero(accountNumberTextBox.Text, 190, 200);
 
             PrintIfNotZero(fromReadingDateLabel.Text, 288, 213);
@@ -2440,51 +2440,51 @@ ORDER BY b.BillNo DESC;
             PrintIfNotZero(presentReadingTextBox.Text, 290, 265);
             PrintIfNotZero(meterConsumedReadingTextBox.Text, 370, 265);
 
-            PrintIfNotZero(dueDateLabel.Text, 670, 35);
+            PrintIfNotZero(dueDateLabel.Text, 665, 35);
 
-            PrintIfNotZero(totalQuantityLabel.Text, 605, 90);
-            PrintIfNotZero(minimumChargeLabel.Text, 648, 105);
-            PrintIfNotZero(totalWaterConsumptionAmountLabel.Text, 700, 90);
+            PrintIfNotZero(totalQuantityLabel.Text, 600, 90);
+            PrintIfNotZero(minimumChargeLabel.Text, 643, 105);
+            PrintIfNotZero(totalWaterConsumptionAmountLabel.Text, 695, 90);
 
             // Only print tier rows if their quantity > 0 (just like in PopulateServiceRateLabels)
             if (int.TryParse(tenQuantityLabel.Text, out int q10) && q10 > 0)
             {
-                PrintIfNotZero(tenQuantityLabel.Text, 605, 125);
-                PrintIfNotZero(tenUnitPriceLabel.Text, 648, 125);
-                PrintIfNotZero(tenAmountLabel.Text, 700, 125);
+                PrintIfNotZero(tenQuantityLabel.Text, 600, 125);
+                PrintIfNotZero(tenUnitPriceLabel.Text, 643, 125);
+                PrintIfNotZero(tenAmountLabel.Text, 695, 125);
             }
             if (int.TryParse(twentyQuantityLabel.Text, out int q20) && q20 > 0)
             {
-                PrintIfNotZero(twentyQuantityLabel.Text, 605, 140);
-                PrintIfNotZero(twentyUnitPriceLabel.Text, 648, 140);
-                PrintIfNotZero(twentyAmountLabel.Text, 700, 140);
+                PrintIfNotZero(twentyQuantityLabel.Text, 600, 140);
+                PrintIfNotZero(twentyUnitPriceLabel.Text, 643, 140);
+                PrintIfNotZero(twentyAmountLabel.Text, 695, 140);
             }
             if (int.TryParse(thirtyQuantityLabel.Text, out int q30) && q30 > 0)
             {
-                PrintIfNotZero(thirtyQuantityLabel.Text, 605, 155);
-                PrintIfNotZero(thirtyUnitPriceLabel.Text, 648, 155);
-                PrintIfNotZero(thirtyAmountLabel.Text, 700, 155);
+                PrintIfNotZero(thirtyQuantityLabel.Text, 600, 155);
+                PrintIfNotZero(thirtyUnitPriceLabel.Text, 643, 155);
+                PrintIfNotZero(thirtyAmountLabel.Text, 695, 155);
             }
             if (int.TryParse(fortyQuantityLabel.Text, out int q40) && q40 > 0)
             {
-                PrintIfNotZero(fortyQuantityLabel.Text, 605, 170);
-                PrintIfNotZero(fortyUnitPriceLabel.Text, 648, 170);
-                PrintIfNotZero(fortyAmountLabel.Text, 700, 170);
+                PrintIfNotZero(fortyQuantityLabel.Text, 600, 170);
+                PrintIfNotZero(fortyUnitPriceLabel.Text, 643, 170);
+                PrintIfNotZero(fortyAmountLabel.Text, 695, 170);
             }
             if (int.TryParse(fortyUpQuantityLabel.Text, out int q41) && q41 > 0)
             {
-                PrintIfNotZero(fortyUpQuantityLabel.Text, 605, 185);
-                PrintIfNotZero(fortyUpUnitPriceLabel.Text, 648, 185);
-                PrintIfNotZero(fortyUpAmountLabel.Text, 700, 185);
+                PrintIfNotZero(fortyUpQuantityLabel.Text, 600, 185);
+                PrintIfNotZero(fortyUpUnitPriceLabel.Text, 643, 185);
+                PrintIfNotZero(fortyUpAmountLabel.Text, 695, 185);
             }
 
-            PrintIfNotZero(discountedAmountLabel.Text, 700, 203);
-            PrintIfNotZero(taxAmountLabel.Text, 700, 218);
-            PrintIfNotZero(arrearsAmountLabel.Text, 700, 248);
-            PrintIfNotZero(totalSCFAmountLabel.Text, 700, 263);
-            PrintIfNotZero(subTotalAmountDueLabel.Text, 700, 283);
-            PrintIfNotZero(penaltyAmountLabel.Text, 700, 298);
-            PrintIfNotZero(subTotalAmountDueLabel.Text, 700, 313);
+            PrintIfNotZero(discountedAmountLabel.Text, 695, 203);
+            PrintIfNotZero(taxAmountLabel.Text, 695, 218);
+            PrintIfNotZero(arrearsAmountLabel.Text, 695, 248);
+            PrintIfNotZero(totalSCFAmountLabel.Text, 695, 263);
+            PrintIfNotZero(subTotalAmountDueLabel.Text, 695, 283);
+            PrintIfNotZero(penaltyAmountLabel.Text, 695, 298);
+            PrintIfNotZero(subTotalAmountDueLabel.Text, 695, 313);
         }
 
 
@@ -2497,7 +2497,7 @@ ORDER BY b.BillNo DESC;
 
             for (int i = 0; i < 3; i++)
             {
-                int offsetY = i * 363;
+                int offsetY = i * 359;
                 DrawBillingForm(g, offsetY, font, brush);
             }
 
