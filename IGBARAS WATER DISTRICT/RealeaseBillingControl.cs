@@ -743,11 +743,21 @@ namespace IGBARAS_WATER_DISTRICT
                         collectionInitianBillingCheckBox.Checked = bill.IsInitialBilling;
                         if (int.TryParse(serviceIDLabel.Text.Trim(), out int serviceId))
                         {
-                            decimal taxAmount = bill.TaxAmount;
-                            discountedTaxAmountLabel.Text = $"{bill.TaxAmount:N2}";
-
                             decimal arrearsWaterOnly = bill.ArrearsAmount;
+                            decimal taxAmount = bill.TaxAmount;
+
+                            // If no arrears, recent tax should also be zero
+                            if (arrearsWaterOnly <= 0m)
+                            {
+                                taxAmount = 0m;
+                            }
+
+                            // Update the label
+                            discountedTaxAmountLabel.Text = $"{taxAmount:N2}";
+
+                            // Call your method with corrected tax
                             PopulateServiceRateLabels2(serviceId, meterConsumed, arrearsWaterOnly, taxAmount);
+
                         }
                         collectionNameLabel.Text = fullname;
                         collectionAddressLabel.Text = address;
@@ -836,13 +846,13 @@ namespace IGBARAS_WATER_DISTRICT
                         return;
                     }
 
-                    // Rule 2: Bill must be paid first before SCF
-                    if (amountPaid < billDue && scfAmountPaid > 0)
-                    {
-                        MessageBox.Show("Bill must be fully paid before SCF payment can be applied.",
-                            "Payment Priority", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
+                    //// Rule 2: Bill must be paid first before SCF
+                    //if (amountPaid < billDue && scfAmountPaid > 0)
+                    //{
+                    //    MessageBox.Show("Bill must be fully paid before SCF payment can be applied.",
+                    //        "Payment Priority", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //    return;
+                    //}
 
                     // Rule 3: SCF balance in DB must be > 0
                     decimal scfBalanceInDb = totalCurrentSCF; // assuming this is from DB
@@ -866,7 +876,32 @@ namespace IGBARAS_WATER_DISTRICT
                     decimal SCFbalance = Math.Max(0, scfBalanceInDb - scfAmountPaid);
                     decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsAmount);
                     decimal totalArrears = arrearsAmount + arrearsPenalty;
-                    decimal balance = Math.Max(0, billDue - amountPaid);
+                    decimal balance = Math.Round(billDue - amountPaid, 2, MidpointRounding.AwayFromZero);
+
+                    // Treat very small balances (< 0.01) as zero
+                    if (balance <= 0.01m)
+                        balance = 0.00m;
+
+                    // Ensure balance is non-negative
+                    balance = Math.Max(0, balance);
+
+
+                    Debug.WriteLine("---- DEBUG: Billing Calculation ----");
+                    Debug.WriteLine($"TotalCurrent: {totalCurrent:N2}");
+                    Debug.WriteLine($"AmountPaid: {amountPaid:N2}");
+                    Debug.WriteLine($"PenaltyAmount: {penaltyAmount:N2}");
+                    Debug.WriteLine($"SCFAmountPaid: {scfAmountPaid:N2}");
+                    Debug.WriteLine($"TotalCurrentSCF: {totalCurrentSCF:N2}");
+                    Debug.WriteLine($"ArrearsAmount: {arrearsAmount:N2}");
+                    Debug.WriteLine($"TotalPenalty: {totalPenalty:N2}");
+                    Debug.WriteLine($"BillDue (totalCurrent + arrears + totalPenalty): {billDue:N2}");
+                    Debug.WriteLine($"SCFBalanceInDb: {scfBalanceInDb:N2}");
+                    Debug.WriteLine($"SCFbalance (after payment): {SCFbalance:N2}");
+                    Debug.WriteLine($"ArrearsPenalty: {arrearsPenalty:N2}");
+                    Debug.WriteLine($"TotalArrears: {totalArrears:N2}");
+                    Debug.WriteLine($"Balance (billDue - amountPaid): {balance:N2}");
+                    Debug.WriteLine($"TotalDue (bill + SCF): {totalDue:N2}");
+                    Debug.WriteLine("------------------------------------");
 
 
                     // -------------------------------
@@ -897,7 +932,7 @@ INSERT INTO Tb_Payments (
                         insertCmd.Parameters.AddWithValue("@TotalArrears", totalArrears);
                         insertCmd.Parameters.AddWithValue("@BillCharge", decimal.TryParse(totalWaterConsumptionAmountLabel2.Text.Replace(",", ""), out decimal billCharge) ? Math.Round(billCharge, 2) : 0m);
                         insertCmd.Parameters.AddWithValue("@TaxAmount", decimal.TryParse(collectionTaxAmountLabel.Text.Replace(",", ""), out decimal taxAmt) ? Math.Round(taxAmt, 2) : 0m);
-                        insertCmd.Parameters.AddWithValue("@TotalCurrent", totalCurrent);
+                        insertCmd.Parameters.AddWithValue("@TotalCurrent", decimal.TryParse(collectionTotalMeteredAmountLabel.Text.Replace(",", ""), out decimal totalCurrents) ? Math.Round(totalCurrents, 2) : 0m);
 
                         if (checkCheckBox.Checked)
                         {
@@ -929,7 +964,15 @@ INSERT INTO Tb_Payments (
                         insertCmd.Parameters.AddWithValue("@FreeWater", int.TryParse(freeWaterLabel.Text.Trim(), out int fw) ? fw : 0);
                         insertCmd.Parameters.AddWithValue("@SCFBalance", SCFbalance);
                         insertCmd.Parameters.AddWithValue("@TotalPenalty", totalPenalty);
-                        insertCmd.Parameters.AddWithValue("@TotalAmountPaid", amountPaid);
+                        insertCmd.Parameters.AddWithValue("@TotalAmountPaid", decimal.TryParse(totalPaidAmountTextBox.Text.Replace(",", ""), out decimal totalAmountPaid) ? Math.Round(totalAmountPaid, 2) : 0m);
+
+                        // ----------------- DEBUGGING -----------------
+                        Debug.WriteLine("---- DEBUG: Parameters to be inserted ----");
+                        foreach (OleDbParameter param in insertCmd.Parameters)
+                        {
+                            Debug.WriteLine($"{param.ParameterName}: {param.Value}");
+                        }
+                        Debug.WriteLine("------------------------------------------");
 
                         insertCmd.ExecuteNonQuery();
                     }
@@ -2769,10 +2812,26 @@ ORDER BY b.BillNo DESC;
 
             if (!int.TryParse(meterConsumedReadingTextBox.Text.Trim(), out int totalWaterConsumed))
                 return;
+            // Try parsing arrears safely
+            decimal arrearsWaterOnly = 0m;
+            decimal recentTaxAmount = 0m;
 
-            decimal arrearsWaterOnly = decimal.Parse(collectionArrearsAmountLabel.Text.Replace(",", "").Trim());
-            decimal recentTaxAmount = decimal.Parse(discountedTaxAmountLabel.Text.Replace(",", "").Trim());
+            // Remove commas and whitespace
+            string arrearsText = collectionArrearsAmountLabel.Text.Replace(",", "").Trim();
+            string taxText = discountedTaxAmountLabel.Text.Replace(",", "").Trim();
+
+            // Parse using TryParse to avoid exceptions
+            decimal.TryParse(arrearsText, out arrearsWaterOnly);
+            decimal.TryParse(taxText, out recentTaxAmount);
+
+            // If arrears is zero (or negative), force recent tax to zero
+            if (arrearsWaterOnly <= 0m)
+            {
+                recentTaxAmount = 0m;
+            }
+
             PopulateServiceRateLabels2(serviceID, totalWaterConsumed, arrearsWaterOnly, recentTaxAmount);
+
             CalculateTotal();
         }
 
