@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IGBARAS_WATER_DISTRICT.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,11 +7,11 @@ using System.Data.OleDb;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using IGBARAS_WATER_DISTRICT.Helpers;
 
 
 namespace IGBARAS_WATER_DISTRICT
@@ -33,7 +34,11 @@ namespace IGBARAS_WATER_DISTRICT
             this.MinimizeBox = true;
             this.ControlBox = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            // Get the version of the assembly
+            Version appVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
+            // Display in the label
+            versionLabel.Text = $"Version: {appVersion.Major}.{appVersion.Minor}.{appVersion.Build}.{appVersion.Revision}";
 
             try
             {
@@ -204,5 +209,10 @@ namespace IGBARAS_WATER_DISTRICT
             }
         }
 
+        private async void versionLabel_Click(object sender, EventArgs e)
+        {
+            UpdateHelper helper = new UpdateHelper();
+            await helper.CheckForUpdatesAsync();
+        }
     }
 }

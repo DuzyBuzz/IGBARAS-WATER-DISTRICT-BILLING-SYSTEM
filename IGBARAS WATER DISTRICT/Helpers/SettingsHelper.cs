@@ -104,13 +104,15 @@ namespace IGBARAS_WATER_DISTRICT.Helpers
         {
             var settings = GetSettings();
 
-            // Only apply penalty if due date has passed
-            if (DateTime.Now <= dueDate)
+            // Only apply penalty after the due date (exclude the due date itself)
+            if (DateTime.Now.Date <= dueDate.Date)
                 return 0m;
 
             decimal penalty = totalDue * (decimal)(settings.PenaltyPercent / 100.0);
             return penalty;
         }
+
+
 
 
 

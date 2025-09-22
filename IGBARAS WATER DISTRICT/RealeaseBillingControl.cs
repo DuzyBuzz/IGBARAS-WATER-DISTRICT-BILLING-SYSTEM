@@ -157,30 +157,7 @@ namespace IGBARAS_WATER_DISTRICT
 
             try
             {
-                // Create a new PrintDocument
-                PrintDocument pd = new PrintDocument();
 
-                // Optional: set the paper size to custom 8.25" x 11.75"
-                pd.DefaultPageSettings.PaperSize = new PaperSize("CustomA4", 825, 1175); // 100 DPI units (1 inch = 100)
-
-                // Assign the PrintPage handler
-                pd.PrintPage += new PrintPageEventHandler(CollectionMapPrintPage);
-
-                // Show a print dialog for user confirmation
-                PrintDialog dialog = new PrintDialog();
-                dialog.Document = pd;
-
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    pd.Print(); // Start the print job
-                }
-
-                MessageBox.Show(
-                    $"Billing record has been saved and printed successfully.",
-                    "Billing Complete",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
 
                 SaveCollectionReceiptSilently();
                 InsertIntoPayments();
@@ -848,26 +825,40 @@ namespace IGBARAS_WATER_DISTRICT
                     // Step 2: Business Rules Enforcement
                     // -------------------------------
 
-                    // Rule: SCF-only payment not allowed if totalCurrent == 0
-                    if (totalCurrent == 0 && scfAmountPaid > 0)
+                    // Calculate the bill portion (excluding SCF)
+                    decimal billDue = totalCurrent + arrearsAmount + totalPenalty;
+
+                    // Rule 1: SCF-only payment not allowed
+                    if (billDue == 0 && scfAmountPaid > 0)
                     {
-                        MessageBox.Show("Cannot pay SCF only when the current bill is zero.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Cannot pay SCF only when the current bill is zero.",
+                            "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
-                    // Rule: SCF balance in DB must be greater than 0
-                    decimal scfBalanceInDb = totalCurrentSCF; // assuming totalCurrentSCF reflects DB value
+                    // Rule 2: Bill must be paid first before SCF
+                    if (amountPaid < billDue && scfAmountPaid > 0)
+                    {
+                        MessageBox.Show("Bill must be fully paid before SCF payment can be applied.",
+                            "Payment Priority", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Rule 3: SCF balance in DB must be > 0
+                    decimal scfBalanceInDb = totalCurrentSCF; // assuming this is from DB
                     if (scfBalanceInDb <= 0 && scfAmountPaid > 0)
                     {
-                        MessageBox.Show("SCF balance in the database is zero. Cannot make SCF payment.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("SCF balance in the database is zero. Cannot make SCF payment.",
+                            "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
-                    // Rule: Prevent overpayment
-                    decimal totalDue = totalCurrent + scfAmountPaid + arrearsAmount + totalPenalty;
-                    if (amountPaid > totalDue)
+                    // Rule 4: Prevent overpayment (bill + SCF)
+                    decimal totalDue = billDue + scfBalanceInDb;
+                    if (amountPaid > billDue + scfAmountPaid)
                     {
-                        MessageBox.Show("Amount paid cannot exceed the total due + SCF.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Amount paid cannot exceed the total bill + SCF.",
+                            "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
@@ -875,7 +866,8 @@ namespace IGBARAS_WATER_DISTRICT
                     decimal SCFbalance = Math.Max(0, scfBalanceInDb - scfAmountPaid);
                     decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsAmount);
                     decimal totalArrears = arrearsAmount + arrearsPenalty;
-                    decimal balance = Math.Max(0, totalCurrent + totalPenalty + arrearsAmount - amountPaid);
+                    decimal balance = Math.Max(0, billDue - amountPaid);
+
 
                     // -------------------------------
                     // Step 3: Insert Payment
@@ -977,6 +969,30 @@ INSERT INTO Tb_Payments (
                     }
 
                     MessageBox.Show("Payment recorded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Create a new PrintDocument
+                    PrintDocument pd = new PrintDocument();
+
+                    // Optional: set the paper size to custom 8.25" x 11.75"
+                    pd.DefaultPageSettings.PaperSize = new PaperSize("CustomA4", 825, 1175); // 100 DPI units (1 inch = 100)
+
+                    // Assign the PrintPage handler
+                    pd.PrintPage += new PrintPageEventHandler(CollectionMapPrintPage);
+
+                    // Show a print dialog for user confirmation
+                    PrintDialog dialog = new PrintDialog();
+                    dialog.Document = pd;
+
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        pd.Print(); // Start the print job
+                    }
+
+                    MessageBox.Show(
+                        $"Billing record has been saved and printed successfully.",
+                        "Billing Complete",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
                     LoadPaymentsToday();
                     SetNextORNo();
                 }
@@ -1467,17 +1483,18 @@ ORDER BY b.BillNo DESC;
 
                             // Step 3: Get Due Date (required for late penalty)
                             DateTime dueDate;
-                            if (!DateTime.TryParseExact(dueDateLabel2.Text, "MMMM dd, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dueDate))
+                            if (!DateTime.TryParse(dueDateLabel2.Text, out dueDate))
                             {
-                                dueDate = DateTime.Now; // fallback, or handle differently if needed
+                                dueDate = DateTime.Now; // fallback
                             }
+
 
                             decimal arrearsAmount = decimal.Parse(arrearsAmountLabel2.Text.Replace(",", "").Trim());
                             // Calculate penalties
                             discountedConsumptionAmount = decimal.Parse(collectionTotalMeteredAmountLabel.Text.Replace(",", "").Trim());
                             decimal latePenalty = SettingsHelper.CalculateLatePaymentPenalty(discountedConsumptionAmount, dueDate);
                             Debug.WriteLine("Late" + latePenalty);
-                            Debug.WriteLine("duedate" + dueDate);
+                            Debug.WriteLine("duedate ----" + dueDate);
                             decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsWaterOnly);
                             Debug.WriteLine($"Initial arrears penalty: {arrearsPenalty:N2}");
 

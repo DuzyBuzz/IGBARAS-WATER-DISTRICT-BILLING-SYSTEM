@@ -138,6 +138,7 @@
     <Compile Include="Helpers\CustomTableLoaderHelper.cs" />
     <Compile Include="Helpers\ReportHelper.cs" />
     <Compile Include="Helpers\ServiceHelper.cs" />
+    <Compile Include="Helpers\UpdateHelper.cs" />
     <Compile Include="Reports\AgingOfSCFReport.cs">
       <DependentUpon>AgingOfSCFReport.rpt</DependentUpon>
       <AutoGen>True</AutoGen>

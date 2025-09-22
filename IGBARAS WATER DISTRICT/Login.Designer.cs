@@ -32,118 +32,111 @@ namespace IGBARAS_WATER_DISTRICT
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            pictureBox1 = new PictureBox();
-            userNameTextBox = new TextBox();
-            passwordTextBox = new TextBox();
-            loginButton = new Button();
-            label3 = new Label();
-            togglePasswordButton = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            SuspendLayout();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.userNameTextBox = new System.Windows.Forms.TextBox();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.loginButton = new System.Windows.Forms.Button();
+            this.versionLabel = new System.Windows.Forms.Label();
+            this.togglePasswordButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            pictureBox1.Anchor = AnchorStyles.Left;
-            pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(57, 41);
-            pictureBox1.Margin = new Padding(4, 3, 4, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(264, 193);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(57, 41);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(264, 193);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // userNameTextBox
             // 
-            userNameTextBox.Anchor = AnchorStyles.Left;
-            userNameTextBox.Location = new Point(57, 256);
-            userNameTextBox.Margin = new Padding(4, 3, 4, 3);
-            userNameTextBox.Name = "userNameTextBox";
-            userNameTextBox.Size = new Size(264, 26);
-            userNameTextBox.TabIndex = 2;
-            userNameTextBox.TextChanged += userNameTextBox_TextChanged;
+            this.userNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.userNameTextBox.Location = new System.Drawing.Point(57, 256);
+            this.userNameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.userNameTextBox.Name = "userNameTextBox";
+            this.userNameTextBox.Size = new System.Drawing.Size(264, 26);
+            this.userNameTextBox.TabIndex = 2;
             // 
             // passwordTextBox
             // 
-            passwordTextBox.Anchor = AnchorStyles.Bottom;
-            passwordTextBox.Location = new Point(57, 304);
-            passwordTextBox.Margin = new Padding(4, 3, 4, 3);
-            passwordTextBox.Name = "passwordTextBox";
-            passwordTextBox.Size = new Size(264, 26);
-            passwordTextBox.TabIndex = 4;
-            passwordTextBox.TextChanged += passwordTextBox_TextChanged;
-            passwordTextBox.Enter += passwordTextBox_Enter;
-            passwordTextBox.KeyDown += passwordTextBox_KeyDown;
-            passwordTextBox.Leave += passwordTextBox_Leave;
+            this.passwordTextBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.passwordTextBox.Location = new System.Drawing.Point(57, 304);
+            this.passwordTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.Size = new System.Drawing.Size(264, 26);
+            this.passwordTextBox.TabIndex = 4;
             // 
             // loginButton
             // 
-            loginButton.Anchor = AnchorStyles.Left;
-            loginButton.BackColor = Color.MidnightBlue;
-            loginButton.FlatStyle = FlatStyle.Popup;
-            loginButton.ForeColor = SystemColors.ButtonFace;
-            loginButton.Location = new Point(141, 355);
-            loginButton.Margin = new Padding(4, 3, 4, 3);
-            loginButton.Name = "loginButton";
-            loginButton.Size = new Size(96, 27);
-            loginButton.TabIndex = 6;
-            loginButton.Text = "Login";
-            loginButton.UseVisualStyleBackColor = false;
-            loginButton.Click += loginButton_Click;
+            this.loginButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.loginButton.BackColor = System.Drawing.Color.MidnightBlue;
+            this.loginButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.loginButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.loginButton.Location = new System.Drawing.Point(141, 355);
+            this.loginButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(96, 27);
+            this.loginButton.TabIndex = 6;
+            this.loginButton.Text = "Login";
+            this.loginButton.UseVisualStyleBackColor = false;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
-            // label3
+            // versionLabel
             // 
-            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(9, 410);
-            label3.Name = "label3";
-            label3.Size = new Size(48, 13);
-            label3.TabIndex = 7;
-            label3.Text = "v.1.0.0.0";
+            this.versionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.BackColor = System.Drawing.Color.Transparent;
+            this.versionLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.versionLabel.Location = new System.Drawing.Point(9, 410);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(48, 13);
+            this.versionLabel.TabIndex = 7;
+            this.versionLabel.Text = "v.1.0.0.0";
+            this.versionLabel.Click += new System.EventHandler(this.versionLabel_Click);
             // 
             // togglePasswordButton
             // 
-            togglePasswordButton.Anchor = AnchorStyles.Bottom;
-            togglePasswordButton.Location = new Point(283, 304);
-            togglePasswordButton.Name = "togglePasswordButton";
-            togglePasswordButton.Size = new Size(38, 26);
-            togglePasswordButton.TabIndex = 9;
-            togglePasswordButton.Text = "🔒";
-            togglePasswordButton.UseVisualStyleBackColor = true;
-            togglePasswordButton.Click += togglePasswordButton_Click;
+            this.togglePasswordButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.togglePasswordButton.Location = new System.Drawing.Point(283, 304);
+            this.togglePasswordButton.Name = "togglePasswordButton";
+            this.togglePasswordButton.Size = new System.Drawing.Size(38, 26);
+            this.togglePasswordButton.TabIndex = 9;
+            this.togglePasswordButton.Text = "🔒";
+            this.togglePasswordButton.UseVisualStyleBackColor = true;
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(9F, 18F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.LightSkyBlue;
-            BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(378, 424);
-            Controls.Add(togglePasswordButton);
-            Controls.Add(label3);
-            Controls.Add(loginButton);
-            Controls.Add(passwordTextBox);
-            Controls.Add(userNameTextBox);
-            Controls.Add(pictureBox1);
-            DoubleBuffered = true;
-            Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            FormBorderStyle = FormBorderStyle.SizableToolWindow;
-            Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 3, 4, 3);
-            MaximizeBox = false;
-            Name = "Login";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Login";
-            FormClosing += Login_FormClosing;
-            Load += Login_Load;
-            Paint += Login_Paint;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ClientSize = new System.Drawing.Size(378, 424);
+            this.Controls.Add(this.togglePasswordButton);
+            this.Controls.Add(this.versionLabel);
+            this.Controls.Add(this.loginButton);
+            this.Controls.Add(this.passwordTextBox);
+            this.Controls.Add(this.userNameTextBox);
+            this.Controls.Add(this.pictureBox1);
+            this.DoubleBuffered = true;
+            this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MaximizeBox = false;
+            this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Login";
+            this.Load += new System.EventHandler(this.Login_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
@@ -151,7 +144,7 @@ namespace IGBARAS_WATER_DISTRICT
         private TextBox userNameTextBox;
         private TextBox passwordTextBox;
         private Button loginButton;
-        private Label label3;
+        private Label versionLabel;
         private Button togglePasswordButton;
     }
 }
