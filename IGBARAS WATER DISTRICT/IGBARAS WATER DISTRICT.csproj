@@ -136,9 +136,18 @@
     </Compile>
     <Compile Include="Helpers\ColumnUpdaterHelper.cs" />
     <Compile Include="Helpers\CustomTableLoaderHelper.cs" />
+    <Compile Include="Helpers\DGVCrudHelper.cs" />
     <Compile Include="Helpers\ReportHelper.cs" />
+    <Compile Include="Helpers\SearchHelper.cs" />
     <Compile Include="Helpers\ServiceHelper.cs" />
     <Compile Include="Helpers\UpdateHelper.cs" />
+    <Compile Include="Reports\MeterReadingSheet.cs">
+      <DependentUpon>MeterReadingSheet.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\AgingOfSCFReport.cs">
       <DependentUpon>AgingOfSCFReport.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -318,6 +327,11 @@
     <Content Include="Reports\MonthlyCollectionReports.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>MonthlyCollectionReports.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\MeterReadingSheet.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MeterReadingSheet.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="SettingsControl.resx">

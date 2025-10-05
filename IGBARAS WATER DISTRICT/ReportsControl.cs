@@ -51,6 +51,10 @@ namespace IGBARAS_WATER_DISTRICT
             {
                 LoadReportToViewer("MonthlyBillingReports.rpt", monthlyBillingTab, monthlyBillingCrystalRepoerViewer);
             }
+            else if (tabControl1.SelectedTab == meterReadingSheetTab) // ✅ Add your Daily Collection tab here
+            {
+                LoadReportToViewer("MeterReadingSheet.rpt", meterReadingSheetTab, meterReadingSheetCrystalReportViewer);
+            }
         }
 
         /// <summary>

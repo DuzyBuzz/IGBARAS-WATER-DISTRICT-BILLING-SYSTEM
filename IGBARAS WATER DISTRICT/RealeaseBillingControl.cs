@@ -105,6 +105,7 @@ namespace IGBARAS_WATER_DISTRICT
                     }
                     SetNextBillNo();
                     SaveBillingInvoiceSilently();
+                    LoadTodayBilling();
                 }
                 else
                 {
@@ -433,6 +434,8 @@ namespace IGBARAS_WATER_DISTRICT
             FormatDataGridView(paymentsOnThisDayDataGridView);
             LoadZoneComboBox();
             LoadPaymentsToday();
+            LoadTodayBilling();
+            toReadingDateLabel.CustomFormat = "MMM-dd-yyyy";
         }
 
         private void LoadZoneComboBox()
@@ -580,8 +583,7 @@ namespace IGBARAS_WATER_DISTRICT
 
             if (!string.IsNullOrWhiteSpace(accountNo))
             {
-                // Load billing history
-                LoadAccountBillHistory(accountNo);
+
 
                 // 🟦 Get latest bill number
                 string latestBillNo = GetLatestBillNoHelper.GetLatestBillNo(accountNo);
@@ -1221,7 +1223,7 @@ INSERT INTO Tb_Payments (
 
 
 
-        private void LoadAccountBillHistory(string accountNo)
+        private void LoadTodayBilling()
         {
             string query = @"
 SELECT
@@ -1247,7 +1249,7 @@ SELECT
 FROM Tb_Billing AS b
 LEFT JOIN Tb_Payments AS p
     ON b.BillNo = p.CurrentBillNo
-WHERE b.AccountNo = ?
+WHERE b.DateTo = ?
 ORDER BY b.BillNo DESC;
 ";
 
@@ -1259,7 +1261,8 @@ ORDER BY b.BillNo DESC;
 
                     using (OleDbCommand cmd = new OleDbCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("?", accountNo);
+                        // Pass today's date as parameter for DateTo
+                        cmd.Parameters.AddWithValue("?", DateTime.Today);
 
                         using (OleDbDataAdapter adapter = new OleDbDataAdapter(cmd))
                         {
@@ -1267,9 +1270,7 @@ ORDER BY b.BillNo DESC;
                             adapter.Fill(dt);
                             billDataGridView.DataSource = dt;
 
-
-
-                            // Loop through each row to apply colors
+                            // Apply colors per row
                             foreach (DataGridViewRow row in billDataGridView.Rows)
                             {
                                 if (row.IsNewRow) continue;
@@ -1290,9 +1291,11 @@ ORDER BY b.BillNo DESC;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to load bill history: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Failed to load today's bills: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         private void ApplyStatusColor(DataGridViewCell cell, string status)
         {
@@ -3067,6 +3070,12 @@ ORDER BY b.BillNo DESC;
             {
                 PopulateServiceRateLabels(serviceId, totalConsumption);
             }
+        }
+
+        private void toReadingDateLabel_ValueChanged(object sender, EventArgs e)
+        {
+            dateBilledLabel.Text = toReadingDateLabel.Value.ToString("MMMM dd, yyyy");
+            dueDateLabel.Text = toReadingDateLabel.Value.AddDays(14).ToString("MMMM dd, yyyy");
         }
     }
 }

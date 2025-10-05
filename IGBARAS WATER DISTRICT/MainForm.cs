@@ -1,7 +1,12 @@
-﻿using IGBARAS_WATER_DISTRICT.Helpers;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using IGBARAS_WATER_DISTRICT.Helpers;
+using IGBARAS_WATER_DISTRICT.Reports;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 

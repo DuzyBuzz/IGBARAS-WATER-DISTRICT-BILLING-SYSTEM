@@ -42,12 +42,15 @@ namespace IGBARAS_WATER_DISTRICT
             this.dailyCollectionCrystalReport = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.monthlyCollectionTab = new System.Windows.Forms.TabPage();
             this.monthlyCollectionCrystalReportViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.meterReadingSheetTab = new System.Windows.Forms.TabPage();
+            this.meterReadingSheetCrystalReportViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.tabControl1.SuspendLayout();
             this.agingOfAccountsTab.SuspendLayout();
             this.dailyBillingTab.SuspendLayout();
             this.monthlyBillingTab.SuspendLayout();
             this.dailyCollectionTab.SuspendLayout();
             this.monthlyCollectionTab.SuspendLayout();
+            this.meterReadingSheetTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -58,6 +61,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tabControl1.Controls.Add(this.monthlyBillingTab);
             this.tabControl1.Controls.Add(this.dailyCollectionTab);
             this.tabControl1.Controls.Add(this.monthlyCollectionTab);
+            this.tabControl1.Controls.Add(this.meterReadingSheetTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -181,6 +185,27 @@ namespace IGBARAS_WATER_DISTRICT
             this.monthlyCollectionCrystalReportViewer.TabIndex = 0;
             this.monthlyCollectionCrystalReportViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.ParameterPanel;
             // 
+            // meterReadingSheetTab
+            // 
+            this.meterReadingSheetTab.Controls.Add(this.meterReadingSheetCrystalReportViewer);
+            this.meterReadingSheetTab.Location = new System.Drawing.Point(4, 29);
+            this.meterReadingSheetTab.Name = "meterReadingSheetTab";
+            this.meterReadingSheetTab.Size = new System.Drawing.Size(1173, 774);
+            this.meterReadingSheetTab.TabIndex = 5;
+            this.meterReadingSheetTab.Text = "Meter Reading Sheet";
+            this.meterReadingSheetTab.UseVisualStyleBackColor = true;
+            // 
+            // meterReadingSheetCrystalReportViewer
+            // 
+            this.meterReadingSheetCrystalReportViewer.ActiveViewIndex = -1;
+            this.meterReadingSheetCrystalReportViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.meterReadingSheetCrystalReportViewer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.meterReadingSheetCrystalReportViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.meterReadingSheetCrystalReportViewer.Location = new System.Drawing.Point(0, 0);
+            this.meterReadingSheetCrystalReportViewer.Name = "meterReadingSheetCrystalReportViewer";
+            this.meterReadingSheetCrystalReportViewer.Size = new System.Drawing.Size(1173, 774);
+            this.meterReadingSheetCrystalReportViewer.TabIndex = 0;
+            // 
             // ReportsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -196,6 +221,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.monthlyBillingTab.ResumeLayout(false);
             this.dailyCollectionTab.ResumeLayout(false);
             this.monthlyCollectionTab.ResumeLayout(false);
+            this.meterReadingSheetTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -213,5 +239,7 @@ namespace IGBARAS_WATER_DISTRICT
         private TabPage monthlyCollectionTab;
         private CrystalDecisions.Windows.Forms.CrystalReportViewer monthlyCollectionCrystalReportViewer;
         private CrystalDecisions.Windows.Forms.CrystalReportViewer agingCrystalReportViewer;
+        private TabPage meterReadingSheetTab;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer meterReadingSheetCrystalReportViewer;
     }
 }
