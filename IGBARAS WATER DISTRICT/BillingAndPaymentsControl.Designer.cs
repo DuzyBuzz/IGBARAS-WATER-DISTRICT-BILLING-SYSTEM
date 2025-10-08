@@ -112,7 +112,6 @@
             this.billingDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.billingDataGridView.Location = new System.Drawing.Point(3, 39);
             this.billingDataGridView.Name = "billingDataGridView";
-            this.billingDataGridView.RowHeadersVisible = false;
             this.billingDataGridView.Size = new System.Drawing.Size(1161, 730);
             this.billingDataGridView.TabIndex = 26;
             // 
@@ -370,7 +369,6 @@
             this.paymentsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.paymentsDataGridView.Location = new System.Drawing.Point(3, 39);
             this.paymentsDataGridView.Name = "paymentsDataGridView";
-            this.paymentsDataGridView.RowHeadersVisible = false;
             this.paymentsDataGridView.Size = new System.Drawing.Size(1161, 730);
             this.paymentsDataGridView.TabIndex = 26;
             // 

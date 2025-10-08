@@ -14,12 +14,13 @@ namespace IGBARAS_WATER_DISTRICT
 {
     public partial class MainForm : Form
     {
-        // Dictionary to store the loaded user controls
+        // Dictionary to store the loaded user controls (optional, for reference)
         private Dictionary<string, UserControl> loadedControls = new Dictionary<string, UserControl>();
 
         // Keep track of currently displayed control
         private string currentControlName = string.Empty;
         private Dictionary<string, Button> sidebarButtons;
+
         public MainForm()
         {
             InitializeComponent();
@@ -33,34 +34,30 @@ namespace IGBARAS_WATER_DISTRICT
                 { "BillSettings", billSettingsButton },
                 { "Settings", settingsButton },
                 { "BillingAndPayments", billingAndPaymentsButton },
-
             };
         }
 
-
         private void LoadControl(string controlName)
         {
-            // 🚫 Avoid reloading the same control
+            // 🚫 Avoid unnecessary action if same control is being loaded
             if (currentControlName == controlName)
                 return;
 
-            currentControlName = controlName;
+            // 🧹 Remove old control if exists
+            if (!string.IsNullOrEmpty(currentControlName) && loadedControls.ContainsKey(currentControlName))
+            {
+                var oldControl = loadedControls[currentControlName];
+                mainPanel.Controls.Remove(oldControl);
+                oldControl.Dispose();
+                loadedControls.Remove(currentControlName);
+            }
 
-            // 🧼 Hide all currently loaded controls
-            foreach (var ctrl in loadedControls.Values)
-                ctrl.Visible = false;
+            currentControlName = controlName;
 
             // 🖍 Highlight the corresponding sidebar button
             HighlightActiveButton(controlName);
 
-            // ✅ If already loaded, just show it
-            if (loadedControls.ContainsKey(controlName))
-            {
-                loadedControls[controlName].Visible = true;
-                return;
-            }
-
-            // 🛠 Dynamically create the control
+            // 🛠 Dynamically create a new control instance each time
             var type = Type.GetType($"IGBARAS_WATER_DISTRICT.{controlName}Control");
 
             if (type != null && type.IsSubclassOf(typeof(UserControl)))
@@ -104,13 +101,15 @@ namespace IGBARAS_WATER_DISTRICT
         private void accountsButton_Click(object sender, EventArgs e) => LoadControl("Accounts");
         private void billingButton_Click(object sender, EventArgs e) => LoadControl("RealeaseBilling");
         private void billSettingsButton_Click(object sender, EventArgs e) => LoadControl("BillSettings");
-
         private void billingAndPaymentsButton_Click(object sender, EventArgs e) => LoadControl("BillingAndPayments");
+        private void reportsButton_Click(object sender, EventArgs e) => LoadControl("Reports");
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             LoadControl("RealeaseBilling");
             usernameLabel.Text = $"{UserCredentials.Fullname}";
         }
+
         private void reloadButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(currentControlName))
@@ -124,14 +123,12 @@ namespace IGBARAS_WATER_DISTRICT
             {
                 var oldControl = loadedControls[currentControlName];
                 mainPanel.Controls.Remove(oldControl);
-                oldControl.Dispose(); // Optional but good practice
+                oldControl.Dispose();
                 loadedControls.Remove(currentControlName);
             }
 
-            LoadControl("RealeaseBilling");
-
+            LoadControl(currentControlName); // reload the same page
         }
-
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
@@ -144,19 +141,14 @@ namespace IGBARAS_WATER_DISTRICT
             if (result == DialogResult.Yes)
             {
                 this.Hide();
-                // Open login form before closing main form
                 Login loginForm = new Login();
                 loginForm.Show();
-
-                // Close current main form
             }
-            // If "No" is selected, do nothing
         }
-
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            // Optional: clean up resources if needed
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -176,18 +168,9 @@ namespace IGBARAS_WATER_DISTRICT
                     return;
                 }
 
-                // Exit the entire application immediately
-                Application.ExitThread(); // Ends all message loops
-                Environment.Exit(0); // Forces the process to close
+                Application.ExitThread();
+                Environment.Exit(0);
             }
         }
-
-
-
-        private void reportsButton_Click(object sender, EventArgs e)
-        {
-            LoadControl("Reports");
-        }
-
     }
 }

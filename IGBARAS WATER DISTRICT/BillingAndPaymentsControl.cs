@@ -114,18 +114,16 @@ namespace IGBARAS_WATER_DISTRICT
                          "AmountBilled", "ArrearsPenaltyAmount", "TotalAmountBilled", "ServiceConnectionFee",
                          "TotalSCF", "SCFArrears", "Is_SCFPartiallyPaid", "Is_SCFPaid" };
 
-            // Search the whole table ignoring date
             var table = SearchHelper.SearchToTable(
                 "Tb_Billing",
-                new string[] { "AccountNo", "BillNo" }, // columns to search
+                new string[] { "AccountNo", "BillNo" },
                 null,
-                null, // ignore fromDate
-                null, // ignore toDate
+                null,
+                null,
                 columns,
                 "DateCreated"
             );
 
-            // Filter the result by the keyword locally
             var filtered = table.AsEnumerable()
                 .Where(r =>
                     r["AccountNo"].ToString().IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0 ||
@@ -140,7 +138,6 @@ namespace IGBARAS_WATER_DISTRICT
             if (billingDataGridView.Columns.Contains("BillingID"))
                 billingDataGridView.Columns["BillingID"].Visible = false;
         }
-
 
         private void searchAccountNumberTextBox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -195,18 +192,16 @@ namespace IGBARAS_WATER_DISTRICT
                          "TotalAmountPaid","Balance","Remarks","FreeWater","[OthersAmount]",
                          "SCFBalance","TotalPenalty","ServiceConnectionFee" };
 
-            // Search the whole table ignoring date
             var table = SearchHelper.SearchToTable(
                 "Tb_Payments",
                 new string[] { "AccountNo", "CurrentBillNo", "ORNumber" },
                 null,
-                null, // ignore fromDate
-                null, // ignore toDate
+                null,
+                null,
                 columns,
                 "PaymentDate"
             );
 
-            // Filter locally by keyword
             var filtered = table.AsEnumerable()
                 .Where(r =>
                     r["AccountNo"].ToString().IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0 ||
@@ -222,7 +217,6 @@ namespace IGBARAS_WATER_DISTRICT
             if (paymentsDataGridView.Columns.Contains("PaymentID"))
                 paymentsDataGridView.Columns["PaymentID"].Visible = false;
         }
-
 
         private void paymentSearchTextBox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -295,11 +289,12 @@ namespace IGBARAS_WATER_DISTRICT
 
             try
             {
+                // Warn before updating
                 DialogResult result = MessageBox.Show(
                     $"Do you want to save the changes to '{dgv.Columns[colIndex].HeaderText}'?",
                     "Confirm Update",
                     MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
+                    MessageBoxIcon.Warning
                 );
 
                 if (result == DialogResult.No)
@@ -308,6 +303,7 @@ namespace IGBARAS_WATER_DISTRICT
                     return;
                 }
 
+                // Validate numeric
                 if (dgv.Columns[colIndex].ValueType == typeof(double) ||
                     dgv.Columns[colIndex].ValueType == typeof(decimal) ||
                     dgv.Columns[colIndex].ValueType == typeof(int) ||
@@ -321,6 +317,7 @@ namespace IGBARAS_WATER_DISTRICT
                     }
                 }
 
+                // Validate date
                 if (dgv.Columns[colIndex].ValueType == typeof(DateTime))
                 {
                     if (newValue == null || !DateTime.TryParse(newValue.ToString(), out _))
@@ -367,11 +364,22 @@ namespace IGBARAS_WATER_DISTRICT
                     var row = dgv.SelectedRows[0];
                     if (row.IsNewRow) return;
 
-                    var id = row.Cells[idColumn].Value;
-                    if (TableUpdaterHelper.DeleteRow(tableName, idColumn, id))
+                    // Ask user before deleting
+                    var confirmResult = MessageBox.Show(
+                        "Are you sure you want to delete this row?",
+                        "Confirm Delete",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning
+                    );
+
+                    if (confirmResult == DialogResult.Yes)
                     {
-                        LoadBillingData();
-                        LoadPaymentsData();
+                        var id = row.Cells[idColumn].Value;
+                        if (TableUpdaterHelper.DeleteRow(tableName, idColumn, id))
+                        {
+                            LoadBillingData();
+                            LoadPaymentsData();
+                        }
                     }
                 }
             };
