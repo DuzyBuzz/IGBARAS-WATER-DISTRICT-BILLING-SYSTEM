@@ -952,8 +952,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel18.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel18.Name = "tableLayoutPanel18";
             this.tableLayoutPanel18.RowCount = 1;
-            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 107F));
-            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 107F));
+            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 108F));
+            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 108F));
             this.tableLayoutPanel18.Size = new System.Drawing.Size(365, 51);
             this.tableLayoutPanel18.TabIndex = 1;
             // 
@@ -965,7 +965,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label33.Location = new System.Drawing.Point(4, 11);
             this.label33.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(138, 97);
+            this.label33.Size = new System.Drawing.Size(138, 98);
             this.label33.TabIndex = 0;
             this.label33.Text = "Item Description/\r\nNature of Service";
             this.label33.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -977,7 +977,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label28.Location = new System.Drawing.Point(149, 11);
             this.label28.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(66, 97);
+            this.label28.Size = new System.Drawing.Size(66, 98);
             this.label28.TabIndex = 1;
             this.label28.Text = "Qty";
             this.label28.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -989,7 +989,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label29.Location = new System.Drawing.Point(222, 11);
             this.label29.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(66, 97);
+            this.label29.Size = new System.Drawing.Size(66, 98);
             this.label29.TabIndex = 2;
             this.label29.Text = "Unit\r\nPrice";
             this.label29.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1001,7 +1001,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label30.Location = new System.Drawing.Point(295, 11);
             this.label30.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(66, 97);
+            this.label30.Size = new System.Drawing.Size(66, 98);
             this.label30.TabIndex = 3;
             this.label30.Text = "Amount";
             this.label30.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1446,7 +1446,6 @@ namespace IGBARAS_WATER_DISTRICT
             this.previousReadingTextBox.Location = new System.Drawing.Point(1, 30);
             this.previousReadingTextBox.Margin = new System.Windows.Forms.Padding(0);
             this.previousReadingTextBox.Name = "previousReadingTextBox";
-            this.previousReadingTextBox.ReadOnly = true;
             this.previousReadingTextBox.Size = new System.Drawing.Size(83, 19);
             this.previousReadingTextBox.TabIndex = 16;
             this.previousReadingTextBox.Text = "0";
@@ -2730,7 +2729,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel41.ColumnCount = 3;
             this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85.71429F));
             this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.tableLayoutPanel41.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 131F));
             this.tableLayoutPanel41.Controls.Add(this.orNumberTextBox, 2, 0);
             this.tableLayoutPanel41.Controls.Add(this.label52, 1, 0);
             this.tableLayoutPanel41.Controls.Add(this.label51, 0, 0);
@@ -2748,10 +2747,10 @@ namespace IGBARAS_WATER_DISTRICT
             this.orNumberTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.orNumberTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.orNumberTextBox.ForeColor = System.Drawing.Color.Red;
-            this.orNumberTextBox.Location = new System.Drawing.Point(293, 0);
+            this.orNumberTextBox.Location = new System.Drawing.Point(292, 0);
             this.orNumberTextBox.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
             this.orNumberTextBox.Name = "orNumberTextBox";
-            this.orNumberTextBox.Size = new System.Drawing.Size(127, 18);
+            this.orNumberTextBox.Size = new System.Drawing.Size(128, 18);
             this.orNumberTextBox.TabIndex = 48;
             this.orNumberTextBox.Text = "00000000";
             this.orNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -2761,7 +2760,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label52.AutoSize = true;
             this.label52.Dock = System.Windows.Forms.DockStyle.Left;
             this.label52.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label52.Location = new System.Drawing.Point(255, 0);
+            this.label52.Location = new System.Drawing.Point(254, 0);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(24, 17);
             this.label52.TabIndex = 3;
@@ -3348,7 +3347,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.410256F));
             this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 93.58974F));
             this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 149F));
-            this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 183F));
+            this.tableLayoutPanel62.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 184F));
             this.tableLayoutPanel62.Controls.Add(this.label40, 0, 0);
             this.tableLayoutPanel62.Controls.Add(this.label158, 1, 0);
             this.tableLayoutPanel62.Controls.Add(this.label162, 3, 2);
@@ -3395,9 +3394,9 @@ namespace IGBARAS_WATER_DISTRICT
             this.label162.AutoSize = true;
             this.label162.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label162.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label162.Location = new System.Drawing.Point(243, 34);
+            this.label162.Location = new System.Drawing.Point(242, 34);
             this.label162.Name = "label162";
-            this.label162.Size = new System.Drawing.Size(178, 19);
+            this.label162.Size = new System.Drawing.Size(179, 19);
             this.label162.TabIndex = 28;
             this.label162.Text = "COLLECTING OFFICER";
             this.label162.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3407,9 +3406,9 @@ namespace IGBARAS_WATER_DISTRICT
             this.collectingOfficerNameLabel.AutoSize = true;
             this.collectingOfficerNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.collectingOfficerNameLabel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.collectingOfficerNameLabel.Location = new System.Drawing.Point(243, 14);
+            this.collectingOfficerNameLabel.Location = new System.Drawing.Point(242, 14);
             this.collectingOfficerNameLabel.Name = "collectingOfficerNameLabel";
-            this.collectingOfficerNameLabel.Size = new System.Drawing.Size(178, 20);
+            this.collectingOfficerNameLabel.Size = new System.Drawing.Size(179, 20);
             this.collectingOfficerNameLabel.TabIndex = 29;
             this.collectingOfficerNameLabel.Text = "Marry De La Cruz";
             this.collectingOfficerNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3419,7 +3418,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label161.AutoSize = true;
             this.label161.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label161.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label161.Location = new System.Drawing.Point(94, 14);
+            this.label161.Location = new System.Drawing.Point(93, 14);
             this.label161.Name = "label161";
             this.label161.Size = new System.Drawing.Size(143, 20);
             this.label161.TabIndex = 27;
@@ -3439,7 +3438,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel64.Name = "tableLayoutPanel64";
             this.tableLayoutPanel64.RowCount = 1;
             this.tableLayoutPanel64.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel64.Size = new System.Drawing.Size(86, 20);
+            this.tableLayoutPanel64.Size = new System.Drawing.Size(85, 20);
             this.tableLayoutPanel64.TabIndex = 31;
             // 
             // cashCheckBox
@@ -3449,7 +3448,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.cashCheckBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cashCheckBox.Location = new System.Drawing.Point(3, 3);
             this.cashCheckBox.Name = "cashCheckBox";
-            this.cashCheckBox.Size = new System.Drawing.Size(13, 14);
+            this.cashCheckBox.Size = new System.Drawing.Size(12, 14);
             this.cashCheckBox.TabIndex = 0;
             this.cashCheckBox.Text = " ";
             this.cashCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3461,7 +3460,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label159.AutoSize = true;
             this.label159.Dock = System.Windows.Forms.DockStyle.Left;
             this.label159.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label159.Location = new System.Drawing.Point(22, 0);
+            this.label159.Location = new System.Drawing.Point(21, 0);
             this.label159.Name = "label159";
             this.label159.Size = new System.Drawing.Size(40, 20);
             this.label159.TabIndex = 25;
@@ -3481,7 +3480,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel65.Name = "tableLayoutPanel65";
             this.tableLayoutPanel65.RowCount = 1;
             this.tableLayoutPanel65.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel65.Size = new System.Drawing.Size(86, 19);
+            this.tableLayoutPanel65.Size = new System.Drawing.Size(85, 19);
             this.tableLayoutPanel65.TabIndex = 32;
             // 
             // checkCheckBox
@@ -3490,7 +3489,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.checkCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkCheckBox.Location = new System.Drawing.Point(3, 3);
             this.checkCheckBox.Name = "checkCheckBox";
-            this.checkCheckBox.Size = new System.Drawing.Size(13, 13);
+            this.checkCheckBox.Size = new System.Drawing.Size(12, 13);
             this.checkCheckBox.TabIndex = 0;
             this.checkCheckBox.Text = " ";
             this.checkCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3502,7 +3501,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label160.AutoSize = true;
             this.label160.Dock = System.Windows.Forms.DockStyle.Left;
             this.label160.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label160.Location = new System.Drawing.Point(22, 0);
+            this.label160.Location = new System.Drawing.Point(21, 0);
             this.label160.Name = "label160";
             this.label160.Size = new System.Drawing.Size(50, 19);
             this.label160.TabIndex = 26;
@@ -3842,8 +3841,8 @@ namespace IGBARAS_WATER_DISTRICT
             this.tableLayoutPanel56.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel56.Name = "tableLayoutPanel56";
             this.tableLayoutPanel56.RowCount = 1;
-            this.tableLayoutPanel56.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 115F));
-            this.tableLayoutPanel56.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 115F));
+            this.tableLayoutPanel56.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 116F));
+            this.tableLayoutPanel56.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel56.Size = new System.Drawing.Size(373, 53);
             this.tableLayoutPanel56.TabIndex = 1;
             // 
@@ -3854,7 +3853,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label90.Location = new System.Drawing.Point(152, 11);
             this.label90.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(67, 105);
+            this.label90.Size = new System.Drawing.Size(67, 106);
             this.label90.TabIndex = 1;
             this.label90.Text = "Qty";
             this.label90.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -3866,7 +3865,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label91.Location = new System.Drawing.Point(226, 11);
             this.label91.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(67, 105);
+            this.label91.Size = new System.Drawing.Size(67, 106);
             this.label91.TabIndex = 2;
             this.label91.Text = "Unit\r\nPrice";
             this.label91.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -3878,7 +3877,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label95.Location = new System.Drawing.Point(300, 11);
             this.label95.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(69, 105);
+            this.label95.Size = new System.Drawing.Size(69, 106);
             this.label95.TabIndex = 3;
             this.label95.Text = "Amount";
             this.label95.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -3891,7 +3890,7 @@ namespace IGBARAS_WATER_DISTRICT
             this.label86.Location = new System.Drawing.Point(4, 11);
             this.label86.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label86.Name = "label86";
-            this.label86.Size = new System.Drawing.Size(141, 105);
+            this.label86.Size = new System.Drawing.Size(141, 106);
             this.label86.TabIndex = 0;
             this.label86.Text = "Item Description/\r\nNature of Service";
             this.label86.TextAlign = System.Drawing.ContentAlignment.TopCenter;
