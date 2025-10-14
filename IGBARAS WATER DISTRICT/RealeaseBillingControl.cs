@@ -1360,272 +1360,243 @@ ORDER BY b.BillNo DESC;
         }
 
 
-
         public void PopulateServiceRateLabels2(int serviceId, int totalConsumption, decimal arrearsWaterOnly, decimal recentTaxAmount)
         {
+            using (var conn = new OleDbConnection(DbConfig.ConnectionString))
             {
-                using (var conn = new OleDbConnection(DbConfig.ConnectionString))
-                {
-                    string query = @"
+                string query = @"
                     SELECT MinRate, [Rate11-20], [Rate21-30], [Rate31-40], [Rate41-Above]
                     FROM Tb_Service
                     WHERE ServiceID = ?";
-                    using (var cmd = new OleDbCommand(query, conn))
+                using (var cmd = new OleDbCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("?", serviceId);
+                    conn.Open();
+
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        cmd.Parameters.AddWithValue("?", serviceId);
-                        conn.Open();
-
-                        using (var reader = cmd.ExecuteReader())
+                        if (reader.Read())
                         {
-                            if (reader.Read())
+                            // Get service rates
+                            decimal minRate = Convert.ToDecimal(reader["MinRate"]);
+                            decimal rate11_20 = Convert.ToDecimal(reader["Rate11-20"]);
+                            decimal rate21_30 = Convert.ToDecimal(reader["Rate21-30"]);
+                            decimal rate31_40 = Convert.ToDecimal(reader["Rate31-40"]);
+                            decimal rate41_above = Convert.ToDecimal(reader["Rate41-Above"]);
+
+                            int q10 = Math.Min(totalConsumption, 10);
+                            int q20 = Math.Min(Math.Max(totalConsumption - 10, 0), 10);
+                            int q30 = Math.Min(Math.Max(totalConsumption - 20, 0), 10);
+                            int q40 = Math.Min(Math.Max(totalConsumption - 30, 0), 10);
+                            int q41 = Math.Max(totalConsumption - 40, 0);
+                            decimal a10;
+
+                            decimal perUnitRateForFirst10 = minRate / 10; // price per cubic meter for first 10
+
+                            if (collectionInitianBillingCheckBox.Checked)
                             {
-                                // Get service rates
-                                decimal minRate = Convert.ToDecimal(reader["MinRate"]);
-                                decimal rate11_20 = Convert.ToDecimal(reader["Rate11-20"]);
-                                decimal rate21_30 = Convert.ToDecimal(reader["Rate21-30"]);
-                                decimal rate31_40 = Convert.ToDecimal(reader["Rate31-40"]);
-                                decimal rate41_above = Convert.ToDecimal(reader["Rate41-Above"]);
-
-                                int q10 = Math.Min(totalConsumption, 10);
-                                int q20 = Math.Min(Math.Max(totalConsumption - 10, 0), 10);
-                                int q30 = Math.Min(Math.Max(totalConsumption - 20, 0), 10);
-                                int q40 = Math.Min(Math.Max(totalConsumption - 30, 0), 10);
-                                int q41 = Math.Max(totalConsumption - 40, 0);
-                                decimal a10;
-
-                                decimal perUnitRateForFirst10 = minRate / 10; // price per cubic meter for first 10
-
-                                if (collectionInitianBillingCheckBox.Checked)
+                                if (totalConsumption == 0)
                                 {
-                                    if (totalConsumption == 0)
-                                    {
-                                        // Initial billing with zero consumption -> no minimum
-                                        a10 = 0;
-                                    }
-                                    else
-                                    {
-                                        // Bill only for actual quantity in first 10 at per-unit rate
-                                        a10 = q10 * perUnitRateForFirst10;
-                                    }
+                                    // Initial billing with zero consumption -> no minimum
+                                    a10 = 0;
                                 }
                                 else
                                 {
-                                    // Not initial billing -> minimum applies even if zero consumption
-                                    a10 = q10 > 0 ? minRate : minRate;
+                                    // Bill only for actual quantity in first 10 at per-unit rate
+                                    a10 = q10 * perUnitRateForFirst10;
                                 }
-
-
-                                decimal a20 = q20 * rate11_20;
-                                decimal a30 = q30 * rate21_30;
-                                decimal a40 = q40 * rate31_40;
-                                decimal a41 = q41 * rate41_above;
-
-                                decimal total = a10 + a20 + a30 + a40 + a41;
-
-                                // Populate labels
-                                tenQuantityLabel2.Text = q10.ToString();
-                                tenUnitPriceLabel2.Text = (minRate / 10).ToString("N2");
-                                tenAmountLabel2.Text = a10.ToString("N2");
-
-                                twentyQuantityLabel2.Text = q20.ToString();
-                                twentyUnitPriceLabel2.Text = rate11_20.ToString("N2");
-                                twentyAmountLabel2.Text = a20.ToString("N2");
-
-                                thirtyQuantityLabel2.Text = q30.ToString();
-                                thirtyUnitPriceLabel2.Text = rate21_30.ToString("N2");
-                                thirtyAmountLabel2.Text = a30.ToString("N2");
-
-                                fortyQuantityLabel2.Text = q40.ToString();
-                                fortyUnitPriceLabel2.Text = rate31_40.ToString("N2");
-                                fortyAmountLabel2.Text = a40.ToString("N2");
-
-                                fortyUpQuantityLabel2.Text = q41.ToString();
-                                fortyUpUnitPriceLabel2.Text = rate41_above.ToString("N2");
-                                fortyUpAmountLabel2.Text = a41.ToString("N2");
-
-                                minimumChargeLabel2.Text = minRate.ToString("N2");
-                                totalWaterConsumptionAmountLabel2.Text = total.ToString("N2");
-                                totalQuantityLabel2.Text = totalConsumption.ToString();
-
-
-                                // Hide rows with zero quantity
-                                tenQuantityLabel.Visible = tenUnitPriceLabel.Visible = tenAmountLabel.Visible = q10 > 0;
-                                twentyQuantityLabel.Visible = twentyUnitPriceLabel.Visible = twentyAmountLabel.Visible = q20 > 0;
-                                thirtyQuantityLabel.Visible = thirtyUnitPriceLabel.Visible = thirtyAmountLabel.Visible = q30 > 0;
-                                fortyQuantityLabel.Visible = fortyUnitPriceLabel.Visible = fortyAmountLabel.Visible = q40 > 0;
-                                fortyUpQuantityLabel.Visible = fortyUpUnitPriceLabel.Visible = fortyUpAmountLabel.Visible = q41 > 0;
-
-                            }
-
-
-                            decimal discounted = 0;
-                            decimal taxAdded = 0;
-                            decimal discountedConsumptionAmount = 0;
-                            // Clean up input texts
-                            string discountText = discountedPercentLabel2.Text.Replace("%", "").Trim();
-                            string taxAddedText = taxExemptedPercentLabel2.Text.Replace("%", "").Trim();
-
-                            if (!decimal.TryParse(totalWaterConsumptionAmountLabel2.Text.Trim(), out decimal totalConsumptionAmount))
-                            {
-                                totalConsumptionAmount = 0;
-                            }
-
-                            decimal addedTaxWaterConsumption = 0;
-
-
-
-                            // Parse Tax
-                            if (decimal.TryParse(taxAddedText, out decimal percent2))
-                            {
-                                taxAdded = totalConsumptionAmount * (percent2 / 100);
-                                taxAmountLabel2.Text = taxAdded.ToString("N2");
                             }
                             else
                             {
-                                taxAmountLabel2.Text = "0.00";
-                            }
-                            // Parse Discount
-                            if (decimal.TryParse(discountText, out decimal percent1))
-                            {
-
-                                addedTaxWaterConsumption = totalConsumptionAmount + taxAdded;
-                                discounted = addedTaxWaterConsumption * (percent1 / 100);
-                                discountedAmountLabel2.Text = Math.Round(discounted, 2).ToString("N2");
-
-
-
-                            }
-                            else
-                            {
-                                discountedAmountLabel2.Text = "0.00";
-                            }
-                            decimal discountedTaxAmount = 0;
-
-                            decimal totalTaxAmount = 0;
-                            // Parse Discount tax
-                            if (decimal.TryParse(discountText, out decimal percent3))
-                            {
-                                decimal taxAmount = decimal.Parse(taxAmountLabel2.Text.Trim());
-
-                                discountedTaxAmount = taxAmount * (percent3 / 100);
-                                totalTaxAmount = taxAmount - discountedTaxAmount;
-
-                                totalTaxAmount = totalTaxAmount + recentTaxAmount;
-                                collectionTaxAmountLabel.Text = totalTaxAmount.ToString("N2");
-
-
-
-
-                            }
-                            else
-                            {
-                                collectionTaxAmountLabel.Text = "0.00";
+                                // Not initial billing -> minimum applies even if zero consumption
+                                a10 = q10 > 0 ? minRate : minRate;
                             }
 
+                            decimal a20 = q20 * rate11_20;
+                            decimal a30 = q30 * rate21_30;
+                            decimal a40 = q40 * rate31_40;
+                            decimal a41 = q41 * rate41_above;
 
-                            collectionTotalMeteredAmountLabel.Text = (totalConsumptionAmount - discounted + discountedTaxAmount).ToString("N2");
-                            Debug.WriteLine($"Discounted Amount: {discounted}");
+                            decimal total = a10 + a20 + a30 + a40 + a41;
 
+                            // Populate labels
+                            tenQuantityLabel2.Text = q10.ToString();
+                            tenUnitPriceLabel2.Text = (minRate / 10).ToString("N2");
+                            tenAmountLabel2.Text = a10.ToString("N2");
 
-                            // Step 3: Get Due Date (required for late penalty)
-                            DateTime dueDate;
-                            if (!DateTime.TryParse(dueDateLabel2.Text, out dueDate))
-                            {
-                                dueDate = DateTime.Now; // fallback
-                            }
+                            twentyQuantityLabel2.Text = q20.ToString();
+                            twentyUnitPriceLabel2.Text = rate11_20.ToString("N2");
+                            twentyAmountLabel2.Text = a20.ToString("N2");
 
+                            thirtyQuantityLabel2.Text = q30.ToString();
+                            thirtyUnitPriceLabel2.Text = rate21_30.ToString("N2");
+                            thirtyAmountLabel2.Text = a30.ToString("N2");
 
-                            decimal arrearsAmount = decimal.Parse(arrearsAmountLabel2.Text.Replace(",", "").Trim());
-                            // Calculate penalties
-                            discountedConsumptionAmount = decimal.Parse(collectionTotalMeteredAmountLabel.Text.Replace(",", "").Trim());
-                            decimal latePenalty = SettingsHelper.CalculateLatePaymentPenalty(discountedConsumptionAmount, dueDate);
-                            Debug.WriteLine("Late" + latePenalty);
-                            Debug.WriteLine("duedate ----" + dueDate);
-                            decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsWaterOnly);
-                            Debug.WriteLine($"Initial arrears penalty: {arrearsPenalty:N2}");
+                            fortyQuantityLabel2.Text = q40.ToString();
+                            fortyUnitPriceLabel2.Text = rate31_40.ToString("N2");
+                            fortyAmountLabel2.Text = a40.ToString("N2");
 
-                            penaltyAmountLabel2.Text = latePenalty.ToString("N2");
-                            // Create a list to hold the penalties to display
-                            List<string> parts = new List<string>();
+                            fortyUpQuantityLabel2.Text = q41.ToString();
+                            fortyUpUnitPriceLabel2.Text = rate41_above.ToString("N2");
+                            fortyUpAmountLabel2.Text = a41.ToString("N2");
 
-                            decimal totalPenalty = arrearsPenalty + latePenalty;
-                            collectionPenaltyLabel.Text = totalPenalty.ToString("N2");
-                            // Add arrears penalty if greater than 0
-                            if (arrearsPenalty > 0)
-                                parts.Add(arrearsPenalty.ToString("N2"));
+                            minimumChargeLabel2.Text = minRate.ToString("N2");
+                            totalWaterConsumptionAmountLabel2.Text = total.ToString("N2");
+                            totalQuantityLabel2.Text = totalConsumption.ToString();
 
-                            // Add late penalty if greater than 0
-                            if (latePenalty > 0)
-                                parts.Add(latePenalty.ToString("N2"));
+                            // Hide rows with zero quantity (use the collection labels visibility as in original)
+                            tenQuantityLabel.Visible = tenUnitPriceLabel.Visible = tenAmountLabel.Visible = q10 > 0;
+                            twentyQuantityLabel.Visible = twentyUnitPriceLabel.Visible = twentyAmountLabel.Visible = q20 > 0;
+                            thirtyQuantityLabel.Visible = thirtyUnitPriceLabel.Visible = thirtyAmountLabel.Visible = q30 > 0;
+                            fortyQuantityLabel.Visible = fortyUnitPriceLabel.Visible = fortyAmountLabel.Visible = q40 > 0;
+                            fortyUpQuantityLabel.Visible = fortyUpUnitPriceLabel.Visible = fortyUpAmountLabel.Visible = q41 > 0;
+                        }
 
-                            // Display logic
-                            if (parts.Count > 0)
-                            {
-                                // Show the penalties joined by " + " (e.g., "120.32 + 235.60")
-                                allPenaltyLabel.Text = string.Join(" + ", parts);
+                        // Calculation section
+                        decimal discounted = 0;
+                        decimal taxAdded = 0;
+                        decimal discountedConsumptionAmount = 0;
 
-                                // Show the total sum of penalties
-                                penaltySumLabel.Text = (arrearsPenalty + latePenalty).ToString("N2");
-                            }
-                            else
-                            {
-                                // If both penalties are zero
-                                collectionPenaltyLabel.Text = "0.00";
-                                penaltySumLabel.Text = "0.00";
-                            }
+                        // Clean up input texts
+                        string discountText = discountedPercentLabel2.Text.Replace("%", "").Trim();
+                        string taxAddedText = taxExemptedPercentLabel2.Text.Replace("%", "").Trim();
 
+                        if (!decimal.TryParse(totalWaterConsumptionAmountLabel2.Text.Trim(), out decimal totalConsumptionAmount))
+                        {
+                            totalConsumptionAmount = 0;
+                        }
 
-                            arrearsPenaltyAmountLabel.Text = arrearsPenalty.ToString("N2");
+                        decimal addedTaxWaterConsumption = 0;
 
-                            // Step 2: Final Charge Calculation
-                            decimal chargeSubTotal = totalConsumptionAmount - discounted + taxAdded;
+                        // Parse Tax
+                        if (decimal.TryParse(taxAddedText, out decimal percent2))
+                        {
+                            taxAdded = totalConsumptionAmount * (percent2 / 100);
+                            taxAmountLabel2.Text = taxAdded.ToString("N2");
+                        }
+                        else
+                        {
+                            taxAmountLabel2.Text = "0.00";
+                        }
 
-                            // Display Final Total
-                            subTotalAmountDueLabel2.Text = chargeSubTotal.ToString("N2");
-                            decimal scf = totalSCFAmountLabel2.Text.Trim().Replace(",", "").Trim() == "" ? 0 : decimal.Parse(totalSCFAmountLabel2.Text.Trim().Replace(",", ""));
-                            decimal othersAmount = collectionOtherPaymentTextBox.Text.Trim().Replace(",", "").Trim() == "" ? 0 : decimal.Parse(collectionOtherPaymentTextBox.Text.Trim().Replace(",", ""));
-                            decimal totalAmountCharge = chargeSubTotal + arrearsPenalty + latePenalty + arrearsAmount;
+                        // Parse discount percent into an outer-scope variable so we can control it when consumption > 30
+                        decimal percent1 = 0m;
+                        decimal.TryParse(discountText, out percent1);
 
+                        // Only apply discount if totalConsumption <= 30
+                        if (totalConsumption < 30 && percent1 > 0m)
+                        {
+                            addedTaxWaterConsumption = totalConsumptionAmount + taxAdded;
+                            discounted = addedTaxWaterConsumption * (percent1 / 100);
+                            discountedAmountLabel2.Text = Math.Round(discounted, 2).ToString("N2");
+                        }
+                        else
+                        {
+                            // Do NOT apply discount when meter consumed is above 30
+                            percent1 = 0m; // ensure downstream math that depends on percent1 uses 0
+                            discounted = 0m;
+                            discountedAmountLabel2.Text = "0.00";
+                        }
 
+                        decimal discountedTaxAmount = 0;
+                        decimal totalTaxAmount = 0;
 
+                        // Parse Discount tax (use the originally parsed discount percent for tax adjustment)
+                        if (decimal.TryParse(discountText, out decimal percent3))
+                        {
+                            decimal taxAmount = decimal.Parse(taxAmountLabel2.Text.Trim());
+                            discountedTaxAmount = taxAmount * (percent3 / 100);
+                            totalTaxAmount = taxAmount - discountedTaxAmount;
 
+                            totalTaxAmount = totalTaxAmount + recentTaxAmount;
+                            collectionTaxAmountLabel.Text = totalTaxAmount.ToString("N2");
+                        }
+                        else
+                        {
+                            collectionTaxAmountLabel.Text = "0.00";
+                        }
 
-                            decimal totalAmountDuePlusSCF = totalAmountCharge + scf + othersAmount;
-                            totalPlusSFCOthersLabel.Text = totalAmountDuePlusSCF.ToString("N2");
-                            totalAmountDueLabel2.Text = totalAmountCharge.ToString("N2");
+                        collectionTotalMeteredAmountLabel.Text = (totalConsumptionAmount - discounted + discountedTaxAmount).ToString("N2");
 
-                            collectionArrearsAmountLabel.Text = arrearsWaterOnly.ToString("N2");
+                        // Step 3: Get Due Date (required for late penalty)
+                        DateTime dueDate;
+                        if (!DateTime.TryParse(dueDateLabel2.Text, out dueDate))
+                        {
+                            dueDate = DateTime.Now; // fallback
+                        }
 
-                            Debug.WriteLine(taxAdded);
-                            Debug.WriteLine(totalConsumptionAmount);
+                        decimal arrearsAmount = 0m;
+                        decimal.TryParse(arrearsAmountLabel2.Text.Replace(",", "").Trim(), out arrearsAmount);
 
+                        // Calculate penalties
+                        discountedConsumptionAmount = decimal.Parse(collectionTotalMeteredAmountLabel.Text.Replace(",", "").Trim());
+                        decimal latePenalty = SettingsHelper.CalculateLatePaymentPenalty(discountedConsumptionAmount, dueDate);
+                        decimal arrearsPenalty = SettingsHelper.CalculatePenaltyOnArrears(arrearsWaterOnly);
 
+                        penaltyAmountLabel2.Text = latePenalty.ToString("N2");
+
+                        // Create a list to hold the penalties to display
+                        List<string> parts = new List<string>();
+
+                        decimal totalPenalty = arrearsPenalty + latePenalty;
+                        collectionPenaltyLabel.Text = totalPenalty.ToString("N2");
+
+                        if (arrearsPenalty > 0)
+                            parts.Add(arrearsPenalty.ToString("N2"));
+
+                        if (latePenalty > 0)
+                            parts.Add(latePenalty.ToString("N2"));
+
+                        if (parts.Count > 0)
+                        {
+                            allPenaltyLabel.Text = string.Join(" + ", parts);
+                            penaltySumLabel.Text = (arrearsPenalty + latePenalty).ToString("N2");
+                        }
+                        else
+                        {
+                            collectionPenaltyLabel.Text = "0.00";
+                            penaltySumLabel.Text = "0.00";
+                        }
+
+                        arrearsPenaltyAmountLabel.Text = arrearsPenalty.ToString("N2");
+
+                        // Final Charge Calculation
+                        decimal chargeSubTotal = totalConsumptionAmount - discounted + taxAdded;
+                        subTotalAmountDueLabel2.Text = chargeSubTotal.ToString("N2");
+
+                        decimal scf = totalSCFAmountLabel2.Text.Trim().Replace(",", "").Trim() == "" ? 0 : decimal.Parse(totalSCFAmountLabel2.Text.Trim().Replace(",", ""));
+                        decimal othersAmount = collectionOtherPaymentTextBox.Text.Trim().Replace(",", "").Trim() == "" ? 0 : decimal.Parse(collectionOtherPaymentTextBox.Text.Trim().Replace(",", ""));
+                        decimal totalAmountCharge = chargeSubTotal + arrearsPenalty + latePenalty + arrearsAmount;
+
+                        decimal totalAmountDuePlusSCF = totalAmountCharge + scf + othersAmount;
+                        totalPlusSFCOthersLabel.Text = totalAmountDuePlusSCF.ToString("N2");
+                        totalAmountDueLabel2.Text = totalAmountCharge.ToString("N2");
+
+                        collectionArrearsAmountLabel.Text = arrearsWaterOnly.ToString("N2");
+
+                        // Keep debug lines if needed (unchanged logic)
+                        Debug.WriteLine(taxAdded);
+                        Debug.WriteLine(totalConsumptionAmount);
+
+                        // Use percent1 (which is 0 if discount was suppressed) for downstream calculations that previously used it
+                        // Safely guard any math that depends on percent1
+                        if (percent1 != 0m)
+                        {
                             latePenalty = SettingsHelper.CalculateLatePaymentPenalty(totalConsumptionAmount, dueDate);
                             totalConsumptionAmount = (totalConsumptionAmount + taxAdded) * (percent1 / 100);
                             decimal allPenalty = arrearsPenalty + latePenalty;
-                            Debug.WriteLine(allPenalty);
-
-
                             allPenalty = allPenalty * (percent1 / 100);
-
-                            Debug.WriteLine(allPenalty);
-
                             decimal totalDiscount = totalConsumptionAmount + allPenalty;
-                            Debug.WriteLine(totalDiscount);
-
-                            // 3. Show final result
                             discountedAmountLabel2.Text = totalDiscount.ToString("N2");
-
-
+                        }
+                        else
+                        {
+                            // ensure discountedAmountLabel2 already shows 0.00 (set above)
                         }
                     }
-
-
                 }
             }
         }
-
-
 
 
 
@@ -1681,7 +1652,6 @@ ORDER BY b.BillNo DESC;
                                 a10 = q10 > 0 ? minRate : minRate;
                             }
 
-
                             decimal a20 = q20 * rate11_20;
                             decimal a30 = q30 * rate21_30;
                             decimal a40 = q40 * rate31_40;
@@ -1722,10 +1692,7 @@ ORDER BY b.BillNo DESC;
                             fortyUpQuantityLabel.Visible = fortyUpUnitPriceLabel.Visible = fortyUpAmountLabel.Visible = q41 > 0;
                         }
 
-                        // ----------------------
                         // Calculation section
-                        // ----------------------
-
                         decimal discounted = 0;
                         decimal taxAdded = 0;
                         decimal arrears = 0;
@@ -1742,7 +1709,6 @@ ORDER BY b.BillNo DESC;
                         {
                             taxAdded = totalConsumptionAmount * (percent2 / 100);
                             taxAmountLabel.Text = taxAdded.ToString("N2");
-
                         }
                         else
                         {
@@ -1753,26 +1719,26 @@ ORDER BY b.BillNo DESC;
                         decimal waterConsumptionDiscountAmount = 0;
                         decimal discountedTax = 0;
 
-                        // Parse Discount
-                        if (decimal.TryParse(discountText, out decimal percent1))
+                        // Only apply discount if totalConsumption <= 30
+                        if (totalConsumption < 30 && decimal.TryParse(discountText, out decimal percent1))
                         {
                             discounted = addedTaxWaterConsumption * (percent1 / 100);
-
                             discountedAmountLabel.Text = discounted.ToString("N2");
                             waterConsumptionDiscountAmount = totalConsumptionAmount * (percent1 / 100);
                             discountedTax = taxAdded * (percent1 / 100);
-
                         }
                         else
                         {
+                            discounted = 0;
                             discountedAmountLabel.Text = "0.00";
+                            waterConsumptionDiscountAmount = 0;
+                            discountedTax = 0;
                         }
-                        decimal discountedWaterConsumption = totalConsumptionAmount - waterConsumptionDiscountAmount;
 
+                        decimal discountedWaterConsumption = totalConsumptionAmount - waterConsumptionDiscountAmount;
                         decimal totalDiscountedTax = taxAdded - discountedTax;
 
                         totalWaterConsumptionAmountLabel.Text = discountedWaterConsumption.ToString("N2");
-
                         taxAmountLabel.Text = totalDiscountedTax.ToString("N2");
 
                         // Step 2: Final Charge Calculation
@@ -1781,10 +1747,6 @@ ORDER BY b.BillNo DESC;
 
                         arrears = decimal.Parse(arrearsAmountLabel.Text.Replace(",", "").Trim());
                         decimal penaltyAmount = decimal.Parse(penaltyAmountLabel.Text.Replace(",", "").Trim());
-                        
-
-
-
                         decimal scf = decimal.Parse(totalSCFAmountLabel.Text.Replace(",", "").Trim());
 
                         // Total amount due calculations
@@ -1797,8 +1759,6 @@ ORDER BY b.BillNo DESC;
                 }
             }
         }
-
-
         private void meterConsumedReadingTextBox_TextChanged(object sender, EventArgs e)
         {
 
@@ -2150,92 +2110,7 @@ ORDER BY b.BillNo DESC;
 
         }
 
-        private bool CheckIfBillIsPaidToday(string currentBillNo)
-        {
-            using (var conn = new OleDbConnection(DbConfig.ConnectionString))
-            {
-                try
-                {
-                    conn.Open();
 
-                    // Parse the currentBillNo to int
-                    if (!int.TryParse(currentBillNo, out int billNo))
-                    {
-                        MessageBox.Show("Invalid Bill Number format.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return false;
-                    }
-
-                    DateTime today = DateTime.Today;
-                    DateTime tomorrow = today.AddDays(1);
-
-                    string query = @"
-                SELECT COUNT(*) 
-                FROM Tb_Billing AS B
-                INNER JOIN Tb_Payments AS P
-                    ON B.BillNo = P.CurrentBillNo
-                WHERE 
-                    B.BillNo = ?
-                    AND (B.Is_PartiallyPaid = 'Yes' OR B.Is_FullyPaid = 'Yes')
-                    AND P.PaymentDate >= ? 
-                    AND P.PaymentDate < ?";
-
-                    using (var cmd = new OleDbCommand(query, conn))
-                    {
-                        // Add parameters in order
-                        cmd.Parameters.Add("?", OleDbType.Integer).Value = billNo;
-                        cmd.Parameters.Add("?", OleDbType.Date).Value = today;
-                        cmd.Parameters.Add("?", OleDbType.Date).Value = tomorrow;
-
-                        int count = Convert.ToInt32(cmd.ExecuteScalar());
-                        return count > 0;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error checking bill payment status:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-        //Y↓\X→|000|025|050|075|100|125|150|175|200|225|250|275|300|325|350|375|400|425|
-        //-----+-----------------------------------------------------------------------+
-        //000  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //025  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //050  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //075  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //100  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //125  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //150  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //175  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //200  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //225  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //250  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //275  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //300  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //325  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //350  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //375  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //400  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //425  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //450  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //475  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //500  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //525  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //550  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //575  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //600  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //625  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-        //650  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 
 
 
@@ -2386,30 +2261,32 @@ ORDER BY b.BillNo DESC;
         }
         public void SaveCollectionReceiptSilently()
         {
-            // Folder: Documents\Collection Receipt\AUG-2025
-            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string monthYear = DateTime.Now.ToString("MMM-yyyy").ToUpper(); // AUG-2025
-            string folderPath = Path.Combine(documentsPath, "Collection Receipt", monthYear);
-            Directory.CreateDirectory(folderPath);
-
-            string orno = orNumberTextBox.Text;
-            string name = collectionNameLabel.Text;
-
-            // File name with timestamp (avoid overwriting)
-            string fileName = $"Receipt_{orno}_{name}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
-            string fullPath = Path.Combine(folderPath, fileName);
-
-            PrintDocument pd = new PrintDocument();
-            pd.PrintController = new StandardPrintController(); // hide print dialog
-            pd.PrinterSettings.PrinterName = "Microsoft Print to PDF";
-            pd.PrinterSettings.PrintToFile = true;
-            pd.PrinterSettings.PrintFileName = fullPath;
-
-            // Attach your drawing logic
-            pd.PrintPage += new PrintPageEventHandler(CollectionMapPrintPage);
-
             try
             {
+                // Use a local folder in the user's Documents directory
+                string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string monthYear = DateTime.Now.ToString("MMM-yyyy");
+                string folderPath = Path.Combine(documentsPath, "Collection Receipt", monthYear);
+
+                // Ensure the directory exists
+                Directory.CreateDirectory(folderPath);
+
+                string orno = orNumberTextBox.Text;
+                string name = collectionNameLabel.Text;
+
+                // Sanitize file name to avoid invalid characters
+                string safeName = string.Join("_", name.Split(Path.GetInvalidFileNameChars()));
+                string fileName = $"Receipt_{orno}_{safeName}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                string fullPath = Path.Combine(folderPath, fileName);
+
+                PrintDocument pd = new PrintDocument();
+                pd.PrintController = new StandardPrintController(); // hide print dialog
+                pd.PrinterSettings.PrinterName = "Microsoft Print to PDF";
+                pd.PrinterSettings.PrintToFile = true;
+                pd.PrinterSettings.PrintFileName = fullPath;
+
+                pd.PrintPage += new PrintPageEventHandler(CollectionMapPrintPage);
+
                 pd.Print();  // Silently save as PDF
             }
             catch (Exception ex)
@@ -2510,30 +2387,32 @@ ORDER BY b.BillNo DESC;
 
         public void SaveBillingInvoiceSilently()
         {
-            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string monthYear = DateTime.Now.ToString("MMM-yyyy");
-            string folderPath = Path.Combine(documentsPath, "Billing Invoice", monthYear);
-
-            // Ensure folder exists
-            Directory.CreateDirectory(folderPath);
-
-            string billno = invoiceTextBox.Text;
-            string name = fullnameTextBox.Text;
-
-            // File name with timestamp (avoid overwriting)
-            string fileName = $"Invoice_{billno}_{name}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
-            string fullPath = Path.Combine(folderPath, fileName);
-
-            PrintDocument pd = new PrintDocument();
-            pd.PrintController = new StandardPrintController(); // suppress dialog
-            pd.PrinterSettings.PrinterName = "Microsoft Print to PDF"; // silent PDF printer
-            pd.PrinterSettings.PrintToFile = true;
-            pd.PrinterSettings.PrintFileName = fullPath;
-
-            pd.PrintPage += new PrintPageEventHandler(BillingMapPrintPage);
-
             try
             {
+                // Use a local folder in the user's Documents directory
+                string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string monthYear = DateTime.Now.ToString("MMM-yyyy");
+                string folderPath = Path.Combine(documentsPath, "Billing Invoice", monthYear);
+
+                // Ensure the directory exists
+                Directory.CreateDirectory(folderPath);
+
+                string billno = invoiceTextBox.Text;
+                string name = fullnameTextBox.Text;
+
+                // Sanitize file name to avoid invalid characters
+                string safeName = string.Join("_", name.Split(Path.GetInvalidFileNameChars()));
+                string fileName = $"Invoice_{billno}_{safeName}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                string fullPath = Path.Combine(folderPath, fileName);
+
+                PrintDocument pd = new PrintDocument();
+                pd.PrintController = new StandardPrintController(); // suppress dialog
+                pd.PrinterSettings.PrinterName = "Microsoft Print to PDF"; // silent PDF printer
+                pd.PrinterSettings.PrintToFile = true;
+                pd.PrinterSettings.PrintFileName = fullPath;
+
+                pd.PrintPage += new PrintPageEventHandler(BillingMapPrintPage);
+
                 pd.Print(); // Print silently to file
             }
             catch (Exception ex)
