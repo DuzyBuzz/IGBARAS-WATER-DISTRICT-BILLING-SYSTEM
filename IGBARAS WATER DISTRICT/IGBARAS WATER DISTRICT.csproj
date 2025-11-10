@@ -141,6 +141,12 @@
     <Compile Include="Helpers\SearchHelper.cs" />
     <Compile Include="Helpers\ServiceHelper.cs" />
     <Compile Include="Helpers\UpdateHelper.cs" />
+    <Compile Include="Reports\DailyBillingReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyBillingReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\MeterReadingSheet.cs">
       <DependentUpon>MeterReadingSheet.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
